@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Bidang;
+use App\Models\SubBidang;
+use Illuminate\Http\Request;
+
+class SubBidangController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('permission:Daftar Sub Bidang', ['only' => ['index']]);
+        $this->middleware('permission:Tambah Sub Bidang', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Edit Sub Bidang', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Hapus Sub Bidang', ['only' => ['destroy']]);
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $data = Bidang::where('tahun', session('tahun'))->get();
+        return view('master.sub-bidang.index', compact('data'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        return view('master.sub-bidang.create', compact('bidang'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'uraian' => 'required',
+            'bidang_id' => 'required'
+        ]);
+        $sub_bidang = new SubBidang();
+        $sub_bidang->bidang_id = $request->bidang_id;
+        $sub_bidang->uraian = $request->uraian;
+        $sub_bidang->tahun = session('tahun');
+        $sub_bidang->save();
+
+        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Menambahkan Sub Bidang']);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(SubBidang $sub_bidang)
+    {
+        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        return view('master.sub-bidang.edit', compact('bidang', 'sub_bidang'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, SubBidang $sub_bidang)
+    {
+        $request->validate([
+            'uraian' => 'required',
+            'bidang_id' => 'required'
+        ]);
+        $sub_bidang->bidang_id = $request->bidang_id;
+        $sub_bidang->uraian = $request->uraian;
+        $sub_bidang->tahun = session('tahun');
+        $sub_bidang->save();
+
+        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Mengubah Sub Bidang']);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(SubBidang $sub_bidang)
+    {
+        $sub_bidang->delete();
+        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Menghapus Sub Bidang']);
+    }
+}
