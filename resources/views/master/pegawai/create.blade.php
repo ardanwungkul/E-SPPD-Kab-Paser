@@ -10,56 +10,57 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="nip">NIP</label>
-                        <input type="text" id="nip" name="nip" class="text-sm rounded-lg"
-                            value="{{ old('nip') }}" placeholder="Masukkan NIP Pegawai" required>
+                        <input type="text" id="nip" name="nip"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('nip') }}"
+                            placeholder="Masukkan NIP Pegawai" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="nama">Nama</label>
-                        <input type="text" id="nama" name="nama" class="text-sm rounded-lg"
-                            value="{{ old('nama') }}" placeholder="Masukkan Nama Pegawai" required>
+                        <input type="text" id="nama" name="nama"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('nama') }}"
+                            placeholder="Masukkan Nama Pegawai" required>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <label for="golongan_id">Pangkat/Golongan</label>
-                        <select name="golongan_id" id="golongan_id" class="text-sm rounded-lg" required>
+                        <label for="pangkat_id">Pangkat/Golongan</label>
+                        <select name="pangkat_id" id="pangkat_id" class="text-sm rounded-lg border border-gray-300"
+                            required>
                             <option value="" selected disabled>Pilih Pangkat/Golongan</option>
                             @foreach ($golongan as $item)
-                                <option value="{{ $item->id }}">{{ $item->pangkat }} - {{ $item->golongan }}
+                                <option value="{{ $item->id }}">{{ $item->kode_golongan }} - {{ $item->uraian }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="tingkat_id">Tingkat</label>
-                        <select name="tingkat_id" id="tingkat_id" class="text-sm rounded-lg" required>
+                        <select name="tingkat_id" id="tingkat_id" class="text-sm rounded-lg border border-gray-300"
+                            required>
                             <option value="" selected disabled>Pilih Tingkat</option>
                             @foreach ($tingkat as $item)
-                                <option value="{{ $item->id }}">{{ $item->tingkat }}</option>
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <label for="jabatan">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan" class="text-sm rounded-lg"
-                            value="{{ old('jabatan') }}" placeholder="Masukkan Jabatan" required>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="jenis_pegawai">Jenis Pegawai</label>
-                        <select name="jenis_pegawai" id="jenis_pegawai" class="text-sm rounded-lg" required>
-                            <option value="" selected disabled>Pilih Jenis Pegawai</option>
-                            <option value="ASN">ASN</option>
-                            <option value="PPPK">PPPK</option>
-                            <option value="PTT">PTT</option>
-                            <option value="Lainnya">Lainnya</option>
+                        <label for="jabatan_id">Jabatan</label>
+                        <select name="jabatan_id" id="jabatan_id" class="text-sm rounded-lg border border-gray-300"
+                            required>
+                            <option value="" selected disabled>Pilih Jabatan</option>
+                            @foreach ($jabatan as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="no_hp">No. Hp</label>
-                        <input type="text" id="no_hp" name="no_hp" class="text-sm rounded-lg"
-                            value="{{ old('no_hp') }}" placeholder="Masukkan Nomor Handphone" required>
+                        <input type="text" id="no_hp" name="no_hp"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('no_hp') }}"
+                            placeholder="Masukkan Nomor Handphone" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="alamat">Alamat</label>
-                        <textarea id="alamat" name="alamat" class="text-sm rounded-lg" placeholder="Masukkan Alamat" required>{{ old('alamat') }}</textarea>
+                        <textarea id="alamat" name="alamat" class="text-sm rounded-lg border border-gray-300" placeholder="Masukkan Alamat"
+                            required>{{ old('alamat') }}</textarea>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button

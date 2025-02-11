@@ -10,28 +10,31 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="name">Nama</label>
-                        <input type="text" id="name" name="name" class="text-sm rounded-lg"
-                            value="{{ old('name') }}" placeholder="Masukkan Nama User" required>
+                        <input type="text" id="name" name="name"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('name') }}"
+                            placeholder="Masukkan Nama User" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" class="text-sm rounded-lg"
-                            autocomplete="new-username" value="{{ old('username') }}" placeholder="Masukkan Username"
-                            required>
+                        <input type="text" id="username" name="username"
+                            class="text-sm rounded-lg border border-gray-300" autocomplete="new-username"
+                            value="{{ old('username') }}" placeholder="Masukkan Username" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="text-sm rounded-lg"
-                            autocomplete="new-email" value="{{ old('email') }}" placeholder="Masukkan Email" required>
+                        <input type="email" id="email" name="email"
+                            class="text-sm rounded-lg border border-gray-300" autocomplete="new-email"
+                            value="{{ old('email') }}" placeholder="Masukkan Email" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" class="text-sm rounded-lg"
-                            autocomplete="new-password" value="{{ old('password') }}" placeholder="Password" required>
+                        <input type="password" id="password" name="password"
+                            class="text-sm rounded-lg border border-gray-300" autocomplete="new-password"
+                            value="{{ old('password') }}" placeholder="Password" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="role_id">Role/Level</label>
-                        <select name="role_id" id="role_id" class="text-sm rounded-lg">
+                        <select name="role_id" id="role_id" class="text-sm rounded-lg border border-gray-300">
                             <option value="" selected disabled> Pilih Role/Level</option>
                             @foreach ($role as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>

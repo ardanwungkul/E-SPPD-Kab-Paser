@@ -10,8 +10,9 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="name">Nama</label>
-                        <input type="text" id="name" name="name" class="text-sm rounded-lg"
-                            value="{{ $role->name }}" placeholder="Masukkan Nama Role" required>
+                        <input type="text" id="name" name="name"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $role->name }}"
+                            placeholder="Masukkan Nama Role" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <fieldset class="grid grid-cols-2 gap-5 border border-gray-300 rounded-lg p-3 bg-white">

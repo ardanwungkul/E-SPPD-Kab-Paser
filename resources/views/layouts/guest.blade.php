@@ -22,10 +22,10 @@
     @endif
 </head>
 
-<body class="font-poppins text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0 bg-gray-100 px-5 md:px-0">
+<body class="font-sans text-gray-900 antialiased">
+    <div class="h-screen w-full md:p-20 bg-jar-auth flex items-center justify-center relative">
         @if (count($errors) > 0)
-            <div class="fixed bottom-5 right-5 z-50 space-y-3">
+            <div class="fixed bottom-5 right-5 z-40">
                 @foreach ($errors->all() as $error)
                     <div id="toast-error-{{ $loop->index }}"
                         class="flex items-center gap-2 w-min p-4 text-gray-500 bg-white rounded-lg shadow border border-red-500"
@@ -62,8 +62,28 @@
                 @endforeach
             </div>
         @endif
-        {{ $slot }}
-
+        <div class="absolute bg-color-1-100 w-full h-full top-0 opacity-10"></div>
+        <div
+            class="md:grid grid-cols-3 rounded-3xl overflow-hidden md:min-w-[671px] max-w-2xl shadow-lg border border-white z-10 md:h-full max-h-[500px] md:min-h-[420px] mx-3 md:mx-0 p-3 bg-white">
+            <div
+                class="col-span-1 hidden md:block group bg-gradient-to-b from-color-1-500 via-color-1-400 to-color-1-600 rounded-3xl">
+                <div class="flex items-center justify-center w-full h-full p-5">
+                    <img src="{{ asset('assets/images/logo-ppu.png') }}"
+                        class="group-hover:scale-125 transition-transform duration-300" alt="">
+                </div>
+            </div>
+            <div class="col-span-2 bg-white overflow-hidden px-10 py-5 flex items-center md:h-full">
+                <div class="w-full">
+                    <div class="flex-col flex justify-center items-center pb-2 border-b border-gray-300">
+                        <p class="text-gray-600 font-extrabold text-center text-lg">Sistem Informasi Perjalanan Dinas
+                        </p>
+                    </div>
+                    <div class="py-3">
+                        {{ $slot }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @if (env('APP_DEPLOY') == true)
         <script src="{{ asset('build/assets/app.js') }}"></script>

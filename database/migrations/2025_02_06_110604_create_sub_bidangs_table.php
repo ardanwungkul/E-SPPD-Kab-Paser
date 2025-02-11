@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_bidang_sub', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('bidang_id');
+            $table->smallIncrements('id');
+            $table->unsignedSmallInteger('bidang_id');
             $table->foreign('bidang_id')->references('id')->on('ref_bidang')->onUpdate('cascade')->onDelete('cascade');
             $table->year('tahun');
-            $table->string('uraian');
+            $table->string('uraian', 100);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -10,19 +10,21 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="tingkat_sppd">Tingkat SPPD</label>
-                        <input type="number" id="tingkat_sppd" name="tingkat_sppd" class="text-sm rounded-lg"
+                        <input type="number" id="tingkat_sppd" name="tingkat_sppd"
+                            class="text-sm rounded-lg border border-gray-300"
                             value="{{ $tingkat_perjalanan_dinas->tingkat_sppd }}" placeholder="Masukkan Tingkat SPPD"
                             required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
-                        <input type="text" id="uraian" name="uraian" class="text-sm rounded-lg"
+                        <input type="text" id="uraian" name="uraian"
+                            class="text-sm rounded-lg border border-gray-300"
                             value="{{ $tingkat_perjalanan_dinas->uraian }}" placeholder="Masukkan Uraian" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="keterangan">Keterangan</label>
-                        <textarea id="keterangan" name="keterangan" rows="4" class="text-sm rounded-lg" placeholder="Masukkan Keterangan"
-                            required>{{ $tingkat_perjalanan_dinas->keterangan }}</textarea>
+                        <textarea id="keterangan" name="keterangan" rows="4" class="text-sm rounded-lg border border-gray-300"
+                            placeholder="Masukkan Keterangan" required>{{ $tingkat_perjalanan_dinas->keterangan }}</textarea>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button

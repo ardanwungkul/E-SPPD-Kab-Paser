@@ -15,7 +15,8 @@
                     <div class="text-sm space-y-3">
                         <div class="flex flex-col gap-1">
                             <label for="provinsi_id">Provinsi</label>
-                            <select name="provinsi_id" id="provinsi_id" class="text-sm rounded-lg" required>
+                            <select name="provinsi_id" id="provinsi_id"
+                                class="text-sm rounded-lg border border-gray-300" required>
                                 <option value="" selected disabled>Pilih Provinsi</option>
                                 @foreach ($provinsi as $item)
                                     <option value="{{ $item->id }}"
@@ -26,18 +27,21 @@
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="nama">Nama</label>
-                            <input type="text" id="nama" name="nama" class="text-sm rounded-lg"
-                                value="{{ $kabupaten_kota->nama }}" placeholder="Masukkan Nama Provinsi" required>
+                            <input type="text" id="nama" name="nama"
+                                class="text-sm rounded-lg border border-gray-300" value="{{ $kabupaten_kota->nama }}"
+                                placeholder="Masukkan Nama Provinsi" required>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="latitude">Latitude</label>
-                            <input type="text" id="latitude" name="latitude" class="text-sm rounded-lg"
+                            <input type="text" id="latitude" name="latitude"
+                                class="text-sm rounded-lg border border-gray-300"
                                 value="{{ $kabupaten_kota->latitude }}" placeholder="Pilih Lokasi Di Map" required
                                 readonly>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="longitude">Longitude</label>
-                            <input type="text" id="longitude" name="longitude" class="text-sm rounded-lg"
+                            <input type="text" id="longitude" name="longitude"
+                                class="text-sm rounded-lg border border-gray-300"
                                 value="{{ $kabupaten_kota->longitude }}" placeholder="Pilih Lokasi Di Map" required
                                 readonly>
                         </div>

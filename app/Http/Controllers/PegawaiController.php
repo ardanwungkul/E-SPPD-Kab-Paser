@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Golongan;
+use App\Models\Jabatan;
 use App\Models\Pegawai;
 use App\Models\TingkatPerjalananDinas;
 use Illuminate\Http\Request;
@@ -21,9 +22,16 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $data = Pegawai::all();
+        $data = Pegawai::with('pangkat')
+            ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->orderBy('ref_pangkat.jenis_pegawai')
+            ->orderBy('ref_pangkat.kode_golongan')
+            ->orderBy('ref_pangkat.uraian')
+            ->select('pegawai.*')
+            ->get();
         return view('master.pegawai.index', compact('data'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +40,8 @@ class PegawaiController extends Controller
     {
         $golongan = Golongan::all();
         $tingkat = TingkatPerjalananDinas::all();
-        return view('master.pegawai.create', compact('golongan', 'tingkat'));
+        $jabatan = Jabatan::all();
+        return view('master.pegawai.create', compact('golongan', 'tingkat', 'jabatan'));
     }
 
     /**
@@ -43,20 +52,18 @@ class PegawaiController extends Controller
         $request->validate([
             'nip' => 'required',
             'nama' => 'required',
-            'golongan_id' => 'required',
+            'pangkat_id' => 'required',
             'tingkat_id' => 'required',
-            'jabatan' => 'required',
-            'jenis_pegawai' => 'required',
+            'jabatan_id' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
         ]);
         $pegawai = new Pegawai();
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
-        $pegawai->golongan_id = $request->golongan_id;
+        $pegawai->pangkat_id = $request->pangkat_id;
         $pegawai->tingkat_id = $request->tingkat_id;
-        $pegawai->jabatan = $request->jabatan;
-        $pegawai->jenis_pegawai = $request->jenis_pegawai;
+        $pegawai->jabatan_id = $request->jabatan_id;
         $pegawai->no_hp = $request->no_hp;
         $pegawai->alamat = $request->alamat;
         $pegawai->save();

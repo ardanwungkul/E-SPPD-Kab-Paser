@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permission_kategori', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
+            $table->tinyIncrements('id');
+            $table->string('nama', 30);
             $table->timestamps();
         });
     }

@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_kegiatan', function (Blueprint $table) {
-            $table->id();
-            $table->string('kode');
+            $table->smallIncrements('id');
+            $table->string('kode', 10);
             $table->year('tahun');
-            $table->string('uraian');
-            $table->string('program_kode');
+            $table->string('uraian', 100);
+            $table->string('program_kode', 10);
             $table->foreign('program_kode')->references('kode')->on('ref_program')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

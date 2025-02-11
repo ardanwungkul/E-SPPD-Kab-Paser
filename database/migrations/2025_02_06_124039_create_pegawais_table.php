@@ -12,18 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pegawai', function (Blueprint $table) {
-            $table->id();
-            $table->string('nip');
-            $table->string('nama');
-            $table->unsignedBigInteger('pangkat_id')->nullable();
+            $table->tinyIncrements('id');
+            $table->string('nip', 21);
+            $table->string('nama', 50);
+            $table->unsignedTinyInteger('pangkat_id')->nullable();
             $table->foreign('pangkat_id')->references('id')->on('ref_pangkat')->onUpdate('cascade')->onDelete('set null');
-            $table->unsignedBigInteger('tingkat_id')->nullable();
+            $table->unsignedTinyInteger('tingkat_id')->nullable();
             $table->foreign('tingkat_id')->references('id')->on('ref_tingkat_sppd')->onUpdate('cascade')->onDelete('set null');
-            $table->string('jabatan');
-            $table->string('jenis_pegawai');
-            $table->string('no_hp');
-            $table->longText('alamat');
+            $table->unsignedTinyInteger('jabatan_id')->nullable();
+            $table->foreign('jabatan_id')->references('id')->on('ref_jabatan')->onUpdate('cascade')->onDelete('set null');
+            $table->string('no_hp', 30)->nullable();
+            $table->longText('alamat')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

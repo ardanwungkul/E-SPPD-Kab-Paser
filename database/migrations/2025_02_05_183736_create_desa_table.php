@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_desa', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->integer('kode_pos');
-            $table->unsignedBigInteger('kecamatan_id');
-            $table->foreign('kecamatan_id')->references('id')->on('master_kecamatan')->onUpdate('cascade')->onDelete('cascade');
+        Schema::create('wilayah_desa', function (Blueprint $table) {
+            $table->smallIncrements('id');
+            $table->string('nama', 50);
+            $table->string('kode_pos', 5);
+            $table->unsignedSmallInteger('kecamatan_id');
+            $table->foreign('kecamatan_id')->references('id')->on('wilayah_kecamatan')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_desa');
+        Schema::dropIfExists('wilayah_desa');
     }
 };

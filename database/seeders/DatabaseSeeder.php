@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PermissionSeeder::class);
         $this->call(RefSeeder::class);
+        $this->call(PegawaiSeeder::class);
+
 
         $provinsi = [
             [

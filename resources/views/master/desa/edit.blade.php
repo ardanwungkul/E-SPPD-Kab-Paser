@@ -10,7 +10,8 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="kecamatan_id">Kecamatan</label>
-                        <select name="kecamatan_id" id="kecamatan_id" class="text-sm rounded-lg" required>
+                        <select name="kecamatan_id" id="kecamatan_id" class="text-sm rounded-lg border border-gray-300"
+                            required>
                             <option value="" selected disabled>Pilih Kecamatan</option>
                             @foreach ($kecamatan as $item)
                                 <option value="{{ $item->id }}"
@@ -21,13 +22,15 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="nama">Nama</label>
-                        <input type="text" id="nama" name="nama" class="text-sm rounded-lg"
-                            value="{{ $desa->nama }}" placeholder="Masukkan Nama Provinsi" required>
+                        <input type="text" id="nama" name="nama"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $desa->nama }}"
+                            placeholder="Masukkan Nama Provinsi" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="kode_pos">Kode Pos</label>
-                        <input type="number" id="kode_pos" name="kode_pos" class="text-sm rounded-lg"
-                            value="{{ $desa->kode_pos }}" placeholder="Masukkan Kode Pos" required>
+                        <input type="number" id="kode_pos" name="kode_pos"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $desa->kode_pos }}"
+                            placeholder="Masukkan Kode Pos" required>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button

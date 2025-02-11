@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_kecamatan', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
+        Schema::create('wilayah_kecamatan', function (Blueprint $table) {
+            $table->smallIncrements('id');
+            $table->string('nama', 50);
             $table->decimal('longitude', 10, 7);
             $table->decimal('latitude', 10, 7);
-            $table->unsignedBigInteger('kabupaten_kota_id');
-            $table->foreign('kabupaten_kota_id')->references('id')->on('master_kabupaten_kota')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedSmallInteger('kabupaten_kota_id');
+            $table->foreign('kabupaten_kota_id')->references('id')->on('wilayah_kabupaten_kota')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_kecamatan');
+        Schema::dropIfExists('wilayah_kecamatan');
     }
 };

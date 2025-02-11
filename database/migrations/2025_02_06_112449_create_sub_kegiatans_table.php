@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_kegiatan_sub', function (Blueprint $table) {
-            $table->id();
-            $table->string('kode');
+            $table->smallIncrements('id');
+            $table->string('kode', 10);
             $table->year('tahun');
-            $table->unsignedBigInteger('kegiatan_id');
+            $table->unsignedSmallInteger('kegiatan_id');
             $table->foreign('kegiatan_id')->references('id')->on('ref_kegiatan')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('uraian');
+            $table->string('uraian', 100);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_program', function (Blueprint $table) {
-            $table->string('kode')->primary();
+            $table->string('kode', 10)->primary();
             $table->year('tahun');
-            $table->string('uraian');
+            $table->string('uraian', 100);
             $table->timestamps();
         });
     }

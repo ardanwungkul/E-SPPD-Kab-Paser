@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Desa extends Model
 {
     use HasFactory;
-    protected $table = 'master_desa';
+    protected $table = 'wilayah_desa';
 
     public function kecamatan()
     {

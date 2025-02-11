@@ -32,7 +32,7 @@
                 <x-sidebar />
             </div>
             <main class="w-full min-h-screen relative">
-                <x-navigation />
+                {{-- <x-navigation /> --}}
                 <div class="p-5 overflow-y-auto">
                     @if (count($errors) > 0)
                         <div class="fixed bottom-5 right-5 z-50 space-y-3">
@@ -102,15 +102,74 @@
                             </div>
                         </div>
                     @endif
-                    @if (isset($header))
-                        <x-container class="!p-1">
-                            <x-slot name="content">
-                                <p class="text-lg font-semibold text-secondary-1">
-                                    {{ $header }}
-                                </p>
-                            </x-slot>
-                        </x-container>
-                    @endif
+                    <x-container>
+                        <x-slot name="content">
+                            <header>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex gap-3 items-center">
+                                        @if (isset($backButton))
+                                            <a href="{{ $backButton }}"
+                                                class="bg-gray-300 hover:bg-gray-400 text-white rounded-full w-9 h-9 text-xs border border-gray-300 shadow-lg flex gap-1 items-center justify-center font-semibold">
+                                                <svg class="w-6 h-6" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
+                                                </svg>
+                                            </a>
+                                        @endif
+                                        <p class="font-semibold text-xl text-gray-800 leading-none">
+                                            {{ $header }}
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-end">
+                                            <p class="">Hii, {{ Auth::user()->name }}</p>
+                                            <p class="text-xs">{{ now()->format('D, d M Y') }}</p>
+                                        </div>
+                                        <div>
+                                            <button id="dropdownUserAvatarButton"
+                                                data-dropdown-toggle="dropdownAvatar"
+                                                data-dropdown-placement="bottom-end"
+                                                class="flex text-sm rounded-full md:me-0 focus:ring-2" type="button">
+                                                <span class="sr-only">Open Menu</span>
+                                                <img class="w-8 h-8 rounded-full"
+                                                    src="{{ asset('assets/images/placeholder-image.jpg') }}"
+                                                    alt="User Photo">
+                                            </button>
+
+                                            <!-- Dropdown menu -->
+                                            <div id="dropdownAvatar"
+                                                class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 border">
+                                                <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                                    <p class="text-xs">{{ Auth::user()->name }}</p>
+                                                    <div class="font-medium truncate text-xs">
+                                                        {{ Auth::user()->email }}
+                                                    </div>
+                                                </div>
+                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                                    aria-labelledby="dropdownUserAvatarButton">
+                                                    <li>
+                                                        <a href="{{ route('profile.edit') }}"
+                                                            class="block px-4 py-2 hover:bg-gray-100 text-xs">Profil</a>
+                                                    </li>
+                                                    <li>
+                                                        <form method="POST" action="{{ route('logout') }}">
+                                                            @csrf
+                                                            <a href="{{ route('logout') }}"
+                                                                onclick="event.preventDefault();
+                                                                        this.closest('form').submit();"
+                                                                class="block px-4 py-2 hover:bg-gray-100 text-xs">Logout</a>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </header>
+                        </x-slot>
+                    </x-container>
                     {{ $slot }}
                 </div>
             </main>

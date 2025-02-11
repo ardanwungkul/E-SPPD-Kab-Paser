@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_jenis_sppd', function (Blueprint $table) {
-            $table->id();
-            $table->string('uraian');
-            $table->string('wilayah');
+            $table->tinyIncrements('id');
+            $table->string('uraian', 100);
+            $table->string('wilayah', 20);
             $table->timestamps();
         });
     }

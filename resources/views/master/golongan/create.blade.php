@@ -10,17 +10,20 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="kode_golongan">Kode Golongan</label>
-                        <input type="text" id="kode_golongan" name="kode_golongan" class="text-sm rounded-lg"
-                            value="{{ old('golongan') }}" placeholder="Masukkan Kode Golongan" required>
+                        <input type="text" id="kode_golongan" name="kode_golongan"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('golongan') }}"
+                            placeholder="Masukkan Kode Golongan" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
-                        <input type="text" id="uraian" name="uraian" class="text-sm rounded-lg"
-                            value="{{ old('uraian') }}" placeholder="Masukkan Uraian Pangkat" required>
+                        <input type="text" id="uraian" name="uraian"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
+                            placeholder="Masukkan Uraian Pangkat" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="jenis_pegawai">Jenis Pegawai</label>
-                        <select name="jenis_pegawai" id="jenis_pegawai" class="text-sm rounded-lg" required>
+                        <select name="jenis_pegawai" id="jenis_pegawai"
+                            class="text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled> Pilih Jenis Pegawai</option>
                             <option value="1">PNS</option>
                             <option value="2">PPPK / P3K</option>

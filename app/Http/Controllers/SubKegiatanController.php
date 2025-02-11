@@ -96,4 +96,13 @@ class SubKegiatanController extends Controller
         $sub_kegiatan->delete();
         return redirect()->route('sub-kegiatan.index')->with(['success' => 'Berhasil Menghapus Sub Kegiatan']);
     }
+
+    public function getSubKegiatanByKegiatan(Request $request)
+    {
+        $request->validate([
+            'kegiatan_id' => 'required|string',
+        ]);
+        $sub_kegiatan = SubKegiatan::where('kegiatan_id', $request->kegiatan_id)->get();
+        return response()->json($sub_kegiatan);
+    }
 }

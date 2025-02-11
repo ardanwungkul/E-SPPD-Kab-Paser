@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_tingkat_sppd', function (Blueprint $table) {
-            $table->id();
-            $table->integer('tingkat_sppd');
-            $table->string('uraian');
-            $table->longText('keterangan');
+            $table->tinyIncrements('id');
+            $table->tinyInteger('tingkat_sppd');
+            $table->string('uraian', 20);
+            $table->longText('keterangan', 100);
             $table->timestamps();
         });
     }

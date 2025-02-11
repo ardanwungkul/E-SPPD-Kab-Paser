@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_bidang', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
             $table->year('tahun');
-            $table->string('uraian');
+            $table->string('uraian', 100);
             $table->timestamps();
         });
     }

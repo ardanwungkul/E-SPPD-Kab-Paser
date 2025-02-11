@@ -26,8 +26,8 @@
                                     <td class="text-xs">Nama</td>
                                     <td class="text-xs">Jabatan</td>
                                     <td class="text-xs">Jenis Pegawai</td>
-                                    <td class="text-xs">Pangkat</td>
                                     <td class="text-xs">Golongan</td>
+                                    <td class="text-xs">Pangkat</td>
                                     <td class="text-xs w-32"></td>
                                 </tr>
                             </thead>
@@ -41,16 +41,16 @@
                                             <p>{{ $item->nama }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->jabatan }}</p>
+                                            <p>{{ $item->jabatan ? $item->jabatan->uraian : '' }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->jenis_pegawai }}</p>
+                                            <p>{{ $item->pangkat->jenis_pegawai_formatted }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->golongan->pangkat }}</p>
+                                            <p>{{ $item->pangkat->kode_golongan }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->golongan->golongan }}</p>
+                                            <p>{{ $item->pangkat->uraian }}</p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">

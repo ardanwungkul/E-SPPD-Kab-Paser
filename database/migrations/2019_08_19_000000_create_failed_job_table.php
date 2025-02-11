@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('failed_job', function (Blueprint $table) {
-            $table->id();
+            $table->tinyIncrements('id');
             $table->string('uuid')->unique();
             $table->text('connection');
             $table->text('queue');

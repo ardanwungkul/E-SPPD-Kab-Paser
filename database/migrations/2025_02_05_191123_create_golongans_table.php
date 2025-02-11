@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ref_pangkat', function (Blueprint $table) {
-            $table->id();
-            $table->string('kode_golongan');
-            $table->integer('jenis_pegawai');
-            $table->string('uraian');
+            $table->tinyIncrements('id');
+            $table->string('kode_golongan', 10);
+            $table->tinyInteger('jenis_pegawai');
+            $table->string('uraian', 100);
             $table->timestamps();
         });
     }

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-jar-auth {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1280' height='768' preserveAspectRatio='none' viewBox='0 0 1280 768'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1037%26quot%3b)' fill='none'%3e%3crect width='1280' height='768' x='0' y='0' fill='rgba(0%2c 162%2c 233%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c511.929C95.77%2c499.765%2c123.882%2c370.293%2c199.012%2c309.669C262.792%2c258.204%2c368.612%2c258.384%2c405.136%2c185.019C441.675%2c111.622%2c392.028%2c26.467%2c380.404%2c-54.694C368.772%2c-135.908%2c394.207%2c-233.222%2c336.836%2c-291.87C279.323%2c-350.663%2c176.056%2c-309.439%2c100.174%2c-341.163C9.658%2c-379.005%2c-46.783%2c-496.753%2c-144.828%2c-493.238C-241.687%2c-489.765%2c-311.315%2c-397.995%2c-374.099%2c-324.158C-436.433%2c-250.85%2c-492.702%2c-167.986%2c-502.767%2c-72.287C-512.664%2c21.819%2c-478.304%2c115.187%2c-428.785%2c195.82C-382.935%2c270.479%2c-304.91%2c312.727%2c-234.389%2c364.717C-158.591%2c420.597%2c-93.418%2c523.794%2c0%2c511.929' fill='%23009add'%3e%3c/path%3e%3cpath d='M1280 1282.1309999999999C1390.451 1310.726 1521.548 1354.7530000000002 1615.262 1289.6770000000001 1709.343 1224.346 1687.524 1079.628 1726.643 971.975 1761.868 875.038 1845.0990000000002 790.895 1833.761 688.381 1822.3429999999998 585.144 1729.6100000000001 515.538 1666.997 432.666 1599.375 343.164 1555.068 226.697 1451.815 182.85199999999998 1345.425 137.67499999999995 1215.731 145.39499999999998 1112.386 197.159 1014.396 246.24099999999999 968.278 355.955 915.0070000000001 451.732 871.1179999999999 530.642 854.739 616.351 830.808 703.4159999999999 803.0260000000001 804.492 717.912 909.477 763.205 1004.012 808.6469999999999 1098.857 947.777 1091.005 1040.387 1140.844 1123.724 1185.693 1188.382 1258.411 1280 1282.1309999999999' fill='%2300aaf5'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1037'%3e%3crect width='1280' height='768' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+}
 .font-poppins {
     font-family: "Poppins", sans-serif;
 }
@@ -31,6 +34,9 @@ html::-webkit-scrollbar {
 }
 #datatable_wrapper {
     position: unset;
+}
+div.dt-container {
+    position: unset !important;
 }
 .dt-layout-row {
     margin: 0 !important;
@@ -100,7 +106,7 @@ table.dataTable.display > tbody > tr:nth-child(even) > * {
 .select2-container--default .select2-selection--single {
     border-radius: 8px !important;
     border: 1px solid #d1d5db !important;
-    height: 33.33px !important;
+    height: 37.33px !important;
     /* padding: 8px 12px !important; */
 }
 .select2-dropdown {
@@ -124,7 +130,7 @@ table.dataTable.display > tbody > tr:nth-child(even) > * {
 .select2-container--default
     .select2-selection--single
     .select2-selection__rendered {
-    line-height: 30px !important;
+    line-height: 36px !important;
 }
 .select2-container--default
     .select2-selection--single
@@ -133,4 +139,12 @@ table.dataTable.display > tbody > tr:nth-child(even) > * {
 }
 .select2-selection.required {
     background-color: yellow !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
 }

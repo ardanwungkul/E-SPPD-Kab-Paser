@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('config', function (Blueprint $table) {
             $table->year('tahun')->primary();
             $table->enum('aktif', ['Y', 'T']);
-            $table->string('judul');
-            $table->string('no_spt');
-            $table->string('no_sppd');
-            $table->string('no_spj');
+            $table->string('judul', 10);
+            $table->string('no_spt', 30);
+            $table->string('no_sppd', 30);
+            $table->string('no_spj', 30);
             $table->timestamps();
         });
     }

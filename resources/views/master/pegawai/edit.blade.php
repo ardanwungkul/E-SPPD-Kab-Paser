@@ -10,17 +10,20 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="nip">NIP</label>
-                        <input type="text" id="nip" name="nip" class="text-sm rounded-lg"
-                            value="{{ $pegawai->nip }}" placeholder="Masukkan NIP Pegawai" required>
+                        <input type="text" id="nip" name="nip"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->nip }}"
+                            placeholder="Masukkan NIP Pegawai" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="nama">Nama</label>
-                        <input type="text" id="nama" name="nama" class="text-sm rounded-lg"
-                            value="{{ $pegawai->nama }}" placeholder="Masukkan Nama Pegawai" required>
+                        <input type="text" id="nama" name="nama"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->nama }}"
+                            placeholder="Masukkan Nama Pegawai" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="golongan_id">Pangkat/Golongan</label>
-                        <select name="golongan_id" id="golongan_id" class="text-sm rounded-lg" required>
+                        <select name="golongan_id" id="golongan_id" class="text-sm rounded-lg border border-gray-300"
+                            required>
                             <option value="" selected disabled>Pilih Pangkat/Golongan</option>
                             @foreach ($golongan as $item)
                                 <option value="{{ $item->id }}"
@@ -32,7 +35,8 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="tingkat_id">Tingkat</label>
-                        <select name="tingkat_id" id="tingkat_id" class="text-sm rounded-lg" required>
+                        <select name="tingkat_id" id="tingkat_id" class="text-sm rounded-lg border border-gray-300"
+                            required>
                             <option value="" selected disabled>Pilih Tingkat</option>
                             @foreach ($tingkat as $item)
                                 <option value="{{ $item->id }}"
@@ -43,12 +47,14 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="jabatan">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan" class="text-sm rounded-lg"
-                            value="{{ $pegawai->jabatan }}" placeholder="Masukkan Jabatan" required>
+                        <input type="text" id="jabatan" name="jabatan"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->jabatan }}"
+                            placeholder="Masukkan Jabatan" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="jenis_pegawai">Jenis Pegawai</label>
-                        <select name="jenis_pegawai" id="jenis_pegawai" class="text-sm rounded-lg" required>
+                        <select name="jenis_pegawai" id="jenis_pegawai"
+                            class="text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled>Pilih Jenis Pegawai</option>
                             <option {{ $pegawai->jenis_pegawai == 'ASN' ? 'selected' : '' }} value="ASN">ASN
                             </option>
@@ -63,12 +69,14 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="no_hp">No. Hp</label>
-                        <input type="text" id="no_hp" name="no_hp" class="text-sm rounded-lg"
-                            value="{{ $pegawai->no_hp }}" placeholder="Masukkan Nomor Handphone" required>
+                        <input type="text" id="no_hp" name="no_hp"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->no_hp }}"
+                            placeholder="Masukkan Nomor Handphone" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="alamat">Alamat</label>
-                        <textarea id="alamat" name="alamat" class="text-sm rounded-lg" placeholder="Masukkan Alamat" required>{{ $pegawai->alamat }}</textarea>
+                        <textarea id="alamat" name="alamat" class="text-sm rounded-lg border border-gray-300" placeholder="Masukkan Alamat"
+                            required>{{ $pegawai->alamat }}</textarea>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button

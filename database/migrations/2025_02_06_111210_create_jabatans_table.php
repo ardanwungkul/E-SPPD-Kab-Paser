@@ -12,8 +12,8 @@
         public function up(): void
         {
             Schema::create('ref_jabatan', function (Blueprint $table) {
-                $table->id();
-                $table->string('uraian');
+                $table->tinyIncrements('id');
+                $table->string('uraian', 100);
                 $table->enum('ttd_default', ['Y', 'N']);
                 $table->timestamps();
             });

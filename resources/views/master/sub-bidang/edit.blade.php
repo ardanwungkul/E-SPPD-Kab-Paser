@@ -10,7 +10,7 @@
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="bidang_id">Bidang</label>
-                        <select id="bidang_id" name="bidang_id" class="text-sm rounded-lg" required>
+                        <select id="bidang_id" name="bidang_id" class="text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled>Pilih Bidang</option>
                             @foreach ($bidang as $item)
                                 <option value="{{ $item->id }}"
@@ -21,8 +21,9 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
-                        <input type="text" id="uraian" name="uraian" class="text-sm rounded-lg"
-                            value="{{ $sub_bidang->uraian }}" placeholder="Masukkan Uraian" required>
+                        <input type="text" id="uraian" name="uraian"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $sub_bidang->uraian }}"
+                            placeholder="Masukkan Uraian" required>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button
