@@ -65,4 +65,8 @@ class NotaDinas extends Model
     {
         return $this->hasMany(NotaDinasLampiran::class, 'nota_dinas_id');
     }
+    public function spt()
+    {
+        return $this->hasOne(SPT::class, 'nota_dinas_id');
+    }
 }

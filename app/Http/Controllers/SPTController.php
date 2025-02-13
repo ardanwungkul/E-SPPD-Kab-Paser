@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotaDinas;
 use Illuminate\Http\Request;
 
 class SPTController extends Controller
@@ -11,7 +12,10 @@ class SPTController extends Controller
      */
     public function index()
     {
-        //
+        // DB::enableQueryLog();
+        $data = NotaDinas::where('tahun', session('tahun'))->orderBy('nomor', 'desc')->get();
+        // dd(DB::getQueryLog());
+        return view('master.spt.index', compact('data'));
     }
 
     /**
