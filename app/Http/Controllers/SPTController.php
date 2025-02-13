@@ -13,7 +13,7 @@ class SPTController extends Controller
     public function index()
     {
         // DB::enableQueryLog();
-        $data = NotaDinas::where('tahun', session('tahun'))->where('status', '!==', "0")->orderBy('nomor', 'desc')->get();
+        $data = NotaDinas::where('tahun', session('tahun'))->where('status', '!=', "0")->orderBy('nomor', 'desc')->get();
         // dd(DB::getQueryLog());
         return view('master.spt.index', compact('data'));
     }
