@@ -102,29 +102,29 @@ class RefSeeder extends Seeder
             ['id' => 3, 'uraian' => 'Perjalanan Dinas Dalam Daerah Dalam Provinsi', 'wilayah' => 'Kabupaten']
         ];
         $program = [
-            ['tahun' => '2025', 'kode' => '4.01.01', 'uraian' => 'PROGRAM PENUNJANG URUSAN PEMERINTAHAN DAERAH KAB/KOTA'],
-            ['tahun' => '2025', 'kode' => '4.01.02', 'uraian' => 'PROGRAM PEMERINTAHAN DAN KESEJAHTERAAN RAKYAT'],
-            ['tahun' => '2025', 'kode' => '4.01.03', 'uraian' => 'PROGRAM PEREKONOMIAN DAN PEMBANGUNAN']
+            ['id' => 1, 'tahun' => '2025', 'kode' => '4.01.01', 'uraian' => 'PROGRAM PENUNJANG URUSAN PEMERINTAHAN DAERAH KAB/KOTA'],
+            ['id' => 2, 'tahun' => '2025', 'kode' => '4.01.02', 'uraian' => 'PROGRAM PEMERINTAHAN DAN KESEJAHTERAAN RAKYAT'],
+            ['id' => 3, 'tahun' => '2025', 'kode' => '4.01.03', 'uraian' => 'PROGRAM PEREKONOMIAN DAN PEMBANGUNAN']
         ];
         $kegiatan = [
-            ['id' => 1, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.01', 'uraian' => 'PERENCANAAN, PENGANGGARAN, DAN EVALUASI KINERJA PERANGKAT DAERAH'],
-            ['id' => 2, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.02', 'uraian' => 'ADMINISTRASI KEUANGAN PERANGKAT DAERAH'],
-            ['id' => 3, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.03', 'uraian' => 'ADMINISTRASI BARANG MILIK DAERAH PADA PERANGKAT DAERAH'],
-            ['id' => 4, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.06', 'uraian' => 'ADMINISTRASI UMUM PERANGKAT DAERAH'],
-            ['id' => 5, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.07', 'uraian' => 'PENGADAAN BARANG MILIK DAERAH PENUNJANG URUSAN PEMERINTAH DAERAH'],
-            ['id' => 6, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.08', 'uraian' => 'PENYEDIAAN JASA PENUNJANG URUSAN PEMERINTAHAN DAERAH'],
-            ['id' => 7, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.09', 'uraian' => 'PEMELIHARAAN BARANG MILIK DAERAH PENUNJANG URUSAN PEMERINTAHAN DAERAH'],
-            ['id' => 8, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.13', 'uraian' => 'PENATAAN ORGANISASI'],
-            ['id' => 9, 'tahun' => '2025', 'program_kode' => '4.01.01', 'kode' => '2.14', 'uraian' => 'PELAKSANAAN  PROTOKOL DAN KOMUNIKASI PIMPINAN'],
+            ['id' => 1, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.01', 'uraian' => 'PERENCANAAN, PENGANGGARAN, DAN EVALUASI KINERJA PERANGKAT DAERAH'],
+            ['id' => 2, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.02', 'uraian' => 'ADMINISTRASI KEUANGAN PERANGKAT DAERAH'],
+            ['id' => 3, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.03', 'uraian' => 'ADMINISTRASI BARANG MILIK DAERAH PADA PERANGKAT DAERAH'],
+            ['id' => 4, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.06', 'uraian' => 'ADMINISTRASI UMUM PERANGKAT DAERAH'],
+            ['id' => 5, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.07', 'uraian' => 'PENGADAAN BARANG MILIK DAERAH PENUNJANG URUSAN PEMERINTAH DAERAH'],
+            ['id' => 6, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.08', 'uraian' => 'PENYEDIAAN JASA PENUNJANG URUSAN PEMERINTAHAN DAERAH'],
+            ['id' => 7, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.09', 'uraian' => 'PEMELIHARAAN BARANG MILIK DAERAH PENUNJANG URUSAN PEMERINTAHAN DAERAH'],
+            ['id' => 8, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.13', 'uraian' => 'PENATAAN ORGANISASI'],
+            ['id' => 9, 'tahun' => '2025', 'program_id' => 1, 'kode' => '2.14', 'uraian' => 'PELAKSANAAN  PROTOKOL DAN KOMUNIKASI PIMPINAN'],
 
-            ['id' => 10, 'tahun' => '2025', 'program_kode' => '4.01.02', 'kode' => '2.01', 'uraian' => 'ADMINISTRASI TATA PEMERINTAHAN'],
-            ['id' => 11, 'tahun' => '2025', 'program_kode' => '4.01.02', 'kode' => '2.02', 'uraian' => 'PELAKSANAAN KEBIJAKAN KESEJAHTERAAN RAKYAT'],
-            ['id' => 12, 'tahun' => '2025', 'program_kode' => '4.01.02', 'kode' => '2.03', 'uraian' => 'FASILITASI DAN KOORDINASI HUKUM'],
+            ['id' => 10, 'tahun' => '2025', 'program_id' => 2, 'kode' => '2.01', 'uraian' => 'ADMINISTRASI TATA PEMERINTAHAN'],
+            ['id' => 11, 'tahun' => '2025', 'program_id' => 2, 'kode' => '2.02', 'uraian' => 'PELAKSANAAN KEBIJAKAN KESEJAHTERAAN RAKYAT'],
+            ['id' => 12, 'tahun' => '2025', 'program_id' => 2, 'kode' => '2.03', 'uraian' => 'FASILITASI DAN KOORDINASI HUKUM'],
 
-            ['id' => 13, 'tahun' => '2025', 'program_kode' => '4.01.03', 'kode' => '2.01', 'uraian' => 'PELAKSANAAN KEBIJAKAN PEREKONOMIAN'],
-            ['id' => 14, 'tahun' => '2025', 'program_kode' => '4.01.03', 'kode' => '2.02', 'uraian' => 'PELAKSANAAN ADMINISTRASI PEMBANGUNAN'],
-            ['id' => 15, 'tahun' => '2025', 'program_kode' => '4.01.03', 'kode' => '2.03', 'uraian' => 'PENGELOLAAN PENGADAAN BARANG DAN JASA'],
-            ['id' => 16, 'tahun' => '2025', 'program_kode' => '4.01.03', 'kode' => '2.04', 'uraian' => 'PEMANTAUAN KEBIJAKAN SUMBER DAYA ALAM']
+            ['id' => 13, 'tahun' => '2025', 'program_id' => 3, 'kode' => '2.01', 'uraian' => 'PELAKSANAAN KEBIJAKAN PEREKONOMIAN'],
+            ['id' => 14, 'tahun' => '2025', 'program_id' => 3, 'kode' => '2.02', 'uraian' => 'PELAKSANAAN ADMINISTRASI PEMBANGUNAN'],
+            ['id' => 15, 'tahun' => '2025', 'program_id' => 3, 'kode' => '2.03', 'uraian' => 'PENGELOLAAN PENGADAAN BARANG DAN JASA'],
+            ['id' => 16, 'tahun' => '2025', 'program_id' => 3, 'kode' => '2.04', 'uraian' => 'PEMANTAUAN KEBIJAKAN SUMBER DAYA ALAM']
         ];
         $sub_kegiatan = [
             ['id' => 1, 'tahun' => '2025', 'kegiatan_id' => 1, 'kode' => '0001', 'uraian' => 'Penyusunan Dokumen Perencanaan Perangkat Daerah'],

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ref_kegiatan', function (Blueprint $table) {
+        Schema::create('transaksi_spt', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('kode', 10);
-            $table->year('tahun');
-            $table->string('uraian', 100);
-            $table->unsignedTinyInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('ref_program')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedSmallInteger('nota_dinas_id');
+            $table->foreign('nota_dinas_id')->references('id')->on('transaksi_nota_dinas')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('nomor', 100);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ref_kegiatan');
+        Schema::dropIfExists('transaksi_spt');
     }
 };

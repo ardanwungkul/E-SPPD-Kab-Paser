@@ -9,11 +9,11 @@
                 @method('POST')
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
-                        <label for="program_kode">Program</label>
-                        <select name="program_kode" id="program_kode" class="text-sm rounded-lg select2" required>
+                        <label for="program_id">Program</label>
+                        <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
-                                <option value="{{ $item->kode }}">{{ $item->uraian }}</option>
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -71,7 +71,7 @@
             selectionCssClass: 'text-sm',
         });
 
-        $('#program_kode').on('change', function() {
+        $('#program_id').on('change', function() {
             const programKode = $(this).val();
 
             if (programKode) {
@@ -79,7 +79,7 @@
                     url: "{{ route('get.kegiatan.by.program') }}",
                     type: "GET",
                     data: {
-                        program_kode: programKode
+                        program_id: programKode
                     },
                     success: function(response) {
                         $('#kegiatan_id').empty();

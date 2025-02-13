@@ -11,7 +11,7 @@ class Kegiatan extends Model
     protected $table = 'ref_kegiatan';
     public function program()
     {
-        return $this->belongsTo(Program::class, 'program_kode');
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
     public function getFormattedKodeAttribute()

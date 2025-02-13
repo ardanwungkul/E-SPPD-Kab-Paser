@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bidang;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BidangController extends Controller
 {
@@ -36,9 +37,20 @@ class BidangController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'uraian' => 'required|unique:ref_bidang'
-        ]);
+        $request->validate(
+            [
+                'uraian' =>  [
+                    'required',
+                    Rule::unique('ref_bidang')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'));
+                    })
+                ],
+            ],
+            [
+                'uraian.required' => 'Uraian Harus Diisi',
+                'uraian.unique' => 'Nama Bidang Sudah Digunakan'
+            ]
+        );
         $bidang = new Bidang();
         $bidang->uraian = $request->uraian;
         $bidang->tahun = session('tahun');
@@ -61,9 +73,20 @@ class BidangController extends Controller
      */
     public function update(Request $request, Bidang $bidang)
     {
-        $request->validate([
-            'uraian' => 'required|unique:ref_bidang,uraian,' . $bidang->uraian . ',uraian',
-        ]);
+        $request->validate(
+            [
+                'uraian' =>  [
+                    'required',
+                    Rule::unique('ref_bidang')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'));
+                    })->ignore($bidang->id)
+                ],
+            ],
+            [
+                'uraian.required' => 'Uraian Harus Diisi',
+                'uraian.unique' => 'Nama Bidang Sudah Digunakan'
+            ]
+        );
         $bidang->uraian = $request->uraian;
         $bidang->save();
 

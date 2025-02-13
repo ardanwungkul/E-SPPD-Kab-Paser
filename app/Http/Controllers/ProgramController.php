@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProgramController extends Controller
 {
@@ -36,10 +37,22 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'kode' => 'required|unique:ref_program',
-            'uraian' => 'required',
-        ]);
+        $request->validate(
+            [
+                'kode' => [
+                    'required',
+                    Rule::unique('ref_program')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'));
+                    })
+                ],
+                'uraian' => 'required',
+            ],
+            [
+                'kode.required' => 'Kode Wajib Diisi',
+                'uraian.required' => 'Uraian Wajib Diisi',
+                'kode.unique' => 'Kode Sudah Digunakan',
+            ]
+        );
         $program = new Program();
         $program->kode = $request->kode;
         $program->uraian = $request->uraian;
@@ -69,10 +82,25 @@ class ProgramController extends Controller
      */
     public function update(Request $request, Program $program)
     {
-        $request->validate([
-            'kode' => 'required|unique:ref_program,kode,' . $program->kode . ',kode',
-            'uraian' => 'required',
-        ]);
+        $request->validate(
+            [
+                'kode' =>
+                [
+                    'required',
+                    Rule::unique('ref_program')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'));
+                    })->ignore($program->id)
+                ],
+                'uraian' => 'required',
+            ],
+            [
+
+                'kode.required' => 'Kode Wajib Diisi',
+                'uraian.required' => 'Uraian Wajib Diisi',
+                'kode.unique' => 'Kode Sudah Digunakan',
+
+            ]
+        );
         $program->kode = $request->kode;
         $program->uraian = $request->uraian;
         $program->save();

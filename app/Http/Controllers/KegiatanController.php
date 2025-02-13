@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kegiatan;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class KegiatanController extends Controller
 {
@@ -38,14 +39,26 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'kode' => 'required',
-            'program_kode' => 'required',
-            'uraian' => 'required',
-        ]);
+        $request->validate(
+            [
+                'kode' => [
+                    'required',
+                    Rule::unique('ref_kegiatan')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'))->where('program_id', $request->program_id);
+                    })
+                ],
+                'program_id' => 'required',
+                'uraian' => 'required',
+            ],
+            [
+                'kode.required' => 'Kode Wajib Diisi',
+                'uraian.required' => 'Uraian Wajib Diisi',
+                'kode.unique' => 'Kode Sudah Digunakan',
+            ]
+        );
         $kegiatan = new Kegiatan();
         $kegiatan->kode = $request->kode;
-        $kegiatan->program_kode = $request->program_kode;
+        $kegiatan->program_id = $request->program_id;
         $kegiatan->uraian = $request->uraian;
         $kegiatan->tahun = session('tahun');
         $kegiatan->save();
@@ -74,13 +87,25 @@ class KegiatanController extends Controller
      */
     public function update(Request $request, Kegiatan $kegiatan)
     {
-        $request->validate([
-            'kode' => 'required',
-            'program_kode' => 'required',
-            'uraian' => 'required',
-        ]);
+        $request->validate(
+            [
+                'kode' => [
+                    'required',
+                    Rule::unique('ref_kegiatan')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'))->where('program_id', $request->program_id);
+                    })->ignore($kegiatan->id)
+                ],
+                'program_id' => 'required',
+                'uraian' => 'required',
+            ],
+            [
+                'kode.required' => 'Kode Wajib Diisi',
+                'uraian.required' => 'Uraian Wajib Diisi',
+                'kode.unique' => 'Kode Sudah Digunakan',
+            ]
+        );
         $kegiatan->kode = $request->kode;
-        $kegiatan->program_kode = $request->program_kode;
+        $kegiatan->program_id = $request->program_id;
         $kegiatan->uraian = $request->uraian;
         $kegiatan->tahun = session('tahun');
         $kegiatan->save();
@@ -99,10 +124,10 @@ class KegiatanController extends Controller
     public function getKegiatanByProgram(Request $request)
     {
         $request->validate([
-            'program_kode' => 'required|string',
+            'program_id' => 'required|string',
         ]);
-        $programKode = $request->input('program_kode');
-        $kegiatan = Kegiatan::where('program_kode', $programKode)->get();
+        $programKode = $request->input('program_id');
+        $kegiatan = Kegiatan::where('program_id', $programKode)->get();
         return response()->json($kegiatan);
     }
 }

@@ -9,12 +9,12 @@
                 @method('POST')
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
-                        <label for="program_kode">Program</label>
-                        <select name="program_kode" id="program_kode" class="text-sm rounded-lg border border-gray-300"
+                        <label for="program_id">Program</label>
+                        <select name="program_id" id="program_id" class="text-sm rounded-lg border border-gray-300"
                             required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
-                                <option value="{{ $item->kode }}">{{ $item->uraian }}</option>
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>

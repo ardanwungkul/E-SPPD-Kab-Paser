@@ -16,4 +16,9 @@ class SubBidang extends Model
     {
         return $this->belongsTo(Bidang::class, 'bidang_id');
     }
+
+    public function anggaran()
+    {
+        return $this->hasMany(Anggaran::class, 'bidang_sub_id');
+    }
 }

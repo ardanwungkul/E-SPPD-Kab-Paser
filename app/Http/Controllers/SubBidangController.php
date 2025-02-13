@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bidang;
 use App\Models\SubBidang;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SubBidangController extends Controller
 {
@@ -39,8 +40,17 @@ class SubBidangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'uraian' => 'required',
+            'uraian' =>  [
+                'required',
+                Rule::unique('ref_bidang_sub')->where(function ($query) use ($request) {
+                    return $query->where('tahun', session('tahun'))->where('bidang_id', $request->bidang_id);
+                })
+            ],
             'bidang_id' => 'required'
+        ], [
+            'uraian.required' => 'Uraian Wajib Diisi',
+            'uraian.unique' => 'Nama Sub Bidang Sudah Digunakan',
+            'bidang_id.required' => 'Bidang Wajib Diisi'
         ]);
         $sub_bidang = new SubBidang();
         $sub_bidang->bidang_id = $request->bidang_id;
@@ -73,13 +83,24 @@ class SubBidangController extends Controller
      */
     public function update(Request $request, SubBidang $sub_bidang)
     {
-        $request->validate([
-            'uraian' => 'required',
-            'bidang_id' => 'required'
-        ]);
+        $request->validate(
+            [
+                'uraian' =>  [
+                    'required',
+                    Rule::unique('ref_bidang_sub')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'))->where('bidang_id', $request->bidang_id);
+                    })->ignore($sub_bidang->id)
+                ],
+                'bidang_id' => 'required'
+            ],
+            [
+                'uraian.required' => 'Uraian Wajib Diisi',
+                'uraian.unique' => 'Nama Sub Bidang Sudah Digunakan',
+                'bidang_id.required' => 'Bidang Wajib Diisi'
+            ]
+        );
         $sub_bidang->bidang_id = $request->bidang_id;
         $sub_bidang->uraian = $request->uraian;
-        $sub_bidang->tahun = session('tahun');
         $sub_bidang->save();
 
         return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Mengubah Sub Bidang']);

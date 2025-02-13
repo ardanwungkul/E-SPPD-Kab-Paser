@@ -2,8 +2,19 @@
     $routeName = request()->route()->getName();
 
     $route = [
-        'transaksi' => ['nota-dinas.index', 'spt.index', 'sppd.index'],
+        'transaksi' => [
+            'nota-dinas.index',
+            'nota-dinas.create',
+            'nota-dinas.edit',
+            'nota-dinas.show',
+            'nota-dinas.disposisi.create',
+            'spt.index',
+            'sppd.index',
+        ],
         'data-tahunan' => [
+            'anggaran.index',
+            'anggaran.create',
+            'anggaran.edit',
             'program.index',
             'program.create',
             'program.edit',
@@ -22,12 +33,6 @@
             'sub-bidang.index',
             'sub-bidang.create',
             'sub-bidang.edit',
-            'bagian.index',
-            'bagian.create',
-            'bagian.edit',
-            'sub-bagian.index',
-            'sub-bagian.create',
-            'sub-bagian.edit',
         ],
         'master-data' => [
             'pegawai.index',
@@ -194,6 +199,21 @@
                 <div id="accordion-collapse-body-data-tahunan" class="hidden bg-secondary-3 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-data-tahunan">
                     <li>
+                        <a href="{{ route('anggaran.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                </svg>
+
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Anggaran Tahunan</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('program.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
@@ -278,36 +298,6 @@
 
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub Bidang</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('bagian.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
-                            <span class="inline-flex justify-center items-center ml-4">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                                </svg>
-
-                            </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref. Bagian</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('sub-bagian.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
-                            <span class="inline-flex justify-center items-center ml-4">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                                </svg>
-
-                            </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub Bagian</span>
                         </a>
                     </li>
                 </div>
@@ -637,6 +627,21 @@
                                 </div>
                             </li>
                             <li>
+                                <a href="{{ route('anggaran.index') }}"
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    <span class="inline-flex justify-center items-center ml-2">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                        </svg>
+
+                                    </span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Anggaran Tahunan</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('program.index') }}"
                                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
@@ -721,36 +726,6 @@
 
                                     </span>
                                     <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub Bidang</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('bagian.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
-                                    <span class="inline-flex justify-center items-center ml-2">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
-                                                d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                                        </svg>
-
-                                    </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref. Bagian</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('sub-bagian.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
-                                    <span class="inline-flex justify-center items-center ml-2">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
-                                                d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                                        </svg>
-
-                                    </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub Bagian</span>
                                 </a>
                             </li>
                         </ul>

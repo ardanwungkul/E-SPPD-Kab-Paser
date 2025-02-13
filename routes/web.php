@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\BagianController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\DesaController;
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('role', RoleController::class);
     Route::resource('users', UserController::class);
+
     Route::resource('nota-dinas', NotaDinasController::class)->parameters(['nota-dinas' => 'nota_dinas']);
     Route::get('nota-dinas/{nota_dinas}/disposisi', [NotaDinasController::class, 'disposisiCreate'])->name('nota-dinas.disposisi.create');
     Route::post('nota-dinas/{nota_dinas}/disposisi', [NotaDinasController::class, 'disposisiStore'])->name('nota-dinas.disposisi.store');
@@ -54,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('spt', SPTController::class);
     Route::resource('sppd', SPPDController::class);
 
+    Route::resource('anggaran-tahunan', AnggaranController::class)->names('anggaran')->parameters(['anggaran' => 'anggaran']);
     Route::resource('referensi/program', ProgramController::class);
     Route::resource('referensi/kegiatan', KegiatanController::class);
     Route::resource('referensi/sub-kegiatan', SubKegiatanController::class);
@@ -64,8 +67,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('referensi/bidang', BidangController::class);
     Route::resource('referensi/sub-bidang', SubBidangController::class);
     Route::get('referensi/get-sub-bidang-by-bidang', [SubBidangController::class, 'getSubBidangByBidang'])->name('get.sub-bidang.by.bidang');
-    Route::resource('referensi/bagian', BagianController::class);
-    Route::resource('referensi/sub-bagian', SubBagianController::class);
 
     Route::resource('pegawai', PegawaiController::class);
     Route::resource('master/golongan', GolonganController::class);

@@ -12,7 +12,6 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-
                     <span class="ms-1.5 text-sm font-medium"> Nota Dinas </span>
             </li>
 
@@ -66,6 +65,7 @@
     </div>
     <x-container>
         <x-slot name="content">
+
             <div class="divide-y">
                 <div class="flex justify-between items-center pb-3">
                     <a href="{{ route('nota-dinas.index') }}" data-tooltip-target="tooltip-kembali"

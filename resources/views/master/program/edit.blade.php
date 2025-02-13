@@ -4,7 +4,7 @@
     </x-slot>
     <x-container>
         <x-slot name="content">
-            <form action="{{ route('program.update', $program->kode) }}" method="POST">
+            <form action="{{ route('program.update', $program->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="text-sm space-y-3">

@@ -74,53 +74,41 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Edit Pegawai', 'category_id' => 9]);
         Permission::create(['name' => 'Hapus Pegawai', 'category_id' => 9]);
 
-        PermissionCategory::create(['nama' => 'Akses Ref Sub Bagian']);
-        Permission::create(['name' => 'Daftar Ref Sub Bagian', 'category_id' => 10]);
-        Permission::create(['name' => 'Tambah Ref Sub Bagian', 'category_id' => 10]);
-        Permission::create(['name' => 'Edit Ref Sub Bagian', 'category_id' => 10]);
-        Permission::create(['name' => 'Hapus Ref Sub Bagian', 'category_id' => 10]);
-
-        PermissionCategory::create(['nama' => 'Akses Ref Bagian']);
-        Permission::create(['name' => 'Daftar Ref Bagian', 'category_id' => 11]);
-        Permission::create(['name' => 'Tambah Ref Bagian', 'category_id' => 11]);
-        Permission::create(['name' => 'Edit Ref Bagian', 'category_id' => 11]);
-        Permission::create(['name' => 'Hapus Ref Bagian', 'category_id' => 11]);
-
         PermissionCategory::create(['nama' => 'Akses Sub Bidang']);
-        Permission::create(['name' => 'Daftar Sub Bidang', 'category_id' => 12]);
-        Permission::create(['name' => 'Tambah Sub Bidang', 'category_id' => 12]);
-        Permission::create(['name' => 'Edit Sub Bidang', 'category_id' => 12]);
-        Permission::create(['name' => 'Hapus Sub Bidang', 'category_id' => 12]);
+        Permission::create(['name' => 'Daftar Sub Bidang', 'category_id' => 10]);
+        Permission::create(['name' => 'Tambah Sub Bidang', 'category_id' => 10]);
+        Permission::create(['name' => 'Edit Sub Bidang', 'category_id' => 10]);
+        Permission::create(['name' => 'Hapus Sub Bidang', 'category_id' => 10]);
 
         PermissionCategory::create(['nama' => 'Akses Bidang']);
-        Permission::create(['name' => 'Daftar Bidang', 'category_id' => 13]);
-        Permission::create(['name' => 'Tambah Bidang', 'category_id' => 13]);
-        Permission::create(['name' => 'Edit Bidang', 'category_id' => 13]);
-        Permission::create(['name' => 'Hapus Bidang', 'category_id' => 13]);
+        Permission::create(['name' => 'Daftar Bidang', 'category_id' => 11]);
+        Permission::create(['name' => 'Tambah Bidang', 'category_id' => 11]);
+        Permission::create(['name' => 'Edit Bidang', 'category_id' => 11]);
+        Permission::create(['name' => 'Hapus Bidang', 'category_id' => 11]);
 
         PermissionCategory::create(['nama' => 'Akses Jenis SPPD']);
-        Permission::create(['name' => 'Daftar Jenis SPPD', 'category_id' => 14]);
-        Permission::create(['name' => 'Tambah Jenis SPPD', 'category_id' => 14]);
-        Permission::create(['name' => 'Edit Jenis SPPD', 'category_id' => 14]);
-        Permission::create(['name' => 'Hapus Jenis SPPD', 'category_id' => 14]);
+        Permission::create(['name' => 'Daftar Jenis SPPD', 'category_id' => 12]);
+        Permission::create(['name' => 'Tambah Jenis SPPD', 'category_id' => 12]);
+        Permission::create(['name' => 'Edit Jenis SPPD', 'category_id' => 12]);
+        Permission::create(['name' => 'Hapus Jenis SPPD', 'category_id' => 12]);
 
         PermissionCategory::create(['nama' => 'Akses Sub Kegiatan']);
-        Permission::create(['name' => 'Daftar Sub Kegiatan', 'category_id' => 15]);
-        Permission::create(['name' => 'Tambah Sub Kegiatan', 'category_id' => 15]);
-        Permission::create(['name' => 'Edit Sub Kegiatan', 'category_id' => 15]);
-        Permission::create(['name' => 'Hapus Sub Kegiatan', 'category_id' => 15]);
+        Permission::create(['name' => 'Daftar Sub Kegiatan', 'category_id' => 13]);
+        Permission::create(['name' => 'Tambah Sub Kegiatan', 'category_id' => 13]);
+        Permission::create(['name' => 'Edit Sub Kegiatan', 'category_id' => 13]);
+        Permission::create(['name' => 'Hapus Sub Kegiatan', 'category_id' => 13]);
 
         PermissionCategory::create(['nama' => 'Akses Kegiatan']);
-        Permission::create(['name' => 'Daftar Kegiatan', 'category_id' => 16]);
-        Permission::create(['name' => 'Tambah Kegiatan', 'category_id' => 16]);
-        Permission::create(['name' => 'Edit Kegiatan', 'category_id' => 16]);
-        Permission::create(['name' => 'Hapus Kegiatan', 'category_id' => 16]);
+        Permission::create(['name' => 'Daftar Kegiatan', 'category_id' => 14]);
+        Permission::create(['name' => 'Tambah Kegiatan', 'category_id' => 14]);
+        Permission::create(['name' => 'Edit Kegiatan', 'category_id' => 14]);
+        Permission::create(['name' => 'Hapus Kegiatan', 'category_id' => 14]);
 
         PermissionCategory::create(['nama' => 'Akses Program']);
-        Permission::create(['name' => 'Daftar Program', 'category_id' => 17]);
-        Permission::create(['name' => 'Tambah Program', 'category_id' => 17]);
-        Permission::create(['name' => 'Edit Program', 'category_id' => 17]);
-        Permission::create(['name' => 'Hapus Program', 'category_id' => 17]);
+        Permission::create(['name' => 'Daftar Program', 'category_id' => 15]);
+        Permission::create(['name' => 'Tambah Program', 'category_id' => 15]);
+        Permission::create(['name' => 'Edit Program', 'category_id' => 15]);
+        Permission::create(['name' => 'Hapus Program', 'category_id' => 15]);
 
 
 

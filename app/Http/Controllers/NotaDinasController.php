@@ -53,20 +53,25 @@ class NotaDinasController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'sub_bidang_id' => 'required',
-            'sub_kegiatan_id' => 'required',
-            'jenis_sppd_id' => 'required',
-            'tanggal' => 'required',
-            'pegawai_id_dari' => 'required',
-            'pegawai_id_kepada' => 'required',
-            'perihal' => 'required',
-            'isi' => 'required',
-            'nomor' => [
-                'required',
-                Rule::unique('transaksi_nota_dinas')->where('tahun', session('tahun')),
+        $request->validate(
+            [
+                'sub_bidang_id' => 'required',
+                'sub_kegiatan_id' => 'required',
+                'jenis_sppd_id' => 'required',
+                'tanggal' => 'required',
+                'pegawai_id_dari' => 'required',
+                'pegawai_id_kepada' => 'required',
+                'perihal' => 'required',
+                'isi' => 'required',
+                'nomor' => [
+                    'required',
+                    Rule::unique('transaksi_nota_dinas')->where('tahun', session('tahun')),
+                ],
             ],
-        ]);
+            [
+                'nomor.unique' => 'Nomor Sudah Digunakan'
+            ]
+        );
 
 
         $nota_dinas = new NotaDinas();
@@ -111,25 +116,70 @@ class NotaDinasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(NotaDinas $nota_dinas)
     {
-        //
+        $program = Program::all();
+        $jenis = JenisPerjalanan::all();
+        $bidang = Bidang::all();
+        $pegawai = Pegawai::with('pangkat')
+            ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->orderBy('ref_pangkat.jenis_pegawai')
+            ->orderBy('ref_pangkat.kode_golongan')
+            ->orderBy('ref_pangkat.uraian')
+            ->select('pegawai.*')
+            ->get();
+        return view('master.nota-dinas.edit', compact('program', 'jenis', 'bidang', 'pegawai', 'nota_dinas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, NotaDinas $nota_dinas)
     {
-        //
+        $request->validate([
+            'sub_bidang_id' => 'required',
+            'sub_kegiatan_id' => 'required',
+            'jenis_sppd_id' => 'required',
+            'tanggal' => 'required',
+            'pegawai_id_dari' => 'required',
+            'pegawai_id_kepada' => 'required',
+            'perihal' => 'required',
+            'isi' => 'required',
+            'nomor' => [
+                'required',
+                Rule::unique('transaksi_nota_dinas')->where('tahun', session('tahun'))->ignore($nota_dinas->id),
+            ],
+        ]);
+
+        $nota_dinas->sub_bidang_id = $request->sub_bidang_id;
+        $nota_dinas->sub_kegiatan_id = $request->sub_kegiatan_id;
+        $nota_dinas->jenis_sppd_id = $request->jenis_sppd_id;
+        $nota_dinas->tanggal = $request->tanggal;
+        $nota_dinas->pegawai_id_dari = $request->pegawai_id_dari;
+        $nota_dinas->pegawai_id_kepada = $request->pegawai_id_kepada;
+        $nota_dinas->perihal = $request->perihal;
+        $nota_dinas->isi = $request->isi;
+        $nota_dinas->nomor = $request->nomor;
+        $nota_dinas->save();
+
+        return redirect()->route('nota-dinas.show', $nota_dinas->id)->with(['success' => 'Berhasil Mengubah Nota Dinas']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(NotaDinas $nota_dinas)
     {
-        //
+        if ($nota_dinas->lampiran->count() > 0) {
+            foreach ($nota_dinas->lampiran as $lampiran) {
+                $path = public_path('storage/' . $lampiran->lampiran);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+        }
+        $nota_dinas->delete();
+        return redirect()->back()->with(['success' => 'Berhasil Menghapus Nota Dinas']);
     }
     public function print(NotaDinas $nota_dinas)
     {

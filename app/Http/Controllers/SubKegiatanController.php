@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Program;
 use App\Models\SubKegiatan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SubKegiatanController extends Controller
 {
@@ -38,12 +39,25 @@ class SubKegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'kode' => 'required',
-            'program_kode' => 'required',
-            'kegiatan_id' => 'required',
-            'uraian' => 'required',
-        ]);
+        $request->validate(
+            [
+                'kode' => [
+                    'required',
+                    Rule::unique('ref_kegiatan_sub')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'))->where('kegiatan_id', $request->kegiatan_id);
+                    })
+                ],
+                'program_id' => 'required',
+                'kegiatan_id' => 'required',
+                'uraian' => 'required',
+            ],
+            [
+                'program_id.required' => 'Program Wajib Diisi',
+                'kegiatan_id.required' => 'Kegiatan Wajib Diisi',
+                'uraian.required' => 'Uraian Wajib Diisi',
+                'kode.unique' => 'Kode Sudah Digunakan',
+            ]
+        );
         $sub_kegiatan = new SubKegiatan();
         $sub_kegiatan->kode = $request->kode;
         $sub_kegiatan->kegiatan_id = $request->kegiatan_id;
@@ -75,12 +89,25 @@ class SubKegiatanController extends Controller
      */
     public function update(Request $request, SubKegiatan $sub_kegiatan)
     {
-        $request->validate([
-            'kode' => 'required',
-            'program_kode' => 'required',
-            'kegiatan_id' => 'required',
-            'uraian' => 'required',
-        ]);
+        $request->validate(
+            [
+                'kode' => [
+                    'required',
+                    Rule::unique('ref_kegiatan_sub')->where(function ($query) use ($request) {
+                        return $query->where('tahun', session('tahun'))->where('kegiatan_id', $request->kegiatan_id);
+                    })->ignore($sub_kegiatan->id)
+                ],
+                'program_id' => 'required',
+                'kegiatan_id' => 'required',
+                'uraian' => 'required',
+            ],
+            [
+                'program_id.required' => 'Program Wajib Diisi',
+                'kegiatan_id.required' => 'Kegiatan Wajib Diisi',
+                'uraian.required' => 'Uraian Wajib Diisi',
+                'kode.unique' => 'Kode Sudah Digunakan',
+            ]
+        );
         $sub_kegiatan->kode = $request->kode;
         $sub_kegiatan->kegiatan_id = $request->kegiatan_id;
         $sub_kegiatan->uraian = $request->uraian;

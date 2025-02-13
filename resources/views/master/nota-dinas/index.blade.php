@@ -96,6 +96,25 @@
                                                         </a>
                                                     </div>
                                                 </div>
+                                                @if ($item->status == '0')
+                                                    <div>
+                                                        <button type="button"
+                                                            data-modal-toggle="confirm-delete-{{ $item->id }}"
+                                                            data-modal-target="confirm-delete-{{ $item->id }}"
+                                                            class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
+                                                            <svg class="w-4 h-4" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                            </svg>
+
+                                                        </button>
+                                                        <x-modal.confirm-delete :id="$item->id" :name="'Data'"
+                                                            :action="route('nota-dinas.destroy', $item->id)" />
+                                                    </div>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

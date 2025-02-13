@@ -9,10 +9,8 @@ class Program extends Model
 {
     use HasFactory;
     protected $table = 'ref_program';
-    protected $primaryKey = 'kode';
-    public $incrementing = false;
     public function kegiatan()
     {
-        return $this->hasMany(Kegiatan::class, 'program_kode');
+        return $this->hasMany(Kegiatan::class, 'program_id');
     }
 }

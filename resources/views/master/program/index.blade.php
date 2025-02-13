@@ -40,7 +40,7 @@
                                             <div class="flex justify-center items-center gap-3">
                                                 <div>
                                                     <div>
-                                                        <a href="{{ route('program.edit', $item->kode) }}"
+                                                        <a href="{{ route('program.edit', $item->id) }}"
                                                             class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                             <svg class="w-4 h-4" aria-hidden="true"
                                                                 xmlns="http://www.w3.org/2000/svg" width="24"
@@ -55,8 +55,8 @@
                                                 </div>
                                                 <div>
                                                     <button type="button"
-                                                        data-modal-toggle="confirm-delete-{{ $item->kode }}"
-                                                        data-modal-target="confirm-delete-{{ $item->kode }}"
+                                                        data-modal-toggle="confirm-delete-{{ $item->id }}"
+                                                        data-modal-target="confirm-delete-{{ $item->id }}"
                                                         class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                         <svg class="w-4 h-4" aria-hidden="true"
                                                             xmlns="http://www.w3.org/2000/svg" width="24"
@@ -67,8 +67,8 @@
                                                         </svg>
 
                                                     </button>
-                                                    <x-modal.confirm-delete :id="$item->kode" :name="'Data'"
-                                                        :action="route('program.destroy', $item->kode)" />
+                                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'"
+                                                        :action="route('program.destroy', $item->id)" />
                                                 </div>
                                             </div>
                                         </td>
