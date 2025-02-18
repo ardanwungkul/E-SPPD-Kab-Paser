@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggaran;
 use App\Models\Bidang;
 use App\Models\JenisPerjalanan;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class AnggaranController extends Controller
@@ -49,7 +50,10 @@ class AnggaranController extends Controller
      */
     public function create()
     {
-        //
+        $program = Program::where('tahun', session('tahun'))->get();
+        $jenis = JenisPerjalanan::all();
+        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        return view('master.anggaran.create', compact('program', 'bidang', 'jenis'));
     }
 
     /**
@@ -57,7 +61,32 @@ class AnggaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        foreach ($request->anggaran as $jenis) {
+            if ($jenis['rp_pagu'] && $jenis['rp_pagu'] !== null) {
+                $existAnggaran = Anggaran::where('sub_kegiatan_id', $request->sub_kegiatan_id)
+                    ->where('tahun', session('tahun'))
+                    ->where('bidang_sub_id', $request->sub_bidang_id)
+                    ->where('jenis_sppd_id', $jenis['id'])->exists();
+                if (!$existAnggaran) {
+                    $anggaran = new Anggaran();
+                    $anggaran->sub_kegiatan_id = $request->sub_kegiatan_id;
+                    $anggaran->bidang_sub_id = $request->sub_bidang_id;
+                    $anggaran->jenis_sppd_id = $jenis['id'];
+                    $anggaran->rp_pagu = preg_replace('/[^0-9-]/', '', $jenis['rp_pagu']);
+                    $anggaran->tahun = session('tahun');
+                    $anggaran->save();
+                } else {
+                    $anggaran = Anggaran::where('sub_kegiatan_id', $request->sub_kegiatan_id)
+                        ->where('tahun', session('tahun'))
+                        ->where('bidang_sub_id', $request->sub_bidang_id)
+                        ->where('jenis_sppd_id', $jenis['id'])->first();
+                    $anggaran->rp_pagu = preg_replace('/[^0-9-]/', '', $jenis['rp_pagu']);
+                    $anggaran->save();
+                }
+            }
+        }
+        return redirect()->route('anggaran.index')->with(['success' => 'Berhasil Menambahkan Anggaran tahunan']);
     }
 
     /**

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->tinyIncrements('id');
+            $table->unsignedSmallInteger('bidang_id')->nullable();
+            $table->foreign('bidang_id')->references('id')->on('ref_bidang')->onUpdate('cascade')->onDelete('set null');
             $table->string('name', 30);
             $table->string('username', 20)->unique();
             $table->string('email', 30)->unique();

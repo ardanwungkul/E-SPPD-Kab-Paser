@@ -15,6 +15,7 @@ return new class extends Migration
             $table->smallIncrements('id');
             $table->year('tahun');
             $table->string('uraian', 100);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

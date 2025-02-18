@@ -64,7 +64,8 @@
 <div class="flex flex-col top-0 left-0 w-60 bg-white border-r h-screen sticky transition-all duration-300 z-30"
     id="sidebar">
     <div class="h-[60px] border-b border-secondary-3 flex-none flex items-center justify-center bg-color-1-400 px-5">
-        <p class="font-medium text-lg text-white whitespace-nowrap expanded-sidebar w-full">E-SPPD</p>
+        <p class="font-medium text-lg text-white whitespace-nowrap expanded-sidebar w-full truncate">
+            {{ session('preferensi') ? session('preferensi')->nama_aplikasi : '' }}</p>
         <button class="p-2 group" id="expand-button">
             <svg class="w-6 h-6 text-white group-hover:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 width="24" height="24" fill="none" viewBox="0 0 24 24">

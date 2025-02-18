@@ -15,9 +15,18 @@ class KabupatenKotaController extends Controller
         $this->middleware('permission:Edit Kabupaten/Kota', ['only' => ['edit', 'update']]);
         $this->middleware('permission:Hapus Kabupaten/Kota', ['only' => ['destroy']]);
     }
-    public function index()
+    public function index(Request $request)
     {
-        $data = KabupatenKota::all();
+        $query = KabupatenKota::with('provinsi')->orderBy('provinsi_id', 'asc');
+
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('nama', 'LIKE', "%{$request->search}%")->orWhereHas('provinsi', function ($q) use ($request) {
+                $q->where('nama', 'LIKE', "%{$request->search}%");
+            });
+        }
+
+        $data = $query->paginate(10)->appends(['search' => $request->search]);
+
         return view('master.kabupaten-kota.index', compact('data'));
     }
 

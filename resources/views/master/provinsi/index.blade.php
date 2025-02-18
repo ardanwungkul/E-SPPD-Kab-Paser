@@ -6,18 +6,24 @@
     <x-container>
         <x-slot name="content">
             <div>
-                <a href="{{ route('provinsi.create') }}"
-                    class="bg-secondary-3 text-secondary-2 rounded-lg px-3 py-2 text-xs border border-secondary-4 shadow-lg flex gap-1 items-center justify-center mb-12 md:mb-4 whitespace-nowrap w-min font-medium">
-                    <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-secondary-2"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        </path>
-                    </svg>
-                    <p>
-                        Tambah
-                    </p>
-                </a>
-                <div class="relative pb-20">
+                <div class="flex items-center justify-between">
+                    <a href="{{ route('provinsi.create') }}"
+                        class="bg-secondary-3 text-secondary-2 rounded-lg px-3 py-2 text-xs border border-secondary-4 shadow-lg flex gap-1 items-center justify-center mb-12 md:mb-4 whitespace-nowrap w-min font-medium">
+                        <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-secondary-2"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+                        </svg>
+                        <p>
+                            Tambah
+                        </p>
+                    </a>
+                    <form method="GET" action="{{ route('provinsi.index') }}">
+                        <input type="text" name="search" class="text-sm rounded-lg" value="{{ request('search') }}"
+                            placeholder="Cari...">
+                    </form>
+                </div>
+                <div class="relative">
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
@@ -81,6 +87,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="pt-5">
+                        {{ $data->links() }}
+                    </div>
                 </div>
             </div>
         </x-slot>
@@ -92,7 +101,8 @@
             info: false,
             lengthChange: false,
             deferRender: true,
-            paging: true,
+            paging: false,
+            searching: false,
             language: {
                 search: '',
                 emptyTable: "Tidak ada data tersedia",

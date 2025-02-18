@@ -18,11 +18,19 @@ class ProvinsiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Provinsi::all();
+        $query = Provinsi::query();
+
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('nama', 'LIKE', "%{$request->search}%");
+        }
+
+        $data = $query->paginate(10)->appends(['search' => $request->search]);
+
         return view('master.provinsi.index', compact('data'));
     }
+
 
     /**
      * Show the form for creating a new resource.

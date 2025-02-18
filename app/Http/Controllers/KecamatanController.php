@@ -19,9 +19,16 @@ class KecamatanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Kecamatan::all();
+
+        $query = Kecamatan::with('kabupaten_kota')->orderBy('kabupaten_kota_id', 'asc');
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('nama', 'LIKE', "%{$request->search}%")->orWhereHas('kabupaten_kota', function ($q) use ($request) {
+                $q->where('nama', 'LIKE', "%{$request->search}%");
+            });
+        }
+        $data = $query->paginate(10)->appends(['search' => $request->search]);
         return view('master.kecamatan.index', compact('data'));
     }
 

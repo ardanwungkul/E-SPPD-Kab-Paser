@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('role', RoleController::class);
     Route::resource('users', UserController::class);
     Route::get('sistem/konfigurasi', [KonfigurasiController::class, 'index'])->name('config.index');
+    Route::post('sistem/konfigurasi', [KonfigurasiController::class, 'store'])->name('config.store');
+    Route::post('sistem/preferensi', [KonfigurasiController::class, 'storePreferensi'])->name('preferensi.store');
 
     Route::resource('nota-dinas', NotaDinasController::class)->parameters(['nota-dinas' => 'nota_dinas']);
     Route::get('nota-dinas/{nota_dinas}/disposisi', [NotaDinasController::class, 'disposisiCreate'])->name('nota-dinas.disposisi.create');

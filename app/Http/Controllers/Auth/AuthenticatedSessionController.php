@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Config;
+use App\Models\Preferensi;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -35,6 +36,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         $request->session()->put('tahun', $request->tahun);
         $request->session()->put('config', $config);
+        $request->session()->put('preferensi', Preferensi::first());
         $user = User::find(Auth::user()->id);
         $user->terakhir_login = now();
         $user->save();
