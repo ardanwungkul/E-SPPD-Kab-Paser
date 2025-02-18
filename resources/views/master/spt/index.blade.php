@@ -35,14 +35,14 @@
                                                 {{ $item->nomor }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-start">{{ $item->spt ? $item->spt->nomor : '' }}</p>
+                                            <p class="text-start">{{ $item->spt ? $item->spt->nomor : '-' }}</p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">
                                                 @if ($item->spt)
                                                     <div>
                                                         <div>
-                                                            <a href="{{ route('nota-dinas.show', $item->id) }}"
+                                                            <a href="{{ route('spt.show', $item->id) }}"
                                                                 class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                                 <svg class="w-4 h-4" aria-hidden="true"
                                                                     xmlns="http://www.w3.org/2000/svg" width="24"
@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div>
                                                         <div>
-                                                            <a href="{{ route('nota-dinas.edit', $item->id) }}"
+                                                            <a href="{{ route('spt.edit', $item->id) }}"
                                                                 class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                                 <svg class="w-4 h-4" aria-hidden="true"
                                                                     xmlns="http://www.w3.org/2000/svg" width="24"
@@ -71,7 +71,7 @@
                                                     </div>
                                                     <div>
                                                         <div>
-                                                            <a href="{{ route('nota-dinas.print', $item->id) }}"
+                                                            <a href="{{ route('spt.print', $item->id) }}"
                                                                 class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                                 <svg class="w-4 h-4" aria-hidden="true"
                                                                     xmlns="http://www.w3.org/2000/svg" width="24"

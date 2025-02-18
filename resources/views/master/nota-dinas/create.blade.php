@@ -157,19 +157,21 @@
                         </div>
                         <div class="space-y-3">
                             <div class="flex flex-col gap-1">
-                                <label for="bidang_id">Bidang</label>
+                                <label for="bidang_id">{{ session('config')->judul }}</label>
                                 <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
-                                    <option value="" selected disabled>Pilih Bidang</option>
+                                    <option value="" selected disabled>Pilih {{ session('config')->judul }}
+                                    </option>
                                     @foreach ($bidang as $item)
                                         <option value="{{ $item->id }}">{{ $item->uraian }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
-                                <label for="sub_bidang_id">Sub Bidang</label>
+                                <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
                                 <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
                                     required>
-                                    <option value="" selected disabled> Pilih Sub Bidang</option>
+                                    <option value="" selected disabled> Pilih Sub {{ session('config')->judul }}
+                                    </option>
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
@@ -389,7 +391,7 @@
                     success: function(response) {
                         $('#sub_bidang_id').empty();
                         $('#sub_bidang_id').append(
-                            '<option value="" selected disabled>Pilih Sub Bidang</option>'
+                            '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
                         );
 
                         if (response.length > 0) {
@@ -400,7 +402,7 @@
                             });
                         } else {
                             $('#sub_bidang_id').append(
-                                '<option value="" disabled>Tidak ada Sub Bidang tersedia</option>'
+                                '<option value="" disabled>Tidak ada Sub {{ session('config')->judul }} tersedia</option>'
                             );
                         }
                     },
@@ -411,7 +413,8 @@
             } else {
                 $('#sub_bidang_id').empty();
                 $('#sub_bidang_id').append(
-                    '<option value="" selected disabled>Pilih Sub Bidang</option>');
+                    '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                    );
             }
         });
     });

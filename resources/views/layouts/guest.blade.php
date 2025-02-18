@@ -75,7 +75,11 @@
             <div class="col-span-2 bg-white overflow-hidden px-10 py-5 flex items-center md:h-full">
                 <div class="w-full">
                     <div class="flex-col flex justify-center items-center pb-2 border-b border-gray-300">
-                        <p class="text-gray-600 font-extrabold text-center text-lg">Sistem Informasi Perjalanan Dinas
+                        <p class="text-gray-600 font-extrabold text-center text-xl leading-none">Badan Keuangan dan Aset
+                            Daerah
+                        </p>
+                        <p class="text-gray-400 font-medium text-center text-sm leading-5">Sistem Informasi
+                            Perjalanan Dinas
                         </p>
                     </div>
                     <div class="py-3">

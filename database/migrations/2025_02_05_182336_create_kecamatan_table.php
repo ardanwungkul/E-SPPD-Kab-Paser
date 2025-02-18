@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('wilayah_kecamatan', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('nama', 50);
-            $table->decimal('longitude', 10, 7);
-            $table->decimal('latitude', 10, 7);
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
             $table->unsignedSmallInteger('kabupaten_kota_id');
             $table->foreign('kabupaten_kota_id')->references('id')->on('wilayah_kabupaten_kota')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

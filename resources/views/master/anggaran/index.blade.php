@@ -33,7 +33,7 @@
                                     <tr class="bg-secondary-3">
                                         <td colspan="1"
                                             class="text-start px-3 py-2 border border-secondary-4 font-semibold">
-                                            Bidang
+                                            {{ session('config')->judul }}
                                         </td>
                                         <td colspan="{{ 1 + $jenis_sppd->count() }}"
                                             class="text-start px-3 py-2 border border-secondary-4 font-semibold">
@@ -45,7 +45,7 @@
                                         <tr class="bg-secondary-3">
                                             <td colspan="1"
                                                 class="text-start px-3 py-2 border border-secondary-4 font-semibold">
-                                                Sub Bidang
+                                                Sub {{ session('config')->judul }}
                                             </td>
                                             <td colspan="{{ 1 + $jenis_sppd->count() }}"
                                                 class="text-start px-3 py-2 border border-secondary-4 font-semibold">

@@ -69,7 +69,9 @@ class NotaDinasController extends Controller
                 ],
             ],
             [
-                'nomor.unique' => 'Nomor Sudah Digunakan'
+                'nomor.unique' => 'Nomor Sudah Digunakan',
+                'pegawai_id_dari.required' => 'Pegawai dari Wajib Diisi',
+                'pegawai_id_untuk.required' => 'Pegawai untuk Wajib Diisi'
             ]
         );
 

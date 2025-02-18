@@ -9,6 +9,7 @@ use App\Http\Controllers\JenisPerjalananController;
 use App\Http\Controllers\KabupatenKotaController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\KonfigurasiController;
 use App\Http\Controllers\NotaDinasController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
@@ -48,12 +49,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('role', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::get('sistem/konfigurasi', [KonfigurasiController::class, 'index'])->name('config.index');
 
     Route::resource('nota-dinas', NotaDinasController::class)->parameters(['nota-dinas' => 'nota_dinas']);
     Route::get('nota-dinas/{nota_dinas}/disposisi', [NotaDinasController::class, 'disposisiCreate'])->name('nota-dinas.disposisi.create');
     Route::post('nota-dinas/{nota_dinas}/disposisi', [NotaDinasController::class, 'disposisiStore'])->name('nota-dinas.disposisi.store');
     Route::get('nota-dinas-cetak/{nota_dinas}', [NotaDinasController::class, 'print'])->name('nota-dinas.print');
     Route::resource('spt', SPTController::class);
+    Route::get('spt-cetak/{spt}', [SPTController::class, 'print'])->name('spt.print');
     Route::resource('sppd', SPPDController::class);
 
     Route::resource('anggaran-tahunan', AnggaranController::class)->names('anggaran')->parameters(['anggaran' => 'anggaran']);

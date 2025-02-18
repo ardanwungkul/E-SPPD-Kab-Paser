@@ -29,10 +29,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $config = Config::where('tahun', $request->tahun)->where('aktif', 'Y')->first();
         $request->authenticate();
 
         $request->session()->regenerate();
         $request->session()->put('tahun', $request->tahun);
+        $request->session()->put('config', $config);
         $user = User::find(Auth::user()->id);
         $user->terakhir_login = now();
         $user->save();
@@ -46,6 +48,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Session::forget('tahun');
+        Session::forget('config');
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

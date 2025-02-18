@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Edit Sub Bidang
+        Edit Sub {{ session('config')->judul }}
     </x-slot>
     <x-container>
         <x-slot name="content">
@@ -9,9 +9,9 @@
                 @method('PUT')
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
-                        <label for="bidang_id">Bidang</label>
+                        <label for="bidang_id">{{ session('config')->judul }}</label>
                         <select id="bidang_id" name="bidang_id" class="text-sm rounded-lg border border-gray-300" required>
-                            <option value="" selected disabled>Pilih Bidang</option>
+                            <option value="" selected disabled>Pilih {{ session('config')->judul }}</option>
                             @foreach ($bidang as $item)
                                 <option value="{{ $item->id }}"
                                     {{ $sub_bidang->bidang_id == $item->id ? 'selected' : '' }}>{{ $item->uraian }}

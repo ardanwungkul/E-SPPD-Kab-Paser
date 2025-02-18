@@ -5,8 +5,7 @@
     <x-container>
         <x-slot name="content">
             <div>
-
-                <div id="accordion-collapse" data-accordion="collapse">
+                <div id="accordion-collapse-disposisi" data-accordion="collapse">
                     <h2 id="accordion-collapse-nota-dinas-heading-1">
                         <button type="button"
                             class="flex items-center justify-between w-full px-3 py-1 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-lg focus:ring-0 focus:ring-gray-200 hover:bg-gray-100"
@@ -47,10 +46,10 @@
                                                 - {{ $nota_dinas->sub_kegiatan->uraian }}</td>
                                         </tr>
                                         <tr class="odd:bg-white even:bg-secondary-3/60">
-                                            <td class="p-2 font-light w-40">Bidang</td>
+                                            <td class="p-2 font-light w-40">{{ session('config')->judul }}</td>
                                             <td class="p-2 font-medium" colspan="2">{{ $nota_dinas->bidang->uraian }}
                                             </td>
-                                            <td class="p-2 font-light w-40">Sub Bidang</td>
+                                            <td class="p-2 font-light w-40">Sub {{ session('config')->judul }}</td>
                                             <td class="p-2 font-medium" colspan="2">
                                                 {{ $nota_dinas->sub_bidang->uraian }}</td>
                                         </tr>
@@ -145,7 +144,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <form action="{{ route('nota-dinas.disposisi.store', $nota_dinas->id) }}" method="POST"
                 enctype="multipart/form-data">
@@ -305,7 +303,7 @@
                     success: function(response) {
                         $('#sub_bidang_id').empty();
                         $('#sub_bidang_id').append(
-                            '<option value="" selected disabled>Pilih Sub Bidang</option>'
+                            '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
                         );
 
                         if (response.length > 0) {
@@ -316,7 +314,7 @@
                             });
                         } else {
                             $('#sub_bidang_id').append(
-                                '<option value="" disabled>Tidak ada Sub Bidang tersedia</option>'
+                                '<option value="" disabled>Tidak ada Sub {{ session('config')->judul }} tersedia</option>'
                             );
                         }
                     },
@@ -327,7 +325,8 @@
             } else {
                 $('#sub_bidang_id').empty();
                 $('#sub_bidang_id').append(
-                    '<option value="" selected disabled>Pilih Sub Bidang</option>');
+                    '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                );
             }
         });
     });

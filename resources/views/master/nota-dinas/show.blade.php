@@ -34,23 +34,27 @@
 
                     <span class="ms-1.5 text-sm font-medium">Berkas Disposisi</span>
             </li>
-            <li class="flex items-center w-full relative">
+            <li class="flex items-center w-full relative {{ $nota_dinas->spt ? 'text-white' : '' }}">
                 <span
-                    class="absolute inset-y-0 -start-px h-10 w-4 bg-color-1-200 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180">
+                    class="absolute inset-y-0 h-10 w-4 bg-color-1-200 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180">
                 </span>
                 <p
-                    class="flex h-10 items-center gap-1.5 bg-gradient-to-r from-gray-200 to-gray-100 px-4 transition w-full pl-10">
+                    class="flex h-10 items-center gap-1.5 {{ $nota_dinas->spt ? 'from-color-1-400 to-color-1-200' : 'bg-gradient-to-r from-gray-200 to-gray-100' }} bg-gradient-to-r  px-4 transition w-full pl-10">
                     <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                         height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                            d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                        @if ($nota_dinas->spt)
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        @else
+                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                        @endif
                     </svg>
-
                     <span class="ms-1.5 text-sm font-medium"> SPT </span>
             </li>
             <li class="flex items-center w-full relative">
                 <span
-                    class="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180">
+                    class="absolute inset-y-0 -start-px h-10 w-4 {{ $nota_dinas->spt ? 'bg-color-1-200' : 'bg-gray-100' }} [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180">
                 </span>
                 <p
                     class="flex h-10 items-center gap-1.5 bg-gradient-to-r from-gray-200 to-gray-100 px-4 transition w-full pl-10">
@@ -65,7 +69,6 @@
     </div>
     <x-container>
         <x-slot name="content">
-
             <div class="divide-y">
                 <div class="flex justify-between items-center pb-3">
                     <a href="{{ route('nota-dinas.index') }}" data-tooltip-target="tooltip-kembali"
@@ -88,8 +91,8 @@
                             class="text-secondary-2 p-2 rounded-lg bg-secondary-3 hover:bg-opacity-80 border border-secondary-4">
                             <div class="flex items-center overflow-hidden">
                                 <svg class="w-5 h-5 bg-secondary-3" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                    viewBox="0 0 24 24">
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z"
                                         clip-rule="evenodd" />
@@ -165,9 +168,9 @@
                                     - {{ $nota_dinas->sub_kegiatan->uraian }}</td>
                             </tr>
                             <tr class="odd:bg-white even:bg-secondary-3/60">
-                                <td class="p-2 font-light w-40">Bidang</td>
+                                <td class="p-2 font-light w-40">{{ session('config')->judul }}</td>
                                 <td class="p-2 font-medium" colspan="2">{{ $nota_dinas->bidang->uraian }}</td>
-                                <td class="p-2 font-light w-40">Sub Bidang</td>
+                                <td class="p-2 font-light w-40">Sub {{ session('config')->judul }}</td>
                                 <td class="p-2 font-medium" colspan="2">{{ $nota_dinas->sub_bidang->uraian }}</td>
                             </tr>
                             <tr class="odd:bg-white even:bg-secondary-3/60">
