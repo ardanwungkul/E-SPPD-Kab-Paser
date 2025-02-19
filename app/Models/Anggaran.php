@@ -10,6 +10,14 @@ class Anggaran extends Model
     use HasFactory;
     protected $table = 'anggaran';
 
+    public function sub_bidang()
+    {
+        return $this->belongsTo(SubBidang::class, 'bidang_sub_id');
+    }
+    public function jenis_sppd()
+    {
+        return $this->belongsTo(JenisPerjalanan::class, 'jenis_sppd_id');
+    }
     public function sub_kegiatan()
     {
         return $this->belongsTo(SubKegiatan::class, 'sub_kegiatan_id');

@@ -6,6 +6,8 @@ use App\Models\Anggaran;
 use App\Models\Bidang;
 use App\Models\JenisPerjalanan;
 use App\Models\Program;
+use App\Models\SubBidang;
+use App\Models\SubKegiatan;
 use Illuminate\Http\Request;
 
 class AnggaranController extends Controller
@@ -48,12 +50,17 @@ class AnggaranController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $program = Program::where('tahun', session('tahun'))->get();
         $jenis = JenisPerjalanan::all();
         $bidang = Bidang::where('tahun', session('tahun'))->get();
-        return view('master.anggaran.create', compact('program', 'bidang', 'jenis'));
+
+        $sub_kegiatan = $request->has('sub_kegiatan') ? SubKegiatan::find($request->sub_kegiatan) : null;
+        $jenis_sppd = $request->has('jenis_sppd') ? JenisPerjalanan::find($request->jenis_sppd) : null;
+        $sub_bidang = $request->has('sub_bidang') ? SubBidang::find($request->sub_bidang) : null;
+
+        return view('master.anggaran.create', compact('program', 'bidang', 'jenis', 'sub_kegiatan', 'jenis_sppd', 'sub_bidang'));
     }
 
     /**
@@ -102,7 +109,10 @@ class AnggaranController extends Controller
      */
     public function edit(Anggaran $anggaran)
     {
-        //
+        $program = Program::where('tahun', session('tahun'))->get();
+        $jenis = JenisPerjalanan::all();
+        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        return view('master.anggaran.edit', compact('anggaran', 'program', 'jenis', 'bidang'));
     }
 
     /**
@@ -110,7 +120,9 @@ class AnggaranController extends Controller
      */
     public function update(Request $request, Anggaran $anggaran)
     {
-        //
+        $anggaran->rp_pagu = preg_replace('/[^0-9-]/', '', $request->rp_pagu);
+        $anggaran->save();
+        return redirect()->route('anggaran.index')->with(['success' => 'Berhasil Mengubah Anggaran tahunan']);
     }
 
     /**

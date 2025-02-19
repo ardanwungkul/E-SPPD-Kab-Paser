@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('spt-cetak/{spt}', [SPTController::class, 'print'])->name('spt.print');
     Route::resource('sppd', SPPDController::class);
 
-    Route::resource('anggaran-tahunan', AnggaranController::class)->names('anggaran')->parameters(['anggaran' => 'anggaran']);
+    Route::resource('anggaran-tahunan', AnggaranController::class)->names('anggaran')->parameters(['anggaran-tahunan' => 'anggaran']);
     Route::resource('referensi/program', ProgramController::class);
     Route::resource('referensi/kegiatan', KegiatanController::class);
     Route::resource('referensi/sub-kegiatan', SubKegiatanController::class);

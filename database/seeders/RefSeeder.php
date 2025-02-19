@@ -289,15 +289,15 @@ class RefSeeder extends Seeder
 
 
 
-        // Bidang::insert($bidang);
-        // SubBidang::insert($sub_bidang);
-        // Jabatan::insert($jabatan);
+        Bidang::insert($bidang);
+        SubBidang::insert($sub_bidang);
+        Jabatan::insert($jabatan);
         JenisPerjalanan::insert($jenis_sppd);
-        // Program::insert($program);
-        // Kegiatan::insert($kegiatan);
-        // SubKegiatan::insert($sub_kegiatan);
+        Program::insert($program);
+        Kegiatan::insert($kegiatan);
+        SubKegiatan::insert($sub_kegiatan);
         Golongan::insert($pangkat);
         TingkatPerjalananDinas::insert($tingkat_sppd);
-        // Anggaran::insert($anggaran);
+        Anggaran::insert($anggaran);
     }
 }

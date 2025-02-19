@@ -112,7 +112,7 @@
                                                                         {{ number_format($anggaranBySubKegiatan->where('jenis_sppd_id', $jenis->id)->sum('rp_pagu'), 0, ',', '.') }}
                                                                     </a>
                                                                 @else
-                                                                    <a
+                                                                    <a class="hover:text-blue-500 hover:underline"
                                                                         href="{{ route('anggaran.create', [
                                                                             'sub_kegiatan' => $anggaranBySubKegiatan->first()->sub_kegiatan->id,
                                                                             'jenis_sppd' => $jenis->id,
