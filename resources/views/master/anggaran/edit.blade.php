@@ -107,7 +107,7 @@
         </x-slot>
     </x-container>
 </x-app-layout>
-<script>
+<script type="module">
     function formatRupiah(angka, prefix) {
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
             split = number_string.split(','),
