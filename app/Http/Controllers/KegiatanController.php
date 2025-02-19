@@ -43,6 +43,7 @@ class KegiatanController extends Controller
             [
                 'kode' => [
                     'required',
+                    'max:10',
                     Rule::unique('ref_kegiatan')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'))->where('program_id', $request->program_id);
                     })
@@ -51,6 +52,7 @@ class KegiatanController extends Controller
                 'uraian' => 'required',
             ],
             [
+                'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',

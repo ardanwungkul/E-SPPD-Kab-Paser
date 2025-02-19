@@ -40,6 +40,7 @@ class ProgramController extends Controller
         $request->validate(
             [
                 'kode' => [
+                    'max:10',
                     'required',
                     Rule::unique('ref_program')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
@@ -48,6 +49,7 @@ class ProgramController extends Controller
                 'uraian' => 'required',
             ],
             [
+                'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',

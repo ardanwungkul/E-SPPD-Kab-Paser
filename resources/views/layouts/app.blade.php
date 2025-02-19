@@ -25,13 +25,28 @@
     @endif
 </head>
 
-<body class="font-poppins antialiased">
+<body class="font-poppins antialiased"
+    onload=" document.getElementById('loader').classList.add('opacity-0');setTimeout(() => {
+    document.getElementById('loader').style.display = 'none';
+}, 300);">
     <div class="min-h-screen bg-gray-100">
         <div class="flex relative">
             <div class="flex-none relative ">
                 <x-sidebar />
             </div>
             <main class="w-full min-h-screen relative">
+                <div id="loader"
+                    class="w-full h-screen fixed top-0 z-50 bg-secondary-3 transition-opacity duration-300">
+                    <div class="w-full h-full flex items-center justify-center relative" id="loader-content">
+                        <div class="loadPage">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>
                 {{-- <x-navigation /> --}}
                 <div class="p-5 overflow-y-auto">
                     @if (count($errors) > 0)

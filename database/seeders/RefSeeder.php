@@ -23,11 +23,7 @@ class RefSeeder extends Seeder
      */
     public function run(): void
     {
-        $config = [
-            ['tahun' => '2025', 'aktif' => 'Y', 'judul' => 'Bagian', 'no_spt' => '90/{nomor_urut}/SPT/{tahun}', 'no_sppd' => '90/{nomor_urut}/SPPD/{tahun}', 'no_spj' => ''],
-            ['tahun' => '2026', 'aktif' => 'T', 'judul' => 'Bagian', 'no_spt' => '90/{nomor_urut}/SPT/{tahun}', 'no_sppd' => '90/{nomor_urut}/SPPD/{tahun}', 'no_spj' => ''],
-            ['tahun' => '2027', 'aktif' => 'T', 'judul' => 'Bagian', 'no_spt' => '90/{nomor_urut}/SPT/{tahun}', 'no_sppd' => '90/{nomor_urut}/SPPD/{tahun}', 'no_spj' => '']
-        ];
+
         $bidang = [
             ['tahun' => '2025', 'id' => 1, 'uraian' => 'BAGIAN UMUM'],
             ['tahun' => '2025', 'id' => 2, 'uraian' => 'BAGIAN PROTOKOL DAN KOMUNIKASI PIMPINAN'],
@@ -292,16 +288,16 @@ class RefSeeder extends Seeder
 
 
 
-        Config::insert($config);
-        Bidang::insert($bidang);
-        SubBidang::insert($sub_bidang);
-        Jabatan::insert($jabatan);
+
+        // Bidang::insert($bidang);
+        // SubBidang::insert($sub_bidang);
+        // Jabatan::insert($jabatan);
         JenisPerjalanan::insert($jenis_sppd);
-        Program::insert($program);
-        Kegiatan::insert($kegiatan);
-        SubKegiatan::insert($sub_kegiatan);
+        // Program::insert($program);
+        // Kegiatan::insert($kegiatan);
+        // SubKegiatan::insert($sub_kegiatan);
         Golongan::insert($pangkat);
         TingkatPerjalananDinas::insert($tingkat_sppd);
-        Anggaran::insert($anggaran);
+        // Anggaran::insert($anggaran);
     }
 }

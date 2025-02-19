@@ -43,6 +43,7 @@ class SubKegiatanController extends Controller
             [
                 'kode' => [
                     'required',
+                    'max:10',
                     Rule::unique('ref_kegiatan_sub')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'))->where('kegiatan_id', $request->kegiatan_id);
                     })
@@ -52,6 +53,7 @@ class SubKegiatanController extends Controller
                 'uraian' => 'required',
             ],
             [
+                'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'program_id.required' => 'Program Wajib Diisi',
                 'kegiatan_id.required' => 'Kegiatan Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',

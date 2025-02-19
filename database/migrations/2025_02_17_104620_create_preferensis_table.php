@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('instansi_kontak_email');
             $table->string('instansi_kontak_fax');
             $table->string('instansi_kontak_telp');
-            $table->string('instansi_logo');
+            $table->string('instansi_logo')->nullable();
             $table->string('instansi_nama');
             $table->string('instansi_pemerintah');
             $table->timestamps();
