@@ -5,6 +5,7 @@ use App\Http\Controllers\BagianController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\DesaController;
 use App\Http\Controllers\GolonganController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JenisPerjalananController;
 use App\Http\Controllers\KabupatenKotaController;
 use App\Http\Controllers\KecamatanController;
@@ -76,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('pegawai', PegawaiController::class);
     Route::resource('master/golongan', GolonganController::class);
     Route::resource('master/tingkat-perjalanan-dinas', TingkatPerjalananDinasController::class)->parameters(['tingkat-perjalanan-dinas' => 'tingkat_perjalanan_dinas']);
+    Route::resource('master/jabatan', JabatanController::class);
     Route::resource('master/desa', DesaController::class);
     Route::resource('master/kecamatan', KecamatanController::class);
     Route::resource('master/kabupaten-kota', KabupatenKotaController::class)->parameters(['kabupaten-kota' => 'kabupaten_kota']);

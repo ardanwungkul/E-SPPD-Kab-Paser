@@ -38,6 +38,9 @@
             'pegawai.index',
             'pegawai.create',
             'pegawai.edit',
+            'jabatan.index',
+            'jabatan.create',
+            'jabatan.edit',
             'golongan.index',
             'golongan.create',
             'golongan.edit',
@@ -374,6 +377,20 @@
 
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Tingkat Perjalanan Dinas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('jabatan.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M7 4v16M7 4l3 3M7 4 4 7m9-3h6l-6 6h6m-6.5 10 3.5-7 3.5 7M14 18h4" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Jabatan</span>
                         </a>
                     </li>
                     <li>
@@ -812,6 +829,21 @@
 
                                     </span>
                                     <span class="ml-2 text-xs tracking-wide truncate">Tingkat Perjalanan Dinas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('jabatan.index') }}"
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    <span class="inline-flex justify-center items-center ml-2">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M7 4v16M7 4l3 3M7 4 4 7m9-3h6l-6 6h6m-6.5 10 3.5-7 3.5 7M14 18h4" />
+                                        </svg>
+
+                                    </span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Jabatan</span>
                                 </a>
                             </li>
                             <li>
