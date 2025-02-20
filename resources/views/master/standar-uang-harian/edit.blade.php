@@ -21,17 +21,18 @@
     </x-slot>
     <x-container>
         <x-slot name="content">
-            <form action="{{ route('suh.store') }}" method="POST">
+            <form action="{{ route('suh.update', $suh->id) }}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="text-sm space-y-3">
                     <div class="flex flex-col gap-1">
-                        <label for="jenis_sppd_id">Jenis Perjalanan Dinas</label>
+                        <label for="jenis_sppd_id">Edit Perjalanan Dinas</label>
                         <select id="jenis_sppd_id" name="jenis_sppd_id" class="text-sm rounded-lg border border-gray-300"
                             required>
                             <option value="" selected disabled> Pilih Jenis Perjalanan Dinas</option>
                             @foreach ($jenis as $item)
-                                <option value="{{ $item->id }}" data-wilayah="{{ $item->wilayah }}">
+                                <option value="{{ $item->id }}" data-wilayah="{{ $item->wilayah }}"
+                                    {{ $item->id == $suh->jenis_sppd_id ? 'selected' : '' }}>
                                     {{ $item->uraian }}</option>
                             @endforeach
                         </select>
@@ -48,7 +49,8 @@
                                         class="text-sm rounded-lg border border-gray-300 w-full select2" required>
                                         <option value="" selected disabled>Pilih Provinsi </option>
                                         @foreach ($provinsi as $item)
-                                            <option value="{{ $item->id }}">
+                                            <option value="{{ $item->id }}"
+                                                {{ $item->id == $suh->provinsi_id ? 'selected' : '' }}>
                                                 {{ $item->nama }}</option>
                                         @endforeach
                                     </select>
@@ -57,7 +59,12 @@
                                     <label for="kabupaten_id" class="w-32 flex-none">Kabupaten/Kota</label>
                                     <select id="kabupaten_id" name="kabupaten_id"
                                         class="text-sm rounded-lg border border-gray-300 w-full select2">
-                                        <option value="" selected disabled>Pilih Kabupaten/Kota </option>
+                                        <option value="" selected disabled>Pilih Kabupaten/Kota</option>
+                                        @foreach ($suh->provinsi->kabupaten_kota as $item)
+                                            <option value="{{ $item->id }}"
+                                                {{ $item->id == $suh->kabupaten_id ? 'selected' : '' }}>
+                                                {{ $item->nama }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="flex items-center justify-between gap-3 w-full">
@@ -65,6 +72,13 @@
                                     <select id="kecamatan_id" name="kecamatan_id"
                                         class="text-sm rounded-lg border border-gray-300 w-full select2">
                                         <option value="" selected disabled>Pilih Kecamatan </option>
+                                        @if ($suh->kabupaten_id)
+                                            @foreach ($suh->kabupaten->kecamatan as $item)
+                                                <option value="{{ $item->id }}"
+                                                    {{ $item->id == $suh->kecamatan_id ? 'selected' : '' }}>
+                                                    {{ $item->nama }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -76,22 +90,24 @@
                             class="text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled> Pilih Tingkat Perjalanan Dinas</option>
                             @foreach ($tingkat as $item)
-                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $suh->tingkat_sppd_id ? 'selected' : '' }}>{{ $item->uraian }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uang_harian">Jumlah Uang Harian</label>
                         <input type="text" id="uang_harian" name="uang_harian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uang_harian') }}"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ $suh->uang_harian }}"
                             oninput="this.value = formatRupiah(this.value, 'Rp. ')" placeholder="Rp. 0" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="batas_biaya_penginapan">Batas Biaya Penginapan per Hari</label>
                         <input type="text" id="batas_biaya_penginapan" name="batas_biaya_penginapan"
                             class="text-sm rounded-lg border border-gray-300"
-                            oninput="this.value = formatRupiah(this.value, 'Rp. ')"
-                            value="{{ old('batas_biaya_penginapan') }}" placeholder="Rp. 0" required>
+                            oninput="this.value = formatRupiah(this.value, 'Rp. ')" value="{{ $suh->uang_harian }}"
+                            placeholder="Rp. 0" required>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button

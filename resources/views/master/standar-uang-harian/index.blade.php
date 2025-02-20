@@ -34,19 +34,26 @@
                                 @foreach ($data as $item)
                                     <tr class="text-xs">
                                         <td>
-                                            <p class="text-start">{{ $item->uraian }}</p>
+                                            <p class="text-start">{{ $item->tingkat_sppd->uraian }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-start">{{ $item->uraian }}</p>
+                                            <p class="text-start">Rp.
+                                                {{ number_format($item->uang_harian, 0, ',', '.') }}
+                                            </p>
                                         </td>
                                         <td>
-                                            <p class="text-start">{{ $item->uraian }}</p>
+                                            <p class="text-start">
+                                                Rp. {{ number_format($item->batas_biaya_penginapan, 0, ',', '.') }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-start">{{ $item->uraian }}</p>
+                                            <p class="text-start">{{ $item->jenis_sppd->uraian }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-start">{{ $item->wilayah }}</p>
+                                            <p class="text-start">{{ $item->provinsi ? $item->provinsi->nama : '' }}</p>
+                                            <p class="text-start">{{ $item->kabupaten ? $item->kabupaten->nama : '' }}
+                                            </p>
+                                            <p class="text-start">{{ $item->kecamatan ? $item->kecamatan->nama : '' }}
+                                            </p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">
