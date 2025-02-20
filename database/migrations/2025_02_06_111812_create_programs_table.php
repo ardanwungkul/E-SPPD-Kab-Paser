@@ -15,7 +15,7 @@ return new class extends Migration
             $table->tinyIncrements('id');
             $table->string('kode', 10);
             $table->year('tahun');
-            $table->string('uraian', 100);
+            $table->string('uraian', 150);
             $table->timestamps();
         });
     }

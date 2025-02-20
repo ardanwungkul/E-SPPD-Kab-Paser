@@ -15,7 +15,7 @@ return new class extends Migration
             $table->smallIncrements('id');
             $table->string('kode', 10);
             $table->year('tahun');
-            $table->string('uraian', 100);
+            $table->string('uraian', 150);
             $table->unsignedTinyInteger('program_id');
             $table->foreign('program_id')->references('id')->on('ref_program')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

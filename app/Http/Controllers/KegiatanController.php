@@ -49,10 +49,10 @@ class KegiatanController extends Controller
                     })
                 ],
                 'program_id' => 'required',
-                'uraian' => ['required', 'max:100',],
+                'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',
@@ -100,10 +100,10 @@ class KegiatanController extends Controller
                     })->ignore($kegiatan->id)
                 ],
                 'program_id' => 'required',
-                'uraian' => ['required', 'max:100',],
+                'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',

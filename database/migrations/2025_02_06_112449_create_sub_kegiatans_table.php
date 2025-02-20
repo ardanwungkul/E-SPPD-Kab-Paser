@@ -17,7 +17,7 @@ return new class extends Migration
             $table->year('tahun');
             $table->unsignedSmallInteger('kegiatan_id');
             $table->foreign('kegiatan_id')->references('id')->on('ref_kegiatan')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('uraian', 100);
+            $table->string('uraian', 150);
             $table->timestamps();
             $table->softDeletes();
         });

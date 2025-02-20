@@ -46,10 +46,10 @@ class ProgramController extends Controller
                         return $query->where('tahun', session('tahun'));
                     })
                 ],
-                'uraian' => ['required', 'max:100',],
+                'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',
@@ -95,10 +95,10 @@ class ProgramController extends Controller
                         return $query->where('tahun', session('tahun'));
                     })->ignore($program->id)
                 ],
-                'uraian' => ['required', 'max:100',],
+                'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
                 'kode.required' => 'Kode Wajib Diisi',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'uraian.required' => 'Uraian Wajib Diisi',
