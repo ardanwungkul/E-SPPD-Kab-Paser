@@ -16,9 +16,15 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="wilayah">Wilayah</label>
-                        <input type="text" id="wilayah" name="wilayah"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
-                            placeholder="Masukkan Wilayah" required>
+                        <select name="wilayah" id="wilayah" class="text-sm rounded-lg border border-gray-300"
+                            required>
+                            <option value="" selected disabled>
+                                Pilih Wilayah
+                            </option>
+                            <option value="Provinsi">Provinsi</option>
+                            <option value="Kabupaten">Kabupaten</option>
+                            <option value="Kecamatan">Kecamatan</option>
+                        </select>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button

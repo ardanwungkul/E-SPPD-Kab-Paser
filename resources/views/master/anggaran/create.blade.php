@@ -11,7 +11,7 @@
                     <div class="text-sm grid grid-cols-2 gap-y-3 gap-x-7">
                         <div class="flex flex-col gap-1">
                             <label for="bidang_id">{{ session('config')->judul }}</label>
-                            <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
+                            <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2">
                                 <option value="" selected disabled>Pilih {{ session('config')->judul }}
                                 </option>
                                 @foreach ($bidang as $item)

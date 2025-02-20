@@ -19,6 +19,7 @@ use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SPPDController;
 use App\Http\Controllers\SPTController;
+use App\Http\Controllers\StandarUangHarianController;
 use App\Http\Controllers\SubBagianController;
 use App\Http\Controllers\SubBidangController;
 use App\Http\Controllers\SubKegiatanController;
@@ -62,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::get('spt-cetak/{spt}', [SPTController::class, 'print'])->name('spt.print');
     Route::resource('sppd', SPPDController::class);
 
+    Route::resource('standar-uang-harian', StandarUangHarianController::class)->names('suh')->parameters(['standar-uang-harian' => 'suh']);
     Route::resource('anggaran-tahunan', AnggaranController::class)->names('anggaran')->parameters(['anggaran-tahunan' => 'anggaran']);
     Route::resource('referensi/program', ProgramController::class);
     Route::resource('referensi/kegiatan', KegiatanController::class);

@@ -1,0 +1,153 @@
+<x-app-layout>
+    <script>
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
+    </script>
+    <x-slot name="header">
+        Tambah Standar Uang Harian
+    </x-slot>
+    <x-container>
+        <x-slot name="content">
+            <form action="{{ route('suh.store') }}" method="POST">
+                @csrf
+                @method('POST')
+                <div class="text-sm space-y-3">
+                    <div class="flex flex-col gap-1">
+                        <label for="jenis_sppd_id">Jenis Perjalanan Dinas</label>
+                        <select id="jenis_sppd_id" name="jenis_sppd_id" class="text-sm rounded-lg border border-gray-300"
+                            required>
+                            <option value="" selected disabled> Pilih Jenis Perjalanan Dinas</option>
+                            @foreach ($jenis as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="">Lokasi Tujuan</label>
+                        <div class="flex items-center justify-between gap-3 w-full">
+                            <label for="provinsi_id">Provinsi</label>
+                            <select id="provinsi_id" name="provinsi_id"
+                                class="text-sm rounded-lg border border-gray-300 w-full select2" required>
+                                <option value="" selected disabled>Pilih Provinsi </option>
+                                @foreach ($provinsi as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="tingkat_sppd_id">Tingkat Perjalanan Dinas</label>
+                        <select id="tingkat_sppd_id" name="tingkat_sppd_id"
+                            class="text-sm rounded-lg border border-gray-300" required>
+                            <option value="" selected disabled> Pilih Tingkat Perjalanan Dinas</option>
+                            @foreach ($tingkat as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="uang_harian">Jumlah Uang Harian</label>
+                        <input type="text" id="uang_harian" name="uang_harian"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uang_harian') }}"
+                            oninput="this.value = formatRupiah(this.value, 'Rp. ')" placeholder="Rp. 0" required>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="batas_biaya_penginapan">Batas Biaya Penginapan per Hari</label>
+                        <input type="text" id="batas_biaya_penginapan" name="batas_biaya_penginapan"
+                            class="text-sm rounded-lg border border-gray-300"
+                            oninput="this.value = formatRupiah(this.value, 'Rp. ')"
+                            value="{{ old('batas_biaya_penginapan') }}" placeholder="Rp. 0" required>
+                    </div>
+                    <div class="flex justify-end items-center gap-4">
+                        <button
+                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                            type="submit">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="4" d="M5 11.917 9.724 16.5 19 7.5" />
+                            </svg>
+
+                            <p>Simpan</p>
+                        </button>
+                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                            href="{{ route('suh.index') }}">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="4" d="M6 18 17.94 6M18 18 6.06 6" />
+                            </svg>
+
+                            <p>Kembali</p>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </x-slot>
+    </x-container>
+</x-app-layout>
+<script type="module">
+    $('.select2').select2({
+        dropdownCssClass: "text-sm",
+        selectionCssClass: 'text-sm',
+    });
+
+    $('#program_id').on('change', function() {
+        const programKode = $(this).val();
+
+        if (programKode) {
+            $.ajax({
+                url: "{{ route('get.kegiatan.by.program') }}",
+                type: "GET",
+                data: {
+                    program_id: programKode
+                },
+                success: function(response) {
+                    $('#kegiatan_id').empty();
+                    $('#kegiatan_id').append(
+                        '<option value="" selected disabled>Pilih Kegiatan</option>'
+                    );
+                    $('#sub_kegiatan_id').empty();
+                    $('#sub_kegiatan_id').append(
+                        '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                    );
+
+                    if (response.length > 0) {
+                        $.each(response, function(index, kegiatan) {
+                            $('#kegiatan_id').append('<option value="' +
+                                kegiatan.id + '">' + kegiatan.uraian +
+                                '</option>');
+                        });
+                    } else {
+                        $('#kegiatan_id').append(
+                            '<option value="" disabled>Tidak ada kegiatan tersedia</option>'
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        } else {
+            $('#kegiatan_id').empty();
+            $('#kegiatan_id').append('<option value="" selected disabled>Pilih Kegiatan</option>');
+            $('#sub_kegiatan_id').empty();
+            $('#sub_kegiatan_id').append(
+                '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+            );
+        }
+    });
+</script>

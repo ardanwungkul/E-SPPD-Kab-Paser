@@ -15,6 +15,9 @@
             'anggaran.index',
             'anggaran.create',
             'anggaran.edit',
+            'suh.index',
+            'suh.create',
+            'suh.edit',
             'program.index',
             'program.create',
             'program.edit',
@@ -198,6 +201,20 @@
                 <div id="accordion-collapse-body-data-tahunan" class="hidden bg-secondary-3 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-data-tahunan">
                     <li>
+                        <a href="{{ route('suh.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('anggaran.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
@@ -225,7 +242,7 @@
 
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref.
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi
                                 {{ session('config')->judul }}
                             </span>
                         </a>
@@ -242,7 +259,7 @@
                                 </svg>
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub
                                 {{ session('config')->judul }}</span>
                         </a>
                     </li>
@@ -257,7 +274,7 @@
                                         d="M8 8v8m0-8h8M8 8H6a2 2 0 1 1 2-2v2Zm0 8h8m-8 0H6a2 2 0 1 0 2 2v-2Zm8 0V8m0 8h2a2 2 0 1 1-2 2v-2Zm0-8h2a2 2 0 1 0-2-2v2Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref. Program</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Program</span>
                         </a>
                     </li>
                     <li>
@@ -271,7 +288,7 @@
                                         d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref. Kegiatan</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Kegiatan</span>
                         </a>
                     </li>
                     <li>
@@ -285,7 +302,7 @@
                                         d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub Kegiatan</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub Kegiatan</span>
                         </a>
                     </li>
                     <li>
@@ -299,7 +316,7 @@
                                 </svg>
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Ref. Jenis Perjalanan</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
                         </a>
                     </li>
                 </div>
@@ -580,7 +597,7 @@
                         </span>
                     </button>
                     <div id="dropdownHoverTransaksi"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 border">
+                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
@@ -649,12 +666,27 @@
                         </span>
                     </button>
                     <div id="dropdownHoverDataTahunan"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 border">
+                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
                                     <div class="text-xs font-light tracking-wide text-gray-500">Data Tahunan</div>
                                 </div>
+                            </li>
+                            <li>
+                                <a href="{{ route('suh.index') }}"
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    <span class="inline-flex justify-center items-center ml-2">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                        </svg>
+
+                                    </span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('anggaran.index') }}"
@@ -684,7 +716,7 @@
 
 
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref.
+                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi
                                         {{ session('config')->judul }}</span>
                                 </a>
                             </li>
@@ -699,7 +731,7 @@
                                                 d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
                                         </svg>
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub
+                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub
                                         {{ session('config')->judul }}</span>
                                 </a>
                             </li>
@@ -714,7 +746,7 @@
                                                 d="M8 8v8m0-8h8M8 8H6a2 2 0 1 1 2-2v2Zm0 8h8m-8 0H6a2 2 0 1 0 2 2v-2Zm8 0V8m0 8h2a2 2 0 1 1-2 2v-2Zm0-8h2a2 2 0 1 0-2-2v2Z" />
                                         </svg>
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref. Program</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Program</span>
                                 </a>
                             </li>
                             <li>
@@ -728,7 +760,7 @@
                                                 d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                         </svg>
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref. Kegiatan</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Kegiatan</span>
                                 </a>
                             </li>
                             <li>
@@ -742,7 +774,7 @@
                                                 d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                         </svg>
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref. Sub Kegiatan</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub Kegiatan</span>
                                 </a>
                             </li>
                             <li>
@@ -756,7 +788,7 @@
                                         </svg>
 
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Ref. Jenis Perjalanan</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
                                 </a>
                             </li>
                         </ul>
@@ -778,7 +810,7 @@
                         </span>
                     </button>
                     <div id="dropdownHoverMasterData"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 border">
+                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
@@ -917,7 +949,7 @@
                         </span>
                     </button>
                     <div id="dropdownHoverSistem"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 border">
+                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
