@@ -19,9 +19,17 @@ class JabatanController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'uraian' => 'required'
-        ]);
+        $request->validate(
+            [
+                'uraian' => [
+                    'required',
+                    'max:100'
+                ],
+            ],
+            [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+            ]
+        );
 
         $jabatan = new Jabatan();
         $jabatan->uraian = $request->uraian;
@@ -35,9 +43,17 @@ class JabatanController extends Controller
     }
     public function update(Request $request, Jabatan $jabatan)
     {
-        $request->validate([
-            'uraian' => 'required'
-        ]);
+        $request->validate(
+            [
+                'uraian' => [
+                    'required',
+                    'max:100'
+                ],
+            ],
+            [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+            ]
+        );
 
         $jabatan->uraian = $request->uraian;
         $jabatan->ttd_default = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'N';

@@ -36,11 +36,17 @@ class TingkatPerjalananDinasController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'tingkat_sppd' => 'required',
-            'uraian' => 'required',
-            'keterangan' => 'required'
-        ]);
+        $request->validate(
+            [
+                'tingkat_sppd' => 'required',
+                'uraian' => ['required', 'max:20'],
+                'keterangan' => ['required', 'max:100']
+            ],
+            [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 20 karakter',
+                'keterangan.max' => 'Keterangan tidak boleh lebih dari 100 karakter',
+            ]
+        );
         $tingkat_perjalanan_dinas = new TingkatPerjalananDinas();
         $tingkat_perjalanan_dinas->tingkat_sppd = $request->tingkat_sppd;
         $tingkat_perjalanan_dinas->uraian = $request->uraian;
@@ -70,11 +76,17 @@ class TingkatPerjalananDinasController extends Controller
      */
     public function update(Request $request, TingkatPerjalananDinas $tingkat_perjalanan_dinas)
     {
-        $request->validate([
-            'tingkat_sppd' => 'required',
-            'uraian' => 'required',
-            'keterangan' => 'required'
-        ]);
+        $request->validate(
+            [
+                'tingkat_sppd' => 'required',
+                'uraian' => ['required', 'max:20'],
+                'keterangan' => ['required', 'max:100']
+            ],
+            [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 20 karakter',
+                'keterangan.max' => 'Keterangan tidak boleh lebih dari 100 karakter',
+            ]
+        );
         $tingkat_perjalanan_dinas->tingkat_sppd = $request->tingkat_sppd;
         $tingkat_perjalanan_dinas->uraian = $request->uraian;
         $tingkat_perjalanan_dinas->keterangan = $request->keterangan;

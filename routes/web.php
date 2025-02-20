@@ -82,7 +82,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('master/jabatan', JabatanController::class);
     Route::resource('master/desa', DesaController::class);
     Route::resource('master/kecamatan', KecamatanController::class);
+    Route::get('master/kecamatan-by-kabupaten-kota', [KecamatanController::class, 'getKecamatanByKabupatenKota'])->name('get.kecamatan-by-kabupaten-kota');
     Route::resource('master/kabupaten-kota', KabupatenKotaController::class)->parameters(['kabupaten-kota' => 'kabupaten_kota']);
+    Route::get('master/kabupaten-kota-by-provinsi', [KabupatenKotaController::class, 'getKabupatenKotaByProvinsi'])->name('get.kabupaten-kota-by-provinsi');
     Route::resource('master/provinsi', ProvinsiController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

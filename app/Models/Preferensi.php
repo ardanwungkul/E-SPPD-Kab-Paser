@@ -9,4 +9,9 @@ class Preferensi extends Model
 {
     use HasFactory;
     protected $table = 'preferensi';
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Provinsi::class, 'instansi_provinsi');
+    }
 }

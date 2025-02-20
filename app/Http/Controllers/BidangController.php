@@ -41,12 +41,14 @@ class BidangController extends Controller
             [
                 'uraian' =>  [
                     'required',
+                    'max:100',
                     Rule::unique('ref_bidang')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
                     })
                 ],
             ],
             [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
                 'uraian.required' => 'Uraian Harus Diisi',
                 'uraian.unique' => 'Nama Bidang Sudah Digunakan'
             ]
@@ -77,12 +79,14 @@ class BidangController extends Controller
             [
                 'uraian' =>  [
                     'required',
+                    'max:100',
                     Rule::unique('ref_bidang')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
                     })->ignore($bidang->id)
                 ],
             ],
             [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
                 'uraian.required' => 'Uraian Harus Diisi',
                 'uraian.unique' => 'Nama Bidang Sudah Digunakan'
             ]

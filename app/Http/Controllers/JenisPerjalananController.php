@@ -36,10 +36,15 @@ class JenisPerjalananController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'uraian' => 'required',
-            'wilayah' => 'required',
-        ]);
+        $request->validate(
+            [
+                'uraian' => ['required', 'max:100',],
+                'wilayah' => 'required',
+            ],
+            [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+            ]
+        );
         $jenis = new JenisPerjalanan();
         $jenis->uraian = $request->uraian;
         $jenis->wilayah = $request->wilayah;
@@ -68,10 +73,15 @@ class JenisPerjalananController extends Controller
      */
     public function update(Request $request, JenisPerjalanan $jenis_perjalanan)
     {
-        $request->validate([
-            'uraian' => 'required',
-            'wilayah' => 'required',
-        ]);
+        $request->validate(
+            [
+                'uraian' => ['required', 'max:100',],
+                'wilayah' => 'required',
+            ],
+            [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+            ]
+        );
         $jenis_perjalanan->uraian = $request->uraian;
         $jenis_perjalanan->wilayah = $request->wilayah;
         $jenis_perjalanan->save();

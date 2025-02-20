@@ -42,12 +42,14 @@ class SubBidangController extends Controller
         $request->validate([
             'uraian' =>  [
                 'required',
+                'max:100',
                 Rule::unique('ref_bidang_sub')->where(function ($query) use ($request) {
                     return $query->where('tahun', session('tahun'))->where('bidang_id', $request->bidang_id);
                 })
             ],
             'bidang_id' => 'required'
         ], [
+            'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
             'uraian.required' => 'Uraian Wajib Diisi',
             'uraian.unique' => 'Nama Sub Bidang Sudah Digunakan',
             'bidang_id.required' => 'Bidang Wajib Diisi'
@@ -86,6 +88,7 @@ class SubBidangController extends Controller
         $request->validate(
             [
                 'uraian' =>  [
+                    'max:100',
                     'required',
                     Rule::unique('ref_bidang_sub')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'))->where('bidang_id', $request->bidang_id);
@@ -94,6 +97,7 @@ class SubBidangController extends Controller
                 'bidang_id' => 'required'
             ],
             [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
                 'uraian.required' => 'Uraian Wajib Diisi',
                 'uraian.unique' => 'Nama Sub Bidang Sudah Digunakan',
                 'bidang_id.required' => 'Bidang Wajib Diisi'

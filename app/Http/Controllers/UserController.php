@@ -39,13 +39,20 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:user',
-            'email' => 'required|unique:user',
-            'password' => 'required',
-            'role_id' => 'required',
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|max:30',
+                'username' => 'required|unique:user|max:20',
+                'email' => 'required|unique:user|max:30',
+                'password' => 'required',
+                'role_id' => 'required',
+            ],
+            [
+                'name.max' => 'Nama User Tidak Boleh Lebih dari 30 Karakter',
+                'username.max' => 'Username Tidak Boleh Lebih dari 20 Karakter',
+                'email.max' => 'Email Tidak Boleh Lebih dari 30 Karakter',
+            ]
+        );
         $user = new User();
         $user->name = $request->name;
         $user->username = $request->username;
@@ -58,12 +65,19 @@ class UserController extends Controller
     }
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:user,username,' . $user->id,
-            'email' => 'required|unique:user,email,' . $user->id,
-            'role_id' => 'required',
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|max:30',
+                'username' => 'required|max:20|unique:user,username,' . $user->id,
+                'email' => 'required|max:30|unique:user,email,' . $user->id,
+                'role_id' => 'required',
+            ],
+            [
+                'name.max' => 'Nama User Tidak Boleh Lebih dari 30 Karakter',
+                'username.max' => 'Username Tidak Boleh Lebih dari 20 Karakter',
+                'email.max' => 'Email Tidak Boleh Lebih dari 30 Karakter',
+            ]
+        );
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;

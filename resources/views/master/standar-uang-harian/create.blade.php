@@ -31,22 +31,45 @@
                             required>
                             <option value="" selected disabled> Pilih Jenis Perjalanan Dinas</option>
                             @foreach ($jenis as $item)
-                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                <option value="{{ $item->id }}" data-wilayah="{{ $item->wilayah }}">
+                                    {{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="">Lokasi Tujuan</label>
-                        <div class="flex items-center justify-between gap-3 w-full">
-                            <label for="provinsi_id">Provinsi</label>
-                            <select id="provinsi_id" name="provinsi_id"
-                                class="text-sm rounded-lg border border-gray-300 w-full select2" required>
-                                <option value="" selected disabled>Pilih Provinsi </option>
-                                @foreach ($provinsi as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div>
+                        <fieldset class="border-y py-3">
+                            <legend class="ml-3 px-3">
+                                Lokasi Tujuan
+                            </legend>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between gap-3 w-full">
+                                    <label for="provinsi_id" class="w-32 flex-none">Provinsi</label>
+                                    <select id="provinsi_id" name="provinsi_id"
+                                        class="text-sm rounded-lg border border-gray-300 w-full select2" required>
+                                        <option value="" selected disabled>Pilih Provinsi </option>
+                                        @foreach ($provinsi as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 w-full">
+                                    <label for="kabupaten_id" class="w-32 flex-none">Kabupaten/Kota</label>
+                                    <select id="kabupaten_id" name="kabupaten_id"
+                                        class="text-sm rounded-lg border border-gray-300 w-full select2" required>
+                                        <option value="" selected disabled>Pilih Kabupaten/Kota </option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 w-full">
+                                    <label for="kecamatan_id" class="w-32 flex-none">Kecamatan</label>
+                                    <select id="kecamatan_id" name="kecamatan_id"
+                                        class="text-sm rounded-lg border border-gray-300 w-full select2" required>
+                                        <option value="" selected disabled>Pilih Kecamatan </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="tingkat_sppd_id">Tingkat Perjalanan Dinas</label>
@@ -105,35 +128,37 @@
         selectionCssClass: 'text-sm',
     });
 
-    $('#program_id').on('change', function() {
-        const programKode = $(this).val();
+    $('#provinsi_id').on('change', function() {
+        const provinsiId = $(this).val();
 
-        if (programKode) {
+        if (provinsiId) {
             $.ajax({
-                url: "{{ route('get.kegiatan.by.program') }}",
+                url: "{{ route('get.kabupaten-kota-by-provinsi') }}",
                 type: "GET",
                 data: {
-                    program_id: programKode
+                    provinsi_id: provinsiId
                 },
                 success: function(response) {
-                    $('#kegiatan_id').empty();
-                    $('#kegiatan_id').append(
-                        '<option value="" selected disabled>Pilih Kegiatan</option>'
-                    );
-                    $('#sub_kegiatan_id').empty();
-                    $('#sub_kegiatan_id').append(
-                        '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                    $('#kabupaten_id').empty();
+                    $('#kabupaten_id').append(
+                        '<option value="" selected disabled>Pilih Kabupaten/Kota</option>'
                     );
 
+                    $('#kecamatan_id').empty();
+                    $('#kecamatan_id').append(
+                        '<option value="" selected disabled>Pilih Kecamatan</option>'
+                    );
+
+
                     if (response.length > 0) {
-                        $.each(response, function(index, kegiatan) {
-                            $('#kegiatan_id').append('<option value="' +
-                                kegiatan.id + '">' + kegiatan.uraian +
+                        $.each(response, function(index, Kabupaten) {
+                            $('#kabupaten_id').append('<option value="' +
+                                Kabupaten.id + '">' + Kabupaten.nama +
                                 '</option>');
                         });
                     } else {
-                        $('#kegiatan_id').append(
-                            '<option value="" disabled>Tidak ada kegiatan tersedia</option>'
+                        $('#kabupaten_id').append(
+                            '<option value="" disabled>Tidak ada Kabupaten/Kota tersedia</option>'
                         );
                     }
                 },
@@ -142,11 +167,52 @@
                 }
             });
         } else {
-            $('#kegiatan_id').empty();
-            $('#kegiatan_id').append('<option value="" selected disabled>Pilih Kegiatan</option>');
-            $('#sub_kegiatan_id').empty();
-            $('#sub_kegiatan_id').append(
-                '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+            $('#kabupaten_id').empty();
+            $('#kabupaten_id').append('<option value="" selected disabled>Pilih Kabupaten/Kota</option>');
+            $('#kecamatan_id').empty();
+            $('#kecamatan_id').append(
+                '<option value="" selected disabled>Pilih Kecamatan</option>'
+            );
+        }
+    });
+    $('#kabupaten_id').on('change', function() {
+        const kabupatenId = $(this).val();
+
+        if (kabupatenId) {
+            $.ajax({
+                url: "{{ route('get.kecamatan-by-kabupaten-kota') }}",
+                type: "GET",
+                data: {
+                    kabupaten_kota_id: kabupatenId
+                },
+                success: function(response) {
+
+                    $('#kecamatan_id').empty();
+                    $('#kecamatan_id').append(
+                        '<option value="" selected disabled>Pilih Kecamatan</option>'
+                    );
+
+
+                    if (response.length > 0) {
+                        $.each(response, function(index, Kecamatan) {
+                            $('#kecamatan_id').append('<option value="' +
+                                Kecamatan.id + '">' + Kecamatan.nama +
+                                '</option>');
+                        });
+                    } else {
+                        $('#kecamatan_id').append(
+                            '<option value="" disabled>Tidak ada Kecamatan tersedia</option>'
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        } else {
+            $('#kecamatan_id').empty();
+            $('#kecamatan_id').append(
+                '<option value="" selected disabled>Pilih Kecamatan</option>'
             );
         }
     });

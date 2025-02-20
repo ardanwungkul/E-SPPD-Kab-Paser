@@ -38,11 +38,23 @@ class GolonganController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'uraian' => 'required',
-            'kode_golongan' => 'required',
-            'jenis_pegawai' => 'required',
-        ]);
+        $request->validate(
+            [
+                'uraian' => [
+                    'required',
+                    'max:100'
+                ],
+                'kode_golongan' => [
+                    'required',
+                    'max:10'
+                ],
+                'jenis_pegawai' => 'required',
+            ],
+            [
+                'kode_golongan.max' => 'kode Golongan tidak boleh lebih dari 10 karakter',
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+            ]
+        );
         $golongan = new Golongan();
         $golongan->uraian = $request->uraian;
         $golongan->kode_golongan = $request->kode_golongan;
@@ -72,11 +84,23 @@ class GolonganController extends Controller
      */
     public function update(Request $request, Golongan $golongan)
     {
-        $request->validate([
-            'uraian' => 'required',
-            'kode_golongan' => 'required',
-            'jenis_pegawai' => 'required',
-        ]);
+        $request->validate(
+            [
+                'uraian' => [
+                    'required',
+                    'max:100'
+                ],
+                'kode_golongan' => [
+                    'required',
+                    'max:10'
+                ],
+                'jenis_pegawai' => 'required',
+            ],
+            [
+                'kode_golongan.max' => 'kode Golongan tidak boleh lebih dari 10 karakter',
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+            ]
+        );
         $golongan->uraian = $request->uraian;
         $golongan->kode_golongan = $request->kode_golongan;
         $golongan->jenis_pegawai = $request->jenis_pegawai;

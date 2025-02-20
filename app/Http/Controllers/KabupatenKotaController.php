@@ -44,12 +44,19 @@ class KabupatenKotaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'provinsi_id' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nama' => 'required|max:50',
+                'provinsi_id' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+            ],
+            [
+                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+            ]
+        );
+
+
         $kabupaten_kota = new KabupatenKota();
         $kabupaten_kota->nama = $request->nama;
         $kabupaten_kota->longitude = $request->longitude;
@@ -81,12 +88,17 @@ class KabupatenKotaController extends Controller
      */
     public function update(Request $request, KabupatenKota $kabupaten_kota)
     {
-        $request->validate([
-            'nama' => 'required',
-            'provinsi_id' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nama' => 'required|max:50',
+                'provinsi_id' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+            ],
+            [
+                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+            ]
+        );
         $kabupaten_kota->nama = $request->nama;
         $kabupaten_kota->longitude = $request->longitude;
         $kabupaten_kota->latitude = $request->latitude;
@@ -102,5 +114,14 @@ class KabupatenKotaController extends Controller
     {
         $kabupaten_kota->delete();
         return redirect()->route('kabupaten-kota.index')->with(['success' => 'Berhasil Menghapus Kabupaten/Kota']);
+    }
+
+    public function getKabupatenKotaByProvinsi(Request $request)
+    {
+        $request->validate([
+            'provinsi_id' => 'required',
+        ]);
+        $kabupaten = KabupatenKota::where('provinsi_id', $request->provinsi_id)->get();
+        return response()->json($kabupaten);
     }
 }

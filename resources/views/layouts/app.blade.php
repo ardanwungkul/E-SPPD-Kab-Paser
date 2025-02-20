@@ -50,7 +50,7 @@
                 {{-- <x-navigation /> --}}
                 <div class="p-5 overflow-y-auto">
                     @if (count($errors) > 0)
-                        <div class="fixed bottom-5 right-5 z-50 space-y-3">
+                        <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-y-3 justify-end items-end">
                             @foreach ($errors->all() as $error)
                                 <div id="toast-error-{{ $loop->index }}"
                                     class="flex items-center gap-2 w-min p-4 text-gray-500 bg-white rounded-lg shadow border border-red-500"

@@ -68,7 +68,6 @@ class AnggaranController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         foreach ($request->anggaran as $jenis) {
             if ($jenis['rp_pagu'] && $jenis['rp_pagu'] !== null) {
                 $existAnggaran = Anggaran::where('sub_kegiatan_id', $request->sub_kegiatan_id)

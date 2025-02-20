@@ -63,7 +63,15 @@
             'provinsi.create',
             'provinsi.edit',
         ],
-        'sistem' => ['role.index', 'role.create', 'role.edit', 'users.index', 'users.create', 'users.edit'],
+        'sistem' => [
+            'role.index',
+            'role.create',
+            'role.edit',
+            'users.index',
+            'users.create',
+            'users.edit',
+            'config.index',
+        ],
     ];
 
 @endphp

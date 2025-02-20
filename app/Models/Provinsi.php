@@ -9,4 +9,9 @@ class Provinsi extends Model
 {
     use HasFactory;
     protected $table = 'wilayah_provinsi';
+
+    public function kabupaten_kota()
+    {
+        return $this->hasMany(KabupatenKota::class, 'provinsi_id');
+    }
 }

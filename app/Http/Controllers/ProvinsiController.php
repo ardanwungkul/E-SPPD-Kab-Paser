@@ -46,9 +46,11 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|max:50',
             'longitude' => 'required',
             'latitude' => 'required',
+        ], [
+            'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
         ]);
         $provinsi = new Provinsi();
         $provinsi->nama = $request->nama;
@@ -79,11 +81,16 @@ class ProvinsiController extends Controller
      */
     public function update(Request $request, Provinsi $provinsi)
     {
-        $request->validate([
-            'nama' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nama' => 'required|max:50',
+                'longitude' => 'required',
+                'latitude' => 'required',
+            ],
+            [
+                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+            ]
+        );
         $provinsi->nama = $request->nama;
         $provinsi->longitude = $request->longitude;
         $provinsi->latitude = $request->latitude;

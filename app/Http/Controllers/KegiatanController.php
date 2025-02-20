@@ -49,9 +49,10 @@ class KegiatanController extends Controller
                     })
                 ],
                 'program_id' => 'required',
-                'uraian' => 'required',
+                'uraian' => ['required', 'max:100',],
             ],
             [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',
@@ -92,15 +93,18 @@ class KegiatanController extends Controller
         $request->validate(
             [
                 'kode' => [
+                    'max:10',
                     'required',
                     Rule::unique('ref_kegiatan')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'))->where('program_id', $request->program_id);
                     })->ignore($kegiatan->id)
                 ],
                 'program_id' => 'required',
-                'uraian' => 'required',
+                'uraian' => ['required', 'max:100',],
             ],
             [
+                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Uraian Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',

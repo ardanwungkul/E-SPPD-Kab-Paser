@@ -46,12 +46,17 @@ class KecamatanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'kabupaten_kota_id' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nama' => 'required|max:50',
+                'kabupaten_kota_id' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+            ],
+            [
+                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+            ]
+        );
         $kecamatan = new Kecamatan();
         $kecamatan->nama = $request->nama;
         $kecamatan->longitude = $request->longitude;
@@ -83,12 +88,17 @@ class KecamatanController extends Controller
      */
     public function update(Request $request, Kecamatan $kecamatan)
     {
-        $request->validate([
-            'nama' => 'required',
-            'kabupaten_kota_id' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nama' => 'required|max:50',
+                'kabupaten_kota_id' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+            ],
+            [
+                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+            ]
+        );
         $kecamatan->nama = $request->nama;
         $kecamatan->longitude = $request->longitude;
         $kecamatan->latitude = $request->latitude;
@@ -104,5 +114,14 @@ class KecamatanController extends Controller
     {
         $kecamatan->delete();
         return redirect()->route('kecamatan.index')->with(['success' => 'Berhasil Menghapus Kecamatan']);
+    }
+
+    public function getKecamatanByKabupatenKota(Request $request)
+    {
+        $request->validate([
+            'kabupaten_kota_id' => 'required',
+        ]);
+        $kecamatan = Kecamatan::where('kabupaten_kota_id', $request->kabupaten_kota_id)->get();
+        return response()->json($kecamatan);
     }
 }
