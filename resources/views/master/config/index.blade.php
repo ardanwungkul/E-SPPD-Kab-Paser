@@ -86,7 +86,7 @@
                                     <div class="flex flex-col gap-1">
                                         <label for="instansi_provinsi">Provinsi Instansi</label>
                                         <select id="instansi_provinsi" name="instansi_provinsi"
-                                            class="text-sm rounded-lg border border-gray-300 select2" required>
+                                            class="text-sm rounded-lg border border-gray-300 select2">
                                             <option value="" selected disabled>Pilih Provinsi</option>
                                             @foreach ($provinsi as $item)
                                                 <option value="{{ $item->id }}"
@@ -101,7 +101,7 @@
                                     <div class="flex flex-col gap-1">
                                         <label for="instansi_kabupaten_kota">Kabupaten/Kota Instansi</label>
                                         <select id="instansi_kabupaten_kota" name="instansi_kabupaten_kota"
-                                            class="text-sm rounded-lg border border-gray-300 select2" required>
+                                            class="text-sm rounded-lg border border-gray-300 select2">
                                             <option value="" selected disabled>Pilih Kabupaten/Kota</option>
                                             @if ($preferensi->instansi_provinsi)
                                                 @foreach ($preferensi->provinsi->kabupaten_kota as $item)
