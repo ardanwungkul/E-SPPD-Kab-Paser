@@ -31,8 +31,8 @@
                             <tbody class="text-secondary-2">
                                 @foreach ($data as $item)
                                     <tr class="text-xs">
-                                        <td>
-                                            <p class="text-start">{{ $item->tingkat_sppd }}</p>
+                                        <td class="dt-head-left dtr-control" data-order="A001">
+                                            <p class="!text-start w-min inline-block">{{ $item->tingkat_sppd }}</p>
                                         </td>
                                         <td>
                                             <p class="text-start">{{ $item->uraian }}</p>
@@ -91,6 +91,7 @@
             lengthChange: false,
             deferRender: true,
             paging: true,
+            pagingType: 'simple',
             language: {
                 search: '',
                 emptyTable: "Tidak ada data tersedia",

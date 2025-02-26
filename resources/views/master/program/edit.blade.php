@@ -7,17 +7,17 @@
             <form action="{{ route('program.update', $program->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="kode">Kode</label>
                         <input type="text" id="kode" name="kode"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $program->kode }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $program->kode }}"
                             placeholder="Masukkan Kode" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
                         <input type="text" id="uraian" name="uraian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $program->uraian }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $program->uraian }}"
                             placeholder="Masukkan Uraian" required>
                     </div>
                     <div class="flex justify-end items-center gap-4">

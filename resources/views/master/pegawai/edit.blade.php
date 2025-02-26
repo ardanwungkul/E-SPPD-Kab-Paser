@@ -7,11 +7,11 @@
             <form action="{{ route('pegawai.update', $pegawai->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="text-sm grid grid-cols-2 gap-3">
-                    <div class="flex flex-col gap-1">
+                <div class="text-xs md:text-sm grid grid-cols-2 gap-3">
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
                         <label for="jenis_pegawai_id">Jenis Pegawai</label>
                         <select name="jenis_pegawai_id" id="jenis_pegawai_id"
-                            class="text-sm rounded-lg border border-gray-300 select2" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
                             <option value="" selected disabled>Pilih Jenis Pegawai</option>
                             @foreach ($jenis_pegawai as $item)
                                 <option value="{{ $item->id }}"
@@ -20,10 +20,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
                         <label for="pangkat_id">Pangkat/Golongan</label>
                         <select name="pangkat_id" id="pangkat_id"
-                            class="text-sm rounded-lg border border-gray-300 select2" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
                             <option value="" selected disabled>Pilih Pangkat/Golongan</option>
                             @foreach ($pegawai->pangkat->jenis_pegawai->pangkat as $item)
                                 <option value="{{ $item->id }}"
@@ -32,10 +32,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
                         <label for="tingkat_id">Tingkat</label>
                         <select name="tingkat_id" id="tingkat_id"
-                            class="text-sm rounded-lg border border-gray-300 select2" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
                             <option value="" selected disabled>Pilih Tingkat</option>
                             @foreach ($tingkat as $item)
                                 <option value="{{ $item->id }}"
@@ -44,40 +44,41 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
                         <label for="jabatan_id">Jabatan</label>
                         <input type="text" id="jabatan" name="jabatan"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->jabatan }}"
-                            placeholder="Masukkan Jabatan" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300"
+                            value="{{ $pegawai->jabatan }}" placeholder="Masukkan Jabatan" required>
                     </div>
                     <div class="border-b pt-2 col-span-2">
                     </div>
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="nip">NIP</label>
                         <input type="text" id="nip" name="nip"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->nip }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $pegawai->nip }}"
                             placeholder="Masukkan NIP Pegawai" required>
                     </div>
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="nama">Nama</label>
                         <input type="text" id="nama" name="nama"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->nama }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $pegawai->nama }}"
                             placeholder="Masukkan Nama Pegawai" required>
                     </div>
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="no_hp">No. Hp</label>
                         <input type="text" id="no_hp" name="no_hp"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $pegawai->no_hp }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $pegawai->no_hp }}"
                             placeholder="Masukkan Nomor Handphone">
                     </div>
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="keterangan">Keterangan</label>
-                        <textarea id="keterangan" name="keterangan" class="text-sm rounded-lg border border-gray-300"
+                        <textarea id="keterangan" name="keterangan" class="text-xs md:text-sm rounded-lg border border-gray-300"
                             placeholder="Masukkan Keterangan">{{ $pegawai->keterangan }}</textarea>
                     </div>
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="alamat">Alamat</label>
-                        <textarea id="alamat" name="alamat" class="text-sm rounded-lg border border-gray-300" placeholder="Masukkan Alamat">{{ $pegawai->alamat }}</textarea>
+                        <textarea id="alamat" name="alamat" class="text-xs md:text-sm rounded-lg border border-gray-300"
+                            placeholder="Masukkan Alamat">{{ $pegawai->alamat }}</textarea>
                     </div>
                     <div class="flex justify-end items-center gap-4 col-span-2">
                         <button
@@ -109,8 +110,8 @@
 </x-app-layout>
 <script type="module">
     $('.select2').select2({
-        dropdownCssClass: "text-sm",
-        selectionCssClass: 'text-sm',
+        dropdownCssClass: "text-xs md:text-sm",
+        selectionCssClass: 'text-xs md:text-sm',
     });
 
     $('#jenis_pegawai_id').on('change', function() {

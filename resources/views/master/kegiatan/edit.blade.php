@@ -7,11 +7,11 @@
             <form action="{{ route('kegiatan.update', $kegiatan->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="program_id">Program</label>
-                        <select name="program_id" id="program_id" class="text-sm rounded-lg border border-gray-300"
-                            required>
+                        <select name="program_id" id="program_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
                                 <option value="{{ $item->id }}"
@@ -23,13 +23,13 @@
                     <div class="flex flex-col gap-1">
                         <label for="kode">Kode</label>
                         <input type="text" id="kode" name="kode"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $kegiatan->kode }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $kegiatan->kode }}"
                             placeholder="Masukkan Kode " required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
                         <input type="text" id="uraian" name="uraian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $kegiatan->uraian }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $kegiatan->uraian }}"
                             placeholder="Masukkan Uraian " required>
                     </div>
 

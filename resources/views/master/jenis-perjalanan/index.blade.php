@@ -54,7 +54,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <button type="button"
+                                                    <button type="button" data-modal-id="{{ $item->id }}"
                                                         data-modal-toggle="confirm-delete-{{ $item->id }}"
                                                         data-modal-target="confirm-delete-{{ $item->id }}"
                                                         class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
@@ -67,12 +67,12 @@
                                                         </svg>
 
                                                     </button>
-                                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'"
-                                                        :action="route('jenis-perjalanan.destroy', $item->id)" />
+
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'" :action="route('jenis-perjalanan.destroy', $item->id)" />
                                 @endforeach
                             </tbody>
                         </table>
@@ -89,24 +89,56 @@
             lengthChange: false,
             deferRender: true,
             paging: true,
+            pagingType: 'simple',
             language: {
                 search: '',
                 emptyTable: "Tidak ada data tersedia",
                 searchPlaceholder: 'Cari...'
             },
             ordering: false,
-            responsive: true,
+            responsive: {
+                details: {
+                    renderer: function(api, rowIdx, columns) {
+                        let data = columns
+                            .map((col, i) => {
+                                return col.hidden ?
+                                    `<div class="my-3">
+                                        <p class="text-xs font-bold">${col.title}</p>
+                                        <div class="text-xs">${col.data}</div>
+                                    </div>` : '';
+                            })
+                            .join('');
+
+                        let table = document.createElement('table');
+                        table.innerHTML = data;
+
+                        return data ? table : false;
+                    }
+                }
+            },
             columnDefs: [{
                 targets: '_all',
                 className: 'dt-head-left',
             }]
-            // columnDefs: [{
-            //     orderable: false,
-            //     targets: [3, 4, 5]
-            // }, {
-            //     className: 'dt-head-center',
-            //     targets: [1, 2, 3, 4, 5]
-            // }]
+        });
+        $(document).on('click', '[data-modal-id]', function() {
+            const modalId = $(this).data('modal-id');
+
+            const $targetEl = $(`[id="confirm-delete-${modalId}"]`);
+
+            const modal = new Modal($targetEl[0]);
+            if (modal) {
+                modal.toggle();
+            }
+        });
+        $(document).on('click', '[data-modal-hide]', function() {
+            const modalId = $(this).data('modal-hide');
+            const $targetEl = $(`#${modalId}`);
+
+            const modal = new Modal($targetEl[0]);
+            if (modal) {
+                modal.hide();
+            }
         });
     });
 </script>

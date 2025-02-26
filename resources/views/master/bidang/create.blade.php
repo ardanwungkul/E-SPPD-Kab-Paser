@@ -7,11 +7,11 @@
             <form action="{{ route('bidang.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
                         <input type="text" id="uraian" name="uraian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
                             placeholder="Masukkan Uraian" required>
                     </div>
                     <div class="flex justify-end items-center gap-4">

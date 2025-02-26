@@ -7,10 +7,10 @@
             <form action="{{ route('sub-kegiatan.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="program_id">Program</label>
-                        <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required>
+                        <select name="program_id" id="program_id" class="text-xs md:text-sm rounded-lg select2" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
                                 <option value="{{ $item->id }}">{{ $item->uraian }}</option>
@@ -19,20 +19,21 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="kegiatan_id">Kegiatan</label>
-                        <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2" required>
+                        <select name="kegiatan_id" id="kegiatan_id" class="text-xs md:text-sm rounded-lg select2"
+                            required>
                             <option value="" selected disabled> Pilih Kegiatan</option>
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="kode">Kode</label>
                         <input type="text" id="kode" name="kode"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('kode') }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('kode') }}"
                             placeholder="Masukkan Kode " required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
                         <input type="text" id="uraian" name="uraian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
                             placeholder="Masukkan Uraian " required>
                     </div>
 
@@ -67,8 +68,8 @@
 <script type="module">
     $(document).ready(function() {
         $('.select2').select2({
-            dropdownCssClass: "text-sm",
-            selectionCssClass: 'text-sm',
+            dropdownCssClass: "text-xs md:text-sm",
+            selectionCssClass: 'text-xs md:text-sm',
         });
 
         $('#program_id').on('change', function() {

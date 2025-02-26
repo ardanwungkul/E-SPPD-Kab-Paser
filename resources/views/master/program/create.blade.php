@@ -7,17 +7,17 @@
             <form action="{{ route('program.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="kode">Kode</label>
                         <input type="text" id="kode" name="kode"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('kode') }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('kode') }}"
                             placeholder="Masukkan Kode" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
                         <input type="text" id="uraian" name="uraian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
                             placeholder="Masukkan Uraian" required>
                     </div>
                     <div class="flex justify-end items-center gap-4">

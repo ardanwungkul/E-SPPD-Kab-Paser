@@ -7,23 +7,23 @@
             <form action="{{ route('golongan.update', $golongan->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="kode_golongan">Kode Golongan</label>
                         <input type="text" id="kode_golongan" name="kode_golongan"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $golongan->kode_golongan }}"
-                            placeholder="Masukkan Kode Golongan" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300"
+                            value="{{ $golongan->kode_golongan }}" placeholder="Masukkan Kode Golongan" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
                         <input type="text" id="uraian" name="uraian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ $golongan->uraian }}"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ $golongan->uraian }}"
                             placeholder="Masukkan Uraian Pangkat" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="jenis_pegawai_id">Jenis Pegawai</label>
                         <select name="jenis_pegawai_id" id="jenis_pegawai_id"
-                            class="text-sm rounded-lg border border-gray-300" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled> Pilih Jenis Pegawai</option>
                             @foreach ($jenis_pegawai as $item)
                                 <option value="{{ $item->id }}"
