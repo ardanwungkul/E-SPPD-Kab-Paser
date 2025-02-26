@@ -21,14 +21,13 @@
                             placeholder="Masukkan Uraian Pangkat" required>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <label for="jenis_pegawai">Jenis Pegawai</label>
-                        <select name="jenis_pegawai" id="jenis_pegawai"
+                        <label for="jenis_pegawai_id">Jenis Pegawai</label>
+                        <select name="jenis_pegawai_id" id="jenis_pegawai_id"
                             class="text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled> Pilih Jenis Pegawai</option>
-                            <option value="1">PNS</option>
-                            <option value="2">PPPK / P3K</option>
-                            <option value="3">Honorer / PPPK</option>
-                            <option value="4">Anggota DPRD</option>
+                            @foreach ($jenis_pegawai as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="flex justify-end items-center gap-4">

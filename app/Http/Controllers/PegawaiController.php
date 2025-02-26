@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Golongan;
-use App\Models\Jabatan;
+use App\Models\JenisPegawai;
 use App\Models\Pegawai;
 use App\Models\TingkatPerjalananDinas;
 use Illuminate\Http\Request;
@@ -24,9 +24,9 @@ class PegawaiController extends Controller
     {
         $data = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
-            ->orderBy('ref_pangkat.jenis_pegawai')
-            ->orderBy('ref_pangkat.kode_golongan')
-            ->orderBy('ref_pangkat.uraian')
+            ->orderBy('ref_pangkat.jenis_pegawai_id', 'asc')
+            ->orderBy('ref_pangkat.kode_golongan', 'desc')
+            ->orderBy('nama', 'asc')
             ->select('pegawai.*')
             ->get();
         return view('master.pegawai.index', compact('data'));
@@ -38,34 +38,49 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        $golongan = Golongan::all();
+        $jenis_pegawai = JenisPegawai::all();
         $tingkat = TingkatPerjalananDinas::all();
-        $jabatan = Jabatan::all();
-        return view('master.pegawai.create', compact('golongan', 'tingkat', 'jabatan'));
+        return view('master.pegawai.create', compact('tingkat', 'jenis_pegawai'));
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nip' => 'required',
-            'nama' => 'required',
-            'pangkat_id' => 'required',
-            'tingkat_id' => 'required',
-            'jabatan_id' => 'required',
-            'no_hp' => 'required',
-            'alamat' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nip' => 'required|max:21',
+                'nama' => 'required|max:70',
+                'pangkat_id' => 'required',
+                'tingkat_id' => 'required',
+                'jabatan' => 'required|max:70',
+                'no_hp' => 'max:30',
+                'keterangan' => 'max:70',
+            ],
+            [
+                'nip.required' => 'Kolom NIP Wajib Diisi.',
+                'nama.required' => 'Kolom Nama Wajib Diisi.',
+                'jabatan.required' => 'Kolom Jabatan Wajib Diisi.',
+                'pangkat_id.required' => 'Anda Perlu Memilih Pangkat.',
+                'tingkat_id.required' => 'Anda Perlu Memilih Tingkat.',
+                'nip.max' => 'Maksimal NIP adalah 21 Karakter',
+                'nama.max' => 'Maksimal Nama adalah 70 Karakter',
+                'jabatan.max' => 'Maksimal Nama adalah 70 Karakter',
+                'no_hp.max' => 'Maksimal Nama adalah 30 Karakter',
+                'keterangan.max' => 'Maksimal Nama adalah 70 Karakter',
+            ]
+        );
         $pegawai = new Pegawai();
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
         $pegawai->pangkat_id = $request->pangkat_id;
         $pegawai->tingkat_id = $request->tingkat_id;
-        $pegawai->jabatan_id = $request->jabatan_id;
         $pegawai->no_hp = $request->no_hp;
+        $pegawai->jabatan = $request->jabatan;
         $pegawai->alamat = $request->alamat;
+        $pegawai->keterangan = $request->keterangan;
         $pegawai->save();
         return redirect()->route('pegawai.index')->with(['success' => 'Berhasil Menambahkan Pegawai']);
     }
@@ -83,9 +98,9 @@ class PegawaiController extends Controller
      */
     public function edit(Pegawai $pegawai)
     {
-        $golongan = Golongan::all();
+        $jenis_pegawai = JenisPegawai::all();
         $tingkat = TingkatPerjalananDinas::all();
-        return view('master.pegawai.edit', compact('pegawai', 'golongan', 'tingkat'));
+        return view('master.pegawai.edit', compact('pegawai', 'tingkat', 'jenis_pegawai'));
     }
 
     /**
@@ -93,24 +108,37 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, Pegawai $pegawai)
     {
-        $request->validate([
-            'nip' => 'required',
-            'nama' => 'required',
-            'golongan_id' => 'required',
-            'tingkat_id' => 'required',
-            'jabatan' => 'required',
-            'jenis_pegawai' => 'required',
-            'no_hp' => 'required',
-            'alamat' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nip' => 'required|max:21',
+                'nama' => 'required|max:70',
+                'pangkat_id' => 'required',
+                'tingkat_id' => 'required',
+                'jabatan' => 'required|max:70',
+                'no_hp' => 'max:30',
+                'keterangan' => 'max:70',
+            ],
+            [
+                'nip.required' => 'Kolom NIP Wajib Diisi.',
+                'nama.required' => 'Kolom Nama Wajib Diisi.',
+                'jabatan.required' => 'Kolom Jabatan Wajib Diisi.',
+                'pangkat_id.required' => 'Anda Perlu Memilih Pangkat.',
+                'tingkat_id.required' => 'Anda Perlu Memilih Tingkat.',
+                'nip.max' => 'Maksimal NIP adalah 21 Karakter',
+                'nama.max' => 'Maksimal Nama adalah 70 Karakter',
+                'jabatan.max' => 'Maksimal Nama adalah 70 Karakter',
+                'no_hp.max' => 'Maksimal Nama adalah 30 Karakter',
+                'keterangan.max' => 'Maksimal Nama adalah 70 Karakter',
+            ]
+        );
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
-        $pegawai->golongan_id = $request->golongan_id;
+        $pegawai->pangkat_id = $request->pangkat_id;
         $pegawai->tingkat_id = $request->tingkat_id;
-        $pegawai->jabatan = $request->jabatan;
-        $pegawai->jenis_pegawai = $request->jenis_pegawai;
         $pegawai->no_hp = $request->no_hp;
+        $pegawai->jabatan = $request->jabatan;
         $pegawai->alamat = $request->alamat;
+        $pegawai->keterangan = $request->keterangan;
         $pegawai->save();
         return redirect()->route('pegawai.index')->with(['success' => 'Berhasil Mengubah Pegawai']);
     }

@@ -2,9 +2,9 @@
     <x-slot name="header">
         Edit Kecamatan {{ $kecamatan->kecamatan }}
     </x-slot>
-    <div class="grid grid-cols-2 gap-5">
-        <div class="w-full">
-            <div id="map" class="w-full h-full rounded-lg border border-secondary-3 shadow-lg"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="w-full min-h-80">
+            <div id="map" class="w-full h-full rounded-lg border border-secondary-3 shadow-lg z-10"></div>
 
         </div>
         <x-container>
@@ -12,11 +12,11 @@
                 <form action="{{ route('kecamatan.update', $kecamatan->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="text-sm space-y-3">
+                    <div class="md:text-sm text-xs space-y-3">
                         <div class="flex flex-col gap-1">
                             <label for="kabupaten_kota_id">Kabupaten/Kota</label>
                             <select name="kabupaten_kota_id" id="kabupaten_kota_id"
-                                class="text-sm rounded-lg border border-gray-300" required>
+                                class="md:text-sm text-xs rounded-lg border border-gray-300" required>
                                 <option value="" selected disabled>Pilih Kabupaten/Kota</option>
                                 @foreach ($kabupaten_kota as $item)
                                     <option value="{{ $item->id }}"
@@ -28,20 +28,20 @@
                         <div class="flex flex-col gap-1">
                             <label for="nama">Nama</label>
                             <input type="text" id="nama" name="nama"
-                                class="text-sm rounded-lg border border-gray-300" value="{{ $kecamatan->nama }}"
-                                placeholder="Masukkan Nama Provinsi" required>
+                                class="md:text-sm text-xs rounded-lg border border-gray-300"
+                                value="{{ $kecamatan->nama }}" placeholder="Masukkan Nama Provinsi" required>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="latitude">Latitude</label>
                             <input type="text" id="latitude" name="latitude"
-                                class="text-sm rounded-lg border border-gray-300" value="{{ $kecamatan->latitude }}"
-                                placeholder="Pilih Lokasi Di Map" required readonly>
+                                class="md:text-sm text-xs rounded-lg border border-gray-300"
+                                value="{{ $kecamatan->latitude }}" placeholder="Pilih Lokasi Di Map" required readonly>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="longitude">Longitude</label>
                             <input type="text" id="longitude" name="longitude"
-                                class="text-sm rounded-lg border border-gray-300" value="{{ $kecamatan->longitude }}"
-                                placeholder="Pilih Lokasi Di Map" required readonly>
+                                class="md:text-sm text-xs rounded-lg border border-gray-300"
+                                value="{{ $kecamatan->longitude }}" placeholder="Pilih Lokasi Di Map" required readonly>
                         </div>
                         <div class="flex justify-end items-center gap-4">
                             <button

@@ -28,7 +28,7 @@
                 <td style="width: 100px; vertical-align: top; font-size: 10pt;line-height: 30px;">KEPADA</td>
                 <td style="width: 20px; vertical-align: top; font-size: 10pt;line-height: 30px;">:</td>
                 <td style="vertical-align: top; font-size: 10pt;line-height: 30px;">
-                    {{ strtoupper($nota_dinas->kepada->jabatan ? $nota_dinas->kepada->jabatan->uraian : '') }}
+                    {{ strtoupper($nota_dinas->kepada->jabatan) }}
                 </td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@
                 <td style="width: 100px; vertical-align: top; font-size: 10pt;line-height: 30px;">DARI</td>
                 <td style="width: 20px; vertical-align: top; font-size: 10pt;line-height: 30px;">:</td>
                 <td style="vertical-align: top; font-size: 10pt;line-height: 30px;">
-                    {{ strtoupper($nota_dinas->dari->jabatan ? $nota_dinas->dari->jabatan->uraian : '') }}
+                    {{ strtoupper($nota_dinas->dari->jabatan) }}
                 </td>
             </tr>
             <tr>
@@ -69,7 +69,7 @@
             <tr>
                 <td style="width: 70%;"></td>
                 <td style="width: 30%; font-weight: bold; font-size: 10pt;">
-                    {{ strtoupper($nota_dinas->dari->jabatan ? $nota_dinas->dari->jabatan->uraian : '') }}
+                    {{ strtoupper($nota_dinas->dari->jabatan) }}
                 </td>
             </tr>
             <tr>

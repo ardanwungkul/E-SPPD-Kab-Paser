@@ -21,14 +21,14 @@
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
-                                <tr>
-                                    <td class="text-xs">Nama</td>
-                                    <td class="text-xs">Role</td>
-                                    <td class="text-xs">Email/Username</td>
-                                    <td class="text-xs">Status</td>
-                                    <td class="text-xs">Terakhir Login</td>
-                                    <td class="text-xs">Tanggal Daftar</td>
-                                    <td class="text-xs w-32"></td>
+                                <tr class="text-xs">
+                                    <td class="!font-medium !text-xs ">Nama</td>
+                                    <td class="!font-medium !text-xs ">Role</td>
+                                    <td class="!font-medium !text-xs ">Email/Username</td>
+                                    <td class="!font-medium !text-xs ">Status</td>
+                                    <td class="!font-medium !text-xs ">Terakhir Login</td>
+                                    <td class="!font-medium !text-xs ">Tanggal Daftar</td>
+                                    <td class="!font-medium !text-xs w-32"></td>
                                 </tr>
                             </thead>
                             <tbody class="text-secondary-2">
@@ -90,7 +90,7 @@
                                                 @endif
                                                 @if (($item->roles->count() > 0 && $item->roles[0]->name !== 'Super Admin') || $item->roles->count() == 0)
                                                     <div>
-                                                        <button type="button"
+                                                        <button type="button" data-modal-id="{{ $item->id }}"
                                                             data-modal-toggle="confirm-delete-{{ $item->id }}"
                                                             data-modal-target="confirm-delete-{{ $item->id }}"
                                                             class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
@@ -101,15 +101,13 @@
                                                                     stroke-linejoin="round" stroke-width="2"
                                                                     d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                                             </svg>
-
                                                         </button>
-                                                        <x-modal.confirm-delete :id="$item->id" :name="'Data'"
-                                                            :action="route('users.destroy', $item->id)" />
                                                     </div>
                                                 @endif
                                             </div>
                                         </td>
                                     </tr>
+                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'" :action="route('users.destroy', $item->id)" />
                                 @endforeach
                             </tbody>
                         </table>
@@ -132,7 +130,27 @@
                 searchPlaceholder: 'Cari...'
             },
             ordering: false,
-            responsive: true,
+            // responsive: true,
+            responsive: {
+                details: {
+                    renderer: function(api, rowIdx, columns) {
+                        let data = columns
+                            .map((col, i) => {
+                                return col.hidden ?
+                                    `<div class="my-3">
+                                        <p class="text-xs font-bold">${col.title}</p>
+                                        <div class="text-xs">${col.data}</div>
+                                    </div>` : '';
+                            })
+                            .join('');
+
+                        let table = document.createElement('table');
+                        table.innerHTML = data;
+
+                        return data ? table : false;
+                    }
+                }
+            },
             columnDefs: [{
                 targets: '_all',
                 className: 'dt-head-left',
@@ -144,6 +162,25 @@
             //     className: 'dt-head-center',
             //     targets: [1, 2, 3, 4, 5]
             // }]
+        });
+        $(document).on('click', '[data-modal-id]', function() {
+            const modalId = $(this).data('modal-id');
+
+            const $targetEl = $(`[id="confirm-delete-${modalId}"]`);
+
+            const modal = new Modal($targetEl[0]);
+            if (modal) {
+                modal.toggle();
+            }
+        });
+        $(document).on('click', '[data-modal-hide]', function() {
+            const modalId = $(this).data('modal-hide');
+            const $targetEl = $(`#${modalId}`);
+
+            const modal = new Modal($targetEl[0]);
+            if (modal) {
+                modal.hide();
+            }
         });
     });
 </script>

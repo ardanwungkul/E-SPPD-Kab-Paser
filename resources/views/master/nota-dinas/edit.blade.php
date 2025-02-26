@@ -169,8 +169,8 @@
                                 data-modal-target="pilih-pegawai-dari" data-modal-toggle="pilih-pegawai-dari"
                                 class="text-sm rounded-lg w-full border-gray-300 cursor-pointer"
                                 placeholder="Ketuk untuk Pilih Pegawai"
-                                value="{{ $nota_dinas->dari->nama }}{{ $nota_dinas->dari->jabatan ? '- ' . $nota_dinas->dari->jabatan->uraian : '' }}"
-                                readonly required>
+                                value="{{ $nota_dinas->dari->nama }} - {{ $nota_dinas->dari->jabatan }}" readonly
+                                required>
                             <x-modal.pilih-pegawai-dari :pegawai="$pegawai" />
                         </div>
                         <div>
@@ -181,7 +181,7 @@
                                 data-modal-target="pilih-pegawai-kepada" data-modal-toggle="pilih-pegawai-kepada"
                                 class="text-sm rounded-lg w-full border-gray-300 cursor-pointer"
                                 placeholder="Ketuk untuk Pilih Pegawai" readonly required
-                                value="{{ $nota_dinas->kepada->nama }}{{ $nota_dinas->kepada->jabatan ? '- ' . $nota_dinas->kepada->jabatan->uraian : '' }}">
+                                value="{{ $nota_dinas->kepada->nama }} - {{ $nota_dinas->kepada->jabatan }}">
                             <x-modal.pilih-pegawai-kepada :pegawai="$pegawai" />
                         </div>
                         <div class="col-span-2">
@@ -351,7 +351,7 @@
                 $('#sub_bidang_id').empty();
                 $('#sub_bidang_id').append(
                     '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
-                    );
+                );
             }
         });
     });

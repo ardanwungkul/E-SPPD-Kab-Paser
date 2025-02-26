@@ -44,7 +44,7 @@
                                             <p>{{ $item->nama }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->jabatan ? $item->jabatan->uraian : '' }}</p>
+                                            <p>{{ $item->jabatan }}</p>
                                         </td>
                                         <td>
                                             <p>{{ $item->pangkat->uraian }} - {{ $item->pangkat->kode_golongan }}</p>
@@ -54,7 +54,7 @@
                                                 <div>
                                                     <button type="button" data-id="{{ $item->id }}"
                                                         data-check="false"
-                                                        data-keterangan="{{ $item->nama }}{{ $item->jabatan ? '- ' . $item->jabatan->uraian : '' }}"
+                                                        data-keterangan="{{ $item->nama }} - {{ $item->jabatan }}"
                                                         class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg button-pegawai-spt-check">
 
                                                         <svg class="w-4 h-4" aria-hidden="true"

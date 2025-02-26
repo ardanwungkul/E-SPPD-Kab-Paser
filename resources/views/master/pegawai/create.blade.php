@@ -7,34 +7,28 @@
             <form action="{{ route('pegawai.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-sm space-y-3">
+                <div class="text-sm grid grid-cols-2 gap-3">
                     <div class="flex flex-col gap-1">
-                        <label for="nip">NIP</label>
-                        <input type="text" id="nip" name="nip"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('nip') }}"
-                            placeholder="Masukkan NIP Pegawai" required>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="nama">Nama</label>
-                        <input type="text" id="nama" name="nama"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('nama') }}"
-                            placeholder="Masukkan Nama Pegawai" required>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="pangkat_id">Pangkat/Golongan</label>
-                        <select name="pangkat_id" id="pangkat_id" class="text-sm rounded-lg border border-gray-300"
-                            required>
-                            <option value="" selected disabled>Pilih Pangkat/Golongan</option>
-                            @foreach ($golongan as $item)
-                                <option value="{{ $item->id }}">{{ $item->kode_golongan }} - {{ $item->uraian }}
-                                </option>
+                        <label for="jenis_pegawai_id">Jenis Pegawai</label>
+                        <select name="jenis_pegawai_id" id="jenis_pegawai_id"
+                            class="text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Jenis Pegawai</option>
+                            @foreach ($jenis_pegawai as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
+                        <label for="pangkat_id">Pangkat/Golongan</label>
+                        <select name="pangkat_id" id="pangkat_id"
+                            class="text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Pangkat/Golongan</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
                         <label for="tingkat_id">Tingkat</label>
-                        <select name="tingkat_id" id="tingkat_id" class="text-sm rounded-lg border border-gray-300"
-                            required>
+                        <select name="tingkat_id" id="tingkat_id"
+                            class="text-sm rounded-lg border border-gray-300 select2" required>
                             <option value="" selected disabled>Pilih Tingkat</option>
                             @foreach ($tingkat as $item)
                                 <option value="{{ $item->id }}">{{ $item->uraian }}</option>
@@ -43,26 +37,40 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="jabatan_id">Jabatan</label>
-                        <select name="jabatan_id" id="jabatan_id" class="text-sm rounded-lg border border-gray-300"
-                            required>
-                            <option value="" selected disabled>Pilih Jabatan</option>
-                            @foreach ($jabatan as $item)
-                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" id="jabatan" name="jabatan"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('jabatan') }}"
+                            placeholder="Masukkan Jabatan" required>
                     </div>
-                    <div class="flex flex-col gap-1">
+                    <div class="border-b pt-2 col-span-2">
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2">
+                        <label for="nip">NIP</label>
+                        <input type="text" id="nip" name="nip"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('nip') }}"
+                            placeholder="Masukkan NIP Pegawai" required>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2">
+                        <label for="nama">Nama</label>
+                        <input type="text" id="nama" name="nama"
+                            class="text-sm rounded-lg border border-gray-300" value="{{ old('nama') }}"
+                            placeholder="Masukkan Nama Pegawai" required>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2">
                         <label for="no_hp">No. Hp</label>
                         <input type="text" id="no_hp" name="no_hp"
                             class="text-sm rounded-lg border border-gray-300" value="{{ old('no_hp') }}"
-                            placeholder="Masukkan Nomor Handphone" required>
+                            placeholder="Masukkan Nomor Handphone">
                     </div>
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col gap-1 col-span-2">
+                        <label for="keterangan">Keterangan</label>
+                        <textarea id="keterangan" name="keterangan" class="text-sm rounded-lg border border-gray-300"
+                            placeholder="Masukkan Keterangan">{{ old('keterangan') }}</textarea>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2">
                         <label for="alamat">Alamat</label>
-                        <textarea id="alamat" name="alamat" class="text-sm rounded-lg border border-gray-300" placeholder="Masukkan Alamat"
-                            required>{{ old('alamat') }}</textarea>
+                        <textarea id="alamat" name="alamat" class="text-sm rounded-lg border border-gray-300" placeholder="Masukkan Alamat">{{ old('alamat') }}</textarea>
                     </div>
-                    <div class="flex justify-end items-center gap-4">
+                    <div class="flex justify-end items-center gap-4 col-span-2">
                         <button
                             class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
                             type="submit">
@@ -90,3 +98,47 @@
         </x-slot>
     </x-container>
 </x-app-layout>
+<script type="module">
+    $('.select2').select2({
+        dropdownCssClass: "text-sm",
+        selectionCssClass: 'text-sm',
+    });
+
+    $('#jenis_pegawai_id').on('change', function() {
+        const jenisPegawaiId = $(this).val();
+
+        if (jenisPegawaiId) {
+            $.ajax({
+                url: "{{ route('get.golongan.by.jenis-pegawai') }}",
+                type: "GET",
+                data: {
+                    jenis_pegawai_id: jenisPegawaiId
+                },
+                success: function(response) {
+                    $('#pangkat_id').empty();
+                    $('#pangkat_id').append(
+                        '<option value="" selected disabled>Pilih Pangkat/Golongan</option>'
+                    );
+
+                    if (response.length > 0) {
+                        $.each(response, function(index, pangkat) {
+                            $('#pangkat_id').append('<option value="' +
+                                pangkat.id + '">' + pangkat.uraian +
+                                '</option>');
+                        });
+                    } else {
+                        $('#pangkat_id').append(
+                            '<option value="" disabled>Tidak ada Pangkat/Golongan tersedia</option>'
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        } else {
+            $('#pangkat_id').empty();
+            $('#pangkat_id').append('<option value="" selected disabled>Pilih Pangkat/Golongan</option>');
+        }
+    });
+</script>

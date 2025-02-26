@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ref_pangkat', function (Blueprint $table) {
+        Schema::create('ref_jenis_pegawai', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('kode_golongan', 10);
-            $table->unsignedTinyInteger('jenis_pegawai_id');
-            $table->foreign('jenis_pegawai_id')->references('id')->on('ref_jenis_pegawai')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('uraian', 100);
+            $table->string('uraian', 20);
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ref_pangkat');
+        Schema::dropIfExists('ref_jenis_pegawai');
     }
 };

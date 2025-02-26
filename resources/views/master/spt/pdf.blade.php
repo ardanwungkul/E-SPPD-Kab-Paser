@@ -119,7 +119,7 @@
                                 <td></td>
                                 <td>Jabatan</td>
                                 <td>:</td>
-                                <td>{{ $pegawai->pegawai->jabatan ? $pegawai->pegawai->jabatan->uraian : '' }}</td>
+                                <td>{{ $pegawai->pegawai->jabatan }}</td>
                             </tr>
                         </table>
                     </td>
@@ -156,7 +156,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td style="text-align: center;">{{ $spt->ub->jabatan ? $spt->ub->jabatan->uraian : '' }}</td>
+                <td style="text-align: center;">{{ $spt->ub->jabatan }}</td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>

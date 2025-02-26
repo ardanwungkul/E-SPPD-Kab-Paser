@@ -2,9 +2,9 @@
     <x-slot name="header">
         Edit Provinsi {{ $provinsi->nama }}
     </x-slot>
-    <div class="grid grid-cols-2 gap-5">
-        <div class="w-full">
-            <div id="map" class="w-full h-full rounded-lg border border-secondary-3 shadow-lg"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="w-full min-h-80">
+            <div id="map" class="w-full h-full rounded-lg border border-secondary-3 shadow-lg z-10"></div>
 
         </div>
         <x-container>

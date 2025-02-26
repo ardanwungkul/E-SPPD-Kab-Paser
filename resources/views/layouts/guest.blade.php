@@ -64,12 +64,12 @@
         @endif
         <div class="absolute bg-color-1-100 w-full h-full top-0 opacity-10"></div>
         <div
-            class="md:grid grid-cols-3 rounded-3xl overflow-hidden md:min-w-[671px] max-w-2xl shadow-lg border border-white z-10 md:h-full max-h-[500px] md:min-h-[420px] mx-3 md:mx-0 p-3 bg-white">
+            class="grid grid-cols-1 md:grid-cols-3 rounded-3xl overflow-hidden md:min-w-[671px] max-w-2xl shadow-lg border border-white z-10 md:h-full max-h-[500px] md:min-h-[420px] mx-3 md:mx-0 p-3 bg-white">
             <div
-                class="col-span-1 hidden md:block group bg-gradient-to-b from-color-1-500 via-color-1-400 to-color-1-600 rounded-3xl">
+                class="col-span-1 md:block group bg-gradient-to-b from-color-1-500 via-color-1-400 to-color-1-600 rounded-3xl">
                 <div class="flex items-center justify-center w-full h-full p-5">
                     <img src="{{ asset('assets/images/logo-ppu.png') }}"
-                        class="group-hover:scale-125 transition-transform duration-300" alt="">
+                        class="group-hover:scale-125 transition-transform duration-300 md:w-full w-1/3" alt="">
                 </div>
             </div>
             <div class="col-span-2 bg-white overflow-hidden px-10 py-5 flex items-center md:h-full">

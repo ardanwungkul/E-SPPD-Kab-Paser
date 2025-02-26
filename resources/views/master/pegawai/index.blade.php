@@ -41,10 +41,10 @@
                                             <p>{{ $item->nama }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->jabatan ? $item->jabatan->uraian : '' }}</p>
+                                            <p>{{ $item->jabatan }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat->jenis_pegawai_formatted }}</p>
+                                            <p>{{ $item->pangkat->jenis_pegawai->uraian }}</p>
                                         </td>
                                         <td>
                                             <p>{{ $item->pangkat->kode_golongan }}</p>

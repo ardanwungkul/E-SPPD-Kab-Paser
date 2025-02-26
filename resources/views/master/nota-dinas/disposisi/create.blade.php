@@ -79,7 +79,7 @@
                                         <tr class="odd:bg-white even:bg-secondary-3/60">
                                             <td class="p-2 font-light w-40">Dari</td>
                                             <td class="p-2 font-medium" colspan="4">
-                                                {{ $nota_dinas->dari->jabatan ? $nota_dinas->dari->jabatan->uraian . ' - ' : '' }}
+                                                {{ $nota_dinas->dari->jabatan }} -
                                                 {{ $nota_dinas->dari->nama }} /
                                                 {{ $nota_dinas->dari->nip }}
                                             </td>
@@ -87,7 +87,7 @@
                                         <tr class="odd:bg-white even:bg-secondary-3/60">
                                             <td class="p-2 font-light w-40">Kepada</td>
                                             <td class="p-2 font-medium" colspan="4">
-                                                {{ $nota_dinas->kepada->jabatan ? $nota_dinas->kepada->jabatan->uraian . ' - ' : '' }}
+                                                {{ $nota_dinas->kepada->jabatan }} -
                                                 {{ $nota_dinas->kepada->nama }} /
                                                 {{ $nota_dinas->kepada->nip }}
                                             </td>

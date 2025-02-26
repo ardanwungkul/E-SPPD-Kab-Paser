@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Golongan;
+use App\Models\JenisPegawai;
 use Illuminate\Http\Request;
 
 class GolonganController extends Controller
@@ -19,10 +20,19 @@ class GolonganController extends Controller
      */
     public function index()
     {
-        $data = Golongan::orderBy('jenis_pegawai', 'asc')->orderBy('kode_golongan', 'asc')
+        $data = Golongan::orderBy('id', 'asc')->orderBy('kode_golongan', 'desc')
             ->get();
 
         return view('master.golongan.index', compact('data'));
+    }
+
+    public function getGolonganByJenisPegawai(Request $request)
+    {
+        $request->validate([
+            'jenis_pegawai_id' => 'required|string',
+        ]);
+        $pangkat = Golongan::where('jenis_pegawai_id', $request->jenis_pegawai_id)->orderBy('kode_golongan', 'desc')->get();
+        return response()->json($pangkat);
     }
 
     /**
@@ -30,7 +40,8 @@ class GolonganController extends Controller
      */
     public function create()
     {
-        return view('master.golongan.create');
+        $jenis_pegawai = JenisPegawai::all();
+        return view('master.golongan.create', compact('jenis_pegawai'));
     }
 
     /**
@@ -48,7 +59,7 @@ class GolonganController extends Controller
                     'required',
                     'max:10'
                 ],
-                'jenis_pegawai' => 'required',
+                'jenis_pegawai_id' => 'required',
             ],
             [
                 'kode_golongan.max' => 'kode Golongan tidak boleh lebih dari 10 karakter',
@@ -58,7 +69,7 @@ class GolonganController extends Controller
         $golongan = new Golongan();
         $golongan->uraian = $request->uraian;
         $golongan->kode_golongan = $request->kode_golongan;
-        $golongan->jenis_pegawai = $request->jenis_pegawai;
+        $golongan->jenis_pegawai_id = $request->jenis_pegawai_id;
         $golongan->save();
         return redirect()->route('golongan.index')->with(['success' => 'Berhasil Menambahkan Golongan']);
     }
@@ -76,7 +87,8 @@ class GolonganController extends Controller
      */
     public function edit(Golongan $golongan)
     {
-        return view('master.golongan.edit', compact('golongan'));
+        $jenis_pegawai = JenisPegawai::all();
+        return view('master.golongan.edit', compact('golongan', 'jenis_pegawai'));
     }
 
     /**
@@ -94,7 +106,7 @@ class GolonganController extends Controller
                     'required',
                     'max:10'
                 ],
-                'jenis_pegawai' => 'required',
+                'jenis_pegawai_id' => 'required',
             ],
             [
                 'kode_golongan.max' => 'kode Golongan tidak boleh lebih dari 10 karakter',
@@ -103,7 +115,7 @@ class GolonganController extends Controller
         );
         $golongan->uraian = $request->uraian;
         $golongan->kode_golongan = $request->kode_golongan;
-        $golongan->jenis_pegawai = $request->jenis_pegawai;
+        $golongan->jenis_pegawai_id = $request->jenis_pegawai_id;
         $golongan->save();
         return redirect()->route('golongan.index')->with(['success' => 'Berhasil Mengubah Golongan']);
     }

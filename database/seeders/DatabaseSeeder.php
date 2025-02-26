@@ -21,9 +21,11 @@ class DatabaseSeeder extends Seeder
         ];
         Config::insert($config);
         $this->call(PermissionSeeder::class);
+
         $this->call(RefSeeder::class);
-        $this->call(PegawaiSeeder::class);
-        $this->call(WilayahSeeder::class);
+        $this->call(AnggaranSeeder::class);
+        // $this->call(PegawaiSeeder::class);
+        // $this->call(WilayahSeeder::class);
         $this->call(PreferensiSeeder::class);
     }
 }

@@ -7,16 +7,17 @@
             <form action="{{ route('role.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-sm space-y-3">
+                <div class="md:text-sm text-xs space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="name">Nama</label>
                         <input type="text" id="name" name="name"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('name') }}"
+                            class="md:text-sm text-xs rounded-lg border border-gray-300" value="{{ old('name') }}"
                             placeholder="Masukkan Nama Role" required>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <fieldset class="grid grid-cols-2 gap-5 border border-gray-300 rounded-lg p-3 bg-white">
-                            <legend align="center" class="px-3 text-sm">Daftar Akses</legend>
+                        <fieldset
+                            class="grid grid-cols-2 gap-5 border-y md:border border-gray-300 md:rounded-lg py-3 md:px-3 bg-white">
+                            <legend align="center" class="px-3 md:text-sm text-xs">Daftar Akses</legend>
                             @foreach ($permission->groupBy('category_id') as $items)
                                 <div>
                                     <div class="flex items-center">
@@ -30,7 +31,9 @@
                                                     d="M5 11.917 9.724 16.5 19 7.5" />
                                             </svg>
                                         </button>
-                                        <p class="text-sm font-semibold">{{ $items[0]->category->nama }}</p>
+                                        <p class="md:text-sm text-xs font-semibold truncate"
+                                            title="{{ $items[0]->category->nama }}">
+                                            {{ $items[0]->category->nama }}</p>
 
                                     </div>
                                     <div id="kategori-{{ $items[0]->category->id }}" class="space-y-1">
@@ -39,7 +42,7 @@
                                                 <input type="checkbox" value="{{ $item->id }}"
                                                     name="permission_id[]" id="checkbox-permission-{{ $item->id }}"
                                                     class="rounded-full">
-                                                <label class="text-sm"
+                                                <label class="md:text-sm text-xs truncate" title="{{ $item->name }}"
                                                     for="checkbox-permission-{{ $item->id }}">{{ $item->name }}</label>
                                             </div>
                                         @endforeach

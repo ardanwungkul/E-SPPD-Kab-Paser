@@ -2,21 +2,20 @@
     <x-slot name="header">
         Tambah Kabupaten/Kota
     </x-slot>
-    <div class="grid grid-cols-2 gap-5">
-        <div class="w-full">
-            <div id="map" class="w-full h-full rounded-lg border border-secondary-3 shadow-lg"></div>
-
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-5">
+        <div class="w-full min-h-80">
+            <div id="map" class="w-full h-full rounded-lg border border-secondary-3 shadow-lg z-10"></div>
         </div>
         <x-container>
             <x-slot name="content">
                 <form action="{{ route('kabupaten-kota.store') }}" method="POST">
                     @csrf
                     @method('POST')
-                    <div class="text-sm space-y-3">
+                    <div class="md:text-sm text-xs space-y-3">
                         <div class="flex flex-col gap-1">
                             <label for="provinsi_id">Provinsi</label>
                             <select name="provinsi_id" id="provinsi_id"
-                                class="text-sm rounded-lg border border-gray-300" required>
+                                class="md:text-sm text-xs rounded-lg border border-gray-300" required>
                                 <option value="" selected disabled>Pilih Provinsi</option>
                                 @foreach ($provinsi as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -26,20 +25,20 @@
                         <div class="flex flex-col gap-1">
                             <label for="nama">Nama</label>
                             <input type="text" id="nama" name="nama"
-                                class="text-sm rounded-lg border border-gray-300" value="{{ old('nama') }}"
+                                class="md:text-sm text-xs rounded-lg border border-gray-300" value="{{ old('nama') }}"
                                 placeholder="Masukkan Nama Provinsi" required>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="latitude">Latitude</label>
                             <input type="text" id="latitude" name="latitude"
-                                class="text-sm rounded-lg border border-gray-300" placeholder="Pilih Lokasi Di Map"
-                                required readonly>
+                                class="md:text-sm text-xs rounded-lg border border-gray-300"
+                                placeholder="Pilih Lokasi Di Map" required readonly>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="longitude">Longitude</label>
                             <input type="text" id="longitude" name="longitude"
-                                class="text-sm rounded-lg border border-gray-300" placeholder="Pilih Lokasi Di Map"
-                                required readonly>
+                                class="md:text-sm text-xs rounded-lg border border-gray-300"
+                                placeholder="Pilih Lokasi Di Map" required readonly>
                         </div>
                         <div class="flex justify-end items-center gap-4">
                             <button

@@ -6,9 +6,9 @@
     <x-container>
         <x-slot name="content">
             <div>
-                <div class="flex items-center justify-between">
+                <div class="flex md:flex-row flex-col md:items-center justify-between">
                     <a href="{{ route('kecamatan.create') }}"
-                        class="bg-secondary-3 text-secondary-2 rounded-lg px-3 py-2 text-xs border border-secondary-4 shadow-lg flex gap-1 items-center justify-center mb-12 md:mb-4 whitespace-nowrap w-min font-medium">
+                        class="bg-secondary-3 text-secondary-2 rounded-lg px-3 py-2 text-xs border border-secondary-4 shadow-lg flex gap-1 items-center justify-center mb-4 md:mb-4 whitespace-nowrap w-min font-medium">
                         <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-secondary-2"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -19,8 +19,8 @@
                         </p>
                     </a>
                     <form method="GET" action="{{ route('kecamatan.index') }}">
-                        <input type="text" name="search" class="text-sm rounded-lg" value="{{ request('search') }}"
-                            placeholder="Cari...">
+                        <input type="text" name="search" class="text-sm rounded-lg mb-4 md:mb-0 w-full"
+                            value="{{ request('search') }}" placeholder="Cari...">
                     </form>
                 </div>
                 <div class="relative">
@@ -72,7 +72,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <button type="button"
+                                                    <button type="button" data-modal-id="{{ $item->id }}"
                                                         data-modal-toggle="confirm-delete-{{ $item->id }}"
                                                         data-modal-target="confirm-delete-{{ $item->id }}"
                                                         class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
@@ -83,14 +83,12 @@
                                                                 stroke-linejoin="round" stroke-width="2"
                                                                 d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                                         </svg>
-
                                                     </button>
-                                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'"
-                                                        :action="route('kecamatan.destroy', $item->id)" />
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'" :action="route('kecamatan.destroy', $item->id)" />
                                 @endforeach
                             </tbody>
                         </table>
@@ -117,7 +115,26 @@
                 searchPlaceholder: 'Cari...'
             },
             ordering: false,
-            responsive: true,
+            responsive: {
+                details: {
+                    renderer: function(api, rowIdx, columns) {
+                        let data = columns
+                            .map((col, i) => {
+                                return col.hidden ?
+                                    `<div class="my-3">
+                                        <p class="text-xs font-bold">${col.title}</p>
+                                        <div class="text-xs">${col.data}</div>
+                                    </div>` : '';
+                            })
+                            .join('');
+
+                        let table = document.createElement('table');
+                        table.innerHTML = data;
+
+                        return data ? table : false;
+                    }
+                }
+            },
             columnDefs: [{
                 targets: '_all',
                 className: 'dt-head-left',
@@ -129,6 +146,25 @@
             //     className: 'dt-head-center',
             //     targets: [1, 2, 3, 4, 5]
             // }]
+        });
+        $(document).on('click', '[data-modal-id]', function() {
+            const modalId = $(this).data('modal-id');
+
+            const $targetEl = $(`[id="confirm-delete-${modalId}"]`);
+
+            const modal = new Modal($targetEl[0]);
+            if (modal) {
+                modal.toggle();
+            }
+        });
+        $(document).on('click', '[data-modal-hide]', function() {
+            const modalId = $(this).data('modal-hide');
+            const $targetEl = $(`#${modalId}`);
+
+            const modal = new Modal($targetEl[0]);
+            if (modal) {
+                modal.hide();
+            }
         });
     });
 </script>

@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('pegawai', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('nip', 21);
-            $table->string('nama', 50);
+            $table->string('nama', 70);
             $table->unsignedTinyInteger('pangkat_id')->nullable();
             $table->foreign('pangkat_id')->references('id')->on('ref_pangkat')->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('tingkat_id')->nullable();
             $table->foreign('tingkat_id')->references('id')->on('ref_tingkat_sppd')->onUpdate('cascade')->onDelete('set null');
-            $table->unsignedTinyInteger('jabatan_id')->nullable();
-            $table->foreign('jabatan_id')->references('id')->on('ref_jabatan')->onUpdate('cascade')->onDelete('set null');
+            $table->string('jabatan', 70)->nullable();
             $table->string('no_hp', 30)->nullable();
-            $table->longText('alamat')->nullable();
+            $table->tinyText('alamat')->nullable();
+            $table->string('keterangan', 70)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

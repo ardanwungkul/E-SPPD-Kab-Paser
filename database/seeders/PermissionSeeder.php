@@ -118,7 +118,7 @@ class PermissionSeeder extends Seeder
         $superadminRole = Role::create(['name' => 'Super Admin']);
 
         $user = User::factory()->create([
-            'name' => 'Ardan Sebagai Admin',
+            'name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678')

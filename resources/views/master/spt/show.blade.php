@@ -199,7 +199,7 @@
                                         <tr class="odd:bg-white even:bg-secondary-3/60">
                                             <td class="p-2 font-light w-40">Dari</td>
                                             <td class="p-2 font-medium" colspan="4">
-                                                {{ $spt->nota_dinas->dari->jabatan ? $spt->nota_dinas->dari->jabatan->uraian . ' - ' : '' }}
+                                                {{ $spt->nota_dinas->dari->jabatan }} -
                                                 {{ $spt->nota_dinas->dari->nama }} /
                                                 {{ $spt->nota_dinas->dari->nip }}
                                             </td>
@@ -207,7 +207,7 @@
                                         <tr class="odd:bg-white even:bg-secondary-3/60">
                                             <td class="p-2 font-light w-40">Kepada</td>
                                             <td class="p-2 font-medium" colspan="4">
-                                                {{ $spt->nota_dinas->kepada->jabatan ? $spt->nota_dinas->kepada->jabatan->uraian . ' - ' : '' }}
+                                                {{ $spt->nota_dinas->kepada->jabatan }} -
                                                 {{ $spt->nota_dinas->kepada->nama }} /
                                                 {{ $spt->nota_dinas->kepada->nip }}
                                             </td>
@@ -407,7 +407,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $pegawai->pegawai->jabatan ? $pegawai->pegawai->jabatan->uraian : '' }}
+                                        {{ $pegawai->pegawai->jabatan }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -487,7 +487,7 @@
                                     </div>
                                 </td>
                                 <td class="px-3 py-1 w-full">
-                                    {{ $spt->ub->jabatan ? $spt->ub->jabatan->uraian : '' }}
+                                    {{ $spt->ub->jabatan }}
                                 </td>
                             </tr>
                             <tr class="even:bg-white odd:bg-secondary-3/60">

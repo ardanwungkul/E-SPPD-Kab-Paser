@@ -9,20 +9,8 @@ class Golongan extends Model
 {
     use HasFactory;
     protected $table = 'ref_pangkat';
-    public function getJenisPegawaiFormattedAttribute()
+    public function jenis_pegawai()
     {
-        $jenis = $this->jenis_pegawai;
-        if ($jenis == 1) {
-            return 'PNS';
-        } else if ($jenis == 2) {
-
-            return 'PPPK / P3K';
-        } else if ($jenis == 3) {
-
-            return 'Honorer / PPPK';
-        } else if ($jenis == 4) {
-
-            return 'Anggota DPRD';
-        }
+        return $this->belongsTo(JenisPegawai::class, 'jenis_pegawai_id');
     }
 }

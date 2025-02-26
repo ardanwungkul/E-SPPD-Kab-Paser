@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "datatables.net-dt": "^2.1.8",
+        "datatables.net-responsive-dt": "^3.0.4",
         "flowbite": "^2.5.2",
         "jquery": "^3.7.1",
         "leaflet": "^1.9.4",

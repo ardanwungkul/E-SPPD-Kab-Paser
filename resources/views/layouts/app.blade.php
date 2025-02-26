@@ -34,7 +34,7 @@
             <div class="flex-none relative ">
                 <x-sidebar />
             </div>
-            <main class="w-full min-h-screen relative">
+            <main class="w-full min-h-screen relative overflow-x-auto">
                 <div id="loader"
                     class="w-full h-screen fixed top-0 z-50 bg-secondary-3 transition-opacity duration-300">
                     <div class="w-full h-full flex items-center justify-center relative" id="loader-content">
@@ -47,7 +47,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <x-navigation /> --}}
                 <div class="p-5 overflow-y-auto">
                     @if (count($errors) > 0)
                         <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-y-3 justify-end items-end">
@@ -133,12 +132,12 @@
                                                 </svg>
                                             </a>
                                         @endif
-                                        <p class="font-semibold text-xl text-gray-800 leading-none">
+                                        <p class="font-semibold md:text-xl text-lg text-gray-800 line-clamp-2">
                                             {{ $header }}
                                         </p>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <div class="text-end">
+                                    <div class="flex items-center gap-3 flex-none">
+                                        <div class="text-end hidden md:block">
                                             <p class="">Hii, {{ Auth::user()->name }}</p>
                                             <p class="text-xs">{{ now()->format('D, d M Y') }}</p>
                                         </div>

@@ -8,6 +8,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import select2 from "select2";
 import "/node_modules/select2/dist/css/select2.css";
+import "datatables.net-responsive-dt";
+import "datatables.net-responsive-dt/css/responsive.dataTables.min.css";
 
 window.$ = jquery;
 window.Alpine = Alpine;

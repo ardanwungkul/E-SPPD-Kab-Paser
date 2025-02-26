@@ -5,8 +5,8 @@
 
     <x-container>
         <x-slot name="content">
-            <div class="">
-                <p>You're logged in!</p>
+            <div>
+                <p class="text-center text-secondary-1 text-sm">Selamat Datang di Aplikasi E-SPPD !</p>
             </div>
         </x-slot>
     </x-container>

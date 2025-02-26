@@ -38,7 +38,7 @@
                                             <p class="text-start">{{ $item->uraian }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-start">{{ $item->jenisPegawaiFormatted }}</p>
+                                            <p class="text-start">{{ $item->jenis_pegawai->uraian }}</p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">

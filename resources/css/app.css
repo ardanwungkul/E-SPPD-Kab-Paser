@@ -200,3 +200,17 @@ input:-webkit-autofill:active {
 #loader-content {
     animation: fadeIn 1s ease-in-out;
 }
+
+.dtr-details {
+    width: 100%;
+    background-color: aliceblue;
+    border: 1px solid gray;
+    padding: 5px !important;
+    border-radius: 8px;
+}
+tr.child td.child table {
+    width: 100% !important;
+}
+div.dt-container .dt-search input {
+    margin-left: 0 !important;
+}
