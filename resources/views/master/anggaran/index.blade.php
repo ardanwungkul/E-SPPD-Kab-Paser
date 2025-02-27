@@ -7,7 +7,7 @@
         <x-slot name="content">
 
             <div>
-                <div class="flex justify-between items-center mb-12 md:mb-4">
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4 md:gap-0">
                     <a href="{{ route('anggaran.create') }}"
                         class="bg-secondary-3 text-secondary-2 rounded-lg px-3 py-2 text-xs border border-secondary-4 shadow-lg flex gap-1 items-center justify-center whitespace-nowrap w-min font-medium">
                         <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-secondary-2"
@@ -19,14 +19,14 @@
                             Tambah
                         </p>
                     </a>
-                    <form action="{{ route('anggaran.index') }}" method="GET">
-                        <input type="search" class="rounded-lg p-2 text-xs" name="q" value="{{ request()->q }}"
-                            placeholder="Cari...">
+                    <form action="{{ route('anggaran.index') }}" method="GET" class="w-full md:w-auto">
+                        <input type="search" class="rounded-lg p-2 text-xs w-full" name="q"
+                            value="{{ request()->q }}" placeholder="Cari...">
                     </form>
                 </div>
                 <div class="relative">
-                    <div class="overflow-hidden">
-                        <table class="text-sm hover stripe row-border w-full">
+                    <div class="md:overflow-hidden overflow-x-scroll md:overflow-x-hidden">
+                        <table class=" text-xs md:text-sm hover stripe row-border w-full">
                             <tbody class="text-secondary-2 text-xs">
                                 @foreach ($data as $item)
                                     {{-- Bidang --}}

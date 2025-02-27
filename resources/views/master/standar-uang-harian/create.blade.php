@@ -24,11 +24,11 @@
             <form action="{{ route('suh.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3">
                     <div class="flex flex-col gap-1">
                         <label for="jenis_sppd_id">Jenis Perjalanan Dinas</label>
-                        <select id="jenis_sppd_id" name="jenis_sppd_id" class="text-sm rounded-lg border border-gray-300"
-                            required>
+                        <select id="jenis_sppd_id" name="jenis_sppd_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled> Pilih Jenis Perjalanan Dinas</option>
                             @foreach ($jenis as $item)
                                 <option value="{{ $item->id }}" data-wilayah="{{ $item->wilayah }}">
@@ -42,10 +42,11 @@
                                 Lokasi Tujuan
                             </legend>
                             <div class="space-y-3">
-                                <div class="flex items-center justify-between gap-3 w-full">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 w-full">
                                     <label for="provinsi_id" class="w-32 flex-none">Provinsi</label>
                                     <select id="provinsi_id" name="provinsi_id"
-                                        class="text-sm rounded-lg border border-gray-300 w-full select2" required>
+                                        class="text-xs md:text-sm rounded-lg border border-gray-300 w-full select2"
+                                        style="width: 100%" required>
                                         <option value="" selected disabled>Pilih Provinsi </option>
                                         @foreach ($provinsi as $item)
                                             <option value="{{ $item->id }}">
@@ -53,17 +54,19 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="flex items-center justify-between gap-3 w-full">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 w-full">
                                     <label for="kabupaten_id" class="w-32 flex-none">Kabupaten/Kota</label>
                                     <select id="kabupaten_id" name="kabupaten_id"
-                                        class="text-sm rounded-lg border border-gray-300 w-full select2">
+                                        class="text-xs md:text-sm rounded-lg border border-gray-300 w-full select2"
+                                        style="width: 100%">
                                         <option value="" selected disabled>Pilih Kabupaten/Kota </option>
                                     </select>
                                 </div>
-                                <div class="flex items-center justify-between gap-3 w-full">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 w-full">
                                     <label for="kecamatan_id" class="w-32 flex-none">Kecamatan</label>
                                     <select id="kecamatan_id" name="kecamatan_id"
-                                        class="text-sm rounded-lg border border-gray-300 w-full select2">
+                                        class="text-xs md:text-sm rounded-lg border border-gray-300 w-full select2"
+                                        style="width: 100%">
                                         <option value="" selected disabled>Pilih Kecamatan </option>
                                     </select>
                                 </div>
@@ -73,7 +76,7 @@
                     <div class="flex flex-col gap-1">
                         <label for="tingkat_sppd_id">Tingkat Perjalanan Dinas</label>
                         <select id="tingkat_sppd_id" name="tingkat_sppd_id"
-                            class="text-sm rounded-lg border border-gray-300" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" required>
                             <option value="" selected disabled> Pilih Tingkat Perjalanan Dinas</option>
                             @foreach ($tingkat as $item)
                                 <option value="{{ $item->id }}">{{ $item->uraian }}</option>
@@ -83,13 +86,14 @@
                     <div class="flex flex-col gap-1">
                         <label for="uang_harian">Jumlah Uang Harian</label>
                         <input type="text" id="uang_harian" name="uang_harian"
-                            class="text-sm rounded-lg border border-gray-300" value="{{ old('uang_harian') }}"
-                            oninput="this.value = formatRupiah(this.value, 'Rp. ')" placeholder="Rp. 0" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300"
+                            value="{{ old('uang_harian') }}" oninput="this.value = formatRupiah(this.value, 'Rp. ')"
+                            placeholder="Rp. 0" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="batas_biaya_penginapan">Batas Biaya Penginapan per Hari</label>
                         <input type="text" id="batas_biaya_penginapan" name="batas_biaya_penginapan"
-                            class="text-sm rounded-lg border border-gray-300"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300"
                             oninput="this.value = formatRupiah(this.value, 'Rp. ')"
                             value="{{ old('batas_biaya_penginapan') }}" placeholder="Rp. 0" required>
                     </div>
@@ -123,8 +127,8 @@
 </x-app-layout>
 <script type="module">
     $('.select2').select2({
-        dropdownCssClass: "text-sm",
-        selectionCssClass: 'text-sm',
+        dropdownCssClass: "text-xs md:text-sm",
+        selectionCssClass: 'text-xs md:text-sm',
     });
 
     $('#provinsi_id').on('change', function() {

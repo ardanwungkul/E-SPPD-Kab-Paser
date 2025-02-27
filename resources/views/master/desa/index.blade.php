@@ -112,13 +112,6 @@
                 targets: '_all',
                 className: 'dt-head-left',
             }]
-            // columnDefs: [{
-            //     orderable: false,
-            //     targets: [3, 4, 5]
-            // }, {
-            //     className: 'dt-head-center',
-            //     targets: [1, 2, 3, 4, 5]
-            // }]
         });
     });
 </script>

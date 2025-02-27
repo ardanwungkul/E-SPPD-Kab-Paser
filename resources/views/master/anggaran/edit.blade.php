@@ -24,12 +24,12 @@
                 <form action="{{ route('anggaran.update', $anggaran->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="text-sm space-y-3 divide-y">
-                        <div class="text-sm grid grid-cols-2 gap-y-3 gap-x-7">
-                            <div class="flex flex-col gap-1">
+                    <div class="text-xs md:text-sm space-y-3 divide-y">
+                        <div class="text-xs md:text-sm grid grid-cols-2 gap-y-3 gap-x-7">
+                            <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
                                 <label for="bidang_id">{{ session('config')->judul }}</label>
-                                <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required
-                                    disabled>
+                                <select name="bidang_id" id="bidang_id" class="text-xs md:text-sm rounded-lg select2"
+                                    required disabled>
                                     <option value="" selected disabled>Pilih {{ session('config')->judul }}
                                     </option>
                                     @foreach ($bidang as $item)
@@ -39,10 +39,10 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex flex-col gap-1">
+                            <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
                                 <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
-                                <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
-                                    required disabled>
+                                <select name="sub_bidang_id" id="sub_bidang_id"
+                                    class="text-xs md:text-sm rounded-lg select2" required disabled>
                                     <option value="" selected disabled> Pilih Sub {{ session('config')->judul }}
                                     </option>
                                     @foreach ($anggaran->sub_bidang->bidang->sub_bidang as $item)
@@ -54,8 +54,8 @@
                             </div>
                             <div class="flex flex-col gap-1 col-span-2">
                                 <label for="program_id">Program</label>
-                                <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required
-                                    disabled>
+                                <select name="program_id" id="program_id" class="text-xs md:text-sm rounded-lg select2"
+                                    required disabled>
                                     <option value="" selected disabled> Pilih Program</option>
                                     @foreach ($program as $item)
                                         <option value="{{ $item->id }}"
@@ -66,8 +66,8 @@
                             </div>
                             <div class="flex flex-col gap-1 col-span-2">
                                 <label for="kegiatan_id">Kegiatan</label>
-                                <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2" required
-                                    disabled>
+                                <select name="kegiatan_id" id="kegiatan_id"
+                                    class="text-xs md:text-sm rounded-lg select2" required disabled>
                                     <option value="" selected disabled> Pilih Kegiatan</option>
                                     @foreach ($anggaran->sub_kegiatan->kegiatan->program->kegiatan as $item)
                                         <option value="{{ $item->id }}"
@@ -78,8 +78,8 @@
                             </div>
                             <div class="flex flex-col gap-1 col-span-2">
                                 <label for="sub_kegiatan_id">Sub Kegiatan</label>
-                                <select name="sub_kegiatan_id" id="sub_kegiatan_id" class="text-sm rounded-lg select2"
-                                    required disabled>
+                                <select name="sub_kegiatan_id" id="sub_kegiatan_id"
+                                    class="text-xs md:text-sm rounded-lg select2" required disabled>
                                     <option value="" selected disabled> Pilih Sub Kegiatan</option>
                                     @foreach ($anggaran->sub_kegiatan->kegiatan->sub_kegiatan as $item)
                                         <option value="{{ $item->id }}"
@@ -92,7 +92,7 @@
                         <div class="pt-3 space-y-1">
                             <label for="rp_pagu" class="block mb-1">{{ $anggaran->jenis_sppd->uraian }}</label>
                             <input type="text" id="rp_pagu" name="rp_pagu"
-                                class="rounded-lg border border-gray-400 w-full text-sm" placeholder="0"
+                                class="rounded-lg border border-gray-400 w-full text-xs md:text-sm" placeholder="0"
                                 value="{{ $anggaran->rp_pagu }}" autofocus required
                                 onfocus="this.value = formatRupiah(this.value, 'Rp. ')"
                                 oninput="this.value = formatRupiah(this.value, 'Rp. ')">
@@ -129,8 +129,8 @@
     <script type="module">
         $(document).ready(function() {
             $('.select2').select2({
-                dropdownCssClass: "text-sm",
-                selectionCssClass: 'text-sm',
+                dropdownCssClass: "text-xs md:text-sm",
+                selectionCssClass: 'text-xs md:text-sm',
             });
 
             $('#program_id').on('change', function() {
