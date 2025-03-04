@@ -90,12 +90,33 @@
                             class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('jabatan') }}"
                             placeholder="Masukkan Jabatan" required>
                     </div>
+                    <div class="border-b pt-2 col-span-2">
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <p>Tanda Tangan Default</p>
+                        <div class="toggler">
+                            <input id="ttd_default" name="ttd_default" type="checkbox">
+                            <label for="ttd_default">
+                                <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 130.2 130.2">
+                                    <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5"></polyline>
+                                </svg>
+                                <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 130.2 130.2">
+                                    <line class="path line" x1="34.4" y1="34.4" x2="95.8"
+                                        y2="95.8"></line>
+                                    <line class="path line" x1="95.8" y1="34.4" x2="34.4"
+                                        y2="95.8"></line>
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
                     <div class="flex justify-end items-center gap-4 col-span-2">
                         <button
                             class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
                             type="submit">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="4" d="M5 11.917 9.724 16.5 19 7.5" />
                             </svg>
@@ -104,8 +125,8 @@
                         </button>
                         <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
                             href="{{ route('pegawai.index') }}">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="4" d="M6 18 17.94 6M18 18 6.06 6" />
                             </svg>
