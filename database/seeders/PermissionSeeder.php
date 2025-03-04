@@ -19,42 +19,41 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
+        PermissionCategory::create(['nama' => 'Akses Konfigurasi']);
+        Permission::create(['name' => 'Daftar Konfigurasi', 'category_id' => 1]);
+        Permission::create(['name' => 'Edit Konfigurasi', 'category_id' => 1]);
+
         PermissionCategory::create(['nama' => 'Akses User']);
-        Permission::create(['name' => 'Daftar User', 'category_id' => 1]);
-        Permission::create(['name' => 'Tambah User', 'category_id' => 1]);
-        Permission::create(['name' => 'Edit User', 'category_id' => 1]);
-        Permission::create(['name' => 'Hapus User', 'category_id' => 1]);
+        Permission::create(['name' => 'Daftar User', 'category_id' => 2]);
+        Permission::create(['name' => 'Tambah User', 'category_id' => 2]);
+        Permission::create(['name' => 'Edit User', 'category_id' => 2]);
+        Permission::create(['name' => 'Hapus User', 'category_id' => 2]);
 
         PermissionCategory::create(['nama' => 'Akses Role']);
-        Permission::create(['name' => 'Daftar Role', 'category_id' => 2]);
-        Permission::create(['name' => 'Tambah Role', 'category_id' => 2]);
-        Permission::create(['name' => 'Edit Role', 'category_id' => 2]);
-        Permission::create(['name' => 'Hapus Role', 'category_id' => 2]);
+        Permission::create(['name' => 'Daftar Role', 'category_id' => 3]);
+        Permission::create(['name' => 'Tambah Role', 'category_id' => 3]);
+        Permission::create(['name' => 'Edit Role', 'category_id' => 3]);
+        Permission::create(['name' => 'Hapus Role', 'category_id' => 3]);
 
 
         PermissionCategory::create(['nama' => 'Akses Provinsi']);
-        Permission::create(['name' => 'Daftar Provinsi', 'category_id' => 3]);
-        Permission::create(['name' => 'Tambah Provinsi', 'category_id' => 3]);
-        Permission::create(['name' => 'Edit Provinsi', 'category_id' => 3]);
-        Permission::create(['name' => 'Hapus Provinsi', 'category_id' => 3]);
+        Permission::create(['name' => 'Daftar Provinsi', 'category_id' => 4]);
+        Permission::create(['name' => 'Tambah Provinsi', 'category_id' => 4]);
+        Permission::create(['name' => 'Edit Provinsi', 'category_id' => 4]);
+        Permission::create(['name' => 'Hapus Provinsi', 'category_id' => 4]);
 
         PermissionCategory::create(['nama' => 'Akses Kabupaten/Kota']);
-        Permission::create(['name' => 'Daftar Kabupaten/Kota', 'category_id' => 4]);
-        Permission::create(['name' => 'Tambah Kabupaten/Kota', 'category_id' => 4]);
-        Permission::create(['name' => 'Edit Kabupaten/Kota', 'category_id' => 4]);
-        Permission::create(['name' => 'Hapus Kabupaten/Kota', 'category_id' => 4]);
+        Permission::create(['name' => 'Daftar Kabupaten/Kota', 'category_id' => 5]);
+        Permission::create(['name' => 'Tambah Kabupaten/Kota', 'category_id' => 5]);
+        Permission::create(['name' => 'Edit Kabupaten/Kota', 'category_id' => 5]);
+        Permission::create(['name' => 'Hapus Kabupaten/Kota', 'category_id' => 5]);
 
         PermissionCategory::create(['nama' => 'Akses Kecamatan']);
-        Permission::create(['name' => 'Daftar Kecamatan', 'category_id' => 5]);
-        Permission::create(['name' => 'Tambah Kecamatan', 'category_id' => 5]);
-        Permission::create(['name' => 'Edit Kecamatan', 'category_id' => 5]);
-        Permission::create(['name' => 'Hapus Kecamatan', 'category_id' => 5]);
-
-        PermissionCategory::create(['nama' => 'Akses Desa']);
-        Permission::create(['name' => 'Daftar Desa', 'category_id' => 6]);
-        Permission::create(['name' => 'Tambah Desa', 'category_id' => 6]);
-        Permission::create(['name' => 'Edit Desa', 'category_id' => 6]);
-        Permission::create(['name' => 'Hapus Desa', 'category_id' => 6]);
+        Permission::create(['name' => 'Daftar Kecamatan', 'category_id' => 6]);
+        Permission::create(['name' => 'Tambah Kecamatan', 'category_id' => 6]);
+        Permission::create(['name' => 'Edit Kecamatan', 'category_id' => 6]);
+        Permission::create(['name' => 'Hapus Kecamatan', 'category_id' => 6]);
 
         PermissionCategory::create(['nama' => 'Akses Tingkat Perjalanan Dinas']);
         Permission::create(['name' => 'Daftar Tingkat Perjalanan Dinas', 'category_id' => 7]);
@@ -109,6 +108,18 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Tambah Program', 'category_id' => 15]);
         Permission::create(['name' => 'Edit Program', 'category_id' => 15]);
         Permission::create(['name' => 'Hapus Program', 'category_id' => 15]);
+
+        PermissionCategory::create(['nama' => 'Akses Anggaran Tahunan']);
+        Permission::create(['name' => 'Daftar Anggaran Tahunan', 'category_id' => 16]);
+        Permission::create(['name' => 'Tambah Anggaran Tahunan', 'category_id' => 16]);
+        Permission::create(['name' => 'Edit Anggaran Tahunan', 'category_id' => 16]);
+        Permission::create(['name' => 'Hapus Anggaran Tahunan', 'category_id' => 16]);
+
+        PermissionCategory::create(['nama' => 'Akses Standar Uang Harian']);
+        Permission::create(['name' => 'Daftar Standar Uang Harian', 'category_id' => 17]);
+        Permission::create(['name' => 'Tambah Standar Uang Harian', 'category_id' => 17]);
+        Permission::create(['name' => 'Edit Standar Uang Harian', 'category_id' => 17]);
+        Permission::create(['name' => 'Hapus Standar Uang Harian', 'category_id' => 17]);
 
 
 

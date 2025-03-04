@@ -7,51 +7,7 @@
             <form action="{{ route('pegawai.update', $pegawai->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="text-xs md:text-sm grid grid-cols-2 gap-3">
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="jenis_pegawai_id">Jenis Pegawai</label>
-                        <select name="jenis_pegawai_id" id="jenis_pegawai_id"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
-                            <option value="" selected disabled>Pilih Jenis Pegawai</option>
-                            @foreach ($jenis_pegawai as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $item->id == $pegawai->pangkat->jenis_pegawai_id ? 'selected' : '' }}>
-                                    {{ $item->uraian }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="pangkat_id">Pangkat/Golongan</label>
-                        <select name="pangkat_id" id="pangkat_id"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
-                            <option value="" selected disabled>Pilih Pangkat/Golongan</option>
-                            @foreach ($pegawai->pangkat->jenis_pegawai->pangkat as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $item->id == $pegawai->pangkat_id ? 'selected' : '' }}>{{ $item->uraian }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="tingkat_id">Tingkat</label>
-                        <select name="tingkat_id" id="tingkat_id"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
-                            <option value="" selected disabled>Pilih Tingkat</option>
-                            @foreach ($tingkat as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $item->id == $pegawai->tingkat_id ? 'selected' : '' }}>{{ $item->uraian }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="jabatan_id">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300"
-                            value="{{ $pegawai->jabatan }}" placeholder="Masukkan Jabatan" required>
-                    </div>
-                    <div class="border-b pt-2 col-span-2">
-                    </div>
+                <div class="text-xs md:text-sm grid grid-cols-2 gap-3 max-w-3xl mx-auto">
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="nip">NIP</label>
                         <input type="text" id="nip" name="nip"
@@ -80,6 +36,75 @@
                         <textarea id="alamat" name="alamat" class="text-xs md:text-sm rounded-lg border border-gray-300"
                             placeholder="Masukkan Alamat">{{ $pegawai->alamat }}</textarea>
                     </div>
+
+                    <div class="border-b pt-2 col-span-2">
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="jenis_pegawai_id">Jenis Pegawai</label>
+                        <select name="jenis_pegawai_id" id="jenis_pegawai_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Jenis Pegawai</option>
+                            @foreach ($jenis_pegawai as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $pegawai->pangkat->jenis_pegawai_id ? 'selected' : '' }}>
+                                    {{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="pangkat_id">Pangkat/Golongan</label>
+                        <select name="pangkat_id" id="pangkat_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Pangkat/Golongan</option>
+                            @foreach ($pegawai->pangkat->jenis_pegawai->pangkat as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $pegawai->pangkat_id ? 'selected' : '' }}>{{ $item->uraian }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="bidang_id">{{ session('config')->judul }}</label>
+                        <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
+                            <option value="" selected disabled>Pilih {{ session('config')->judul }}
+                            </option>
+                            @foreach ($bidang as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $pegawai->sub_bidang->bidang_id ? 'selected' : '' }}>
+                                    {{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
+                        <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2" required>
+                            <option value="" selected disabled> Pilih Sub {{ session('config')->judul }}
+                            </option>
+                            @foreach ($pegawai->sub_bidang->bidang->sub_bidang as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $pegawai->bidang_sub_id ? 'selected' : '' }}>{{ $item->uraian }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="tingkat_id">Tingkat</label>
+                        <select name="tingkat_id" id="tingkat_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Tingkat</option>
+                            @foreach ($tingkat as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $item->id == $pegawai->tingkat_id ? 'selected' : '' }}>{{ $item->uraian }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="jabatan_id">Jabatan</label>
+                        <input type="text" id="jabatan" name="jabatan"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300"
+                            value="{{ $pegawai->jabatan }}" placeholder="Masukkan Jabatan" required>
+                    </div>
                     <div class="flex justify-end items-center gap-4 col-span-2">
                         <button
                             class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
@@ -94,8 +119,8 @@
                         </button>
                         <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
                             href="{{ route('pegawai.index') }}">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="4" d="M6 18 17.94 6M18 18 6.06 6" />
                             </svg>
@@ -149,6 +174,46 @@
         } else {
             $('#pangkat_id').empty();
             $('#pangkat_id').append('<option value="" selected disabled>Pilih Pangkat/Golongan</option>');
+        }
+    });
+
+    $('#bidang_id').on('change', function() {
+        const bidangId = $(this).val();
+
+        if (bidangId) {
+            $.ajax({
+                url: "{{ route('get.sub-bidang.by.bidang') }}",
+                type: "GET",
+                data: {
+                    bidang_id: bidangId
+                },
+                success: function(response) {
+                    $('#sub_bidang_id').empty();
+                    $('#sub_bidang_id').append(
+                        '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                    );
+
+                    if (response.length > 0) {
+                        $.each(response, function(index, subbidang) {
+                            $('#sub_bidang_id').append('<option value="' +
+                                subbidang.id + '">' + subbidang.uraian +
+                                '</option>');
+                        });
+                    } else {
+                        $('#sub_bidang_id').append(
+                            '<option value="" disabled>Tidak ada Sub {{ session('config')->judul }} tersedia</option>'
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        } else {
+            $('#sub_bidang_id').empty();
+            $('#sub_bidang_id').append(
+                '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+            );
         }
     });
 </script>

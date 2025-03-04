@@ -15,9 +15,6 @@ class ProvinsiController extends Controller
         $this->middleware('permission:Edit Provinsi', ['only' => ['edit', 'update']]);
         $this->middleware('permission:Hapus Provinsi', ['only' => ['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $query = Provinsi::query();
@@ -31,18 +28,11 @@ class ProvinsiController extends Controller
         return view('master.provinsi.index', compact('data'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('master.provinsi.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -60,25 +50,11 @@ class ProvinsiController extends Controller
         return redirect()->route('provinsi.index')->with(['success' => 'Berhasil Menambahkan Provinsi']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Provinsi $provinsi)
     {
         return view('master.provinsi.edit', compact('provinsi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Provinsi $provinsi)
     {
         $request->validate(
@@ -98,9 +74,6 @@ class ProvinsiController extends Controller
         return redirect()->route('provinsi.index')->with(['success' => 'Berhasil Mengubah Provinsi']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Provinsi $provinsi)
     {
         $provinsi->delete();

@@ -17,4 +17,8 @@ class Pegawai extends Model
     {
         return $this->belongsTo(Golongan::class, 'pangkat_id');
     }
+    public function sub_bidang()
+    {
+        return $this->belongsTo(SubBidang::class, 'bidang_sub_id');
+    }
 }

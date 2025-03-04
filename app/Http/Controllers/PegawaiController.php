@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidang;
 use App\Models\Golongan;
 use App\Models\JenisPegawai;
 use App\Models\Pegawai;
@@ -40,7 +41,8 @@ class PegawaiController extends Controller
     {
         $jenis_pegawai = JenisPegawai::all();
         $tingkat = TingkatPerjalananDinas::all();
-        return view('master.pegawai.create', compact('tingkat', 'jenis_pegawai'));
+        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        return view('master.pegawai.create', compact('tingkat', 'jenis_pegawai', 'bidang'));
     }
 
 
@@ -54,6 +56,7 @@ class PegawaiController extends Controller
                 'nip' => 'required|max:21',
                 'nama' => 'required|max:70',
                 'pangkat_id' => 'required',
+                'sub_bidang_id' => 'required',
                 'tingkat_id' => 'required',
                 'jabatan' => 'required|max:70',
                 'no_hp' => 'max:30',
@@ -64,6 +67,7 @@ class PegawaiController extends Controller
                 'nama.required' => 'Kolom Nama Wajib Diisi.',
                 'jabatan.required' => 'Kolom Jabatan Wajib Diisi.',
                 'pangkat_id.required' => 'Anda Perlu Memilih Pangkat.',
+                'sub_bidang_id.required' => 'Anda Perlu Memilih Sub ' . session('config')->judul . '.',
                 'tingkat_id.required' => 'Anda Perlu Memilih Tingkat.',
                 'nip.max' => 'Maksimal NIP adalah 21 Karakter',
                 'nama.max' => 'Maksimal Nama adalah 70 Karakter',
@@ -76,6 +80,7 @@ class PegawaiController extends Controller
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
         $pegawai->pangkat_id = $request->pangkat_id;
+        $pegawai->bidang_sub_id = $request->sub_bidang_id;
         $pegawai->tingkat_id = $request->tingkat_id;
         $pegawai->no_hp = $request->no_hp;
         $pegawai->jabatan = $request->jabatan;
@@ -100,7 +105,8 @@ class PegawaiController extends Controller
     {
         $jenis_pegawai = JenisPegawai::all();
         $tingkat = TingkatPerjalananDinas::all();
-        return view('master.pegawai.edit', compact('pegawai', 'tingkat', 'jenis_pegawai'));
+        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        return view('master.pegawai.edit', compact('pegawai', 'tingkat', 'jenis_pegawai', 'bidang'));
     }
 
     /**
@@ -113,6 +119,7 @@ class PegawaiController extends Controller
                 'nip' => 'required|max:21',
                 'nama' => 'required|max:70',
                 'pangkat_id' => 'required',
+                'sub_bidang_id' => 'required',
                 'tingkat_id' => 'required',
                 'jabatan' => 'required|max:70',
                 'no_hp' => 'max:30',
@@ -123,6 +130,7 @@ class PegawaiController extends Controller
                 'nama.required' => 'Kolom Nama Wajib Diisi.',
                 'jabatan.required' => 'Kolom Jabatan Wajib Diisi.',
                 'pangkat_id.required' => 'Anda Perlu Memilih Pangkat.',
+                'sub_bidang_id.required' => 'Anda Perlu Memilih Sub ' . session('config')->judul . '.',
                 'tingkat_id.required' => 'Anda Perlu Memilih Tingkat.',
                 'nip.max' => 'Maksimal NIP adalah 21 Karakter',
                 'nama.max' => 'Maksimal Nama adalah 70 Karakter',
@@ -134,6 +142,7 @@ class PegawaiController extends Controller
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
         $pegawai->pangkat_id = $request->pangkat_id;
+        $pegawai->bidang_sub_id = $request->sub_bidang_id;
         $pegawai->tingkat_id = $request->tingkat_id;
         $pegawai->no_hp = $request->no_hp;
         $pegawai->jabatan = $request->jabatan;

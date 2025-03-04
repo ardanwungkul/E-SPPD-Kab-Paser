@@ -7,42 +7,7 @@
             <form action="{{ route('pegawai.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-xs md:text-sm grid grid-cols-2 gap-3">
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="jenis_pegawai_id">Jenis Pegawai</label>
-                        <select name="jenis_pegawai_id" id="jenis_pegawai_id"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
-                            <option value="" selected disabled>Pilih Jenis Pegawai</option>
-                            @foreach ($jenis_pegawai as $item)
-                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="pangkat_id">Pangkat/Golongan</label>
-                        <select name="pangkat_id" id="pangkat_id"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
-                            <option value="" selected disabled>Pilih Pangkat/Golongan</option>
-                        </select>
-                    </div>
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="tingkat_id">Tingkat</label>
-                        <select name="tingkat_id" id="tingkat_id"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
-                            <option value="" selected disabled>Pilih Tingkat</option>
-                            @foreach ($tingkat as $item)
-                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                        <label for="jabatan_id">Jabatan</label>
-                        <input type="text" id="jabatan" name="jabatan"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('jabatan') }}"
-                            placeholder="Masukkan Jabatan" required>
-                    </div>
-                    <div class="border-b pt-2 col-span-2">
-                    </div>
+                <div class="text-xs md:text-sm grid grid-cols-2 gap-3 max-w-3xl mx-auto">
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="nip">NIP</label>
                         <input type="text" id="nip" name="nip"
@@ -70,6 +35,60 @@
                         <label for="alamat">Alamat</label>
                         <textarea id="alamat" name="alamat" class="text-xs md:text-sm rounded-lg border border-gray-300"
                             placeholder="Masukkan Alamat">{{ old('alamat') }}</textarea>
+                    </div>
+                    <div class="border-b pt-2 col-span-2">
+                    </div>
+
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="jenis_pegawai_id">Jenis Pegawai</label>
+                        <select name="jenis_pegawai_id" id="jenis_pegawai_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Jenis Pegawai</option>
+                            @foreach ($jenis_pegawai as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="pangkat_id">Pangkat/Golongan</label>
+                        <select name="pangkat_id" id="pangkat_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Pangkat/Golongan</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label for="bidang_id">{{ session('config')->judul }}</label>
+                        <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
+                            <option value="" selected disabled>Pilih {{ session('config')->judul }}
+                            </option>
+                            @foreach ($bidang as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
+                        <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2" required>
+                            <option value="" selected disabled> Pilih Sub {{ session('config')->judul }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="tingkat_id">Tingkat</label>
+                        <select name="tingkat_id" id="tingkat_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 select2" required>
+                            <option value="" selected disabled>Pilih Tingkat</option>
+                            @foreach ($tingkat as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                        <label for="jabatan_id">Jabatan</label>
+                        <input type="text" id="jabatan" name="jabatan"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('jabatan') }}"
+                            placeholder="Masukkan Jabatan" required>
                     </div>
                     <div class="flex justify-end items-center gap-4 col-span-2">
                         <button
@@ -140,6 +159,45 @@
         } else {
             $('#pangkat_id').empty();
             $('#pangkat_id').append('<option value="" selected disabled>Pilih Pangkat/Golongan</option>');
+        }
+    });
+    $('#bidang_id').on('change', function() {
+        const bidangId = $(this).val();
+
+        if (bidangId) {
+            $.ajax({
+                url: "{{ route('get.sub-bidang.by.bidang') }}",
+                type: "GET",
+                data: {
+                    bidang_id: bidangId
+                },
+                success: function(response) {
+                    $('#sub_bidang_id').empty();
+                    $('#sub_bidang_id').append(
+                        '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                    );
+
+                    if (response.length > 0) {
+                        $.each(response, function(index, subbidang) {
+                            $('#sub_bidang_id').append('<option value="' +
+                                subbidang.id + '">' + subbidang.uraian +
+                                '</option>');
+                        });
+                    } else {
+                        $('#sub_bidang_id').append(
+                            '<option value="" disabled>Tidak ada Sub {{ session('config')->judul }} tersedia</option>'
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        } else {
+            $('#sub_bidang_id').empty();
+            $('#sub_bidang_id').append(
+                '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+            );
         }
     });
 </script>

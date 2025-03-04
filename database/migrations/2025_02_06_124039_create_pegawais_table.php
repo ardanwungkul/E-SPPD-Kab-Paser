@@ -19,10 +19,16 @@ return new class extends Migration
             $table->foreign('pangkat_id')->references('id')->on('ref_pangkat')->onUpdate('cascade')->onDelete('set null');
             $table->unsignedTinyInteger('tingkat_id')->nullable();
             $table->foreign('tingkat_id')->references('id')->on('ref_tingkat_sppd')->onUpdate('cascade')->onDelete('set null');
+
+            $table->unsignedSmallInteger('bidang_sub_id');
+            $table->foreign('bidang_sub_id')->references('id')->on('ref_bidang_sub')->onUpdate('cascade')->onDelete('cascade');
+
             $table->string('jabatan', 70)->nullable();
             $table->string('no_hp', 30)->nullable();
             $table->tinyText('alamat')->nullable();
             $table->string('keterangan', 70)->nullable();
+            $table->enum('ttd_default', ['Y', 'N']);
+            $table->enum('aktif', ['Y', 'N'])->default('Y');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -30,18 +30,12 @@ class KabupatenKotaController extends Controller
         return view('master.kabupaten-kota.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $provinsi = Provinsi::all();
         return view('master.kabupaten-kota.create', compact('provinsi'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate(
@@ -66,26 +60,12 @@ class KabupatenKotaController extends Controller
         return redirect()->route('kabupaten-kota.index')->with(['success' => 'Berhasil Menambahkan Kabupaten/Kota']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(KabupatenKota $kabupaten_kota)
     {
         $provinsi = Provinsi::all();
         return view('master.kabupaten-kota.edit', compact('provinsi', 'kabupaten_kota'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, KabupatenKota $kabupaten_kota)
     {
         $request->validate(
@@ -107,9 +87,6 @@ class KabupatenKotaController extends Controller
         return redirect()->route('kabupaten-kota.index')->with(['success' => 'Berhasil Mengubah Kabupaten/Kota']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(KabupatenKota $kabupaten_kota)
     {
         $kabupaten_kota->delete();
