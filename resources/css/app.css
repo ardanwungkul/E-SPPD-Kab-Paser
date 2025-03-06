@@ -236,14 +236,21 @@ div.dt-container .dt-search input {
     width: 72px;
     height: 36px;
     border: 1px solid #d6d6d6;
-    border-radius: 36px;
-    background: #e4e8e8;
+    border-radius: 8px;
+    background: white;
     cursor: pointer;
+
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+        0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+        var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .toggler label::after {
     display: block;
-    border-radius: 100%;
+    border-radius: 8px;
     background-color: #d7062a;
     content: "";
     animation-name: toggler-size;

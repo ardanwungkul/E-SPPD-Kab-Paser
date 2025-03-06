@@ -20,8 +20,11 @@ return new class extends Migration
             $table->unsignedTinyInteger('tingkat_id')->nullable();
             $table->foreign('tingkat_id')->references('id')->on('ref_tingkat_sppd')->onUpdate('cascade')->onDelete('set null');
 
-            $table->unsignedSmallInteger('bidang_sub_id');
-            $table->foreign('bidang_sub_id')->references('id')->on('ref_bidang_sub')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedSmallInteger('bidang_id');
+            $table->foreign('bidang_id')->references('id')->on('ref_bidang')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unsignedSmallInteger('bidang_sub_id')->nullable();
+            $table->foreign('bidang_sub_id')->references('id')->on('ref_bidang_sub')->onUpdate('cascade')->onDelete('set null');
 
             $table->string('jabatan', 70)->nullable();
             $table->string('no_hp', 30)->nullable();

@@ -10,10 +10,6 @@ class SPT extends Model
     use HasFactory;
     protected $table = 'transaksi_spt';
 
-    public function nota_dinas()
-    {
-        return $this->belongsTo(NotaDinas::class, 'nota_dinas_id');
-    }
     public function dasar()
     {
         return $this->hasMany(SPTDasar::class, 'spt_id');

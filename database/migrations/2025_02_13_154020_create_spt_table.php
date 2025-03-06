@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('transaksi_spt', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->unsignedSmallInteger('nota_dinas_id');
-            $table->foreign('nota_dinas_id')->references('id')->on('transaksi_nota_dinas')->onUpdate('cascade')->onDelete('cascade');
+            $table->year('tahun');
             $table->enum('ub_status', ['Y', 'N']);
             $table->unsignedTinyInteger('penandatangan_id');
             $table->foreign('penandatangan_id')->references('id')->on('pegawai')->onUpdate('cascade')->onDelete('cascade');

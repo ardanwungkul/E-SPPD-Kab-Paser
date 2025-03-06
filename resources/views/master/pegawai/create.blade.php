@@ -69,7 +69,7 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
-                        <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2" required>
+                        <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2">
                             <option value="" selected disabled> Pilih Sub {{ session('config')->judul }}
                             </option>
                         </select>
@@ -110,6 +110,8 @@
                                 </svg>
                             </label>
                         </div>
+                    </div>
+                    <div class="border-b pt-2 col-span-2">
                     </div>
                     <div class="flex justify-end items-center gap-4 col-span-2">
                         <button

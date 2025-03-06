@@ -21,4 +21,8 @@ class Pegawai extends Model
     {
         return $this->belongsTo(SubBidang::class, 'bidang_sub_id');
     }
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'bidang_id');
+    }
 }

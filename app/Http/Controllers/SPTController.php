@@ -19,7 +19,7 @@ class SPTController extends Controller
     public function index()
     {
         // DB::enableQueryLog();
-        $data = NotaDinas::where('tahun', session('tahun'))->where('status', '!=', "0")->orderBy('nomor', 'desc')->get();
+        $data = SPT::where('tahun', session('tahun'))->orderBy('nomor', 'desc')->get();
         // dd(DB::getQueryLog());
         return view('master.spt.index', compact('data'));
     }
@@ -31,21 +31,12 @@ class SPTController extends Controller
     {
         $pegawai = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
-            ->orderBy('ref_pangkat.jenis_pegawai')
-            ->orderBy('ref_pangkat.kode_golongan')
-            ->orderBy('ref_pangkat.uraian')
+            ->orderBy('ref_pangkat.jenis_pegawai_id', 'asc')
+            ->orderBy('ref_pangkat.kode_golongan', 'desc')
+            ->orderBy('nama', 'asc')
             ->select('pegawai.*')
             ->get();
-        if ($request->nota_dinas) {
-            $nota_dinas = NotaDinas::find($request->nota_dinas);
-            if ($nota_dinas) {
-                return view('master.spt.create', compact('nota_dinas', 'pegawai'));
-            } else {
-                return redirect()->route('spt.create');
-            }
-        } else {
-            return view('master.spt.create', compact('pegawai'));
-        }
+        return view('master.spt.create', compact('pegawai'));
     }
 
     /**

@@ -52,10 +52,6 @@ Route::middleware('auth')->group(function () {
     Route::post('sistem/konfigurasi', [KonfigurasiController::class, 'store'])->name('config.store');
     Route::post('sistem/preferensi', [KonfigurasiController::class, 'storePreferensi'])->name('preferensi.store');
 
-    Route::resource('nota-dinas', NotaDinasController::class)->parameters(['nota-dinas' => 'nota_dinas']);
-    Route::get('nota-dinas/{nota_dinas}/disposisi', [NotaDinasController::class, 'disposisiCreate'])->name('nota-dinas.disposisi.create');
-    Route::post('nota-dinas/{nota_dinas}/disposisi', [NotaDinasController::class, 'disposisiStore'])->name('nota-dinas.disposisi.store');
-    Route::get('nota-dinas-cetak/{nota_dinas}', [NotaDinasController::class, 'print'])->name('nota-dinas.print');
     Route::resource('spt', SPTController::class);
     Route::get('spt-cetak/{spt}', [SPTController::class, 'print'])->name('spt.print');
     Route::resource('sppd', SPPDController::class);

@@ -70,21 +70,28 @@
                             </option>
                             @foreach ($bidang as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ $item->id == $pegawai->sub_bidang->bidang_id ? 'selected' : '' }}>
+                                    {{ $item->id == $pegawai->bidang_id ? 'selected' : '' }}>
                                     {{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
-                        <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2" required>
+                        <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2">
                             <option value="" selected disabled> Pilih Sub {{ session('config')->judul }}
                             </option>
-                            @foreach ($pegawai->sub_bidang->bidang->sub_bidang as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $item->id == $pegawai->bidang_sub_id ? 'selected' : '' }}>{{ $item->uraian }}
-                                </option>
-                            @endforeach
+                            @if ($pegawai->bidang_sub_id)
+                                @foreach ($pegawai->sub_bidang->bidang->sub_bidang as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ $item->id == $pegawai->bidang_sub_id ? 'selected' : '' }}>
+                                        {{ $item->uraian }}
+                                    </option>
+                                @endforeach
+                            @else
+                                @foreach ($pegawai->bidang->sub_bidang as $item)
+                                    <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
@@ -146,6 +153,8 @@
                                 </svg>
                             </label>
                         </div>
+                    </div>
+                    <div class="border-b pt-2 col-span-2">
                     </div>
                     <div class="flex justify-end items-center gap-4 col-span-2">
                         <button

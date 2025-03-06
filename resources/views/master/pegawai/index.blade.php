@@ -99,7 +99,8 @@
 </x-app-layout>
 <script type="module">
     $(document).ready(function() {
-        $('#datatable').DataTable({
+
+        var table = $('#datatable').DataTable({
             info: false,
             lengthChange: false,
             deferRender: true,
@@ -135,6 +136,27 @@
                 targets: '_all',
                 className: 'dt-head-left',
             }]
+        });
+        table.columns().flatten().each(function(colIdx) {
+            var select = $('<select />')
+                .appendTo(
+                    table.column(colIdx).footer()
+                )
+                .on('change', function() {
+                    table
+                        .column(colIdx)
+                        .search($(this).val())
+                        .draw();
+                });
+
+            table
+                .column(colIdx)
+                .cache('search')
+                .sort()
+                .unique()
+                .each(function(d) {
+                    select.append($('<option value="' + d + '">' + d + '</option>'));
+                });
         });
         $(document).on('click', '[data-modal-id]', function() {
             const modalId = $(this).data('modal-id');
