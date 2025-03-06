@@ -7,16 +7,16 @@
             <form action="{{ route('role.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="md:text-sm text-xs space-y-3">
+                <div class="md:text-sm text-xs space-y-3 max-w-xl mx-auto">
                     <div class="flex flex-col gap-1">
                         <label for="name">Nama</label>
                         <input type="text" id="name" name="name"
-                            class="md:text-sm text-xs rounded-lg border border-gray-300" value="{{ old('name') }}"
-                            placeholder="Masukkan Nama Role" required>
+                            class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md"
+                            value="{{ old('name') }}" placeholder="Masukkan Nama Role" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <fieldset
-                            class="grid grid-cols-2 gap-5 border-y md:border border-gray-300 md:rounded-lg py-3 md:px-3 bg-white">
+                            class="grid grid-cols-2 gap-5 border-y md:border border-gray-300 md:rounded-lg py-3 md:px-3 bg-white shadow-md">
                             <legend align="center" class="px-3 md:text-sm text-xs">Daftar Akses</legend>
                             @foreach ($permission->groupBy('category_id') as $items)
                                 <div>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button
-                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
                             type="submit">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -63,7 +63,7 @@
 
                             <p>Simpan</p>
                         </button>
-                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
                             href="{{ route('role.index') }}">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">

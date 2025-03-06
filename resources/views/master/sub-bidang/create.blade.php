@@ -7,11 +7,11 @@
             <form action="{{ route('sub-bidang.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-xs md:text-sm space-y-3">
+                <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
                     <div class="flex flex-col gap-1">
                         <label for="bidang_id">{{ session('config')->judul }}</label>
                         <select id="bidang_id" name="bidang_id"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
                             <option value="" selected disabled>Pilih {{ session('config')->judul }}</option>
                             @foreach ($bidang as $item)
                                 <option value="{{ $item->id }}">{{ $item->uraian }}</option>
@@ -21,12 +21,12 @@
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Uraian</label>
                         <input type="text" id="uraian" name="uraian"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300" value="{{ old('uraian') }}"
-                            placeholder="Masukkan Uraian" required>
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
+                            value="{{ old('uraian') }}" placeholder="Masukkan Uraian" required>
                     </div>
                     <div class="flex justify-end items-center gap-4">
                         <button
-                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
                             type="submit">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -36,7 +36,7 @@
 
                             <p>Simpan</p>
                         </button>
-                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
                             href="{{ route('sub-bidang.index') }}">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">

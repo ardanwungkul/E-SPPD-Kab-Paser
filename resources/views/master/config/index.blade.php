@@ -8,8 +8,8 @@
             <form action="{{ route('preferensi.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="space-y-5">
-                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-100 border-secondary-4 shadow-md">
+                <div class="space-y-5 max-w-xl mx-auto">
+                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-50 border-secondary-4 shadow-md">
                         <legend align="center"
                             class="px-5 text-secondary-1 bg-white rounded-lg border md:text-sm text-xs">Sistem
                         </legend>
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-100 border-secondary-4 shadow-md">
+                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-50 border-secondary-4 shadow-md">
                         <legend align="center"
                             class="px-5 text-secondary-1 bg-white rounded-lg border md:text-sm text-xs">Profil
                             Instansi
@@ -132,8 +132,8 @@
             <form action="{{ route('config.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="space-y-5">
-                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-100 border-secondary-4 shadow-md">
+                <div class="space-y-5 max-w-xl mx-auto">
+                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-50 border-secondary-4 shadow-md">
                         <legend align="center"
                             class="px-5 text-secondary-1 bg-white rounded-lg border md:text-sm text-xs">Format
                             Penomoran
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-100 border-secondary-4 shadow-md">
+                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-50 border-secondary-4 shadow-md">
                         <legend align="center"
                             class="px-5 text-secondary-1 bg-white rounded-lg border md:text-sm text-xs">Judul
                             Bagian/Bidang
@@ -185,7 +185,6 @@
                             </div>
                         </div>
                     </fieldset>
-
                     <div class="flex justify-end items-center gap-4">
                         <button
                             class="bg-white md:bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 md:text-sm text-xs"

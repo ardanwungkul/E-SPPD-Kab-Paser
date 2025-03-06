@@ -7,7 +7,7 @@
             <form action="{{ route('anggaran.store') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="text-xs md:text-sm space-y-3 divide-y">
+                <div class="text-xs md:text-sm space-y-3 divide-y max-w-xl mx-auto">
                     <div class="text-xs md:text-sm grid grid-cols-2 gap-y-3 gap-x-7">
                         <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
                             <label for="bidang_id">{{ session('config')->judul }}</label>
@@ -84,8 +84,8 @@
                                     class="block mb-1">{{ $item->uraian }}</label>
                                 <input type="text" id="anggaran[{{ $loop->index }}][rp_pagu]"
                                     name="anggaran[{{ $loop->index }}][rp_pagu]"
-                                    class="rounded-lg border border-gray-400 w-full text-xs md:text-sm" placeholder="0"
-                                    oninput="this.value = formatRupiah(this.value, 'Rp. ')">
+                                    class="rounded-lg border border-gray-400 w-full text-xs md:text-sm shadow-md"
+                                    placeholder="0" oninput="this.value = formatRupiah(this.value, 'Rp. ')">
                                 <input type="text" name="anggaran[{{ $loop->index }}][id]" class="hidden"
                                     value="{{ $item->id }}">
                             </div>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="flex justify-end items-center gap-4 pt-3">
                         <button
-                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
                             type="submit">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -103,7 +103,7 @@
 
                             <p>Simpan</p>
                         </button>
-                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1"
+                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
                             href="{{ route('anggaran.index') }}">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
