@@ -28,118 +28,129 @@
                     <div class="md:overflow-hidden overflow-x-scroll md:overflow-x-hidden">
                         <table class=" text-xs md:text-sm hover stripe row-border w-full">
                             <tbody class="text-secondary-2 text-xs">
-                                @foreach ($data as $item)
-                                    {{-- Bidang --}}
-                                    <tr class="bg-secondary-3">
-                                        <td colspan="1"
-                                            class="text-start px-3 py-2 border border-secondary-4 font-semibold">
-                                            {{ session('config')->judul }}
-                                        </td>
-                                        <td colspan="{{ 1 + $jenis_sppd->count() }}"
-                                            class="text-start px-3 py-2 border border-secondary-4 font-semibold">
-                                            {{ $item->uraian }}
-                                        </td>
-                                    </tr>
-                                    {{-- Sub Bidang --}}
-                                    @foreach ($item->sub_bidang as $sub_bidang)
+                                @if ($data->count() > 0)
+                                    @foreach ($data as $item)
+                                        {{-- Bidang --}}
                                         <tr class="bg-secondary-3">
                                             <td colspan="1"
                                                 class="text-start px-3 py-2 border border-secondary-4 font-semibold">
-                                                Sub {{ session('config')->judul }}
+                                                {{ session('config')->judul }}
                                             </td>
                                             <td colspan="{{ 1 + $jenis_sppd->count() }}"
                                                 class="text-start px-3 py-2 border border-secondary-4 font-semibold">
-                                                {{ $sub_bidang->uraian }}
+                                                {{ $item->uraian }}
                                             </td>
                                         </tr>
-                                        <tr class="bg-secondary-3">
-                                            <td class="px-3 py-2 border border-secondary-4 font-semibold">Rekening</td>
-                                            <td class="px-3 py-2 border border-secondary-4 font-semibold">Program /
-                                                Kegiatan
-                                            </td>
-                                            @foreach ($jenis_sppd as $jenis)
-                                                <td
-                                                    class="text-center px-3 py-2 border border-secondary-4 font-semibold">
-                                                    {{ $jenis->uraian }}</td>
-                                            @endforeach
-                                        </tr>
-                                        {{-- Program --}}
-                                        @foreach ($sub_bidang->anggaran->groupBy('sub_kegiatan.kegiatan.program.id') as $anggaranByProgram)
-                                            <tr>
-                                                <td class="text-start px-3 py-2 border font-semibold">
-                                                    {{ $anggaranByProgram->first()->sub_kegiatan->kegiatan->program->kode }}
+                                        {{-- Sub Bidang --}}
+                                        @foreach ($item->sub_bidang as $sub_bidang)
+                                            <tr class="bg-secondary-3">
+                                                <td colspan="1"
+                                                    class="text-start px-3 py-2 border border-secondary-4 font-semibold">
+                                                    Sub {{ session('config')->judul }}
                                                 </td>
-                                                <td class="text-start px-3 py-2 border font-semibold">
-                                                    {{ $anggaranByProgram->first()->sub_kegiatan->kegiatan->program->uraian }}
-                                                </td>
-                                                <td class="text-center px-3 py-2 border font-semibold"
-                                                    colspan="{{ $jenis_sppd->count() }}">
-                                                    Rp.
-                                                    {{ number_format($anggaranByProgram->where('sub_kegiatan.kegiatan.program.id', $anggaranByProgram->first()->sub_kegiatan->kegiatan->program->id)->sum('rp_pagu'), 0, ',', '.') }}
+                                                <td colspan="{{ 1 + $jenis_sppd->count() }}"
+                                                    class="text-start px-3 py-2 border border-secondary-4 font-semibold">
+                                                    {{ $sub_bidang->uraian }}
                                                 </td>
                                             </tr>
-                                            {{-- Kegiatan --}}
-                                            @foreach ($anggaranByProgram->groupBy('sub_kegiatan.kegiatan.id') as $anggaranByKegiatan)
+                                            <tr class="bg-secondary-3">
+                                                <td class="px-3 py-2 border border-secondary-4 font-semibold">Rekening
+                                                </td>
+                                                <td class="px-3 py-2 border border-secondary-4 font-semibold">Program /
+                                                    Kegiatan
+                                                </td>
+                                                @foreach ($jenis_sppd as $jenis)
+                                                    <td
+                                                        class="text-center px-3 py-2 border border-secondary-4 font-semibold">
+                                                        {{ $jenis->uraian }}</td>
+                                                @endforeach
+                                            </tr>
+                                            {{-- Program --}}
+                                            @foreach ($sub_bidang->anggaran->groupBy('sub_kegiatan.kegiatan.program.id') as $anggaranByProgram)
                                                 <tr>
-                                                    <td class="text-start px-3 py-2 border font-medium">
-                                                        {{ $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->formattedKode }}
+                                                    <td class="text-start px-3 py-2 border font-semibold">
+                                                        {{ $anggaranByProgram->first()->sub_kegiatan->kegiatan->program->kode }}
                                                     </td>
-                                                    <td class="text-start px-3 py-2 border font-medium">
-                                                        {{ $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->uraian }}
+                                                    <td class="text-start px-3 py-2 border font-semibold">
+                                                        {{ $anggaranByProgram->first()->sub_kegiatan->kegiatan->program->uraian }}
                                                     </td>
                                                     <td class="text-center px-3 py-2 border font-semibold"
                                                         colspan="{{ $jenis_sppd->count() }}">
                                                         Rp.
-                                                        {{ number_format($anggaranByKegiatan->where('sub_kegiatan.kegiatan.id', $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->id)->sum('rp_pagu'), 0, ',', '.') }}
+                                                        {{ number_format($anggaranByProgram->where('sub_kegiatan.kegiatan.program.id', $anggaranByProgram->first()->sub_kegiatan->kegiatan->program->id)->sum('rp_pagu'), 0, ',', '.') }}
                                                     </td>
                                                 </tr>
-                                                {{-- Sub Kegiatan --}}
-                                                @foreach ($anggaranByKegiatan->groupBy('sub_kegiatan.id') as $anggaranBySubKegiatan)
+                                                {{-- Kegiatan --}}
+                                                @foreach ($anggaranByProgram->groupBy('sub_kegiatan.kegiatan.id') as $anggaranByKegiatan)
                                                     <tr>
-                                                        <td class="text-start px-3 py-2 border font-normal">
-                                                            {{ $anggaranBySubKegiatan->first()->sub_kegiatan->formattedKode }}
+                                                        <td class="text-start px-3 py-2 border font-medium">
+                                                            {{ $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->formattedKode }}
                                                         </td>
-                                                        <td class="px-3 py-2 border font-normal">
-                                                            {{ $anggaranBySubKegiatan->first()->sub_kegiatan->uraian }}
+                                                        <td class="text-start px-3 py-2 border font-medium">
+                                                            {{ $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->uraian }}
                                                         </td>
-                                                        {{-- Anggaran --}}
-                                                        @foreach ($jenis_sppd as $jenis)
-                                                            <td class="text-center px-3 py-2 border font-normal">
-                                                                @if ($anggaranBySubKegiatan->where('jenis_sppd_id', $jenis->id)->count() > 0)
-                                                                    <a class="hover:text-blue-500 hover:underline"
-                                                                        href="{{ route('anggaran.edit', $anggaranBySubKegiatan->where('jenis_sppd_id', $jenis->id)->first()->id) }}">
-                                                                        Rp.
-                                                                        {{ number_format($anggaranBySubKegiatan->where('jenis_sppd_id', $jenis->id)->sum('rp_pagu'), 0, ',', '.') }}
-                                                                    </a>
-                                                                @else
-                                                                    <a class="hover:text-blue-500 hover:underline"
-                                                                        href="{{ route('anggaran.create', [
-                                                                            'sub_kegiatan' => $anggaranBySubKegiatan->first()->sub_kegiatan->id,
-                                                                            'jenis_sppd' => $jenis->id,
-                                                                            'sub_bidang' => $sub_bidang->id,
-                                                                        ]) }}">
-                                                                        Rp. 0
-                                                                    </a>
-                                                                @endif
-                                                            </td>
-                                                        @endforeach
+                                                        <td class="text-center px-3 py-2 border font-semibold"
+                                                            colspan="{{ $jenis_sppd->count() }}">
+                                                            Rp.
+                                                            {{ number_format($anggaranByKegiatan->where('sub_kegiatan.kegiatan.id', $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->id)->sum('rp_pagu'), 0, ',', '.') }}
+                                                        </td>
                                                     </tr>
+                                                    {{-- Sub Kegiatan --}}
+                                                    @foreach ($anggaranByKegiatan->groupBy('sub_kegiatan.id') as $anggaranBySubKegiatan)
+                                                        <tr>
+                                                            <td class="text-start px-3 py-2 border font-normal">
+                                                                {{ $anggaranBySubKegiatan->first()->sub_kegiatan->formattedKode }}
+                                                            </td>
+                                                            <td class="px-3 py-2 border font-normal">
+                                                                {{ $anggaranBySubKegiatan->first()->sub_kegiatan->uraian }}
+                                                            </td>
+                                                            {{-- Anggaran --}}
+                                                            @foreach ($jenis_sppd as $jenis)
+                                                                <td class="text-center px-3 py-2 border font-normal">
+                                                                    @if ($anggaranBySubKegiatan->where('jenis_sppd_id', $jenis->id)->count() > 0)
+                                                                        <a class="hover:text-blue-500 hover:underline"
+                                                                            href="{{ route('anggaran.edit', $anggaranBySubKegiatan->where('jenis_sppd_id', $jenis->id)->first()->id) }}">
+                                                                            Rp.
+                                                                            {{ number_format($anggaranBySubKegiatan->where('jenis_sppd_id', $jenis->id)->sum('rp_pagu'), 0, ',', '.') }}
+                                                                        </a>
+                                                                    @else
+                                                                        <a class="hover:text-blue-500 hover:underline"
+                                                                            href="{{ route('anggaran.create', [
+                                                                                'sub_kegiatan' => $anggaranBySubKegiatan->first()->sub_kegiatan->id,
+                                                                                'jenis_sppd' => $jenis->id,
+                                                                                'sub_bidang' => $sub_bidang->id,
+                                                                            ]) }}">
+                                                                            Rp. 0
+                                                                        </a>
+                                                                    @endif
+                                                                </td>
+                                                            @endforeach
+                                                        </tr>
+                                                    @endforeach
                                                 @endforeach
                                             @endforeach
+                                            <tr>
+                                                <td colspan="{{ 2 + $jenis_sppd->count() }}">
+                                                    <br>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                         <tr>
                                             <td colspan="{{ 2 + $jenis_sppd->count() }}">
                                                 <br>
+                                                <br>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    <tr>
-                                        <td colspan="{{ 2 + $jenis_sppd->count() }}">
-                                            <br>
-                                            <br>
+                                @else
+                                    <tr class="bg-secondary-3">
+                                        <td class="px-3 py-2">
+                                            <p class="text-sm text-center">
+                                                Tidak Ada Data Tersedia
+                                            </p>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
