@@ -7,6 +7,7 @@ use App\Models\KopSurat;
 use App\Models\Preferensi;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KonfigurasiController extends Controller
 {
@@ -124,15 +125,15 @@ class KonfigurasiController extends Controller
         if ($request->hasFile('dprd_logo')) {
 
             if ($kop_surat->dprd_logo) {
-                $old_file_dprd_logo = public_path('storage/' . $kop_surat->dprd_logo);
-                if (file_exists($old_file_dprd_logo)) {
-                    unlink($old_file_dprd_logo);
+                $old_file_dprd_logo = 'public/' . $kop_surat->dprd_logo;
+                if (Storage::exists($old_file_dprd_logo)) {
+                    Storage::delete($old_file_dprd_logo);
                 }
             }
 
 
             $file_dprd = $request->file('dprd_logo');
-            $nama_file_dprd = time() . '_' . mt_rand(100, 999) . '_' . $file_dprd->getClientOriginalName();
+            $nama_file_dprd = time() . '_' . mt_rand(100, 999) . '_' . mt_rand(100, 999) . '.' . $file_dprd->getClientOriginalExtension();
             $file_dprd->storeAs('public/uploads/gambar/kop_surat', $nama_file_dprd);
             $kop_surat->dprd_logo = 'uploads/gambar/kop_surat/' . $nama_file_dprd;
         }
@@ -144,15 +145,15 @@ class KonfigurasiController extends Controller
         if ($request->hasFile('setwan_logo')) {
 
             if ($kop_surat->setwan_logo) {
-                $old_file_setwan_logo = public_path('storage/' . $kop_surat->setwan_logo);
-                if (file_exists($old_file_setwan_logo)) {
-                    unlink($old_file_setwan_logo);
+                $old_file_setwan_logo = 'public/' . $kop_surat->setwan_logo;
+                if (Storage::exists($old_file_setwan_logo)) {
+                    Storage::delete($old_file_setwan_logo);
                 }
             }
 
 
             $file_setwan = $request->file('setwan_logo');
-            $nama_file_setwan = time() . '_' . mt_rand(100, 999) . '_' . $file_setwan->getClientOriginalName();
+            $nama_file_setwan = time() . '_' . mt_rand(100, 999) . '_' . mt_rand(100, 999) . '.' . $file_setwan->getClientOriginalExtension();
             $file_setwan->storeAs('public/uploads/gambar/kop_surat', $nama_file_setwan);
             $kop_surat->setwan_logo = 'uploads/gambar/kop_surat/' . $nama_file_setwan;
         }
