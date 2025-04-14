@@ -20,6 +20,20 @@ return new class extends Migration
             $table->date('penandatangan_tanggal');
             $table->string('penandatangan_lokasi', 100);
             $table->string('nomor', 100);
+            $table->string('nomor_urut', 5);
+            $table->string('nomor_urut_tambahan', 5)->nullable();
+            $table->boolean('is_dprd')->default(false);
+
+            $table->unsignedSmallInteger('sub_kegiatan_id');
+            $table->foreign('sub_kegiatan_id')->references('id')->on('ref_kegiatan_sub')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedTinyInteger('jenis_sppd_id');
+            $table->foreign('jenis_sppd_id')->references('id')->on('ref_jenis_sppd')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedSmallInteger('bidang_sub_id');
+            $table->foreign('bidang_sub_id')->references('id')->on('ref_bidang_sub')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->date('tanggal_berangkat');
+            $table->date('tanggal_kembali');
+
             $table->timestamps();
         });
     }

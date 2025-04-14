@@ -44,7 +44,7 @@
                                         @foreach ($item->kegiatan()->orderBy('kode', 'asc')->get() as $kegiatan)
                                             <tr class="text-xs text-black tracking-wide">
                                                 <td>
-                                                    <p class="text-start font-medium">{{ $kegiatan->formatted_kode }}
+                                                    <p class="text-start font-medium">{{ $kegiatan->kode }}
                                                     </p>
                                                 </td>
                                                 <td>
@@ -59,7 +59,7 @@
                                                     <tr class="text-xs tracking-wide">
                                                         <td>
                                                             <p class="text-start font-medium">
-                                                                {{ $sub_kegiatan->formatted_kode }}
+                                                                {{ $sub_kegiatan->kode }}
                                                             </p>
                                                         </td>
                                                         <td>

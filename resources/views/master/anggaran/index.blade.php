@@ -84,7 +84,7 @@
                                                 @foreach ($anggaranByProgram->groupBy('sub_kegiatan.kegiatan.id') as $anggaranByKegiatan)
                                                     <tr>
                                                         <td class="text-start px-3 py-2 border font-medium">
-                                                            {{ $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->formattedKode }}
+                                                            {{ $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->kode }}
                                                         </td>
                                                         <td class="text-start px-3 py-2 border font-medium">
                                                             {{ $anggaranByKegiatan->first()->sub_kegiatan->kegiatan->uraian }}
@@ -99,7 +99,7 @@
                                                     @foreach ($anggaranByKegiatan->groupBy('sub_kegiatan.id') as $anggaranBySubKegiatan)
                                                         <tr>
                                                             <td class="text-start px-3 py-2 border font-normal">
-                                                                {{ $anggaranBySubKegiatan->first()->sub_kegiatan->formattedKode }}
+                                                                {{ $anggaranBySubKegiatan->first()->sub_kegiatan->kode }}
                                                             </td>
                                                             <td class="px-3 py-2 border font-normal">
                                                                 {{ $anggaranBySubKegiatan->first()->sub_kegiatan->uraian }}

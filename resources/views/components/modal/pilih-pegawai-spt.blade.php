@@ -24,7 +24,7 @@
             <div class="px-4 py-2 space-y-4 pt-16">
                 <div class="relative pb-20">
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
-                        <table class="text-sm hover stripe row-border datatable">
+                        <table id="tablePegawaiSpt" class="text-sm hover stripe row-border datatable">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr>
                                     <td class="text-xs">NIP</td>
@@ -50,7 +50,7 @@
                                             <p>{{ $item->pangkat->uraian }} - {{ $item->pangkat->kode_golongan }}</p>
                                         </td>
                                         <td>
-                                            <div class="flex justify-center items-center gap-3">
+                                            <div class="flex justify-end items-center gap-3">
                                                 <div>
                                                     <button type="button" data-id="{{ $item->id }}"
                                                         data-check="false"

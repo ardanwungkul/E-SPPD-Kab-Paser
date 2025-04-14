@@ -40,29 +40,56 @@
         <table style="width: 100%; border-bottom: solid 2.2pt #000;">
             <tr>
                 <td>
-                    <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents(public_path('assets/images/logo-ppu.png'))) }}"
-                        style="width: 70px;">
+
+                    @if ($spt->is_dprd)
+                        <img style="width: 70px;"
+                            src="{{ $kop_surat->dprd_logo && file_exists(public_path('storage/' . $kop_surat->dprd_logo))
+                                ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('storage/' . $kop_surat->dprd_logo)))
+                                : 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('assets/images/logo-ppu.png'))) }}"
+                            class="w-full h-28 object-cover" />
+                    @else
+                        <img style="width: 70px;"
+                            src="{{ $kop_surat->setwan_logo && file_exists(public_path('storage/' . $kop_surat->setwan_logo))
+                                ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('storage/' . $kop_surat->setwan_logo)))
+                                : 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('assets/images/logo-ppu.png'))) }}"
+                            class="w-full h-28 object-cover" />
+                    @endif
+
                 </td>
                 <td style="text-align: center;">
                     <h3 class="text-black tracking-tight">
-                        PROVINSI KALIMANTAN TIMUR
+                        {{ $spt->is_dprd ? $kop_surat->dprd_header_1 : $kop_surat->setwan_header_1 }}
                     </h3>
-                    <h2 class="text-black">SEKRETARIAT DAERAH</h2>
-                    <p style="font-size: 11pt;">Jl. Gersamata No. 5 Lakudo, Kode Pos 93763</p>
+                    <h3 class="text-black">{{ $spt->is_dprd ? $kop_surat->dprd_header_2 : $kop_surat->setwan_header_2 }}
+                    </h3>
                     <p style="font-size: 11pt;">
-                        Telepon : 022 213455
-                        Fax : 022 1234567
-                        Email : instansi@gmail.com
-                    </p>
+                        {{ $spt->is_dprd ? $kop_surat->dprd_header_3 : $kop_surat->setwan_header_3 }}</p>
+                    <h3 class="text-black tracking-tight">
+                        {{ $spt->is_dprd ? $kop_surat->dprd_header_4 : $kop_surat->setwan_header_4 }}
+                    </h3>
                 </td>
             </tr>
         </table>
 
+
         <table style="width: 100%; margin-top: 20px;">
             <tr>
                 <td style="text-align: center;margin:0">
-                    <h3><u class="text-black">SURAT PERINTAH TUGAS</u></h3>
-                    <h4 style="font-weight: normal;margin:0">NOMOR : {{ $spt->nomor }}</h4>
+                    <h3><u class="text-black">SURAT TUGAS</u></h3>
+                    @php
+                        $patch = explode('/', $spt->nomor);
+                        $nomor_urut = $spt->nomor_urut;
+                        $index = array_search($nomor_urut, $patch);
+                    @endphp
+                    <h4 style="font-weight: normal;margin:0">NO :
+                        @foreach ($patch as $item)
+                            <span style="margin: 0 1px !important">{{ $item }}</span>
+                            @if (!$loop->last)
+                                <span style="margin: 0 1px !important"> / </span>
+                            @endif
+                        @endforeach
+                    </h4>
+
                 </td>
             </tr>
         </table>
@@ -70,10 +97,12 @@
         <table style="width: 100%;margin:20px 0">
             @foreach ($spt->dasar as $dasar)
                 <tr>
-                    <td width="70px" style="vertical-align: top;">{{ $loop->first ? 'Dasar' : '' }}</td>
-                    <td width="20px" style="vertical-align: top; text-align: center;">{{ $loop->first ? ':' : '' }}
+                    <td width="70px" style="vertical-align: top; font-weight: bold;">
+                        {{ $loop->first ? 'DASAR' : '' }}</td>
+                    <td width="20px" style="vertical-align: top; text-align: center; font-weight: bold;">
+                        {{ $loop->first ? ':' : '' }}
                     </td>
-                    <td width="20px" style="vertical-align: top;">{{ $loop->index + 1 }}.</td>
+                    <td width="20px" style="vertical-align: top; font-weight: bold;">{{ $loop->index + 1 }}.</td>
                     <td style="vertical-align: top;">{{ $dasar->uraian }}</td>
                 </tr>
             @endforeach
@@ -82,7 +111,7 @@
         <table style="width: 100%; margin: 0">
             <tr>
                 <td style="text-align: center;">
-                    <h4 style="font-weight: normal;">MEMERINTAHKAN</h4>
+                    <h4 style="font-weight: bold;">MEMERINTAHKAN :</h4>
                 </td>
             </tr>
         </table>
@@ -90,13 +119,15 @@
         <table style="width: 100%;">
             @foreach ($spt->pegawai as $pegawai)
                 <tr>
-                    <td width="70px" style="vertical-align: top;">{{ $loop->first ? 'Kepada' : '' }}</td>
-                    <td width="20px" style="vertical-align: top; text-align: center;">{{ $loop->first ? ':' : '' }}
+                    <td width="70px" style="vertical-align: top; font-weight: bold;">
+                        {{ $loop->first ? 'KEPADA' : '' }}</td>
+                    <td width="20px" style="vertical-align: top; text-align: center; font-weight: bold;">
+                        {{ $loop->first ? ':' : '' }}
                     </td>
                     <td style="vertical-align: top;">
                         <table style="width: 100%;">
                             <tr>
-                                <td width="10px">{{ $loop->index + 1 }}.</td>
+                                <td width="10px" style="font-weight: bold;">{{ $loop->index + 1 }}.</td>
                                 <td width="100px">Nama</td>
                                 <td width="10px">:</td>
                                 <td>{{ $pegawai->pegawai->nama }}</td>
@@ -130,58 +161,78 @@
         <table style="width: 100%; margin-top: 20px;">
             @foreach ($spt->untuk as $untuk)
                 <tr>
-                    <td width="70px" style="vertical-align: top;">{{ $loop->first ? 'Untuk' : '' }}</td>
-                    <td width="20px" style="vertical-align: top; text-align: center;">{{ $loop->first ? ':' : '' }}
+                    <td width="70px" style="vertical-align: top; font-weight: bold;">
+                        {{ $loop->first ? 'UNTUK' : '' }}</td>
+                    <td width="20px" style="vertical-align: top; text-align: center; font-weight: bold;">
+                        {{ $loop->first ? ':' : '' }}
                     </td>
-                    <td width="20px" style="vertical-align: top;">{{ $loop->index + 1 }}.</td>
+                    <td width="20px" style="vertical-align: top; font-weight: bold;">{{ $loop->index + 1 }}.</td>
                     <td style="vertical-align: top;">{{ $untuk->uraian }}</td>
                 </tr>
             @endforeach
-
+        </table>
+        <table style="width: 100%; margin-top: 20px;">
+            <tr>
+                <td width="70px" style="vertical-align: top; font-weight: bold;">WAKTU</td>
+                <td width="20px" style="vertical-align: top; text-align: center; font-weight: bold;">:</td>
+                <td width="190px" style="vertical-align: top; font-weight: bold;">BERANGKAT TANGGAL</td>
+                <td width="20px" style="vertical-align: top; text-align:center; font-weight: bold;">:</td>
+                <td style="vertical-align: top;">
+                    {{ \Carbon\Carbon::parse($spt->tanggal_berangkat)->locale('id')->translatedFormat('d F Y') }}</td>
+            </tr>
+            <tr>
+                <td width="70px" style="vertical-align: top; font-weight: bold;"></td>
+                <td width="20px" style="vertical-align: top; text-align: center; font-weight: bold;"></td>
+                <td width="190px" style="vertical-align: top; font-weight: bold;">KEMBALI TANGGAL</td>
+                <td width="20px" style="vertical-align: top; text-align:center; font-weight: bold;">:</td>
+                <td style="vertical-align: top;">
+                    {{ \Carbon\Carbon::parse($spt->tanggal_kembali)->locale('id')->translatedFormat('d F Y') }}</td>
+            </tr>
         </table>
 
         <table style="width: 100%; margin-top: 20px;">
             <tr>
-                <td width="65%"></td>
-                <td style="text-align: left;">Ditetapkan di {{ $spt->penandatangan_lokasi }} </td>
+                <td width="50%"></td>
+                <td width="90px" style="text-align: left; vertical-align:top;">Ditetapkan di</td>
+                <td width="20px" style="vertical-align: top; text-align:center; font-weight: bold;">:</td>
+                <td style="text-align: left; vertical-align:top">{{ $spt->penandatangan_lokasi }} </td>
             </tr>
             <tr>
                 <td></td>
-                <td style="text-align: left;">pada tanggal
-                    {{ \Carbon\Carbon::parse($spt->penandatangan_tanggal)->format('d M Y') }}
+                <td width="90px" style="text-align: left; vertical-align:top;">Pada tanggal</td>
+                <td width="20px" style="vertical-align: top; text-align:center; font-weight: bold;">:</td>
+                <td style="text-align: left; vertical-align:top">
+                    {{ \Carbon\Carbon::parse($spt->penandatangan_tanggal)->locale('id')->translatedFormat('d F Y') }}
                 </td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td colspan="4">&nbsp;</td>
             </tr>
             <tr>
                 <td></td>
-                <td style="text-align: center;">{{ $spt->ub->jabatan }}</td>
+                <td colspan="3" style="text-align: center; font-weight : bold">{{ $spt->ub->jabatan }},</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td colspan="4">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td colspan="4">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
+                <td colspan="4">&nbsp;</td>
             </tr>
             <tr>
                 <td></td>
-                <td style="text-align: center;font-weight: bold;">
-                    <u>{{ $spt->ub->nama }}</u>
+                <td colspan="3" style="text-align: center;font-weight: bold;">
+                    <p style="font-weight: bold">{{ $spt->ub->nama }}</p>
                 </td>
             </tr>
             <tr>
                 <td></td>
-                <td style="text-align: center;">{{ $spt->ub->pangkat ? $spt->ub->pangkat->uraian : '' }},
-                    {{ $spt->ub->pangkat ? $spt->ub->pangkat->kode_golongan : '' }}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td style="text-align: center;">NIP : {{ $spt->ub->nip }}</td>
+                <td colspan="3" style="text-align: center; font-weight :bold">NIP. {{ $spt->ub->nip }}</td>
             </tr>
         </table>
     </div>
 </body>
+
+</html>

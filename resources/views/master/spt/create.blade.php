@@ -27,268 +27,97 @@
         </div>
     </div>
 
-    @if (isset($nota_dinas))
-        <div class="mb-4 shadow-lg rounded-lg border border-gray-300">
-            <ol class="overflow-hidden rounded-lg text-gray-600 w-full grid grid-cols-4">
-                <li class="flex items-center w-full text-white">
-                    <p
-                        class="flex h-10 items-center gap-1.5 bg-gradient-to-r from-color-1-400 to-color-1-200 px-4 transition w-full">
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-
-                        <span class="ms-1.5 text-sm font-medium"> Nota Dinas </span>
-                </li>
-                <li class="flex items-center w-full text-white relative">
-                    <span
-                        class="absolute inset-y-0 h-10 w-4 bg-color-1-200 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180">
-                    </span>
-                    <p
-                        class="flex h-10 items-center gap-1.5 bg-gradient-to-r from-color-1-400 to-color-1-200 px-4 transition w-full pl-10">
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-
-                        <span class="ms-1.5 text-sm font-medium">Berkas Disposisi</span>
-                </li>
-                <li class="flex items-center w-full text-white relative">
-                    <span
-                        class="absolute inset-y-0 h-10 w-4 bg-color-1-200 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180">
-
-                    </span>
-                    <p
-                        class="flex h-10 items-center gap-1.5 bg-gradient-to-r from-color-1-400 to-color-1-200 px-4 transition w-full pl-10">
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                                d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
-                        </svg>
-
-                        <span class="ms-1.5 text-sm font-medium"> SPT </span>
-                </li>
-                <li class="flex items-center w-full relative">
-                    <span
-                        class="absolute inset-y-0 h-10 w-4 bg-color-1-200 [clip-path:_polygon(0_0,_0%_100%,_100%_50%)] rtl:rotate-180">
-                    </span>
-                    <p
-                        class="flex h-10 items-center gap-1.5 bg-gradient-to-r from-gray-200 to-gray-100 px-4 transition w-full pl-10">
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                                d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
-                        </svg>
-
-                        <span class="ms-1.5 text-sm font-medium"> SPPD </span>
-                </li>
-            </ol>
-        </div>
-    @endif
-    @if (isset($nota_dinas))
-        <x-container>
-            <x-slot name="content">
-                <div>
-                    <div id="accordion-collapse-spt" data-accordion="collapse">
-                        <h2 id="accordion-collapse-nota-dinas-heading-1">
-                            <button type="button"
-                                class="flex items-center justify-between w-full px-3 py-1 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-lg focus:ring-0 focus:ring-gray-200 hover:bg-gray-100"
-                                data-accordion-target="#accordion-collapse-nota-dinas-body-1" aria-expanded="false"
-                                aria-controls="accordion-collapse-nota-dinas-body-1">
-                                <span class="text-sm">Nota Dinas</span>
-                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 5 5 1 1 5" />
-                                </svg>
-                            </button>
-                        </h2>
-                        <div id="accordion-collapse-nota-dinas-body-1" class="hidden"
-                            aria-labelledby="accordion-collapse-nota-dinas-heading-1">
-                            <div class="p-5 border border-gray-200 rounded-lg mt-1 divide-y">
-                                <div class="py-3">
-                                    <table class="w-full table-striped text-sm text-secondary-2">
-                                        <tbody>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Program</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {{ $nota_dinas->program->kode }}
-                                                    -
-                                                    {{ $nota_dinas->program->uraian }}
-                                                </td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Kegiatan</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {{ $nota_dinas->kegiatan->formatted_kode }}
-                                                    -
-                                                    {{ $nota_dinas->kegiatan->uraian }}</td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Sub Kegiatan</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {{ $nota_dinas->sub_kegiatan->formatted_kode }}
-                                                    - {{ $nota_dinas->sub_kegiatan->uraian }}</td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">{{ session('config')->judul }}</td>
-                                                <td class="p-2 font-medium" colspan="2">
-                                                    {{ $nota_dinas->bidang->uraian }}
-                                                </td>
-                                                <td class="p-2 font-light w-40">Sub {{ session('config')->judul }}</td>
-                                                <td class="p-2 font-medium" colspan="2">
-                                                    {{ $nota_dinas->sub_bidang->uraian }}</td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Jenis Perjalanan</td>
-                                                <td class="p-2 font-medium" colspan="2">
-                                                    {{ $nota_dinas->jenis_perjalanan->uraian }}</td>
-                                                <td class="p-2 font-light w-40">Tahun</td>
-                                                <td class="p-2 font-medium" colspan="2">{{ $nota_dinas->tahun }}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="py-3">
-                                    <table class="w-full table-striped text-sm text-secondary-2">
-                                        <tbody>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Nomor</td>
-                                                <td class="p-2 font-medium" colspan="4">{{ $nota_dinas->nomor }}
-                                                </td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Tanggal</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {{ \Carbon\Carbon::parse($nota_dinas->tanggal)->format('d M Y') }}
-                                                </td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Dari</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {{ $nota_dinas->dari->jabatan }} -
-                                                    {{ $nota_dinas->dari->nama }} /
-                                                    {{ $nota_dinas->dari->nip }}
-                                                </td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Kepada</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {{ $nota_dinas->kepada->jabatan }} -
-                                                    {{ $nota_dinas->kepada->nama }} /
-                                                    {{ $nota_dinas->kepada->nip }}
-                                                </td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Perihal</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {{ $nota_dinas->perihal }}
-                                                </td>
-                                            </tr>
-                                            <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                <td class="p-2 font-light w-40">Isi</td>
-                                                <td class="p-2 font-medium" colspan="4">
-                                                    {!! $nota_dinas->isi !!}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                @if ($nota_dinas->lampiran->count() > 0)
-                                    <div class="py-3">
-                                        <table class="w-full table-striped text-sm text-secondary-2">
-                                            <tbody>
-                                                <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                    <td class="p-2 font-medium w-40">Lampiran</td>
-                                                    <td class="p-2 font-medium" colspan="4"></td>
-                                                </tr>
-                                                @foreach ($nota_dinas->lampiran as $lampiran)
-                                                    <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                        <td class="p-2 font-medium" colspan="5">
-                                                            <a href="{{ asset('storage/' . $lampiran->lampiran) }}"
-                                                                class="hover:text-blue-500 hover:underline"
-                                                                target="_blank">
-                                                                <div class="flex items-center gap-1">
-                                                                    <svg class="w-6 h-6" aria-hidden="true"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="24" height="24"
-                                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                                        <path fill-rule="evenodd"
-                                                                            d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
-                                                                            clip-rule="evenodd" />
-                                                                    </svg>
-                                                                    <p>
-                                                                        Lihat Berkas
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                @endif
-                                @if ($nota_dinas->disposisi)
-                                    <div class="py-3">
-                                        <table class="w-full table-striped text-sm text-secondary-2">
-                                            <tbody>
-                                                <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                    <td class="p-2 font-medium w-40">Bukti Disposisi</td>
-                                                    <td class="p-2 font-medium" colspan="4"></td>
-                                                </tr>
-                                                <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                    <td class="p-2 font-light w-40">Berkas</td>
-                                                    <td class="p-2 font-medium" colspan="4">
-                                                        <a href="{{ asset('storage/' . $nota_dinas->disposisi->lampiran) }}"
-                                                            class="hover:text-blue-500 hover:underline"
-                                                            target="_blank">
-                                                            <div class="flex items-center gap-1">
-                                                                <svg class="w-6 h-6" aria-hidden="true"
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" fill="currentColor"
-                                                                    viewBox="0 0 24 24">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
-                                                                        clip-rule="evenodd" />
-                                                                </svg>
-                                                                <p>
-                                                                    Lihat Berkas
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd:bg-white even:bg-secondary-3/60">
-                                                    <td class="p-2 font-light w-40">Keterangan</td>
-                                                    <td class="p-2 font-medium" colspan="4">
-                                                        {{ $nota_dinas->disposisi->keterangan }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </x-slot>
-        </x-container>
-    @endif
 
 
     <div>
-        <form action="{{ route('spt.store', isset($nota_dinas) ? ['nota_dinas' => $nota_dinas->id] : '') }}"
-            class="text-sm" method="POST" id="form">
+        <form action="{{ route('spt.store') }}" class="text-sm" method="POST" id="form">
             @csrf
             @method('POST')
+            <input type="hidden" name="is_dprd" value="{{ request()->lembaga == 'dprd' ? 'dprd' : null }}">
             <x-container>
                 <x-slot name="content">
-                    <fieldset class="border-t">
+                    <fieldset class="border-t max-w-xl mx-auto">
+                        <legend align="center" class="px-3 text-secondary-1 py-1"> Umum </legend>
+                        <div class="text-sm grid grid-cols-2 gap-y-3 gap-x-7">
+                            <div class="space-y-3">
+                                <div class="flex flex-col gap-1">
+                                    <label for="program_id">Program</label>
+                                    <select name="program_id" id="program_id" class="text-sm rounded-lg select2"
+                                        required>
+                                        <option value="" selected disabled> Pilih Program</option>
+                                        @foreach ($program as $item)
+                                            <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="kegiatan_id">Kegiatan</label>
+                                    <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2"
+                                        required>
+                                        <option value="" selected disabled> Pilih Kegiatan</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="sub_kegiatan_id">Sub Kegiatan</label>
+                                    <select name="sub_kegiatan_id" id="sub_kegiatan_id"
+                                        class="text-sm rounded-lg select2" required>
+                                        <option value="" selected disabled> Pilih Sub Kegiatan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex flex-col gap-1">
+                                    <label for="bidang_id">{{ session('config')->judul }}</label>
+                                    <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
+                                        <option value="" selected disabled>Pilih {{ session('config')->judul }}
+                                        </option>
+                                        @foreach ($bidang as $item)
+                                            <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
+                                    <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
+                                        required>
+                                        <option value="" selected disabled> Pilih Sub
+                                            {{ session('config')->judul }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="jenis_sppd_id">Jenis SPPD</label>
+                                    <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
+                                        required>
+                                        <option value="" selected disabled> Pilih Jenis SPPD</option>
+                                        @foreach ($jenis as $item)
+                                            <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-span-2 grid grid-cols-2 gap-x-7">
+                                <div class="w-full border-t col-span-2 pb-3 mt-3">
+
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="tanggal_berangkat">Tanggal Berangkat</label>
+                                    <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
+                                        class="w-full text-sm rounded-lg border border-secondary-4">
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="tanggal_kembali">Tanggal Kembali</label>
+                                    <input type="date" id="tanggal_kembali" name="tanggal_kembali"
+                                        class="w-full text-sm rounded-lg border border-secondary-4">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </x-slot>
+            </x-container>
+            <x-container>
+                <x-slot name="content">
+                    <fieldset class="border-t max-w-xl mx-auto">
                         <legend align="center" class="px-3 text-secondary-1">Dasar</legend>
                         <div class="pt-3">
                             <table class="table table-bordered w-full" id="dynamicTableDasar">
@@ -317,11 +146,11 @@
             </x-container>
             <x-container>
                 <x-slot name="content">
-                    <fieldset class="border-t">
+                    <fieldset class="border-t max-w-xl mx-auto">
                         <legend align="center" class="px-3 text-secondary-1">Pegawai</legend>
                         <button type="button" name="add" id="addPegawai" data-modal-target="pilih-pegawai-spt"
                             data-modal-toggle="pilih-pegawai-spt"
-                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center whitespace-nowrap">
+                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center whitespace-nowrap focus:ring-1 focus:ring-blue-500">
                             Pilih Pegawai
                         </button>
                         <x-modal.pilih-pegawai-spt :pegawai="$pegawai" />
@@ -335,7 +164,7 @@
             </x-container>
             <x-container>
                 <x-slot name="content">
-                    <fieldset class="border-t">
+                    <fieldset class="border-t max-w-xl mx-auto">
                         <legend align="center" class="px-3 text-secondary-1">Untuk</legend>
                         <div class="pt-3">
                             <table class="table table-bordered w-full" id="dynamicTableUntuk">
@@ -364,7 +193,7 @@
             </x-container>
             <x-container>
                 <x-slot name="content">
-                    <fieldset class="border-t">
+                    <fieldset class="border-t max-w-xl mx-auto">
                         <legend align="center" class="px-3 text-secondary-1">Penanda Tangan</legend>
                         <div class="pt-3">
                             <div class="grid grid-cols-2 gap-5">
@@ -378,12 +207,12 @@
                                         <input type="text" id="penandatangan_keterangan"
                                             name="penandatangan_keterangan"
                                             class="rounded-lg text-sm border border-secondary-4 w-full cursor-pointer"
-                                            data-modal-target="pilih-pegawai-dari"
-                                            data-modal-toggle="pilih-pegawai-dari"
+                                            data-modal-target="pilih-pegawai-penandatangan"
+                                            data-modal-toggle="pilih-pegawai-penandatangan"
                                             placeholder="Ketuk untuk memilih Pegawai" readonly required>
                                         <input type="text" id="penandatangan_id" name="penandatangan_id"
                                             class="hidden">
-                                        <x-modal.pilih-pegawai-dari :pegawai="$pegawai" />
+                                        <x-modal.pilih-pegawai-penandatangan :pegawai="$pegawai" />
                                     </div>
                                 </div>
                                 <div>
@@ -405,9 +234,10 @@
                     </fieldset>
                 </x-slot>
             </x-container>
+
             <x-container>
                 <x-slot name="content">
-                    <div class="flex justify-end items-center gap-4 col-span-2 text-sm">
+                    <div class="flex justify-end items-center gap-4 col-span-2 text-sm max-w-xl mx-auto">
                         <button
                             class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
                             type="submit">
@@ -433,6 +263,7 @@
         </form>
     </div>
 </x-app-layout>
+{{-- Form validation --}}
 <script type="module">
     $(document).ready(function() {
 
@@ -454,21 +285,14 @@
         $('#button-alert-2').on('click', function() {
             $('#alert-2').hide();
         })
-        $('.datatable tbody').on('click', '.button-pegawai-dari-check', function() {
-            const pegawai_id = $(this).data('id');
-            const pegawai_keterangan = $(this).data('keterangan');
-            if (pegawai_id) {
-                $('#penandatangan_id').val(pegawai_id);
-                $('#penandatangan_keterangan').val(pegawai_keterangan)
-            }
-            $('#close-button-pilih-pegawai-dari').click()
-        });
+
     });
 </script>
+{{-- Dasar & Untuk --}}
 <script type="module">
     var iDasar = 1;
     var iUntuk = 1;
-
+    var iPegawai = 1;
 
     $(document).ready(function() {
         function updateDasarNumbers() {
@@ -494,6 +318,15 @@
                     name: `untuk[${newIndex}][uraian]`,
                     placeholder: `Untuk Ke-${newIndex}`
                 });
+            });
+        }
+
+        function updatePegawaiNumbers() {
+            $("#dynamicTablePegawai tr").each(function(index, tr) {
+                const newIndexPegawai = index + 1;
+                $(tr).find("label").attr("for", `pegawai[${newIndexPegawai}][keterangan]`).text(
+                    "Pegawai Ke " +
+                    newIndexPegawai);
             });
         }
 
@@ -541,51 +374,6 @@
             updateUntukNumbers();
         });
 
-        $(document).on('click', '.remove-tr', function() {
-            const data = $(this).data('id');
-            if (data == 'dasar') {
-                --iDasar;
-                $(this).parents('tr').remove();
-                updateDasarNumbers();
-            }
-            if (data == 'untuk') {
-                --iUntuk;
-                $(this).parents('tr').remove();
-                updateUntukNumbers();
-            }
-        });
-    });
-</script>
-<script type="module">
-    $(document).ready(function() {
-        let table = $('.datatable').DataTable({
-            info: false,
-            lengthChange: false,
-            deferRender: true,
-            paging: true,
-            language: {
-                search: '',
-                emptyTable: "Tidak ada data tersedia",
-                searchPlaceholder: 'Cari...'
-            },
-            ordering: false,
-            responsive: true,
-            columnDefs: [{
-                targets: '_all',
-                className: 'dt-head-left',
-            }]
-        });
-
-        var iPegawai = 1;
-
-        function updatePegawaiNumbers() {
-            $("#dynamicTablePegawai tr").each(function(index, tr) {
-                const newIndexPegawai = index + 1;
-                $(tr).find("label").attr("for", `pegawai[${newIndexPegawai}][keterangan]`).text(
-                    "Pegawai Ke " +
-                    newIndexPegawai);
-            });
-        }
         $('.datatable tbody').on('click', '.button-pegawai-spt-check', function() {
             const pegawai_id = $(this).data('id');
             const pegawai_keterangan = $(this).data('keterangan');
@@ -604,14 +392,14 @@
                 const newRow = `
                 <tr class="pegawai-item" data-id="${pegawai_id}">
                     <td class="flex items-start px-2 py-2">
-                        <label for="pegawai[${pegawai_id}][keterangan]" class="align-top whitespace-nowrap">Pegawai Ke 1</label>    
+                        <label for="pegawai[${pegawai_id}][keterangan]" class="align-top whitespace-nowrap">Pegawai Ke 1</label>
                     </td>
                     <td class="w-full px-2 py-2">
                         <div class="space-y-1">
                             <input name="pegawai[${pegawai_id}][keterangan]" id="pegawai[${pegawai_id}][keterangan]" value="${pegawai_keterangan}"
                                     class="w-full text-sm rounded-lg border border-secondary-4 cursor-pointer" readonly />
                             <input name="pegawai[${pegawai_id}][id]" id="pegawai[${pegawai_id}][id]" type="text" value="${pegawai_id}"
-                                    class="hidden" readonly required>    
+                                    class="hidden" readonly required>
                         </div>
                     </td>
                 </tr>
@@ -619,6 +407,216 @@
                 $('#dynamicTablePegawai tBody').append(newRow);
             }
             updatePegawaiNumbers()
+        });
+        $(document).on('click', '.remove-tr', function() {
+            const data = $(this).data('id');
+            if (data == 'dasar') {
+                --iDasar;
+                $(this).parents('tr').remove();
+                updateDasarNumbers();
+            }
+            if (data == 'untuk') {
+                --iUntuk;
+                $(this).parents('tr').remove();
+                updateUntukNumbers();
+            }
+        });
+    });
+</script>
+
+{{-- Data Table --}}
+<script type="module">
+    $(document).ready(function() {
+        let tablePegawaiSpt = $('#tablePegawaiSpt').DataTable({
+            info: false,
+            lengthChange: false,
+            deferRender: true,
+            paging: true,
+            language: {
+                search: '',
+                emptyTable: "Tidak ada data tersedia",
+                searchPlaceholder: 'Cari...'
+            },
+            ordering: false,
+            responsive: true,
+            columnDefs: [{
+                targets: '_all',
+                className: 'dt-head-left',
+            }]
+        });
+        let tablePegawaiPenandatangan = $('#tablePegawaiPenandatangan').DataTable({
+            info: false,
+            lengthChange: false,
+            deferRender: true,
+            paging: true,
+            language: {
+                search: '',
+                emptyTable: "Tidak ada data tersedia",
+                searchPlaceholder: 'Cari...'
+            },
+            ordering: false,
+            responsive: true,
+            columnDefs: [{
+                    targets: 4,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: '_all',
+                    className: 'dt-head-left'
+                }
+            ]
+        });
+
+        $('.datatable tbody').on('click', '.button-pegawai-penandatangan-check', function() {
+            const pegawai_id = $(this).data('id');
+            const pegawai_keterangan = $(this).data('keterangan');
+            if (pegawai_id) {
+                $('#penandatangan_id').val(pegawai_id);
+                $('#penandatangan_keterangan').val(pegawai_keterangan)
+            }
+            $('#close-button-pilih-pegawai-penandatangan').click()
+        });
+        $('#ub_status').on('click', function() {
+            $('#penandatangan_keterangan').val('')
+            if ($(this).is(':checked')) {
+                tablePegawaiPenandatangan.column(4).search('Y').draw();
+            } else {
+                tablePegawaiPenandatangan.column(4).search('').draw();
+            }
+
+        })
+    });
+</script>
+{{-- Select 2 --}}
+<script type="module">
+    $(document).ready(function() {
+        $('.select2').select2({
+            dropdownCssClass: "text-sm",
+            selectionCssClass: 'text-sm',
+        });
+
+        $('#program_id').on('change', function() {
+            const programKode = $(this).val();
+
+            if (programKode) {
+                $.ajax({
+                    url: "{{ route('get.kegiatan.by.program') }}",
+                    type: "GET",
+                    data: {
+                        program_id: programKode
+                    },
+                    success: function(response) {
+                        $('#kegiatan_id').empty();
+                        $('#kegiatan_id').append(
+                            '<option value="" selected disabled>Pilih Kegiatan</option>'
+                        );
+                        $('#sub_kegiatan_id').empty();
+                        $('#sub_kegiatan_id').append(
+                            '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                        );
+
+                        if (response.length > 0) {
+                            $.each(response, function(index, kegiatan) {
+                                $('#kegiatan_id').append('<option value="' +
+                                    kegiatan.id + '">' + kegiatan.uraian +
+                                    '</option>');
+                            });
+                        } else {
+                            $('#kegiatan_id').append(
+                                '<option value="" disabled>Tidak ada kegiatan tersedia</option>'
+                            );
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#kegiatan_id').empty();
+                $('#kegiatan_id').append('<option value="" selected disabled>Pilih Kegiatan</option>');
+                $('#sub_kegiatan_id').empty();
+                $('#sub_kegiatan_id').append(
+                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                );
+            }
+        });
+        $('#kegiatan_id').on('change', function() {
+            const kegiatanId = $(this).val();
+
+            if (kegiatanId) {
+                $.ajax({
+                    url: "{{ route('get.sub-kegiatan.by.kegiatan') }}",
+                    type: "GET",
+                    data: {
+                        kegiatan_id: kegiatanId
+                    },
+                    success: function(response) {
+                        $('#sub_kegiatan_id').empty();
+                        $('#sub_kegiatan_id').append(
+                            '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                        );
+
+                        if (response.length > 0) {
+                            $.each(response, function(index, subkegiatan) {
+                                $('#sub_kegiatan_id').append('<option value="' +
+                                    subkegiatan.id + '">' + subkegiatan.uraian +
+                                    '</option>');
+                            });
+                        } else {
+                            $('#sub_kegiatan_id').append(
+                                '<option value="" disabled>Tidak ada Sub kegiatan tersedia</option>'
+                            );
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#sub_kegiatan_id').empty();
+                $('#sub_kegiatan_id').append(
+                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>');
+            }
+        });
+        $('#bidang_id').on('change', function() {
+            const bidangId = $(this).val();
+
+            if (bidangId) {
+                $.ajax({
+                    url: "{{ route('get.sub-bidang.by.bidang') }}",
+                    type: "GET",
+                    data: {
+                        bidang_id: bidangId
+                    },
+                    success: function(response) {
+                        $('#sub_bidang_id').empty();
+                        $('#sub_bidang_id').append(
+                            '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                        );
+
+                        if (response.length > 0) {
+                            $.each(response, function(index, subbidang) {
+                                $('#sub_bidang_id').append('<option value="' +
+                                    subbidang.id + '">' + subbidang.uraian +
+                                    '</option>');
+                            });
+                        } else {
+                            $('#sub_bidang_id').append(
+                                '<option value="" disabled>Tidak ada Sub {{ session('config')->judul }} tersedia</option>'
+                            );
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#sub_bidang_id').empty();
+                $('#sub_bidang_id').append(
+                    '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                );
+            }
         });
     });
 </script>

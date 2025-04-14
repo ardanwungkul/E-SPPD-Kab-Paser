@@ -15,9 +15,9 @@ return new class extends Migration
             $table->year('tahun')->primary();
             $table->enum('aktif', ['Y', 'T']);
             $table->string('judul', 10);
-            $table->string('no_spt', 30);
-            $table->string('no_sppd', 30);
-            $table->string('no_spj', 30)->nullable();
+            $table->string('no_spt', 100);
+            $table->string('no_sppd', 100);
+            $table->string('no_spj', 100)->nullable();
             $table->timestamps();
         });
     }

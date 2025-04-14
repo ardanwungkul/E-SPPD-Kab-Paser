@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('sistem/konfigurasi', [KonfigurasiController::class, 'index'])->name('config.index');
     Route::post('sistem/konfigurasi', [KonfigurasiController::class, 'store'])->name('config.store');
     Route::post('sistem/preferensi', [KonfigurasiController::class, 'storePreferensi'])->name('preferensi.store');
+    Route::post('sistem/kop-surat', [KonfigurasiController::class, 'storeKopSurat'])->name('kop-surat.store');
 
     Route::resource('spt', SPTController::class);
     Route::get('spt-cetak/{spt}', [SPTController::class, 'print'])->name('spt.print');
