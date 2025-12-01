@@ -74,7 +74,7 @@
             </div>
             <div class="col-span-2 bg-white overflow-hidden px-10 py-5 flex items-center md:h-full">
                 <div class="w-full">
-                    <div class="flex-col flex space-y-4 justify-center items-center pb-3 border-b border-gray-300">
+                    <div class="flex-col flex space-y-4 justify-center items-center pb-4 border-b border-gray-300">
                         <p class="text-gray-600 font-extrabold text-center text-xl leading-none">Sistem Informasi
                             Perjalanan Dinas <span class=" text-nowrap">(E-SPPD)</span>
                         </p>
