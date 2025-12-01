@@ -38,78 +38,71 @@
                 <x-slot name="content">
                     <fieldset class="border-t max-w-xl mx-auto">
                         <legend align="center" class="px-3 text-secondary-1 py-1"> Umum </legend>
-                        <div class="text-sm grid grid-cols-2 gap-y-3 gap-x-7">
-                            <div class="space-y-3">
-                                <div class="flex flex-col gap-1">
-                                    <label for="program_id">Program</label>
-                                    <select name="program_id" id="program_id" class="text-sm rounded-lg select2"
-                                        required>
-                                        <option value="" selected disabled> Pilih Program</option>
-                                        @foreach ($program as $item)
-                                            <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="kegiatan_id">Kegiatan</label>
-                                    <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2"
-                                        required>
-                                        <option value="" selected disabled> Pilih Kegiatan</option>
-                                    </select>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="sub_kegiatan_id">Sub Kegiatan</label>
-                                    <select name="sub_kegiatan_id" id="sub_kegiatan_id"
-                                        class="text-sm rounded-lg select2" required>
-                                        <option value="" selected disabled> Pilih Sub Kegiatan</option>
-                                    </select>
-                                </div>
+                        <div class="text-sm grid grid-cols-1 gap-y-3 gap-x-7">
+                            <div class="flex flex-col gap-1">
+                                <label for="bidang_id">{{ session('config')->judul }}</label>
+                                <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
+                                    <option value="" selected disabled>Pilih {{ session('config')->judul }}
+                                    </option>
+                                    @foreach ($bidang as $item)
+                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="space-y-3">
-                                <div class="flex flex-col gap-1">
-                                    <label for="bidang_id">{{ session('config')->judul }}</label>
-                                    <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
-                                        <option value="" selected disabled>Pilih {{ session('config')->judul }}
-                                        </option>
-                                        @foreach ($bidang as $item)
-                                            <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
-                                    <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
-                                        required>
-                                        <option value="" selected disabled> Pilih Sub
-                                            {{ session('config')->judul }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="jenis_sppd_id">Jenis SPPD</label>
-                                    <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
-                                        required>
-                                        <option value="" selected disabled> Pilih Jenis SPPD</option>
-                                        @foreach ($jenis as $item)
-                                            <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
+                                <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
+                                    required>
+                                    <option value="" selected disabled> Pilih Sub
+                                        {{ session('config')->judul }}
+                                    </option>
+                                </select>
                             </div>
-                            <div class="col-span-2 grid grid-cols-2 gap-x-7">
-                                <div class="w-full border-t col-span-2 pb-3 mt-3">
-
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="tanggal_berangkat">Tanggal Berangkat</label>
-                                    <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
-                                        class="w-full text-sm rounded-lg border border-secondary-4">
-                                </div>
-                                <div class="flex flex-col gap-1">
-                                    <label for="tanggal_kembali">Tanggal Kembali</label>
-                                    <input type="date" id="tanggal_kembali" name="tanggal_kembali"
-                                        class="w-full text-sm rounded-lg border border-secondary-4">
-                                </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="program_id">Program</label>
+                                <select name="program_id" id="program_id" class="text-sm rounded-lg select2"
+                                    required>
+                                    <option value="" selected disabled> Pilih Program</option>
+                                    @foreach ($program as $item)
+                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="kegiatan_id">Kegiatan</label>
+                                <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2"
+                                    required>
+                                    <option value="" selected disabled> Pilih Kegiatan</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="sub_kegiatan_id">Sub Kegiatan</label>
+                                <select name="sub_kegiatan_id" id="sub_kegiatan_id"
+                                    class="text-sm rounded-lg select2" required>
+                                    <option value="" selected disabled> Pilih Sub Kegiatan</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="jenis_sppd_id">Jenis SPPD</label>
+                                <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
+                                    required>
+                                    <option value="" selected disabled> Pilih Jenis SPPD</option>
+                                    @foreach ($jenis as $item)
+                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="w-full border-t pb-3 mt-3">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="tanggal_berangkat">Tanggal Berangkat</label>
+                                <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
+                                    class="w-full text-sm rounded-lg border border-secondary-4">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="tanggal_kembali">Tanggal Kembali</label>
+                                <input type="date" id="tanggal_kembali" name="tanggal_kembali"
+                                    class="w-full text-sm rounded-lg border border-secondary-4">
                             </div>
                         </div>
                     </fieldset>
@@ -196,8 +189,8 @@
                     <fieldset class="border-t max-w-xl mx-auto">
                         <legend align="center" class="px-3 text-secondary-1">Penanda Tangan</legend>
                         <div class="pt-3">
-                            <div class="grid grid-cols-2 gap-5">
-                                <div class="col-span-2">
+                            <div class="grid grid-cols-1 gap-5">
+                                <div>
                                     <div class="flex items-center gap-5">
                                         <div class="flex items-center gap-1">
                                             <input type="checkbox" class="rounded-full" name="ub_status"

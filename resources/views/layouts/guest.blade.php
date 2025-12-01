@@ -64,7 +64,7 @@
         @endif
         <div class="absolute bg-color-1-100 w-full h-full top-0 opacity-10"></div>
         <div
-            class="grid grid-cols-1 md:grid-cols-3 rounded-3xl overflow-hidden md:min-w-[671px] max-w-2xl shadow-lg border border-white z-10 md:h-full max-h-[500px] md:min-h-[420px] mx-3 md:mx-0 p-3 bg-white">
+            class="grid grid-cols-1 md:grid-cols-3 rounded-3xl overflow-hidden md:min-w-[671px] max-w-2xl shadow-lg border border-white z-10 md:h-full max-h-[460px] md:min-h-[420px] mx-3 md:mx-0 p-3 bg-white">
             <div
                 class="col-span-1 md:block group bg-gradient-to-b from-color-1-500 via-color-1-400 to-color-1-600 rounded-3xl">
                 <div class="flex items-center justify-center w-full h-full p-5">
@@ -74,13 +74,17 @@
             </div>
             <div class="col-span-2 bg-white overflow-hidden px-10 py-5 flex items-center md:h-full">
                 <div class="w-full">
-                    <div class="flex-col flex justify-center items-center pb-2 border-b border-gray-300">
-                        <p class="text-gray-600 font-extrabold text-center text-xl leading-none">Badan Keuangan dan Aset
-                            Daerah
+                    <div class="flex-col flex space-y-4 justify-center items-center pb-3 border-b border-gray-300">
+                        <p class="text-gray-600 font-extrabold text-center text-xl leading-none">Sistem Informasi
+                            Perjalanan Dinas <span class=" text-nowrap">(E-SPPD)</span>
                         </p>
-                        <p class="text-gray-400 font-medium text-center text-sm leading-5">Sistem Informasi
-                            Perjalanan Dinas
-                        </p>
+                        <div class=" flex flex-col">
+                            <p class="text-gray-400 font-medium text-center leading-5">Badan Keuangan dan Aset
+                                Daerah
+                            </p>
+                            <p class="text-gray-400 font-medium text-base text-center leading-5">Kab. Penajam Paser Utara
+                            </p>
+                        </div>
                     </div>
                     <div class="py-3">
                         {{ $slot }}
