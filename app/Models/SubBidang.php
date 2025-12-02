@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubBidang extends Model
 {
+    public $timestamps = false;
     protected $table = 'ref_bidang_sub';
     use HasFactory;
     // use SoftDeletes;

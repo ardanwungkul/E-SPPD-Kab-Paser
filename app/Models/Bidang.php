@@ -10,6 +10,7 @@ class Bidang extends Model
 {
     use HasFactory;
     // use SoftDeletes;
+    public $timestamps = false;
     protected $table = 'ref_bidang';
     public function sub_bidang()
     {
