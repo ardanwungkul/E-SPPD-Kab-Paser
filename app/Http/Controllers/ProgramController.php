@@ -49,10 +49,10 @@ class ProgramController extends Controller
                 'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
+                'uraian.max' => 'Nama Program tidak boleh lebih dari 150 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
-                'uraian.required' => 'Uraian Wajib Diisi',
+                'uraian.required' => 'Nama Program Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',
             ]
         );
@@ -98,10 +98,10 @@ class ProgramController extends Controller
                 'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
+                'uraian.max' => 'Nama Program tidak boleh lebih dari 150 karakter',
                 'kode.required' => 'Kode Wajib Diisi',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
-                'uraian.required' => 'Uraian Wajib Diisi',
+                'uraian.required' => 'Nama Program Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',
 
             ]

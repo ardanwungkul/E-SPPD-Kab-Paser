@@ -52,10 +52,10 @@ class KegiatanController extends Controller
                 'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
+                'uraian.max' => 'Nama Kegiatan tidak boleh lebih dari 150 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 50 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
-                'uraian.required' => 'Uraian Wajib Diisi',
+                'uraian.required' => 'Nama Kegiatan Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',
             ]
         );
@@ -103,10 +103,10 @@ class KegiatanController extends Controller
                 'uraian' => ['required', 'max:150',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 150 karakter',
+                'uraian.max' => 'Nama Kegiatan tidak boleh lebih dari 150 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 50 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
-                'uraian.required' => 'Uraian Wajib Diisi',
+                'uraian.required' => 'Nama Kegiatan Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',
             ]
         );

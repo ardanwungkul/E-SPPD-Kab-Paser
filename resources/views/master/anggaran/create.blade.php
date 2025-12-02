@@ -22,10 +22,10 @@
                             </select>
                         </div>
                         <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
-                            <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
+                            <label for="sub_bidang_id">Sub. {{ session('config')->judul }}</label>
                             <select name="sub_bidang_id" id="sub_bidang_id"
                                 class="text-xs md:text-sm rounded-lg select2" required>
-                                <option value="" selected disabled> Pilih Sub {{ session('config')->judul }}
+                                <option value="" selected disabled> Pilih Sub. {{ session('config')->judul }}
                                 </option>
                                 @if ($sub_bidang)
                                     @foreach ($sub_bidang->bidang->sub_bidang as $s)
@@ -63,10 +63,10 @@
                             </select>
                         </div>
                         <div class="flex flex-col gap-1 col-span-2">
-                            <label for="sub_kegiatan_id">Sub Kegiatan</label>
+                            <label for="sub_kegiatan_id">Sub. Kegiatan</label>
                             <select name="sub_kegiatan_id" id="sub_kegiatan_id"
                                 class="text-xs md:text-sm rounded-lg select2" required>
-                                <option value="" selected disabled> Pilih Sub Kegiatan</option>
+                                <option value="" selected disabled> Pilih Sub. Kegiatan</option>
                                 @if ($sub_kegiatan)
                                     @foreach ($sub_kegiatan->kegiatan->sub_kegiatan as $s)
                                         <option value="{{ $s->id }}"
@@ -91,27 +91,9 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="flex justify-end items-center gap-4 pt-3">
-                        <button
-                            class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
-                            type="submit">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="4" d="M5 11.917 9.724 16.5 19 7.5" />
-                            </svg>
-
-                            <p>Simpan</p>
-                        </button>
-                        <a class="bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 shadow-md"
-                            href="{{ route('anggaran.index') }}">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="4" d="M6 18 17.94 6M18 18 6.06 6" />
-                            </svg>
-                            <p>Kembali</p>
-                        </a>
+                    <div class="flex justify-end items-center gap-4 pt-4">
+                        <x-button.save-button/>
+                        <x-button.back-button :route="route('anggaran.index')"/>
                     </div>
                 </div>
             </form>
@@ -159,7 +141,7 @@
                         );
                         $('#sub_kegiatan_id').empty();
                         $('#sub_kegiatan_id').append(
-                            '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                            '<option value="" selected disabled>Pilih Sub. Kegiatan</option>'
                         );
 
                         if (response.length > 0) {
@@ -183,7 +165,7 @@
                 $('#kegiatan_id').append('<option value="" selected disabled>Pilih Kegiatan</option>');
                 $('#sub_kegiatan_id').empty();
                 $('#sub_kegiatan_id').append(
-                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                    '<option value="" selected disabled>Pilih Sub. Kegiatan</option>'
                 );
             }
         });
@@ -200,7 +182,7 @@
                     success: function(response) {
                         $('#sub_kegiatan_id').empty();
                         $('#sub_kegiatan_id').append(
-                            '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                            '<option value="" selected disabled>Pilih Sub. Kegiatan</option>'
                         );
 
                         if (response.length > 0) {
@@ -211,7 +193,7 @@
                             });
                         } else {
                             $('#sub_kegiatan_id').append(
-                                '<option value="" disabled>Tidak ada Sub kegiatan tersedia</option>'
+                                '<option value="" disabled>Tidak ada Sub. kegiatan tersedia</option>'
                             );
                         }
                     },
@@ -222,7 +204,7 @@
             } else {
                 $('#sub_kegiatan_id').empty();
                 $('#sub_kegiatan_id').append(
-                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>');
+                    '<option value="" selected disabled>Pilih Sub. Kegiatan</option>');
             }
         });
         $('#bidang_id').on('change', function() {
@@ -238,7 +220,7 @@
                     success: function(response) {
                         $('#sub_bidang_id').empty();
                         $('#sub_bidang_id').append(
-                            '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                            '<option value="" selected disabled>Pilih Sub. {{ session('config')->judul }}</option>'
                         );
 
                         if (response.length > 0) {
@@ -249,7 +231,7 @@
                             });
                         } else {
                             $('#sub_bidang_id').append(
-                                '<option value="" disabled>Tidak ada Sub {{ session('config')->judul }} tersedia</option>'
+                                '<option value="" disabled>Tidak ada Sub. {{ session('config')->judul }} tersedia</option>'
                             );
                         }
                     },
@@ -260,7 +242,7 @@
             } else {
                 $('#sub_bidang_id').empty();
                 $('#sub_bidang_id').append(
-                    '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+                    '<option value="" selected disabled>Pilih Sub. {{ session('config')->judul }}</option>'
                 );
             }
         });

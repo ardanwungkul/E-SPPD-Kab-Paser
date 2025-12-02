@@ -25,7 +25,7 @@
     @endif
 </head>
 
-<body class="font-poppins antialiased"
+<body class="font-sans antialiased"
     onload=" document.getElementById('loader').classList.add('opacity-0');setTimeout(() => {
     document.getElementById('loader').style.display = 'none';
 }, 300);">

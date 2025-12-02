@@ -53,11 +53,11 @@ class SubKegiatanController extends Controller
                 'uraian' => ['required', 'max:200',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 200 karakter',
+                'uraian.max' => 'Nama Sub. Bidang tidak boleh lebih dari 200 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 50 Digit',
                 'program_id.required' => 'Program Wajib Diisi',
                 'kegiatan_id.required' => 'Kegiatan Wajib Diisi',
-                'uraian.required' => 'Uraian Wajib Diisi',
+                'uraian.required' => 'Nama Sub. Bidang Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',
             ]
         );
@@ -106,11 +106,11 @@ class SubKegiatanController extends Controller
                 'uraian' => ['required', 'max:200',],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 200 karakter',
+                'uraian.max' => 'Nama Sub. Bidang tidak boleh lebih dari 200 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 50 Digit',
                 'program_id.required' => 'Program Wajib Diisi',
                 'kegiatan_id.required' => 'Kegiatan Wajib Diisi',
-                'uraian.required' => 'Uraian Wajib Diisi',
+                'uraian.required' => 'Nama Sub. Bidang Wajib Diisi',
                 'kode.unique' => 'Kode Sudah Digunakan',
             ]
         );

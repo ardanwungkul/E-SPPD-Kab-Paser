@@ -48,8 +48,8 @@ class BidangController extends Controller
                 ],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
-                'uraian.required' => 'Uraian Harus Diisi',
+                'uraian.max' => 'Nama Bidang tidak boleh lebih dari 100 karakter',
+                'uraian.required' => 'Nama Bidang Harus Diisi',
                 'uraian.unique' => 'Nama Bidang Sudah Digunakan'
             ]
         );
@@ -86,8 +86,8 @@ class BidangController extends Controller
                 ],
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
-                'uraian.required' => 'Uraian Harus Diisi',
+                'uraian.max' => 'Nama Bidang tidak boleh lebih dari 100 karakter',
+                'uraian.required' => 'Nama Bidang Harus Diisi',
                 'uraian.unique' => 'Nama Bidang Sudah Digunakan'
             ]
         );

@@ -42,7 +42,7 @@ class JenisPerjalananController extends Controller
                 'wilayah' => 'required',
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Jenis Perjalanan tidak boleh lebih dari 100 karakter',
             ]
         );
         $jenis = new JenisPerjalanan();
@@ -79,7 +79,7 @@ class JenisPerjalananController extends Controller
                 'wilayah' => 'required',
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Jenis Perjalanan tidak boleh lebih dari 100 karakter',
             ]
         );
         $jenis_perjalanan->uraian = $request->uraian;

@@ -227,7 +227,7 @@
 
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Referensi
-                                Bidang
+                                {{ session('config')->judul }}
                             </span>
                         </a>
                     </li>
@@ -243,8 +243,8 @@
                                 </svg>
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub
-                                Bidang</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub.
+                                {{ session('config')->judul }}</span>
                         </a>
                     </li>
                     <li>
@@ -286,7 +286,7 @@
                                         d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub Kegiatan</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub. Kegiatan</span>
                         </a>
                     </li>
                     <li>
@@ -731,7 +731,7 @@
                                                 d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                         </svg>
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub Kegiatan</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub. Kegiatan</span>
                                 </a>
                             </li>
                             <li>

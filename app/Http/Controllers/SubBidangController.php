@@ -49,9 +49,9 @@ class SubBidangController extends Controller
             ],
             'bidang_id' => 'required'
         ], [
-            'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
-            'uraian.required' => 'Uraian Wajib Diisi',
-            'uraian.unique' => 'Nama Sub Bidang Sudah Digunakan',
+            'uraian.max' => 'Nama Sub. Bidang tidak boleh lebih dari 100 karakter',
+            'uraian.required' => 'Nama Sub. Bidang Wajib Diisi',
+            'uraian.unique' => 'Nama Sub. Bidang Sudah Digunakan',
             'bidang_id.required' => 'Bidang Wajib Diisi'
         ]);
         $sub_bidang = new SubBidang();
@@ -60,7 +60,7 @@ class SubBidangController extends Controller
         $sub_bidang->tahun = session('tahun');
         $sub_bidang->save();
 
-        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Menambahkan Sub Bidang']);
+        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Menambahkan Sub. Bidang']);
     }
 
     /**
@@ -97,9 +97,9 @@ class SubBidangController extends Controller
                 'bidang_id' => 'required'
             ],
             [
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
-                'uraian.required' => 'Uraian Wajib Diisi',
-                'uraian.unique' => 'Nama Sub Bidang Sudah Digunakan',
+                'uraian.max' => 'Nama Sub. Bidang tidak boleh lebih dari 100 karakter',
+                'uraian.required' => 'Nama Sub. Bidang Wajib Diisi',
+                'uraian.unique' => 'Nama Sub. Bidang Sudah Digunakan',
                 'bidang_id.required' => 'Bidang Wajib Diisi'
             ]
         );
@@ -107,7 +107,7 @@ class SubBidangController extends Controller
         $sub_bidang->uraian = $request->uraian;
         $sub_bidang->save();
 
-        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Mengubah Sub Bidang']);
+        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Mengubah Sub. Bidang']);
     }
 
     /**
@@ -116,7 +116,7 @@ class SubBidangController extends Controller
     public function destroy(SubBidang $sub_bidang)
     {
         $sub_bidang->delete();
-        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Menghapus Sub Bidang']);
+        return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Menghapus Sub. Bidang']);
     }
     public function getSubBidangByBidang(Request $request)
     {

@@ -8,17 +8,8 @@
 
             <div>
                 <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4 md:gap-0">
-                    <a href="{{ route('anggaran.create') }}"
-                        class="bg-secondary-3 text-secondary-2 rounded-lg px-3 py-2 text-xs border border-secondary-4 shadow-lg flex gap-1 items-center justify-center whitespace-nowrap w-min font-medium">
-                        <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-secondary-2"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                        </svg>
-                        <p>
-                            Tambah
-                        </p>
-                    </a>
+                    <x-button.add-button :route="route('anggaran.create')" />
+                    
                     <form action="{{ route('anggaran.index') }}" method="GET" class="w-full md:w-auto">
                         <input type="search" class="rounded-lg p-2 text-xs w-full" name="q"
                             value="{{ request()->q }}" placeholder="Cari...">
@@ -46,7 +37,7 @@
                                             <tr class="bg-secondary-3">
                                                 <td colspan="1"
                                                     class="text-start px-3 py-2 border border-secondary-4 font-semibold">
-                                                    Sub {{ session('config')->judul }}
+                                                    Sub. {{ session('config')->judul }}
                                                 </td>
                                                 <td colspan="{{ 1 + $jenis_sppd->count() }}"
                                                     class="text-start px-3 py-2 border border-secondary-4 font-semibold">
