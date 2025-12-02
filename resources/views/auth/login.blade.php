@@ -14,7 +14,7 @@
                     </svg>
                 </div>
                 <input type="text" id="username_or_email" name="username_or_email" autocomplete="username" required
-                    value="{{ old('username_or_email') }}" placeholder="Masukkan Username atau Email" class="block w-full rounded-r-lg text-sm border-none">
+                    value="{{ old('username_or_email') }}" placeholder="Username atau Email" class="block w-full rounded-r-lg text-sm border-none">
             </div>
             {{-- <x-input-error :messages="$errors->get('username_or_email')" class="mt-2" /> --}}
         </div>
