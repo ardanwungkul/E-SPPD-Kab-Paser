@@ -110,17 +110,8 @@
                             </div>
                         </div>
                     </fieldset> --}}
-                    <div class="flex justify-end items-center gap-4">
-                        <button
-                            class="bg-white md:bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 md:text-sm text-xs"
-                            type="submit">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="4" d="M5 11.917 9.724 16.5 19 7.5" />
-                            </svg>
-                            <p>Simpan</p>
-                        </button>
+                    <div class="flex justify-end items-center gap-4 pt-4">
+                        <x-button.save-button />
                     </div>
                 </div>
             </form>
@@ -163,7 +154,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-50 border-secondary-4 shadow-md">
+                    {{-- <fieldset class="border rounded-lg p-4 bg-white md:bg-gray-50 border-secondary-4 shadow-md">
                         <legend align="center"
                             class="px-5 text-secondary-1 bg-white rounded-lg border md:text-sm text-xs">Judul
                             Bagian/Bidang
@@ -185,18 +176,9 @@
                                 </div>
                             </div>
                         </div>
-                    </fieldset>
-                    <div class="flex justify-end items-center gap-4">
-                        <button
-                            class="bg-white md:bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 md:text-sm text-xs"
-                            type="submit">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="4" d="M5 11.917 9.724 16.5 19 7.5" />
-                            </svg>
-                            <p>Simpan</p>
-                        </button>
+                    </fieldset> --}}
+                    <div class="flex justify-end items-center gap-4 pt-4">
+                        <x-button.save-button />
                     </div>
                 </div>
             </form>
@@ -338,17 +320,8 @@
 
                         </div>
                     </fieldset>
-                    <div class="flex justify-end items-center gap-4">
-                        <button
-                            class="bg-white md:bg-secondary-3 hover:bg-opacity-80 text-secondary-1 py-2 px-5 rounded-lg border border-secondary-4 flex items-center gap-1 md:text-sm text-xs"
-                            type="submit">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="4" d="M5 11.917 9.724 16.5 19 7.5" />
-                            </svg>
-                            <p>Simpan</p>
-                        </button>
+                    <div class="flex justify-end items-center gap-4 pt-4">
+                        <x-button.save-button />
                     </div>
                 </div>
             </form>

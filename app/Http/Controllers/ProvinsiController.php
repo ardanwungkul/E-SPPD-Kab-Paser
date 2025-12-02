@@ -40,7 +40,7 @@ class ProvinsiController extends Controller
             'longitude' => 'required',
             'latitude' => 'required',
         ], [
-            'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+            'nama.max' => 'Nama Provinsi Tidak Boleh Lebih Dari 50'
         ]);
         $provinsi = new Provinsi();
         $provinsi->nama = $request->nama;
@@ -64,7 +64,7 @@ class ProvinsiController extends Controller
                 'latitude' => 'required',
             ],
             [
-                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+                'nama.max' => 'Nama Provinsi Tidak Boleh Lebih Dari 50'
             ]
         );
         $provinsi->nama = $request->nama;

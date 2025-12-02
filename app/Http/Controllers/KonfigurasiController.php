@@ -75,7 +75,7 @@ class KonfigurasiController extends Controller
         $config->no_spt = $request->no_spt;
         $config->no_sppd = $request->no_sppd;
         $config->no_spj = $request->no_spj;
-        $config->judul = $request->judul;
+        // $config->judul = $request->judul;
         $config->save();
         $request->session()->put('config', $config);
 

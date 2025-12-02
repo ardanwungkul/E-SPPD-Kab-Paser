@@ -7,17 +7,8 @@
         <x-slot name="content">
             <div>
                 <div class="flex md:flex-row flex-col md:items-center justify-between">
-                    <a href="{{ route('provinsi.create') }}"
-                        class="bg-secondary-3 text-secondary-2 rounded-lg px-3 py-2 text-xs border border-secondary-4 shadow-lg flex gap-1 items-center justify-center mb-4 md:mb-4 whitespace-nowrap w-min font-medium">
-                        <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-secondary-2"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                        </svg>
-                        <p>
-                            Tambah
-                        </p>
-                    </a>
+                    <x-button.add-button :route="route('provinsi.create')" />
+
                     <form method="GET" action="{{ route('provinsi.index') }}">
                         <input type="text" name="search" class="text-sm rounded-lg mb-4 md:mb-0 w-full"
                             value="{{ request('search') }}" placeholder="Cari...">
@@ -28,7 +19,7 @@
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr>
-                                    <td class="text-xs">Nama</td>
+                                    <td class="text-xs">Provinsi</td>
                                     <td class="text-xs">Latitude</td>
                                     <td class="text-xs">Longitude</td>
                                     <td class="text-xs w-32"></td>

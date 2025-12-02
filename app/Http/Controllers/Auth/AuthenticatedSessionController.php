@@ -31,6 +31,8 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $config = Config::where('tahun', $request->tahun)->where('aktif', 'Y')->first();
+
+        $config->judul = "Bidang";
         $request->authenticate();
 
         $request->session()->regenerate();

@@ -13,7 +13,7 @@
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr>
                                     <td class="text-xs">Kode</td>
-                                    <td class="text-xs">Program/Kegiatan</td>
+                                    <td class="text-xs">Program/Kegiatan/Sub. Kegiatan</td>
                                     <td class="text-xs w-32"></td>
                                 </tr>
                             </thead>

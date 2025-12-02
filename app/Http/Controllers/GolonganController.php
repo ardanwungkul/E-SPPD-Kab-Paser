@@ -63,7 +63,7 @@ class GolonganController extends Controller
             ],
             [
                 'kode_golongan.max' => 'kode Golongan tidak boleh lebih dari 10 karakter',
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Nama Pangkat tidak boleh lebih dari 100 karakter',
             ]
         );
         $golongan = new Golongan();
@@ -110,7 +110,7 @@ class GolonganController extends Controller
             ],
             [
                 'kode_golongan.max' => 'kode Golongan tidak boleh lebih dari 10 karakter',
-                'uraian.max' => 'Uraian tidak boleh lebih dari 100 karakter',
+                'uraian.max' => 'Nama Pangkat tidak boleh lebih dari 100 karakter',
             ]
         );
         $golongan->uraian = $request->uraian;

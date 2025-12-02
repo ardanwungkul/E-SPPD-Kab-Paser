@@ -46,7 +46,7 @@ class KabupatenKotaController extends Controller
                 'latitude' => 'required',
             ],
             [
-                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+                'nama.max' => 'Nama Kabupaten/Kota Tidak Boleh Lebih Dari 50'
             ]
         );
 
@@ -76,7 +76,7 @@ class KabupatenKotaController extends Controller
                 'latitude' => 'required',
             ],
             [
-                'nama.max' => 'Nama Tidak Boleh Lebih Dari 50'
+                'nama.max' => 'Nama Kabupaten/Kota Tidak Boleh Lebih Dari 50'
             ]
         );
         $kabupaten_kota->nama = $request->nama;
