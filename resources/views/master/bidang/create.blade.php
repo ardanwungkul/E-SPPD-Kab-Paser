@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Tambah Bidang
+        Tambah {{ session('config')->judul }}
     </x-slot>
     <x-container>
         <x-slot name="content">

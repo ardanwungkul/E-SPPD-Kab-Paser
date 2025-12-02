@@ -139,7 +139,7 @@
                                     <div class="flex items-center gap-3 flex-none">
                                         <div class="text-end hidden md:block">
                                             <p class="">Hii, {{ Auth::user()->name }}</p>
-                                            <p class="text-xs">{{ now()->format('D, d M Y') }}</p>
+                                            <p class="text-xs">{{ now()->translatedFormat('D, d M Y') }}</p>
                                         </div>
                                         <div>
                                             <button id="dropdownUserAvatarButton"
