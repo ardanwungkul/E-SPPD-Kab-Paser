@@ -10,7 +10,7 @@ class SubBidang extends Model
 {
     protected $table = 'ref_bidang_sub';
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
 
     public function bidang()
     {

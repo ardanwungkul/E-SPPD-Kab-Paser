@@ -227,7 +227,7 @@
 
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Referensi
-                                {{ session('config')->judul }}
+                                Bidang
                             </span>
                         </a>
                     </li>
@@ -244,7 +244,7 @@
 
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub
-                                {{ session('config')->judul }}</span>
+                                Bidang</span>
                         </a>
                     </li>
                     <li>

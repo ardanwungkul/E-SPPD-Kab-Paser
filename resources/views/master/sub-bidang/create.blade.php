@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Tambah Sub {{ session('config')->judul }}
+        Tambah Sub Bidang
     </x-slot>
     <x-container>
         <x-slot name="content">
@@ -9,10 +9,10 @@
                 @method('POST')
                 <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
                     <div class="flex flex-col gap-1">
-                        <label for="bidang_id">{{ session('config')->judul }}</label>
+                        <label for="bidang_id">Bidang</label>
                         <select id="bidang_id" name="bidang_id"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
-                            <option value="" selected disabled>Pilih {{ session('config')->judul }}</option>
+                            <option value="" selected disabled>Pilih Bidang</option>
                             @foreach ($bidang as $item)
                                 <option value="{{ $item->id }}">{{ $item->uraian }}</option>
                             @endforeach

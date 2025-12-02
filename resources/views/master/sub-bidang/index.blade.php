@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Referensi Sub {{ session('config')->judul }}
+        Referensi Sub Bidang
     </x-slot>
 
     <x-container>
@@ -22,8 +22,8 @@
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr>
-                                    <td class="text-xs">Nama {{ session('config')->judul }}/Sub
-                                        {{ session('config')->judul }}</td>
+                                    <td class="text-xs">Nama Bidang/Sub
+                                        Bidang</td>
                                     <td class="text-xs w-32"></td>
                                 </tr>
                             </thead>

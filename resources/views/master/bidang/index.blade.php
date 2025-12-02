@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Referensi {{ session('config')->judul }}
+        Referensi Bidang
     </x-slot>
 
     <x-container>
