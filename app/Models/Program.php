@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $table = 'ref_program2';
 
     protected $primaryKey = 'kdprog';

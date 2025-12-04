@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class JenisPegawai extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'ref_jenis_pegawai';
 
     public function pangkat()

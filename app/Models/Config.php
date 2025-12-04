@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Config extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'config';
     protected $primaryKey = 'tahun';
     public $incrementing = false;

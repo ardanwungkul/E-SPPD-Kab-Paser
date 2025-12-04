@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Anggaran extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     protected $table = 'anggaran';
 
     public function sub_bidang()

@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TingkatPerjalananDinas extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'ref_tingkat_sppd';
 }
