@@ -59,7 +59,7 @@ class AnggaranController extends Controller
         $sub_kegiatan = $request->has('sub_kegiatan') ? SubKegiatan::find($request->sub_kegiatan) : null;
         $sub_bidang = $request->has('sub_bidang') ? SubBidang::find($request->sub_bidang) : null;
 
-        return view('master.anggaran.create', compact('program', 'bidang', 'jenis', 'sub_kegiatan', 'sub_bidang'));
+        return view('master.anggaran.create', compact('program', 'bidang', 'sub_kegiatan', 'sub_bidang'));
     }
 
     /**
