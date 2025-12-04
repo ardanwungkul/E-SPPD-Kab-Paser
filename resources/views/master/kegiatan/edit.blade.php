@@ -15,7 +15,8 @@
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
                                 <option value="{{ $item->kdprog }}"
-                                    {{ old('program_id', $kegiatan->kdprog) == $item->kdprog ? 'selected' : '' }}>{{ $item->uraian }}
+                                    {{ old('program_id', $kegiatan->kdprog) == $item->kdprog ? 'selected' : '' }}>
+                                    {{ $item->kdprog }} - {{ $item->uraian }}
                                 </option>
                             @endforeach
                         </select>
