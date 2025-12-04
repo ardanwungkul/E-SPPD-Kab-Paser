@@ -25,6 +25,6 @@ class Kegiatan2 extends Model
     }
     public function sub_kegiatan()
     {
-        return $this->hasMany(SubKegiatan::class, 'kegiatan_id');
+        return $this->hasMany(SubKegiatan2::class, 'kdgiat');
     }
 }

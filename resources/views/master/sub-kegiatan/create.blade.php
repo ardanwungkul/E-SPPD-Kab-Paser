@@ -13,7 +13,7 @@
                         <select name="program_id" id="program_id" class="text-xs md:text-sm rounded-lg select2" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
-                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                <option {{ old('program_id') == $item->kdprog ? 'selected' : '' }} value="{{ $item->kdprog }}">{{$item->kdprog}} - {{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -72,7 +72,7 @@
                         if (response.length > 0) {
                             $.each(response, function(index, kegiatan) {
                                 $('#kegiatan_id').append('<option value="' +
-                                    kegiatan.id + '">' + kegiatan.uraian +
+                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat + ' - ' + kegiatan.uraian +
                                     '</option>');
                             });
                         } else {

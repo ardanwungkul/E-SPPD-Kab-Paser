@@ -130,9 +130,9 @@ class KegiatanController extends Controller
     public function getKegiatanByProgram(Request $request)
     {
         $request->validate([
-            'kdprog' => 'required|string',
+            'program_id' => 'required|string',
         ]);
-        $programKode = $request->input('kdprog');
+        $programKode = $request->input('program_id');
         $kegiatan = Kegiatan2::where('kdprog', $programKode)->get();
         return response()->json($kegiatan);
     }

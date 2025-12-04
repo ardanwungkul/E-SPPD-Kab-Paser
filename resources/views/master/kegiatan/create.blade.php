@@ -14,7 +14,7 @@
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
-                                <option {{ old('program_id') == $item->kdprog ? 'selected' : '' }} value="{{ $item->kdprog }}">{{ $item->uraian }}</option>
+                                <option {{ old('program_id') == $item->kdprog ? 'selected' : '' }} value="{{ $item->kdprog }}">{{$item->kdprog}} - {{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>

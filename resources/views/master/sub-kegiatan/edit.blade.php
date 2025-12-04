@@ -4,7 +4,7 @@
     </x-slot>
     <x-container>
         <x-slot name="content">
-            <form action="{{ route('sub-kegiatan.update', $sub_kegiatan->id) }}" method="POST">
+            <form action="{{ route('sub-kegiatan.update', $sub_kegiatan->kdsub) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
@@ -13,9 +13,9 @@
                         <select name="program_id" id="program_id" class="text-xs md:text-sm rounded-lg select2" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $sub_kegiatan->kegiatan->program_id == $item->id ? 'selected' : '' }}>
-                                    {{ $item->uraian }}
+                                <option value="{{ $item->kdprog }}"
+                                    {{ old('program_id', $sub_kegiatan->kdprog) == $item->kdprog ? 'selected' : '' }}>
+                                    {{ $item->kdprog }} - {{ $item->uraian }}
                                 </option>
                             @endforeach
                         </select>
@@ -26,8 +26,8 @@
                             required>
                             <option value="" selected disabled> Pilih Kegiatan</option>
                             @foreach ($sub_kegiatan->kegiatan->program->kegiatan as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $sub_kegiatan->kegiatan_id == $item->id ? 'selected' : '' }}>{{ $item->uraian }}
+                                <option value="{{ $item->kdgiat }}"
+                                    {{ $sub_kegiatan->kdgiat == $item->kdgiat ? 'selected' : '' }}>{{ $item->kdgiat }} - {{ $item->uraian }}
                                 </option>
                             @endforeach
 
@@ -37,13 +37,13 @@
                         <label for="kode">Kode Sub. Kegiatan</label>
                         <input type="text" id="kode" name="kode"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $sub_kegiatan->kode }}" placeholder="Masukkan Kode Sub. Kegiatan" required>
+                            value="{{ old('kode', $sub_kegiatan->kdsub) }}" placeholder="Masukkan Kode Sub. Kegiatan" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Nama Sub. Kegiatan</label>
                         <input type="text" id="uraian" name="uraian"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $sub_kegiatan->uraian }}" placeholder="Masukkan Nama Sub. Kegiatan " required>
+                            value="{{ old('uraian', $sub_kegiatan->uraian) }}" placeholder="Masukkan Nama Sub. Kegiatan " required>
                     </div>
 
                     <div class="flex justify-end items-center gap-4 pt-4">
@@ -81,7 +81,7 @@
                         if (response.length > 0) {
                             $.each(response, function(index, kegiatan) {
                                 $('#kegiatan_id').append('<option value="' +
-                                    kegiatan.id + '">' + kegiatan.uraian +
+                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat + ' - ' + kegiatan.uraian +
                                     '</option>');
                             });
                         } else {

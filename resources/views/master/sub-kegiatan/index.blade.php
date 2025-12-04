@@ -21,7 +21,7 @@
                                 @foreach ($data as $item)
                                     <tr class="text-xs text-black tracking-wide">
                                         <td>
-                                            <p class="text-start font-medium">{{ $item->kode }}</p>
+                                            <p class="text-start font-medium">{{ $item->kdprog }}</p>
                                         </td>
                                         <td>
                                             <p class="text-start">{{ $item->uraian }}</p>
@@ -31,10 +31,10 @@
                                         </td>
                                     </tr>
                                     @if ($item->kegiatan->count() > 0)
-                                        @foreach ($item->kegiatan()->orderBy('kode', 'asc')->get() as $kegiatan)
+                                        @foreach ($item->kegiatan()->orderBy('kdgiat', 'asc')->get() as $kegiatan)
                                             <tr class="text-xs text-black tracking-wide">
                                                 <td>
-                                                    <p class="text-start font-medium">{{ $kegiatan->kode }}
+                                                    <p class="text-start font-medium">{{ $kegiatan->kdgiat }}
                                                     </p>
                                                 </td>
                                                 <td>
@@ -45,11 +45,11 @@
                                                 </td>
                                             </tr>
                                             @if ($kegiatan->sub_kegiatan->count() > 0)
-                                                @foreach ($kegiatan->sub_kegiatan()->orderBy('kode', 'asc')->get() as $sub_kegiatan)
+                                                @foreach ($kegiatan->sub_kegiatan()->orderBy('kdsub', 'asc')->get() as $sub_kegiatan)
                                                     <tr class="text-xs tracking-wide">
                                                         <td>
                                                             <p class="text-start font-medium">
-                                                                {{ $sub_kegiatan->kode }}
+                                                                {{ $sub_kegiatan->kdsub }}
                                                             </p>
                                                         </td>
                                                         <td>
@@ -59,7 +59,7 @@
                                                             <div class="flex justify-center items-center gap-3">
                                                                 <div>
                                                                     <div>
-                                                                        <a href="{{ route('sub-kegiatan.edit', $sub_kegiatan->id) }}"
+                                                                        <a href="{{ route('sub-kegiatan.edit', $sub_kegiatan->kdsub) }}"
                                                                             class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                                             <svg class="w-4 h-4" aria-hidden="true"
                                                                                 xmlns="http://www.w3.org/2000/svg"
@@ -77,9 +77,9 @@
                                                                 </div>
                                                                 <div>
                                                                     <button type="button"
-                                                                        data-modal-id="{{ $sub_kegiatan->id }}"
-                                                                        data-modal-toggle="confirm-delete-{{ $sub_kegiatan->id }}"
-                                                                        data-modal-target="confirm-delete-{{ $sub_kegiatan->id }}"
+                                                                        data-modal-id="{{ $sub_kegiatan->kdsub }}"
+                                                                        data-modal-toggle="confirm-delete-{{ $sub_kegiatan->kdsub }}"
+                                                                        data-modal-target="confirm-delete-{{ $sub_kegiatan->kdsub }}"
                                                                         class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                                         <svg class="w-4 h-4" aria-hidden="true"
                                                                             xmlns="http://www.w3.org/2000/svg"
@@ -97,8 +97,8 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <x-modal.confirm-delete :id="$sub_kegiatan->id" :name="'Data'"
-                                                        :action="route('sub-kegiatan.destroy', $sub_kegiatan->id)" />
+                                                    <x-modal.confirm-delete :id="$sub_kegiatan->kdsub" :name="'Data'"
+                                                        :action="route('sub-kegiatan.destroy', $sub_kegiatan->kdsub)" />
                                                 @endforeach
                                             @endif
                                         @endforeach
