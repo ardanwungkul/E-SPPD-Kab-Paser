@@ -44,7 +44,7 @@ class SubKegiatanController extends Controller
                 'kode' => [
                     'required',
                     'max:20',
-                    Rule::unique('ref_kegiatan_sub2', 'kdsub')->where(function ($query) use ($request) {
+                    Rule::unique('ref_kegiatan_sub', 'kdsub')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'))->where('kdgiat', $request->kdgiat);
                     })
                 ],
@@ -98,7 +98,7 @@ class SubKegiatanController extends Controller
                 'kode' => [
                     'max:20',
                     'required',
-                    Rule::unique('ref_kegiatan_sub2', 'kdsub')->where(function ($query) use ($request) {
+                    Rule::unique('ref_kegiatan_sub', 'kdsub')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'))->where('kdgiat', $request->kegiatan_id);
                     })->ignore($sub_kegiatan->kdsub, 'kdsub')
                 ],
