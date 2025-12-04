@@ -19,14 +19,14 @@
         <x-slot name="header">
             Edit Anggaran
         </x-slot>
-        <x-container>
-            <x-slot name="content">
-                <form action="{{ route('anggaran.update', $anggaran->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="text-xs md:text-sm space-y-3 divide-y max-w-xl mx-auto">
-                        <div class="text-xs md:text-sm grid grid-cols-2 gap-y-3 gap-x-7">
-                            <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+        <form action="{{ route('anggaran.update', $anggaran->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <x-container>
+                <x-slot name="content">
+                    <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
+                        <div class="text-xs md:text-sm flex flex-col gap-3">
+                            <div class="flex flex-col gap-1">
                                 <label for="bidang_id">{{ session('config')->judul }}</label>
                                 <select name="bidang_id" id="bidang_id" class="text-xs md:text-sm rounded-lg select2"
                                     required disabled>
@@ -39,7 +39,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex flex-col gap-1 col-span-2 md:col-span-1">
+                            <div class="flex flex-col gap-1">
                                 <label for="sub_bidang_id">Sub. {{ session('config')->judul }}</label>
                                 <select name="sub_bidang_id" id="sub_bidang_id"
                                     class="text-xs md:text-sm rounded-lg select2" required disabled>
@@ -52,59 +52,92 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex flex-col gap-1 col-span-2">
+                        </div>
+                    </div>
+                </x-slot>
+            </x-container>
+            <x-container>
+                <x-slot name="content">
+                    <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
+                        <div class="text-xs md:text-sm flex flex-col gap-y-3">
+                            <div class="flex flex-col gap-1">
                                 <label for="program_id">Program</label>
                                 <select name="program_id" id="program_id" class="text-xs md:text-sm rounded-lg select2"
                                     required disabled>
                                     <option value="" selected disabled> Pilih Program</option>
                                     @foreach ($program as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ $item->id == $anggaran->sub_kegiatan->kegiatan->program_id ? 'selected' : '' }}>
-                                            {{ $item->uraian }}</option>
+                                        <option value="{{ $item->kdprog }}"
+                                            {{ $item->kdprog == $anggaran->kdprog ? 'selected' : '' }}>
+                                            {{ $item->kdprog }} - {{ $item->uraian }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex flex-col gap-1 col-span-2">
+                            <div class="flex flex-col gap-1">
                                 <label for="kegiatan_id">Kegiatan</label>
                                 <select name="kegiatan_id" id="kegiatan_id"
                                     class="text-xs md:text-sm rounded-lg select2" required disabled>
                                     <option value="" selected disabled> Pilih Kegiatan</option>
                                     @foreach ($anggaran->sub_kegiatan->kegiatan->program->kegiatan as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ $item->id == $anggaran->sub_kegiatan->kegiatan_id ? 'selected' : '' }}>
-                                            {{ $item->uraian }}</option>
+                                        <option value="{{ $item->kdgiat }}"
+                                            {{ $item->kdgiat == $anggaran->kdgiat ? 'selected' : '' }}>
+                                            {{ $item->kdgiat }} - {{ $item->uraian }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex flex-col gap-1 col-span-2">
+                            <div class="flex flex-col gap-1">
                                 <label for="sub_kegiatan_id">Sub. Kegiatan</label>
                                 <select name="sub_kegiatan_id" id="sub_kegiatan_id"
                                     class="text-xs md:text-sm rounded-lg select2" required disabled>
                                     <option value="" selected disabled> Pilih Sub. Kegiatan</option>
                                     @foreach ($anggaran->sub_kegiatan->kegiatan->sub_kegiatan as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ $item->id == $anggaran->sub_kegiatan_id ? 'selected' : '' }}>
-                                            {{ $item->uraian }}</option>
+                                        <option value="{{ $item->kdsub }}"
+                                            {{ $item->kdsub == $anggaran->kdsub ? 'selected' : '' }}>
+                                            {{ $item->kdsub }} - {{ $item->uraian }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="pt-3 space-y-1">
-                            <label for="rp_pagu" class="block mb-1">{{ $anggaran->jenis_sppd->uraian }}</label>
-                            <input type="text" id="rp_pagu" name="rp_pagu"
-                                class="rounded-lg border border-gray-400 w-full text-xs md:text-sm shadow-md"
-                                placeholder="0" value="{{ $anggaran->rp_pagu }}" autofocus required
-                                onfocus="this.value = formatRupiah(this.value, 'Rp. ')"
-                                oninput="this.value = formatRupiah(this.value, 'Rp. ')">
+                    </div>
+                </x-slot>
+            </x-container>
+            <x-container>
+                <x-slot name="content">
+                    <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
+                        <div class="text-xs md:text-sm flex flex-col gap-y-3">
+                            <div class="pt-3 space-y-3">
+                                <div class="pt-3 space-y-3">
+                                    <div>
+                                        <label for="rp_pagu1" class="block mb-1">Dalam Daerah</label>
+                                        <input type="text" id="rp_pagu1" name="rp_pagu1"
+                                            class="rounded-lg border border-gray-400 w-full text-xs md:text-sm shadow-md"
+                                            placeholder="0" value="Rp. {{ number_format($anggaran->rp_pagu1, 0, ',', '.') }}" required
+                                            oninput="this.value = formatRupiah(this.value, 'Rp. ')">
+                                    </div>
+                                    <div>
+                                        <label for="rp_pagu2" class="block mb-1">Luar Daerah Dalam Provinsi</label>
+                                        <input type="text" id="rp_pagu2" name="rp_pagu2"
+                                            class="rounded-lg border border-gray-400 w-full text-xs md:text-sm shadow-md"
+                                            placeholder="0" value="Rp. {{ number_format($anggaran->rp_pagu2, 0, ',', '.') }}" required
+                                            oninput="this.value = formatRupiah(this.value, 'Rp. ')">
+                                    </div>
+                                    <div>
+                                        <label for="rp_pagu3" class="block mb-1">Dalam Daerah</label>
+                                        <input type="text" id="rp_pagu3" name="rp_pagu3"
+                                            class="rounded-lg border border-gray-400 w-full text-xs md:text-sm shadow-md"
+                                            placeholder="0" value="Rp. {{ number_format($anggaran->rp_pagu3, 0, ',', '.') }}" required
+                                            oninput="this.value = formatRupiah(this.value, 'Rp. ')">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end items-center gap-4 pt-4">
+                                <x-button.save-button />
+                                <x-button.back-button :route="route('anggaran.index')" />
+                            </div>
                         </div>
                     </div>
-                    <div class="flex justify-end items-center gap-4 pt-4 max-w-xl mx-auto">
-                        <x-button.save-button/>
-                        <x-button.back-button :route="route('anggaran.index')"/>
-                    </div>
-                </form>
-            </x-slot>
-        </x-container>
+                </x-slot>
+            </x-container>
+        </form>
     </x-app-layout>
 
     <script type="module">

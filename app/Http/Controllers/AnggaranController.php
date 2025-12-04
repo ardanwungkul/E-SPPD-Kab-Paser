@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
 use App\Models\Bidang;
-use App\Models\JenisPerjalanan;
 use App\Models\Program;
 use App\Models\SubBidang;
 use App\Models\SubKegiatan;
@@ -21,8 +20,6 @@ class AnggaranController extends Controller
     }
     public function index(Request $request)
     {
-        $jenis_sppd = JenisPerjalanan::all();
-
         $query = Bidang::where('tahun', session('tahun'))->whereHas('sub_bidang', function ($query) {
             $query->whereHas('anggaran');
         })->with(['sub_bidang' => function ($query) {
@@ -48,7 +45,7 @@ class AnggaranController extends Controller
         }
 
         $data = $query->get();
-        return view('master.anggaran.index', compact('data', 'jenis_sppd'));
+        return view('master.anggaran.index', compact('data'));
     }
 
     /**
@@ -57,14 +54,12 @@ class AnggaranController extends Controller
     public function create(Request $request)
     {
         $program = Program::where('tahun', session('tahun'))->get();
-        $jenis = JenisPerjalanan::all();
         $bidang = Bidang::where('tahun', session('tahun'))->get();
 
         $sub_kegiatan = $request->has('sub_kegiatan') ? SubKegiatan::find($request->sub_kegiatan) : null;
-        $jenis_sppd = $request->has('jenis_sppd') ? JenisPerjalanan::find($request->jenis_sppd) : null;
         $sub_bidang = $request->has('sub_bidang') ? SubBidang::find($request->sub_bidang) : null;
 
-        return view('master.anggaran.create', compact('program', 'bidang', 'jenis', 'sub_kegiatan', 'jenis_sppd', 'sub_bidang'));
+        return view('master.anggaran.create', compact('program', 'bidang', 'jenis', 'sub_kegiatan', 'sub_bidang'));
     }
 
     /**
@@ -72,30 +67,38 @@ class AnggaranController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($request->anggaran as $jenis) {
-            if ($jenis['rp_pagu'] && $jenis['rp_pagu'] !== null) {
-                $existAnggaran = Anggaran::where('sub_kegiatan_id', $request->sub_kegiatan_id)
-                    ->where('tahun', session('tahun'))
-                    ->where('bidang_sub_id', $request->sub_bidang_id)
-                    ->where('jenis_sppd_id', $jenis['id'])->exists();
-                if (!$existAnggaran) {
-                    $anggaran = new Anggaran();
-                    $anggaran->sub_kegiatan_id = $request->sub_kegiatan_id;
-                    $anggaran->bidang_sub_id = $request->sub_bidang_id;
-                    $anggaran->jenis_sppd_id = $jenis['id'];
-                    $anggaran->rp_pagu = preg_replace('/[^0-9-]/', '', $jenis['rp_pagu']);
-                    $anggaran->tahun = session('tahun');
-                    $anggaran->save();
-                } else {
-                    $anggaran = Anggaran::where('sub_kegiatan_id', $request->sub_kegiatan_id)
-                        ->where('tahun', session('tahun'))
-                        ->where('bidang_sub_id', $request->sub_bidang_id)
-                        ->where('jenis_sppd_id', $jenis['id'])->first();
-                    $anggaran->rp_pagu = preg_replace('/[^0-9-]/', '', $jenis['rp_pagu']);
-                    $anggaran->save();
-                }
-            }
+        // dd($request);
+        $anggaran = Anggaran::where('kdsub', $request->sub_kegiatan_id)
+            ->where('tahun', session('tahun'))
+            ->where('bidang_sub_id', $request->sub_bidang_id)
+            ->first();
+
+        if (!$anggaran) {
+
+            $anggaran = new Anggaran();
+
+            $anggaran->kdprog = $request->program_id;
+            $anggaran->kdgiat = $request->kegiatan_id;
+            $anggaran->kdsub = $request->sub_kegiatan_id;
+
+            $anggaran->bidang_id = $request->bidang_id;
+            $anggaran->bidang_sub_id = $request->sub_bidang_id;
+
+            $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1);
+            $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2);
+            $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3);
+
+            $anggaran->tahun = session('tahun');
+            $anggaran->save();
+        } else {
+
+            $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1);
+            $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2);
+            $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3);
+
+            $anggaran->save();
         }
+
         return redirect()->route('anggaran.index')->with(['success' => 'Berhasil Menambahkan Anggaran tahunan']);
     }
 
@@ -113,9 +116,8 @@ class AnggaranController extends Controller
     public function edit(Anggaran $anggaran)
     {
         $program = Program::where('tahun', session('tahun'))->get();
-        $jenis = JenisPerjalanan::all();
         $bidang = Bidang::where('tahun', session('tahun'))->get();
-        return view('master.anggaran.edit', compact('anggaran', 'program', 'jenis', 'bidang'));
+        return view('master.anggaran.edit', compact('anggaran', 'program', 'bidang'));
     }
 
     /**
@@ -123,8 +125,12 @@ class AnggaranController extends Controller
      */
     public function update(Request $request, Anggaran $anggaran)
     {
-        $anggaran->rp_pagu = preg_replace('/[^0-9-]/', '', $request->rp_pagu);
+        $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1);
+        $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2);
+        $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3);
+
         $anggaran->save();
+
         return redirect()->route('anggaran.index')->with(['success' => 'Berhasil Mengubah Anggaran tahunan']);
     }
 

@@ -16,13 +16,9 @@ class Anggaran extends Model
     {
         return $this->belongsTo(SubBidang::class, 'bidang_sub_id');
     }
-    public function jenis_sppd()
-    {
-        return $this->belongsTo(JenisPerjalanan::class, 'jenis_sppd_id');
-    }
     public function sub_kegiatan()
     {
-        return $this->belongsTo(SubKegiatan::class, 'sub_kegiatan_id');
+        return $this->belongsTo(SubKegiatan::class, 'kdsub');
     }
     public function getKegiatanAttribute()
     {
