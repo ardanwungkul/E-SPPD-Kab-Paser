@@ -42,7 +42,7 @@ class ProgramController extends Controller
                 'kode' => [
                     'max:10',
                     'required',
-                    Rule::unique('ref_program2', 'kdprog')->where(function ($query) use ($request) {
+                    Rule::unique('ref_program', 'kdprog')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
                     })
                 ],
@@ -91,7 +91,7 @@ class ProgramController extends Controller
                 [
                     'max:10',
                     'required',
-                    Rule::unique('ref_program2', 'kdprog')->where(function ($query) use ($request) {
+                    Rule::unique('ref_program', 'kdprog')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
                     })->ignore($program->kdprog, 'kdprog')
                 ],

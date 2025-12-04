@@ -9,9 +9,14 @@ class Kegiatan extends Model
 {
     use HasFactory;
     protected $table = 'ref_kegiatan';
+
+    protected $primaryKey = 'kdgiat';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     public function program()
     {
-        return $this->belongsTo(Program::class, 'program_id');
+        return $this->belongsTo(Program::class, 'kdprog');
     }
 
     public function getFormattedKodeAttribute()
@@ -20,6 +25,7 @@ class Kegiatan extends Model
     }
     public function sub_kegiatan()
     {
-        return $this->hasMany(SubKegiatan::class, 'kegiatan_id');
+        return $this->hasMany(SubKegiatan::class, 'kdgiat');
     }
 }
+

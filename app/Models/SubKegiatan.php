@@ -9,11 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SubKegiatan extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $table = 'ref_kegiatan_sub';
+
+    protected $primaryKey = 'kdsub';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     public function kegiatan()
     {
-        return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
+        return $this->belongsTo(Kegiatan::class, 'kdgiat');
     }
     public function getFormattedKodeAttribute()
     {

@@ -63,7 +63,7 @@
 
         <div class="pt-4">
             <button
-                class="bg-color-1-500 hover:bg-opacity-80 transition-colors duration-300 px-10 py-1 text-white rounded-lg shadow-lg text-sm w-full h-[37.33px]">Login</button>
+                class="bg-color-1-500 hover:bg-opacity-80 transition-colors duration-300 px-10 py-1 text-white rounded-lg shadow-lg text-sm w-full h-[37.33px]">Masuk</button>
         </div>
     </form>
 </x-guest-layout>

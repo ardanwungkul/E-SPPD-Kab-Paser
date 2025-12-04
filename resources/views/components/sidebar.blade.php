@@ -526,7 +526,7 @@
                                 </path>
                             </svg>
                         </span>
-                        <span class="ml-2 text-xs tracking-wide truncate">Logout</span>
+                        <span class="ml-2 text-xs tracking-wide truncate">Keluar</span>
                     </a>
                 </form>
             </li>

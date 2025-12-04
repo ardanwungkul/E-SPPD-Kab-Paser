@@ -5,18 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kegiatan2 extends Model
+class Kegiatan extends Model
 {
     use HasFactory;
-    protected $table = 'ref_kegiatan2';
-
-    protected $primaryKey = 'kdgiat';
-    public $incrementing = false;
-    protected $keyType = 'string';
-
+    protected $table = 'ref_kegiatan';
     public function program()
     {
-        return $this->belongsTo(Program::class, 'kdprog');
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
     public function getFormattedKodeAttribute()
@@ -25,6 +20,6 @@ class Kegiatan2 extends Model
     }
     public function sub_kegiatan()
     {
-        return $this->hasMany(SubKegiatan2::class, 'kdgiat');
+        return $this->hasMany(SubKegiatan::class, 'kegiatan_id');
     }
 }

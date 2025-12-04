@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SubKegiatan2 extends Model
+class SubKegiatan extends Model
 {
     use HasFactory;
-    // use SoftDeletes;
-    protected $table = 'ref_kegiatan_sub2';
-
-    protected $primaryKey = 'kdsub';
-    public $incrementing = false;
-    protected $keyType = 'string';
-
+    use SoftDeletes;
+    protected $table = 'ref_kegiatan_sub';
     public function kegiatan()
     {
-        return $this->belongsTo(Kegiatan2::class, 'kdgiat');
+        return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
     }
     public function getFormattedKodeAttribute()
     {
