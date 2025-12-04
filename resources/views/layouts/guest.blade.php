@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ session('preferensi') ? session('preferensi')->nama_aplikasi : 'E-SPPD' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -75,15 +75,13 @@
             <div class="col-span-2 bg-white overflow-hidden px-10 py-5 flex items-center md:h-full">
                 <div class="w-full">
                     <div class="flex-col flex space-y-4 justify-center items-center pb-4 border-b border-gray-300">
-                        <p class="text-gray-600 font-extrabold text-center text-xl leading-none">Sistem Informasi
-                            Perjalanan Dinas <span class=" text-nowrap">(E-SPPD)</span>
-                        </p>
-                        <div class=" flex flex-col">
-                            <p class="text-gray-400 font-medium text-center leading-5">Badan Keuangan dan Aset
-                                Daerah
-                            </p>
-                            <p class="text-gray-400 font-medium text-base text-center leading-5">Kab. Penajam Paser Utara
-                            </p>
+                        <div class=" flex flex-col text-gray-600 font-extrabold text-center text-xl leading-none">
+                            <p>Sistem Informasi Perjalanan Dinas</p>
+                            <p>(E-SPPD)</p>
+                        </div>
+                        <div class=" flex flex-col text-gray-400 font-medium text-center leading-5">
+                            <p>Badan Keuangan dan Aset Daerah</p>
+                            <p>Kab. Penajam Paser Utara</p>
                         </div>
                     </div>
                     <div class="py-3">

@@ -143,7 +143,7 @@
                         <legend align="center" class="px-3 text-secondary-1">Pegawai</legend>
                         <button type="button" name="add" id="addPegawai" data-modal-target="pilih-pegawai-spt"
                             data-modal-toggle="pilih-pegawai-spt"
-                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center whitespace-nowrap focus:ring-1 focus:ring-blue-500">
+                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-xs font-medium text-center whitespace-nowrap focus:ring-1 focus:ring-blue-500">
                             Pilih Pegawai
                         </button>
                         <x-modal.pilih-pegawai-spt :pegawai="$pegawai" />

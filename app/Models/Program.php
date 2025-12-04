@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
     use HasFactory;
-    protected $table = 'ref_program';
+    public $timestamps = false;
+    protected $table = 'ref_program2';
+
+    protected $primaryKey = 'kdprog';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     public function kegiatan()
     {
         return $this->hasMany(Kegiatan::class, 'program_id');

@@ -21,7 +21,7 @@
                                 @foreach ($data as $item)
                                     <tr class="text-xs">
                                         <td>
-                                            <p class="text-start">{{ $item->kode }}</p>
+                                            <p class="text-start">{{ $item->kdprog }}</p>
                                         </td>
                                         <td>
                                             <p class="text-start">{{ $item->uraian }}</p>
@@ -30,7 +30,7 @@
                                             <div class="flex justify-center items-center gap-3">
                                                 <div>
                                                     <div>
-                                                        <a href="{{ route('program.edit', $item->id) }}"
+                                                        <a href="{{ route('program.edit', $item->kdprog) }}"
                                                             class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                             <svg class="w-4 h-4" aria-hidden="true"
                                                                 xmlns="http://www.w3.org/2000/svg" width="24"
@@ -44,9 +44,9 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <button type="button" data-modal-id="{{ $item->id }}"
-                                                        data-modal-toggle="confirm-delete-{{ $item->id }}"
-                                                        data-modal-target="confirm-delete-{{ $item->id }}"
+                                                    <button type="button" data-modal-id="{{ $item->kdprog }}"
+                                                        data-modal-toggle="confirm-delete-{{ $item->kdprog }}"
+                                                        data-modal-target="confirm-delete-{{ $item->kdprog }}"
                                                         class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                         <svg class="w-4 h-4" aria-hidden="true"
                                                             xmlns="http://www.w3.org/2000/svg" width="24"
@@ -62,7 +62,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'" :action="route('program.destroy', $item->id)" />
+                                    <x-modal.confirm-delete :id="$item->kdprog" :name="'Data'" :action="route('program.destroy', $item->kdprog)" />
                                 @endforeach
                             </tbody>
                         </table>

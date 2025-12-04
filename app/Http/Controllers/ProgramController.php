@@ -20,7 +20,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $data = Program::where('tahun', session('tahun'))->orderBy('kode', 'asc')->get();
+        $data = Program::where('tahun', session('tahun'))->orderBy('kdprog', 'asc')->get();
         return view('master.program.index', compact('data'));
     }
 
@@ -57,7 +57,7 @@ class ProgramController extends Controller
             ]
         );
         $program = new Program();
-        $program->kode = $request->kode;
+        $program->kdprog = $request->kode;
         $program->uraian = $request->uraian;
         $program->tahun = session('tahun');
         $program->save();
@@ -75,15 +75,16 @@ class ProgramController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Program $program)
+    public function edit($kdprog)
     {
+        $program = Program::where('kdprog', $kdprog)->first();
         return view('master.program.edit', compact('program'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Program $program)
+    public function update(Request $request, $kdprog)
     {
         $request->validate(
             [
@@ -93,7 +94,7 @@ class ProgramController extends Controller
                     'required',
                     Rule::unique('ref_program')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
-                    })->ignore($program->id)
+                    })->ignore($kdprog)
                 ],
                 'uraian' => ['required', 'max:150',],
             ],
@@ -106,7 +107,9 @@ class ProgramController extends Controller
 
             ]
         );
-        $program->kode = $request->kode;
+        $program = Program::where('kdprog', $kdprog)->first();
+
+        $program->kdprog = $request->kode;
         $program->uraian = $request->uraian;
         $program->save();
         return redirect()->route('program.index')->with(['success' => 'Berhasil Mengubah Program']);
@@ -115,8 +118,10 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Program $program)
+    public function destroy($kdprog)
     {
+        $program = Program::where('kdprog', $kdprog)->first();
+        
         $program->delete();
         return redirect()->route('program.index')->with(['success' => 'Berhasil Menghapus Program']);
     }

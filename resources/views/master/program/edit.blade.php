@@ -4,7 +4,7 @@
     </x-slot>
     <x-container>
         <x-slot name="content">
-            <form action="{{ route('program.update', $program->id) }}" method="POST">
+            <form action="{{ route('program.update', $program->kdprog) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
@@ -12,7 +12,7 @@
                         <label for="kode">Kode Program</label>
                         <input type="text" id="kode" name="kode"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $program->kode }}" placeholder="Masukkan Kode Program" required>
+                            value="{{ $program->kdprog }}" placeholder="Masukkan Kode Program" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Nama Program</label>
