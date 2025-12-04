@@ -12,13 +12,13 @@
                         <label for="kode">Kode Program</label>
                         <input type="text" id="kode" name="kode"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $program->kdprog }}" placeholder="Masukkan Kode Program" required>
+                            value="{{ old('kode', $program->kdprog) }}" placeholder="Masukkan Kode Program" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Nama Program</label>
                         <input type="text" id="uraian" name="uraian"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $program->uraian }}" placeholder="Masukkan Nama Program" required>
+                            value="{{ old('uraian', $program->uraian) }}" placeholder="Masukkan Nama Program" required>
                     </div>
                     <div class="flex justify-end items-center gap-4 pt-4">
                         <x-button.save-button/>

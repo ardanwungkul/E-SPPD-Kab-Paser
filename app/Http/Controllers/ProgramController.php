@@ -42,14 +42,14 @@ class ProgramController extends Controller
                 'kode' => [
                     'max:10',
                     'required',
-                    Rule::unique('ref_program')->where(function ($query) use ($request) {
+                    Rule::unique('ref_program2', 'kdprog')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
                     })
                 ],
-                'uraian' => ['required', 'max:150',],
+                'uraian' => ['required', 'max:120',],
             ],
             [
-                'uraian.max' => 'Nama Program tidak boleh lebih dari 150 karakter',
+                'uraian.max' => 'Nama Program tidak boleh lebih dari 120 karakter',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'kode.required' => 'Kode Wajib Diisi',
                 'uraian.required' => 'Nama Program Wajib Diisi',
@@ -75,16 +75,15 @@ class ProgramController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($kdprog)
+    public function edit(Program $program)
     {
-        $program = Program::where('kdprog', $kdprog)->first();
         return view('master.program.edit', compact('program'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $kdprog)
+    public function update(Request $request, Program $program)
     {
         $request->validate(
             [
@@ -92,14 +91,14 @@ class ProgramController extends Controller
                 [
                     'max:10',
                     'required',
-                    Rule::unique('ref_program')->where(function ($query) use ($request) {
+                    Rule::unique('ref_program2', 'kdprog')->where(function ($query) use ($request) {
                         return $query->where('tahun', session('tahun'));
-                    })->ignore($kdprog)
+                    })->ignore($program->kdprog, 'kdprog')
                 ],
-                'uraian' => ['required', 'max:150',],
+                'uraian' => ['required', 'max:120',],
             ],
             [
-                'uraian.max' => 'Nama Program tidak boleh lebih dari 150 karakter',
+                'uraian.max' => 'Nama Program tidak boleh lebih dari 120 karakter',
                 'kode.required' => 'Kode Wajib Diisi',
                 'kode.max' => 'Maksimal Kode Yang Bisa Digunakan adalah 10 Digit',
                 'uraian.required' => 'Nama Program Wajib Diisi',
@@ -107,7 +106,6 @@ class ProgramController extends Controller
 
             ]
         );
-        $program = Program::where('kdprog', $kdprog)->first();
 
         $program->kdprog = $request->kode;
         $program->uraian = $request->uraian;
@@ -118,10 +116,8 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($kdprog)
+    public function destroy(Program $program)
     {
-        $program = Program::where('kdprog', $kdprog)->first();
-        
         $program->delete();
         return redirect()->route('program.index')->with(['success' => 'Berhasil Menghapus Program']);
     }

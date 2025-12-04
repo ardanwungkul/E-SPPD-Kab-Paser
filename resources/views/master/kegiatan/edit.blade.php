@@ -4,7 +4,7 @@
     </x-slot>
     <x-container>
         <x-slot name="content">
-            <form action="{{ route('kegiatan.update', $kegiatan->id) }}" method="POST">
+            <form action="{{ route('kegiatan.update', $kegiatan->kdgiat) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
@@ -14,8 +14,8 @@
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $kegiatan->program_id == $item->id ? 'selected' : '' }}>{{ $item->uraian }}
+                                <option value="{{ $item->kdprog }}"
+                                    {{ old('program_id', $kegiatan->kdprog) == $item->kdprog ? 'selected' : '' }}>{{ $item->uraian }}
                                 </option>
                             @endforeach
                         </select>
@@ -24,13 +24,13 @@
                         <label for="kode">Kode Kegiatan</label>
                         <input type="text" id="kode" name="kode"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $kegiatan->kode }}" placeholder="Masukkan Kode Kegiatan" required>
+                            value="{{ old('kode', $kegiatan->kdgiat) }}" placeholder="Masukkan Kode Kegiatan" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Nama Kegiatan</label>
                         <input type="text" id="uraian" name="uraian"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $kegiatan->uraian }}" placeholder="Masukkan Nama Kegiatan" required>
+                            value="{{ old('uraian', $kegiatan->uraian) }}" placeholder="Masukkan Nama Kegiatan" required>
                     </div>
 
                     <div class="flex justify-end items-center gap-4 pt-4">

@@ -22,7 +22,7 @@
                                 @foreach ($data as $item)
                                     <tr class="text-xs text-black tracking-wide">
                                         <td>
-                                            <p class="text-start font-medium">{{ $item->kode }}</p>
+                                            <p class="text-start font-medium">{{ $item->kdprog }}</p>
                                         </td>
                                         <td>
                                             <p class="text-start">{{ $item->uraian }}</p>
@@ -32,10 +32,10 @@
                                         </td>
                                     </tr>
                                     @if ($item->kegiatan->count() > 0)
-                                        @foreach ($item->kegiatan()->orderBy('kode', 'asc')->get() as $kegiatan)
+                                        @foreach ($item->kegiatan()->orderBy('kdgiat', 'asc')->get() as $kegiatan)
                                             <tr class="text-xs tracking-wide">
                                                 <td>
-                                                    <p class="text-start font-medium">{{ $kegiatan->kode }}
+                                                    <p class="text-start font-medium">{{ $kegiatan->kdgiat }}
                                                     </p>
                                                 </td>
                                                 <td>
@@ -45,7 +45,7 @@
                                                     <div class="flex justify-center items-center gap-3">
                                                         <div>
                                                             <div>
-                                                                <a href="{{ route('kegiatan.edit', $kegiatan->id) }}"
+                                                                <a href="{{ route('kegiatan.edit', $kegiatan->kdgiat) }}"
                                                                     class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                                     <svg class="w-4 h-4" aria-hidden="true"
                                                                         xmlns="http://www.w3.org/2000/svg"
@@ -61,9 +61,9 @@
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <button type="button" data-modal-id="{{ $kegiatan->id }}"
-                                                                data-modal-toggle="confirm-delete-{{ $kegiatan->id }}"
-                                                                data-modal-target="confirm-delete-{{ $kegiatan->id }}"
+                                                            <button type="button" data-modal-id="{{ $kegiatan->kdgiat }}"
+                                                                data-modal-toggle="confirm-delete-{{ $kegiatan->kdgiat }}"
+                                                                data-modal-target="confirm-delete-{{ $kegiatan->kdgiat }}"
                                                                 class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
                                                                 <svg class="w-4 h-4" aria-hidden="true"
                                                                     xmlns="http://www.w3.org/2000/svg" width="24"
@@ -77,8 +77,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <x-modal.confirm-delete :id="$kegiatan->id" :name="'Data'"
-                                                :action="route('kegiatan.destroy', $kegiatan->id)" />
+                                            <x-modal.confirm-delete :id="$kegiatan->kdgiat" :name="'Data'"
+                                                :action="route('kegiatan.destroy', $kegiatan->kdgiat)" />
                                         @endforeach
                                     @endif
                                 @endforeach

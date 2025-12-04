@@ -16,6 +16,6 @@ class Program extends Model
 
     public function kegiatan()
     {
-        return $this->hasMany(Kegiatan::class, 'program_id');
+        return $this->hasMany(Kegiatan2::class, 'kdprog');
     }
 }
