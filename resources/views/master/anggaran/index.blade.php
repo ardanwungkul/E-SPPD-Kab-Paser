@@ -45,10 +45,10 @@
                                                 </td>
                                             </tr>
                                             <tr class="bg-secondary-3">
-                                                <td class="px-3 py-2 border border-secondary-4 font-semibold">Rekening
+                                                <td class="px-3 py-2 border border-secondary-4 font-semibold">Kode Rekening
                                                 </td>
                                                 <td class="px-3 py-2 border border-secondary-4 font-semibold">Program /
-                                                    Kegiatan
+                                                    Kegiatan / Sub. Kegiatan
                                                 </td>
                                                 <td
                                                     class="text-center px-3 py-2 border border-secondary-4 font-semibold">
@@ -166,7 +166,6 @@
                                                                                         stroke-width="2"
                                                                                         d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
                                                                                 </svg>
-
                                                                             </a>
                                                                         </div>
                                                                     </div>
@@ -176,11 +175,6 @@
                                                     @endforeach
                                                 @endforeach
                                             @endforeach
-                                            <tr>
-                                                <td colspan="{{ 5 }}">
-                                                    <br>
-                                                </td>
-                                            </tr>
                                         @endforeach
                                         <tr>
                                             <td colspan="{{ 5 }}">

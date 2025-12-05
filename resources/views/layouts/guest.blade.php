@@ -75,11 +75,11 @@
             <div class="col-span-2 bg-white overflow-hidden px-10 py-5 flex items-center md:h-full">
                 <div class="w-full">
                     <div class="flex-col flex space-y-4 justify-center items-center pb-4 border-b border-gray-300">
-                        <div class=" flex flex-col text-gray-600 font-extrabold text-center text-xl leading-none">
+                        <div class="flex flex-col text-gray-400 font-extrabold text-center text-xl leading-none">
                             <p>Sistem Informasi Perjalanan Dinas</p>
                             <p>(E-SPPD)</p>
                         </div>
-                        <div class=" flex flex-col text-gray-400 font-medium text-center leading-5">
+                        <div class="flex flex-col text-gray-600 font-medium text-center leading-5">
                             <p>Badan Keuangan dan Aset Daerah</p>
                             <p>Kab. Penajam Paser Utara</p>
                         </div>
