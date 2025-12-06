@@ -6,7 +6,7 @@
     <x-container>
         <x-slot name="content">
             <div>
-                <x-button.add-button :route="route('jenis-perjalanan.create')" />
+                {{-- <x-button.add-button :route="route('jenis-perjalanan.create')" /> --}}
 
                 <div class="relative pb-20">
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
@@ -15,7 +15,7 @@
                                 <tr>
                                     <td class="text-xs">Jenis Perjalanan</td>
                                     <td class="text-xs">Wilayah</td>
-                                    <td class="text-xs w-32"></td>
+                                    {{-- <td class="text-xs w-32"></td> --}}
                                 </tr>
                             </thead>
                             <tbody class="text-secondary-2">
@@ -27,7 +27,7 @@
                                         <td>
                                             <p class="text-start">{{ $item->wilayah }}</p>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <div class="flex justify-center items-center gap-3">
                                                 <div>
                                                     <div>
@@ -61,9 +61,9 @@
 
                                                 </div>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
-                                    <x-modal.confirm-delete :id="$item->id" :name="'Data'" :action="route('jenis-perjalanan.destroy', $item->id)" />
+                                    {{-- <x-modal.confirm-delete :id="$item->id" :name="'Data'" :action="route('jenis-perjalanan.destroy', $item->id)" /> --}}
                                 @endforeach
                             </tbody>
                         </table>

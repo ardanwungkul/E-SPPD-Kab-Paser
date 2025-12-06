@@ -289,7 +289,7 @@
                             <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
                         </a>
                     </li>
-                    {{-- <li>
+                    <li>
                         <a href="{{ route('jenis-perjalanan.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
@@ -302,10 +302,10 @@
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
                         </a>
-                    </li> --}}
+                    </li>
                 </div>
                 <h2 id="accordion-collapse-heading-master-data">
-                    <button type="button" class="w-full"
+                    <button type="button" class="w-full hover:bg-gray-300"
                         data-accordion-target="#accordion-collapse-body-master-data"
                         aria-expanded="{{ in_array($routeName, $route['master-data']) ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-master-data">
@@ -735,7 +735,7 @@
                                 </a>
                             </li>
                             <li>
-                            {{-- <li>
+                            <li>
                                 <a href="{{ route('jenis-perjalanan.index') }}"
                                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
@@ -748,7 +748,7 @@
                                     </span>
                                     <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
                                 </a>
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                 </li>
