@@ -9,7 +9,7 @@
                 @method('POST')
                 <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
                     <div class="flex flex-col gap-1">
-                        <label for="name">Nama</label>
+                        <label for="name">Nama Pengguna</label>
                         <input type="text" id="name" name="name"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
                             value="{{ old('name') }}" placeholder="Masukkan Nama User" required>

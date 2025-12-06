@@ -9,7 +9,7 @@
                 @method('PUT')
                 <div class="md:text-sm text-xs space-y-3 max-w-xl mx-auto">
                     <div class="flex flex-col gap-1">
-                        <label for="name">Nama</label>
+                        <label for="name">Nama Pengguna</label>
                         <input type="text" id="name" name="name"
                             class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md"
                             value="{{ $user->name }}" placeholder="Masukkan Nama User" required>

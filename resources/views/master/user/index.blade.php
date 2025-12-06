@@ -12,7 +12,7 @@
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr class="text-xs">
-                                    <td class="!font-medium !text-xs ">Nama</td>
+                                    <td class="!font-medium !text-xs ">Nama Pengguna</td>
                                     <td class="!font-medium !text-xs ">Username</td>
                                     <td class="!font-medium !text-xs ">Role</td>
                                     {{-- <td class="!font-medium !text-xs ">Email/Username</td> --}}

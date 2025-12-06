@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Profil
+        Profil Pengguna
     </x-slot>
     <x-container>
         <x-slot name="content">
@@ -14,7 +14,7 @@
                 <div class="space-y-5 max-w-xl mx-auto">
                     <p class=" text-lg font-semibold text-secondary-1">Informasi Akun</p>
                     <div class="flex flex-col gap-1">
-                        <label for="name">Nama</label>
+                        <label for="name">Nama Pengguna</label>
                         <input type="text" id="name" name="name"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
                             value="{{ old('name', $user->name) }}" placeholder="Masukkan Nama" required>

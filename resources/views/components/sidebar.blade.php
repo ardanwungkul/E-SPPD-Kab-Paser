@@ -462,7 +462,7 @@
                                         stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                 </svg>
                                 <div class="flex flex-row items-center h-8">
-                                    <div class="text-xs tracking-wide text-secondary-1">Sistem</div>
+                                    <div class="text-xs tracking-wide text-secondary-1">Pengaturan</div>
                                 </div>
                             </div>
                             <svg data-accordion-icon class="w-2 h-2 rotate-180 shrink-0 text-secondary-1"
@@ -908,7 +908,7 @@
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
-                                    <div class="text-xs font-light tracking-wide text-gray-500">Sistem</div>
+                                    <div class="text-xs font-light tracking-wide text-gray-500">Pengaturan</div>
                                 </div>
                             </li>
                             <li>

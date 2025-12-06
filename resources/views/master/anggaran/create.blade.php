@@ -15,7 +15,7 @@
                                 <option value="" selected disabled>Pilih {{ session('config')->judul }}
                                 </option>
                                 @foreach ($bidang as $item)
-                                    <option value="{{ $item->id }}"
+                                    <option value="{{ $item->id }}" {{Auth::user()->level < 3 ? ($item->id == Auth::user()->bidang_id ? 'selected' : '') : ''}}
                                         {{ $sub_bidang && $sub_bidang->bidang->id == $item->id ? 'selected' : '' }}>
                                         {{ $item->uraian }}</option>
                                 @endforeach
@@ -274,5 +274,7 @@
                 );
             }
         });
+
+        $('#bidang_id').trigger('change');
     });
 </script>

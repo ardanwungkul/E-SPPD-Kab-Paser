@@ -8,6 +8,7 @@ use App\Models\Program;
 use App\Models\SubBidang;
 use App\Models\SubKegiatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnggaranController extends Controller
 {
@@ -47,7 +48,10 @@ class AnggaranController extends Controller
     public function create(Request $request)
     {
         $program = Program::where('tahun', session('tahun'))->get();
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->where('id', Auth::user()->bidang_id);
+            })->get();
 
         $sub_kegiatan = $request->has('sub_kegiatan') ? SubKegiatan::find($request->sub_kegiatan) : null;
         $sub_bidang = $request->has('sub_bidang') ? SubBidang::find($request->sub_bidang) : null;
