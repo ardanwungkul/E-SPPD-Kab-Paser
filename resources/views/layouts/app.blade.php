@@ -158,7 +158,7 @@
                                                 <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                                     <p class="text-xs">{{ Auth::user()->name }}</p>
                                                     <div class="font-medium truncate text-xs">
-                                                        {{ Auth::user()->email }}
+                                                        {{ Auth::user()->username }}
                                                     </div>
                                                 </div>
                                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -173,7 +173,7 @@
                                                             <a href="{{ route('logout') }}"
                                                                 onclick="event.preventDefault();
                                                                         this.closest('form').submit();"
-                                                                class="block px-4 py-2 hover:bg-gray-100 text-xs">Logout</a>
+                                                                class="block px-4 py-2 hover:bg-gray-100 text-xs">Keluar</a>
                                                         </form>
                                                     </li>
                                                 </ul>
