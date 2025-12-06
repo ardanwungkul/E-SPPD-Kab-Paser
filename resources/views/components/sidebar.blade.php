@@ -64,7 +64,7 @@
     ];
 
 @endphp
-<div class="flex flex-col top-0 left-0 w-60 bg-white border-r h-screen sticky transition-all duration-300 z-30"
+<div class="flex flex-col top-0 left-0 w-60 bg-gray-200 border-r h-screen sticky transition-all duration-300 z-30"
     id="sidebar">
     <div class="h-[60px] border-b border-secondary-3 flex-none flex items-center justify-center bg-color-1-400 px-5">
         <p class="font-medium text-lg text-white whitespace-nowrap expanded-sidebar w-full truncate">
@@ -85,7 +85,7 @@
             </li>
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                             height="24" fill="none" viewBox="0 0 24 24">
@@ -99,10 +99,10 @@
                     <span class="ml-2 text-xs tracking-wide truncate">Dashboard</span>
                 </a>
             </li>
-            <div id="accordion-collapse" data-accordion="collapse" data-active-classes="bg-secondary-3 font-medium"
+            <div id="accordion-collapse" data-accordion="collapse" data-active-classes="bg-gray-200 font-medium"
                 data-inactive-classes="font-light">
                 <h2 id="accordion-collapse-heading-transaksi">
-                    <button type="button" class="w-full hover:bg-gray-50"
+                    <button type="button" class="w-full hover:bg-gray-300"
                         data-accordion-target="#accordion-collapse-body-transaksi"
                         aria-expanded="{{ in_array($routeName, $route['transaksi']) ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-transaksi">
@@ -126,11 +126,11 @@
                         </li>
                     </button>
                 </h2>
-                <div id="accordion-collapse-body-transaksi" class="hidden bg-secondary-3 border-y border-gray-300"
+                <div id="accordion-collapse-body-transaksi" class="hidden bg-gray-200 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-transaksi">
                     <li>
                         <a href="{{ route('spt.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -143,7 +143,7 @@
                     </li>
                     <li>
                         <a href="{{ route('sppd.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -156,7 +156,7 @@
                     </li>
                 </div>
                 <h2 id="accordion-collapse-heading-data-tahunan">
-                    <button type="button" class="w-full hover:bg-gray-50"
+                    <button type="button" class="w-full hover:bg-gray-300"
                         data-accordion-target="#accordion-collapse-body-data-tahunan"
                         aria-expanded="{{ in_array($routeName, $route['data-tahunan']) ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-data-tahunan">
@@ -182,40 +182,11 @@
                         </li>
                     </button>
                 </h2>
-                <div id="accordion-collapse-body-data-tahunan" class="hidden bg-secondary-3 border-y border-gray-300"
+                <div id="accordion-collapse-body-data-tahunan" class="hidden bg-gray-200 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-data-tahunan">
                     <li>
-                        <a href="{{ route('suh.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
-                            <span class="inline-flex justify-center items-center ml-4">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
-                                </svg>
-                            </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('anggaran.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
-                            <span class="inline-flex justify-center items-center ml-4">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
-                                </svg>
-
-                            </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Anggaran Tahunan</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ route('bidang.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -233,7 +204,7 @@
                     </li>
                     <li>
                         <a href="{{ route('sub-bidang.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -249,7 +220,7 @@
                     </li>
                     <li>
                         <a href="{{ route('program.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -263,7 +234,7 @@
                     </li>
                     <li>
                         <a href="{{ route('kegiatan.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -277,7 +248,7 @@
                     </li>
                     <li>
                         <a href="{{ route('sub-kegiatan.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -290,8 +261,37 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('anggaran.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                </svg>
+
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Anggaran Tahunan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('suh.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
+                        </a>
+                    </li>
+                    {{-- <li>
                         <a href="{{ route('jenis-perjalanan.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -302,7 +302,7 @@
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </div>
                 <h2 id="accordion-collapse-heading-master-data">
                     <button type="button" class="w-full"
@@ -332,11 +332,11 @@
                         </li>
                     </button>
                 </h2>
-                <div id="accordion-collapse-body-master-data" class="hidden bg-secondary-3 border-y border-gray-300"
+                <div id="accordion-collapse-body-master-data" class="hidden bg-gray-200 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-master-data">
                     <li>
                         <a href="{{ route('pegawai.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -351,7 +351,7 @@
                     </li>
                     <li>
                         <a href="{{ route('golongan.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -367,7 +367,7 @@
                     </li>
                     <li>
                         <a href="{{ route('tingkat-perjalanan-dinas.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -382,7 +382,7 @@
                     </li>
                     <li>
                         <a href="{{ route('provinsi.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -395,7 +395,7 @@
                     </li>
                     <li>
                         <a href="{{ route('kabupaten-kota.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -408,7 +408,7 @@
                     </li>
                     <li>
                         <a href="{{ route('kecamatan.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -421,7 +421,7 @@
                     </li>
                     {{-- <li>
                         <a href="{{ route('desa.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -434,7 +434,7 @@
                     </li> --}}
                 </div>
                 <h2 id="accordion-collapse-heading-sistem">
-                    <button type="button" class="w-full hover:bg-gray-50"
+                    <button type="button" class="w-full hover:bg-gray-300"
                         data-accordion-target="#accordion-collapse-body-sistem"
                         aria-expanded="{{ in_array($routeName, $route['sistem']) ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-sistem">
@@ -461,11 +461,11 @@
                         </li>
                     </button>
                 </h2>
-                <div id="accordion-collapse-body-sistem" class="hidden bg-secondary-3 border-y border-gray-300"
+                <div id="accordion-collapse-body-sistem" class="hidden bg-gray-200 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-sistem">
                     <li>
                         <a href="{{ route('role.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -479,7 +479,7 @@
                     </li>
                     <li>
                         <a href="{{ route('users.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -495,7 +495,7 @@
                     </li>
                     <li>
                         <a href="{{ route('config.index') }}"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -517,7 +517,7 @@
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                 this.closest('form').submit();"
-                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -540,7 +540,7 @@
                 </li>
                 <li>
                     <a href="{{ route('dashboard') }}"
-                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -557,7 +557,7 @@
                     <button type="button" data-dropdown-placement="left-start"
                         data-dropdown-toggle="dropdownHoverTransaksi" data-dropdown-trigger="hover"
                         data-dropdown-delay="0" data-dropdown-offset-distance="0"
-                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
                             <svg class="w-4 h-4 rotate-90 text-secondary-1" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -568,7 +568,7 @@
                         </span>
                     </button>
                     <div id="dropdownHoverTransaksi"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
+                        class="z-30 hidden divide-y bg-gray-200 divide-gray-100 rounded-r-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
@@ -577,7 +577,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('spt.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -592,7 +592,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('sppd.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -612,7 +612,7 @@
                     <button type="button" data-dropdown-placement="left-start"
                         data-dropdown-toggle="dropdownHoverDataTahunan" data-dropdown-trigger="hover"
                         data-dropdown-delay="0" data-dropdown-offset-distance="0"
-                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
                             <svg class="w-4 h-4 text-secondary-1" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -624,46 +624,15 @@
                         </span>
                     </button>
                     <div id="dropdownHoverDataTahunan"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
+                        class="z-30 hidden divide-y bg-gray-200 divide-gray-100 rounded-r-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
                                     <div class="text-xs font-light tracking-wide text-gray-500">Data Tahunan</div>
                                 </div>
                             </li>
-                            <li>
-                                <a href="{{ route('suh.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
-                                    <span class="inline-flex justify-center items-center ml-2">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
-                                                d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
-                                        </svg>
-
-                                    </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('anggaran.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
-                                    <span class="inline-flex justify-center items-center ml-2">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
-                                                d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
-                                        </svg>
-
-                                    </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Anggaran Tahunan</span>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="{{ route('bidang.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -680,7 +649,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('sub-bidang.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -695,7 +664,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('program.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -709,7 +678,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('kegiatan.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -723,7 +692,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('sub-kegiatan.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -736,8 +705,39 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('anggaran.index') }}"
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    <span class="inline-flex justify-center items-center ml-2">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                        </svg>
+
+                                    </span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Anggaran Tahunan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('suh.index') }}"
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    <span class="inline-flex justify-center items-center ml-2">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
+                                        </svg>
+
+                                    </span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
+                                </a>
+                            </li>
+                            <li>
+                            {{-- <li>
                                 <a href="{{ route('jenis-perjalanan.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -748,7 +748,7 @@
                                     </span>
                                     <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>
@@ -756,7 +756,7 @@
                     <button type="button" data-dropdown-placement="left-start"
                         data-dropdown-toggle="dropdownHoverMasterData" data-dropdown-trigger="hover"
                         data-dropdown-delay="0" data-dropdown-offset-distance="0"
-                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
                             <svg class="w-4 h-4 text-secondary-1" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -768,16 +768,16 @@
                         </span>
                     </button>
                     <div id="dropdownHoverMasterData"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
+                        class="z-30 hidden divide-y bg-gray-200 divide-gray-100 rounded-r-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
-                                    <div class="text-xs font-light tracking-wide text-gray-500">Master Data</div>
+                                    <div class="text-xs font-light tracking-wide text-gray-500">Data Referensi</div>
                                 </div>
                             </li>
                             <li>
                                 <a href="{{ route('pegawai.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -792,7 +792,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('golongan.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -808,7 +808,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('tingkat-perjalanan-dinas.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -823,7 +823,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('provinsi.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -836,7 +836,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('kabupaten-kota.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -849,7 +849,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('kecamatan.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -862,7 +862,7 @@
                             </li>
                             {{-- <li>
                                 <a href="{{ route('desa.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -880,7 +880,7 @@
                     <button type="button" data-dropdown-placement="left-start"
                         data-dropdown-toggle="dropdownHoverSistem" data-dropdown-trigger="hover"
                         data-dropdown-delay="0" data-dropdown-offset-distance="0"
-                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                        class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
                             <svg class="w-4 h-4 text-secondary-1" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -892,7 +892,7 @@
                         </span>
                     </button>
                     <div id="dropdownHoverSistem"
-                        class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 border">
+                        class="z-30 hidden divide-y bg-gray-200 divide-gray-100 rounded-r-lg shadow-sm w-60 border">
                         <ul class=" text-sm text-gray-700" aria-labelledby="dropdownHoverButton">
                             <li class="px-2">
                                 <div class="flex flex-row items-center h-8">
@@ -901,7 +901,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('role.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -915,7 +915,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('users.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -931,7 +931,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('config.index') }}"
-                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -956,7 +956,7 @@
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                     this.closest('form').submit();"
-                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-300 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
