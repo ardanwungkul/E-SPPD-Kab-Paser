@@ -5,20 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Bidang;
 use App\Models\SubBidang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class SubBidangController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Sub Bidang', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Sub Bidang', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Sub Bidang', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Sub Bidang', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = Bidang::where('tahun', session('tahun'))->get();
@@ -30,7 +21,11 @@ class SubBidangController extends Controller
      */
     public function create()
     {
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->where('id', Auth::user()->bidang_id);
+            })->get();
+
         return view('master.sub-bidang.create', compact('bidang'));
     }
 
@@ -76,7 +71,10 @@ class SubBidangController extends Controller
      */
     public function edit(SubBidang $sub_bidang)
     {
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->where('id', Auth::user()->bidang_id);
+            })->get();
         return view('master.sub-bidang.edit', compact('bidang', 'sub_bidang'));
     }
 

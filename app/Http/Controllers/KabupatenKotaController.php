@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 
 class KabupatenKotaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Kabupaten/Kota', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Kabupaten/Kota', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Kabupaten/Kota', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Kabupaten/Kota', ['only' => ['destroy']]);
-    }
     public function index(Request $request)
     {
         $query = KabupatenKota::with('provinsi')->orderBy('provinsi_id', 'asc');

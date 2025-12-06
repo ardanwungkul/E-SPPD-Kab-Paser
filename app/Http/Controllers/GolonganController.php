@@ -8,16 +8,6 @@ use Illuminate\Http\Request;
 
 class GolonganController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Pangkat/Golongan', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Pangkat/Golongan', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Pangkat/Golongan', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Pangkat/Golongan', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = Golongan::orderBy('id', 'asc')->orderBy('kode_golongan', 'desc')

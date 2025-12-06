@@ -22,18 +22,32 @@
                             required>
                     </div>
                     <div class="flex flex-col gap-1">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email"
-                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            autocomplete="new-email" value="{{ old('email') }}" placeholder="Masukkan Email" required>
-                    </div>
-                    <div class="flex flex-col gap-1">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
                             autocomplete="new-password" value="{{ old('password') }}" placeholder="Password" required>
                     </div>
                     <div class="flex flex-col gap-1">
+                        <label for="bidang_id">{{ session('config')->judul }}</label>
+                        <select id="bidang_id" name="bidang_id"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
+                            <option value="" selected disabled>Pilih {{ session('config')->judul }}</option>
+                            @foreach ($bidang as $item)
+                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="level">Role</label>
+                        <select id="level" name="level"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
+                            <option value="" selected disabled>Pilih Role</option>
+                            @for ($i = 1; $i < Auth::user()->level; $i++)
+                                <option value="{{ $i }}">{{ $i == 1 ? 'User Bidang' : ($i == 2 ? 'Admin Bidang' : 'Admin') }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    {{-- <div class="flex flex-col gap-1">
                         <label for="role_id">Role/Level</label>
                         <select name="role_id" id="role_id"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md w-full">
@@ -42,7 +56,7 @@
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="flex justify-end items-center gap-4 pt-4">
                         <x-button.save-button />
                         <x-button.back-button :route="route('users.index')" />

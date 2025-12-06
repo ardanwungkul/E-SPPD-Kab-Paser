@@ -7,14 +7,6 @@ use Illuminate\Http\Request;
 
 class ProvinsiController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Provinsi', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Provinsi', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Provinsi', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Provinsi', ['only' => ['destroy']]);
-    }
     public function index(Request $request)
     {
         $query = Provinsi::query();

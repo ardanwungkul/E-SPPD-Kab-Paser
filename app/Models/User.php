@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+// use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
-    use SoftDeletes;
+    // use HasRoles;
+    // use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -50,10 +50,14 @@ class User extends Authenticatable
     ];
     public function getFormattedCreatedAtAttribute()
     {
-        return $this->created_at ? \Carbon\Carbon::parse($this->created_at)->format('d M Y h:i') : '';
+        return $this->created_at ? \Carbon\Carbon::parse($this->created_at)->translatedFormat('d M Y h:i') : null;
     }
     public function getFormattedTerakhirLoginAttribute()
     {
-        return $this->terakhir_login ? \Carbon\Carbon::parse($this->terakhir_login)->format('d M Y h:i') : '';
+        return $this->last_login ? \Carbon\Carbon::parse($this->last_login)->translatedFormat('d M Y h:i') : null;
+    }
+    public function getFormattedTerakhirLogoutAttribute()
+    {
+        return $this->last_logout ? \Carbon\Carbon::parse($this->last_logout)->translatedFormat('d M Y h:i') : null;
     }
 }

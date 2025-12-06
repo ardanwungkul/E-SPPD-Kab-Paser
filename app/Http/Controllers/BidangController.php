@@ -10,14 +10,9 @@ class BidangController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:Daftar Bidang', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Bidang', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Bidang', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Bidang', ['only' => ['destroy']]);
+        $this->middleware('level:3')->except('index');
     }
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $data = Bidang::where('tahun', session('tahun'))->get();

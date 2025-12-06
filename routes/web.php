@@ -51,7 +51,6 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('role', RoleController::class);
     Route::resource('users', UserController::class);
     Route::get('sistem/konfigurasi', [KonfigurasiController::class, 'index'])->name('config.index');
     Route::post('sistem/konfigurasi', [KonfigurasiController::class, 'store'])->name('config.store');
@@ -71,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('referensi/get-sub-kegiatan-by-kegiatan', [SubKegiatanController::class, 'getSubKegiatanByKegiatan'])->name('get.sub-kegiatan.by.kegiatan');
 
     Route::resource('referensi/jenis-perjalanan', JenisPerjalananController::class);
+    
     Route::resource('referensi/bidang', BidangController::class);
     Route::resource('referensi/sub-bidang', SubBidangController::class);
     Route::get('referensi/get-sub-bidang-by-bidang', [SubBidangController::class, 'getSubBidangByBidang'])->name('get.sub-bidang.by.bidang');

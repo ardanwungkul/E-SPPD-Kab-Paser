@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class KonfigurasiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Konfigurasi', ['only' => ['index']]);
-        $this->middleware('permission:Edit Konfigurasi', ['only' => ['store', 'storePreferensi']]);
-    }
     public function index()
     {
         $config = Config::where('aktif', 'Y')->where('tahun', session('tahun'))->first();

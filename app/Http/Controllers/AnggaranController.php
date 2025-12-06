@@ -11,13 +11,6 @@ use Illuminate\Http\Request;
 
 class AnggaranController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Anggaran Tahunan', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Anggaran Tahunan', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Anggaran Tahunan', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Anggaran Tahunan', ['only' => ['destroy']]);
-    }
     public function index(Request $request)
     {
         $query = Bidang::where('tahun', session('tahun'))->whereHas('sub_bidang', function ($query) {

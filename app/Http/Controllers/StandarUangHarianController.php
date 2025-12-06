@@ -10,13 +10,6 @@ use Illuminate\Http\Request;
 
 class StandarUangHarianController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Standar Uang Harian', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Standar Uang Harian', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Standar Uang Harian', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Standar Uang Harian', ['only' => ['destroy']]);
-    }
     public function index()
     {
         $data = StandarUangHarian::where('tahun', session('tahun'))->get();

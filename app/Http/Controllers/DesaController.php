@@ -8,17 +8,6 @@ use Illuminate\Http\Request;
 
 class DesaController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Desa', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Desa', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Desa', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Desa', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = Desa::all();

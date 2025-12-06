@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->put('config', $config);
         $request->session()->put('preferensi', Preferensi::first());
         $user = User::find(Auth::user()->id);
-        $user->terakhir_login = now();
+        $user->last_login = now();
         $user->save();
 
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -53,6 +53,11 @@ class AuthenticatedSessionController extends Controller
     {
         Session::forget('tahun');
         Session::forget('config');
+
+        $user = User::find(Auth::user()->id);
+        $user->last_logout = now();
+        $user->save();
+        
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

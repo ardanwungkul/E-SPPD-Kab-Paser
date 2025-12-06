@@ -7,16 +7,6 @@ use Illuminate\Http\Request;
 
 class TingkatPerjalananDinasController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Tingkat Perjalanan Dinas', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Tingkat Perjalanan Dinas', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Tingkat Perjalanan Dinas', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Tingkat Perjalanan Dinas', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = TingkatPerjalananDinas::OrderBy('tingkat_sppd', 'asc')->get();

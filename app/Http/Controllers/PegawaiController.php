@@ -11,16 +11,6 @@ use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Pegawai', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Pegawai', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Pegawai', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Pegawai', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = Pegawai::with('pangkat')

@@ -10,14 +10,9 @@ class ProgramController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:Daftar Program', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Program', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Program', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Program', ['only' => ['destroy']]);
+        $this->middleware('level:3')->except('index');
     }
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $data = Program::where('tahun', session('tahun'))->orderBy('kdprog', 'asc')->get();

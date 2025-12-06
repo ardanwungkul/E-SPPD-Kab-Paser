@@ -13,10 +13,12 @@
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr class="text-xs">
                                     <td class="!font-medium !text-xs ">Nama</td>
+                                    <td class="!font-medium !text-xs ">Username</td>
                                     <td class="!font-medium !text-xs ">Role</td>
-                                    <td class="!font-medium !text-xs ">Email/Username</td>
+                                    {{-- <td class="!font-medium !text-xs ">Email/Username</td> --}}
                                     <td class="!font-medium !text-xs ">Status</td>
                                     <td class="!font-medium !text-xs ">Terakhir Login</td>
+                                    <td class="!font-medium !text-xs ">Terakhir Logout</td>
                                     <td class="!font-medium !text-xs ">Tanggal Daftar</td>
                                     <td class="!font-medium !text-xs w-32"></td>
                                 </tr>
@@ -27,17 +29,17 @@
                                         <td>
                                             <p>{{ $item->name }}</p>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             @if ($item->roles)
                                                 @foreach ($item->roles as $role)
                                                     <p>{{ $role->name }}</p>
                                                 @endforeach
                                             @endif
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <p>{{ $item->email }}</p>
                                             <p>{{ $item->username }}</p>
                                         </td>
+                                        <td>{{ $item->level == 1 ? 'User Bidang' : ($item->level == 2 ? 'Admin Bidang' : ($item->level == 3 ? 'Admin' : 'Superadmin')) }}</td>
                                         <td>
                                             <div>
                                                 @if ($item->status)
@@ -54,15 +56,19 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p>{{ $item->formattedTerakhirLogin }}
+                                            <p>{{ $item->formattedTerakhirLogin ?? '-' }}
                                             </p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->formattedCreatedAt }}</p>
+                                            <p>{{ $item->formattedTerakhirLogout ?? '-' }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>{{ $item->formattedCreatedAt ?? '-' }}</p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">
-                                                @if (Auth::user()->roles[0]->name == 'Super Admin')
+                                                @if (Auth::user()->level >= 3 && (Auth::user()->level > $item->level || Auth::user()->level == $item->level))
                                                     <div>
                                                         <div>
                                                             <a href="{{ route('users.edit', $item->id) }}"
@@ -78,7 +84,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                @if (($item->roles->count() > 0 && $item->roles[0]->name !== 'Super Admin') || $item->roles->count() == 0)
+                                                @if (Auth::user()->level >= 3 && Auth::user()->level > $item->level)
                                                     <div>
                                                         <button type="button" data-modal-id="{{ $item->id }}"
                                                             data-modal-toggle="confirm-delete-{{ $item->id }}"

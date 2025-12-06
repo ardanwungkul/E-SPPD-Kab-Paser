@@ -7,16 +7,6 @@ use Illuminate\Http\Request;
 
 class JenisPerjalananController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Jenis SPPD', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Jenis SPPD', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Jenis SPPD', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Jenis SPPD', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = JenisPerjalanan::all();

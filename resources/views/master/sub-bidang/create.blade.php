@@ -14,7 +14,7 @@
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
                             <option value="" selected disabled>Pilih {{ session('config')->judul }}</option>
                             @foreach ($bidang as $item)
-                                <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                <option value="{{ $item->id }}" {{Auth::user()->level < 3 ? ($item->id == Auth::user()->bidang_id ? 'selected' : '') : ''}}>{{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>

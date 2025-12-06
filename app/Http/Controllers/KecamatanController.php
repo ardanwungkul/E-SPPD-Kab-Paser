@@ -8,17 +8,6 @@ use Illuminate\Http\Request;
 
 class KecamatanController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('permission:Daftar Kecamatan', ['only' => ['index']]);
-        $this->middleware('permission:Tambah Kecamatan', ['only' => ['create', 'store']]);
-        $this->middleware('permission:Edit Kecamatan', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:Hapus Kecamatan', ['only' => ['destroy']]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
 
