@@ -197,7 +197,7 @@
                                 </svg>
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Pegawai</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Data Pegawai</span>
                         </a>
                     </li>
                     <div class=" mx-8 border-t border-gray-300"></div>
@@ -215,7 +215,7 @@
 
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi
+                            <span class="ml-2 text-xs tracking-wide truncate">Data
                                 {{ session('config')->judul }}
                             </span>
                         </a>
@@ -232,7 +232,7 @@
                                 </svg>
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub.
+                            <span class="ml-2 text-xs tracking-wide truncate">Data Sub.
                                 {{ session('config')->judul }}</span>
                         </a>
                     </li>
@@ -249,7 +249,7 @@
                                         d="M8 8v8m0-8h8M8 8H6a2 2 0 1 1 2-2v2Zm0 8h8m-8 0H6a2 2 0 1 0 2 2v-2Zm8 0V8m0 8h2a2 2 0 1 1-2 2v-2Zm0-8h2a2 2 0 1 0-2-2v2Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Program</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Data Program</span>
                         </a>
                     </li>
                     <li>
@@ -263,7 +263,7 @@
                                         d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Kegiatan</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Data Kegiatan</span>
                         </a>
                     </li>
                     <li>
@@ -277,7 +277,7 @@
                                         d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub. Kegiatan</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Data Sub. Kegiatan</span>
                         </a>
                     </li>
                     <div class=" mx-8 border-t border-gray-300"></div>
@@ -310,21 +310,11 @@
                         <a href="{{ route('suh.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
-                                <svg class=" w-4 h-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="Outline">
-                                        <g data-name="Outline" id="Outline-2">
-                                            <path fill="currentColor"
-                                                d="M22,41.192V33.885h4.027l5.7,7.893a1,1,0,0,0,1.621-1.171l-5.037-6.973a6.535,6.535,0,0,0-1.774-12.826H21a1,1,0,0,0-1,1V41.192a1,1,0,0,0,2,0Zm9.077-13.846a4.544,4.544,0,0,1-4.539,4.539H22V22.808h4.538A4.544,4.544,0,0,1,31.077,27.346Z" />
-                                            <path fill="currentColor"
-                                                d="M37.615,26.346a1,1,0,0,0-1,1V41.192a1,1,0,0,0,2,0V36.654h2.231a5.154,5.154,0,1,0,0-10.308ZM44,31.5a3.158,3.158,0,0,1-3.154,3.154H38.615V28.346h2.231A3.158,3.158,0,0,1,44,31.5Z" />
-                                            <path fill="currentColor"
-                                                d="M32,2A30,30,0,1,0,62,32,30.034,30.034,0,0,0,32,2Zm0,58A28,28,0,1,1,60,32,28.032,28.032,0,0,1,32,60Z" />
-                                            <path fill="currentColor"
-                                                d="M49.655,16.793a3.172,3.172,0,1,0-3.173,3.172,3.138,3.138,0,0,0,1.264-.266A19.994,19.994,0,0,1,22.691,49.707a1,1,0,1,0-.931,1.769A21.986,21.986,0,0,0,49.229,18.351,3.127,3.127,0,0,0,49.655,16.793Zm-4.344,0a1.172,1.172,0,1,1,1.171,1.172A1.172,1.172,0,0,1,45.311,16.793Z" />
-                                            <path fill="currentColor"
-                                                d="M16.793,44.035a3.157,3.157,0,0,0-.692.081A19.779,19.779,0,0,1,12,32,20.023,20.023,0,0,1,32,12a19.811,19.811,0,0,1,8.463,1.874,1,1,0,0,0,.848-1.812A21.989,21.989,0,0,0,14.39,45.16a3.141,3.141,0,0,0-.769,2.047,3.173,3.173,0,1,0,3.172-3.172Zm0,4.344a1.172,1.172,0,1,1,1.173-1.172A1.172,1.172,0,0,1,16.793,48.379Z" />
-                                        </g>
-                                    </g>
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
                                 </svg>
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Standar Uang Harian</span>
@@ -669,7 +659,7 @@
                                         </svg>
 
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Pegawai</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Data Pegawai</span>
                                 </a>
                             </li>
                             <div class=" mx-2 border-t border-gray-300"></div>
@@ -686,7 +676,7 @@
 
 
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi
+                                    <span class="ml-2 text-xs tracking-wide truncate">Data
                                         {{ session('config')->judul }}</span>
                                 </a>
                             </li>
@@ -701,7 +691,7 @@
                                                 d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
                                         </svg>
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Sub
+                                    <span class="ml-2 text-xs tracking-wide truncate">Data Sub
                                         {{ session('config')->judul }}</span>
                                 </a>
                             </li>
@@ -778,21 +768,11 @@
                                 <a href="{{ route('suh.index') }}"
                                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
-                                        <svg class=" w-4 h-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                                            <g id="Outline">
-                                                <g data-name="Outline" id="Outline-2">
-                                                    <path fill="currentColor"
-                                                        d="M22,41.192V33.885h4.027l5.7,7.893a1,1,0,0,0,1.621-1.171l-5.037-6.973a6.535,6.535,0,0,0-1.774-12.826H21a1,1,0,0,0-1,1V41.192a1,1,0,0,0,2,0Zm9.077-13.846a4.544,4.544,0,0,1-4.539,4.539H22V22.808h4.538A4.544,4.544,0,0,1,31.077,27.346Z" />
-                                                    <path fill="currentColor"
-                                                        d="M37.615,26.346a1,1,0,0,0-1,1V41.192a1,1,0,0,0,2,0V36.654h2.231a5.154,5.154,0,1,0,0-10.308ZM44,31.5a3.158,3.158,0,0,1-3.154,3.154H38.615V28.346h2.231A3.158,3.158,0,0,1,44,31.5Z" />
-                                                    <path fill="currentColor"
-                                                        d="M32,2A30,30,0,1,0,62,32,30.034,30.034,0,0,0,32,2Zm0,58A28,28,0,1,1,60,32,28.032,28.032,0,0,1,32,60Z" />
-                                                    <path fill="currentColor"
-                                                        d="M49.655,16.793a3.172,3.172,0,1,0-3.173,3.172,3.138,3.138,0,0,0,1.264-.266A19.994,19.994,0,0,1,22.691,49.707a1,1,0,1,0-.931,1.769A21.986,21.986,0,0,0,49.229,18.351,3.127,3.127,0,0,0,49.655,16.793Zm-4.344,0a1.172,1.172,0,1,1,1.171,1.172A1.172,1.172,0,0,1,45.311,16.793Z" />
-                                                    <path fill="currentColor"
-                                                        d="M16.793,44.035a3.157,3.157,0,0,0-.692.081A19.779,19.779,0,0,1,12,32,20.023,20.023,0,0,1,32,12a19.811,19.811,0,0,1,8.463,1.874,1,1,0,0,0,.848-1.812A21.989,21.989,0,0,0,14.39,45.16a3.141,3.141,0,0,0-.769,2.047,3.173,3.173,0,1,0,3.172-3.172Zm0,4.344a1.172,1.172,0,1,1,1.173-1.172A1.172,1.172,0,0,1,16.793,48.379Z" />
-                                                </g>
-                                            </g>
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
                                         </svg>
 
                                     </span>
