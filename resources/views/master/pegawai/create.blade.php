@@ -30,10 +30,10 @@
                     </legend>
                     <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
                         <div class="flex flex-col gap-1">
-                            <label id="nip_nik" for="nip">NIK/NIP</label>
+                            <label id="nip_nik" for="nip">NIP</label>
                             <input type="text" id="nip" name="nip"
                                 class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                                value="{{ old('nip') }}" placeholder="Masukkan NIK/NIP Pegawai" required>
+                                value="{{ old('nip') }}" placeholder="Masukkan NIP Pegawai" required>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="nama">Nama</label>
@@ -97,26 +97,24 @@
                             <textarea id="keterangan" name="keterangan" class="text-xs md:text-sm h-10 rounded-lg border border-gray-300 shadow-md"
                                 placeholder="Masukkan Keterangan">{{ old('keterangan') }}</textarea>
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <p>Tanda Tangan Default</p>
-                            <div class=" w-full flex justify-end">
-                                <div class="toggler">
-                                    <input id="ttd_default" name="ttd_default" type="checkbox">
-                                    <label for="ttd_default">
-                                        <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 130.2 130.2">
-                                            <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5">
-                                            </polyline>
-                                        </svg>
-                                        <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 130.2 130.2">
-                                            <line class="path line" x1="34.4" y1="34.4" x2="95.8"
-                                                y2="95.8"></line>
-                                            <line class="path line" x1="95.8" y1="34.4" x2="34.4"
-                                                y2="95.8"></line>
-                                        </svg>
-                                    </label>
-                                </div>
+                        <div class="flex justify-between items-center gap-6">
+                            <p>Penandatangan Laporan :</p>
+                            <div class="toggler">
+                                <input id="ttd_default" name="ttd_default" type="checkbox">
+                                <label for="ttd_default">
+                                    <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5">
+                                        </polyline>
+                                    </svg>
+                                    <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <line class="path line" x1="34.4" y1="34.4" x2="95.8"
+                                            y2="95.8"></line>
+                                        <line class="path line" x1="95.8" y1="34.4" x2="34.4"
+                                            y2="95.8"></line>
+                                    </svg>
+                                </label>
                             </div>
                         </div>
                         <div class="flex justify-end items-center gap-4 pt-4">
@@ -135,7 +133,7 @@
         selectionCssClass: 'text-xs',
     });
 
-    let currentMode = "NIK";
+    let currentMode = "NIP";
 
     function formatNIP(value) {
         // Hanya angka

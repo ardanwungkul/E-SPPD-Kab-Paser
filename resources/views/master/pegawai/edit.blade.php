@@ -123,50 +123,46 @@
                             <textarea id="keterangan" name="keterangan" class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
                                 placeholder="Masukkan Keterangan">{{ $pegawai->keterangan }}</textarea>
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <p>Tanda Tangan Default</p>
-                            <div class=" w-full flex justify-end">
-                                <div class="toggler">
-                                    <input id="ttd_default" name="ttd_default"
-                                        {{ $pegawai->ttd_default == 'Y' ? 'checked' : '' }} type="checkbox">
-                                    <label for="ttd_default">
-                                        <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 130.2 130.2">
-                                            <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5">
-                                            </polyline>
-                                        </svg>
-                                        <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 130.2 130.2">
-                                            <line class="path line" x1="34.4" y1="34.4" x2="95.8"
-                                                y2="95.8"></line>
-                                            <line class="path line" x1="95.8" y1="34.4" x2="34.4"
-                                                y2="95.8"></line>
-                                        </svg>
-                                    </label>
-                                </div>
+                        <div class="flex items-center justify-between">
+                            <p>Penandatangan Laporan :</p>
+                            <div class="toggler">
+                                <input id="ttd_default" name="ttd_default"
+                                    {{ $pegawai->ttd_default == 'Y' ? 'checked' : '' }} type="checkbox">
+                                <label for="ttd_default">
+                                    <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5">
+                                        </polyline>
+                                    </svg>
+                                    <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <line class="path line" x1="34.4" y1="34.4" x2="95.8"
+                                            y2="95.8"></line>
+                                        <line class="path line" x1="95.8" y1="34.4" x2="34.4"
+                                            y2="95.8"></line>
+                                    </svg>
+                                </label>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <p>Aktif</p>
-                            <div class=" w-full flex justify-end">
-                                <div class="toggler">
-                                    <input id="aktif" name="aktif"
-                                        {{ $pegawai->aktif == 'Y' ? 'checked' : '' }} type="checkbox">
-                                    <label for="aktif">
-                                        <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 130.2 130.2">
-                                            <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5">
-                                            </polyline>
-                                        </svg>
-                                        <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 130.2 130.2">
-                                            <line class="path line" x1="34.4" y1="34.4" x2="95.8"
-                                                y2="95.8"></line>
-                                            <line class="path line" x1="95.8" y1="34.4" x2="34.4"
-                                                y2="95.8"></line>
-                                        </svg>
-                                    </label>
-                                </div>
+                        <div class="flex items-center justify-between">
+                            <p>Status Pegawai :</p>
+                            <div class="toggler">
+                                <input id="aktif" name="aktif" {{ $pegawai->aktif == 'Y' ? 'checked' : '' }}
+                                    type="checkbox">
+                                <label for="aktif">
+                                    <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5">
+                                        </polyline>
+                                    </svg>
+                                    <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <line class="path line" x1="34.4" y1="34.4" x2="95.8"
+                                            y2="95.8"></line>
+                                        <line class="path line" x1="95.8" y1="34.4" x2="34.4"
+                                            y2="95.8"></line>
+                                    </svg>
+                                </label>
                             </div>
                         </div>
                         <div class="flex justify-end items-center gap-4 pt-4">
@@ -265,6 +261,8 @@
                     }
                 },
                 error: function(xhr) {
+
+                    $('#pangkat_id').prop('disabled', false);
                     console.error(xhr.responseText);
                 }
             });
@@ -310,6 +308,8 @@
                     }
                 },
                 error: function(xhr) {
+                    
+                        $('#sub_bidang_id').prop('disabled', false);
                     console.error(xhr.responseText);
                 }
             });

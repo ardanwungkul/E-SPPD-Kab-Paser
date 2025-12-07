@@ -35,39 +35,43 @@
                                                     <p class="ml-3">{{ $sub_bidang->uraian }}</p>
                                                 </td>
                                                 <td>
-                                                    @if ($item->id == Auth::user()->bidang_id)
+                                                    @if ( Auth::user()->level >= 3 || $item->id == Auth::user()->bidang_id)
                                                         <div class="flex justify-center items-center gap-3">
                                                             <div>
-                                                                <div>
-                                                                    <a href="{{ route('sub-bidang.edit', $sub_bidang->id) }}"
-                                                                        class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
-                                                                        <svg class="w-4 h-4" aria-hidden="true"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" fill="none"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path stroke="currentColor"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
-                                                                                d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
-                                                                        </svg>
+                                                                @if ( Auth::user()->level > 1 || !$sub_bidang->anggaran)    
+                                                                    <div>
+                                                                        <a href="{{ route('sub-bidang.edit', $sub_bidang->id) }}"
+                                                                            class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
+                                                                            <svg class="w-4 h-4" aria-hidden="true"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24" fill="none"
+                                                                                viewBox="0 0 24 24">
+                                                                                <path stroke="currentColor"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                                    d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
+                                                                            </svg>
 
-                                                                    </a>
-                                                                </div>
+                                                                        </a>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                             <div>
-                                                                <button type="button" data-modal-id="{{ $sub_bidang->id }}"
-                                                                    data-modal-toggle="confirm-delete-{{ $sub_bidang->id }}"
-                                                                    data-modal-target="confirm-delete-{{ $sub_bidang->id }}"
-                                                                    class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
-                                                                    <svg class="w-4 h-4" aria-hidden="true"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" fill="none" viewBox="0 0 24 24">
-                                                                        <path stroke="currentColor" stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                                                    </svg>
+                                                                @if ( Auth::user()->level > 1)
+                                                                    <button type="button" data-modal-id="{{ $sub_bidang->id }}"
+                                                                        data-modal-toggle="confirm-delete-{{ $sub_bidang->id }}"
+                                                                        data-modal-target="confirm-delete-{{ $sub_bidang->id }}"
+                                                                        class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
+                                                                        <svg class="w-4 h-4" aria-hidden="true"
+                                                                            xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                            height="24" fill="none" viewBox="0 0 24 24">
+                                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                                        </svg>
 
-                                                                </button>
+                                                                    </button>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     @endif

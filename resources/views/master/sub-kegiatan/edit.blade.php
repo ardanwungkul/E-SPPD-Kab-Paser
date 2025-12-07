@@ -27,7 +27,8 @@
                             <option value="" selected disabled> Pilih Kegiatan</option>
                             @foreach ($sub_kegiatan->kegiatan->program->kegiatan as $item)
                                 <option value="{{ $item->kdgiat }}"
-                                    {{ $sub_kegiatan->kdgiat == $item->kdgiat ? 'selected' : '' }}>{{ $item->kdgiat }} - {{ $item->uraian }}
+                                    {{ $sub_kegiatan->kdgiat == $item->kdgiat ? 'selected' : '' }}>{{ $item->kdgiat }} -
+                                    {{ $item->uraian }}
                                 </option>
                             @endforeach
 
@@ -37,18 +38,20 @@
                         <label for="kode">Kode Sub. Kegiatan</label>
                         <input type="text" id="kode" name="kode"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ old('kode', $sub_kegiatan->kdsub) }}" placeholder="Masukkan Kode Sub. Kegiatan" required>
+                            value="{{ old('kode', $sub_kegiatan->kdsub) }}" placeholder="Masukkan Kode Sub. Kegiatan"
+                            required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Nama Sub. Kegiatan</label>
                         <input type="text" id="uraian" name="uraian"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ old('uraian', $sub_kegiatan->uraian) }}" placeholder="Masukkan Nama Sub. Kegiatan " required>
+                            value="{{ old('uraian', $sub_kegiatan->uraian) }}"
+                            placeholder="Masukkan Nama Sub. Kegiatan " required>
                     </div>
 
                     <div class="flex justify-end items-center gap-4 pt-4">
-                        <x-button.save-button/>
-                        <x-button.back-button :route="route('sub-kegiatan.index')"/>
+                        <x-button.save-button />
+                        <x-button.back-button :route="route('sub-kegiatan.index')" />
                     </div>
                 </div>
             </form>
@@ -66,6 +69,9 @@
             const programKode = $(this).val();
 
             if (programKode) {
+
+                $('#kegiatan_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
                 $.ajax({
                     url: "{{ route('get.kegiatan.by.program') }}",
                     type: "GET",
@@ -81,16 +87,22 @@
                         if (response.length > 0) {
                             $.each(response, function(index, kegiatan) {
                                 $('#kegiatan_id').append('<option value="' +
-                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat + ' - ' + kegiatan.uraian +
+                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat +
+                                    ' - ' + kegiatan.uraian +
                                     '</option>');
                             });
+
+                            $('#kegiatan_id').prop('disabled', false);
                         } else {
                             $('#kegiatan_id').append(
                                 '<option value="" disabled>Tidak ada kegiatan tersedia</option>'
                             );
+
+                            $('#kegiatan_id').prop('disabled', false);
                         }
                     },
                     error: function(xhr) {
+                        $('#kegiatan_id').prop('disabled', false);
                         console.error(xhr.responseText);
                     }
                 });

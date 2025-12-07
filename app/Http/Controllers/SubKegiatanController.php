@@ -11,7 +11,7 @@ class SubKegiatanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('level:3')->except('index');
+        $this->middleware('level:3')->except('index', 'getSubKegiatanByKegiatan');
     }
     
     public function index()

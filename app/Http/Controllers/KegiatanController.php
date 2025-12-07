@@ -11,7 +11,7 @@ class KegiatanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('level:3')->except('index');
+        $this->middleware('level:3')->except('index', 'getKegiatanByProgram');
     }
     
     public function index()

@@ -45,7 +45,8 @@
                                                 </td>
                                             </tr>
                                             <tr class="bg-secondary-3">
-                                                <td class="px-3 py-2 border border-secondary-4 font-semibold">Kode Rekening
+                                                <td class="px-3 py-2 border border-secondary-4 font-semibold">Kode
+                                                    Rekening
                                                 </td>
                                                 <td class="px-3 py-2 border border-secondary-4 font-semibold">Program /
                                                     Kegiatan / Sub. Kegiatan
@@ -149,10 +150,10 @@
                                                             </td>
 
                                                             {{-- Option --}}
-                                                            <td class=" border">
-                                                                <div
-                                                                    class="flex justify-center items-center gap-3 px-2">
-                                                                    <div>
+                                                            <td class=" border-x">
+                                                                @if (Auth::user()->level >= 3 || $item->id == Auth::user()->bidang_id)
+                                                                    <div
+                                                                        class="flex justify-center items-center gap-3 px-2">
                                                                         <div>
                                                                             <a href="{{ route('anggaran.edit', $anggaranBySubKegiatan->first()->id) }}"
                                                                                 class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
@@ -169,7 +170,7 @@
                                                                             </a>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

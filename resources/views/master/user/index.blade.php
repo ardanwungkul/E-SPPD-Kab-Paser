@@ -14,6 +14,7 @@
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr class="text-xs">
+                                    <td></td>
                                     <td class="!font-medium !text-xs ">Nama Pengguna</td>
                                     <td class="!font-medium !text-xs ">Username</td>
                                     <td class="!font-medium !text-xs ">Role</td>
@@ -28,6 +29,9 @@
                             <tbody class="text-secondary-2">
                                 @foreach ($data as $item)
                                     <tr class="text-xs">
+                                        <td>
+                                            <img class=" w-14 h-14 rounded-lg" src="{{ $item->photo ? asset('storage/user/' . $item->photo) : asset('assets/images/placeholder-image.jpg') }}" alt="">
+                                        </td>
                                         <td>
                                             <p>{{ $item->name }}</p>
                                         </td>

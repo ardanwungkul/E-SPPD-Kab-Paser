@@ -13,7 +13,8 @@
                         <select name="program_id" id="program_id" class="text-xs md:text-sm rounded-lg select2" required>
                             <option value="" selected disabled> Pilih Program</option>
                             @foreach ($program as $item)
-                                <option {{ old('program_id') == $item->kdprog ? 'selected' : '' }} value="{{ $item->kdprog }}">{{$item->kdprog}} - {{ $item->uraian }}</option>
+                                <option {{ old('program_id') == $item->kdprog ? 'selected' : '' }}
+                                    value="{{ $item->kdprog }}">{{ $item->kdprog }} - {{ $item->uraian }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -38,8 +39,8 @@
                     </div>
 
                     <div class="flex justify-end items-center gap-4 pt-4">
-                        <x-button.save-button/>
-                        <x-button.back-button :route="route('sub-kegiatan.index')"/>
+                        <x-button.save-button />
+                        <x-button.back-button :route="route('sub-kegiatan.index')" />
                     </div>
                 </div>
             </form>
@@ -57,6 +58,10 @@
             const programKode = $(this).val();
 
             if (programKode) {
+
+                $('#kegiatan_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+
                 $.ajax({
                     url: "{{ route('get.kegiatan.by.program') }}",
                     type: "GET",
@@ -72,16 +77,22 @@
                         if (response.length > 0) {
                             $.each(response, function(index, kegiatan) {
                                 $('#kegiatan_id').append('<option value="' +
-                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat + ' - ' + kegiatan.uraian +
+                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat +
+                                    ' - ' + kegiatan.uraian +
                                     '</option>');
                             });
+
+                            $('#kegiatan_id').prop('disabled', false);
                         } else {
                             $('#kegiatan_id').append(
                                 '<option value="" disabled>Tidak ada kegiatan tersedia</option>'
                             );
+
+                            $('#kegiatan_id').prop('disabled', false);
                         }
                     },
                     error: function(xhr) {
+                        $('#kegiatan_id').prop('disabled', false);
                         console.error(xhr.responseText);
                     }
                 });
