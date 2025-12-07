@@ -42,7 +42,7 @@
                                         <td>{{ $item->level == 1 ? 'User Bidang' : ($item->level == 2 ? 'Admin Bidang' : ($item->level == 3 ? 'Admin' : 'Superadmin')) }}</td>
                                         <td>
                                             <div>
-                                                @if ($item->status)
+                                                @if ($item->aktif == 'Y')
                                                     <p
                                                         class="text-white bg-green-400 rounded-lg shadow px-3 py-1 text-center">
                                                         Aktif
