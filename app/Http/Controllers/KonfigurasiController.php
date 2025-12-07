@@ -88,14 +88,14 @@ class KonfigurasiController extends Controller
     public function storePreferensi(Request $request)
     {
         $preferensi = Preferensi::first();
-        $preferensi->nama_aplikasi = $request->nama_aplikasi;
-        $preferensi->instansi_pemerintah = $request->instansi_pemerintah;
-        $preferensi->instansi_alamat = $request->instansi_alamat;
-        $preferensi->instansi_kontak_email = $request->instansi_kontak_email;
-        $preferensi->instansi_kontak_fax = $request->instansi_kontak_fax;
-        $preferensi->instansi_kontak_telp = $request->instansi_kontak_telp;
-        $preferensi->instansi_provinsi = $request->instansi_provinsi;
-        $preferensi->instansi_kabupaten_kota = $request->instansi_kabupaten_kota;
+        $preferensi->appname = $request->appname;
+        // $preferensi->instansi_pemerintah = $request->instansi_pemerintah;
+        // $preferensi->instansi_alamat = $request->instansi_alamat;
+        // $preferensi->instansi_kontak_email = $request->instansi_kontak_email;
+        // $preferensi->instansi_kontak_fax = $request->instansi_kontak_fax;
+        // $preferensi->instansi_kontak_telp = $request->instansi_kontak_telp;
+        // $preferensi->instansi_provinsi = $request->instansi_provinsi;
+        // $preferensi->instansi_kabupaten_kota = $request->instansi_kabupaten_kota;
         $preferensi->save();
 
         $request->session()->put('preferensi', $preferensi);
