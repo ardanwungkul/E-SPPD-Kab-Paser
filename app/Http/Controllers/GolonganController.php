@@ -21,7 +21,7 @@ class GolonganController extends Controller
         $request->validate([
             'jenis_pegawai_id' => 'required|string',
         ]);
-        $pangkat = Golongan::where('jenis_pegawai_id', $request->jenis_pegawai_id)->orderBy('kdgol', 'desc')->get();
+        $pangkat = Golongan::where('jnspeg', $request->jenis_pegawai_id)->orderBy('kdgol', 'desc')->get();
         return response()->json($pangkat);
     }
 

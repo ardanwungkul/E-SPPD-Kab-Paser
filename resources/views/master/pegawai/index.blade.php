@@ -38,7 +38,7 @@
                                             <p>{{ $item->pangkat->jenis_pegawai->uraian }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat->kode_golongan }}</p>
+                                            <p>{{ $item->pangkat->kdgol }}</p>
                                         </td>
                                         <td>
                                             <p>{{ $item->pangkat->uraian }}</p>

@@ -13,6 +13,6 @@ class JenisPegawai extends Model
 
     public function pangkat()
     {
-        return $this->hasMany(Golongan::class, 'jenis_pegawai_id');
+        return $this->hasMany(Golongan::class, 'jnspeg');
     }
 }

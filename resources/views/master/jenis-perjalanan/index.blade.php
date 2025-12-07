@@ -6,67 +6,111 @@
     <x-container>
         <x-slot name="content">
             <div>
-                {{-- <x-button.add-button :route="route('jenis-perjalanan.create')" /> --}}
+                <div class=" flex mb-4 border-b border-gray-200">
+                    <ul class=" grid grid-cols-3 text-sm font-medium" id="jenis-tab"
+                        data-tabs-toggle="#jenis-tab-content" role="tablist">
+                        <li role="presentation">
+                            <button 
+                                class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 " 
+                                id="jenis-pegawai-tab" data-tabs-target="#jenis-pegawai" type="button" role="tab"
+                                aria-controls="jenis-pegawai" aria-selected="false">Jenis Pegawai</button>
+                        </li>
+                        <li role="presentation">
+                            <button
+                                class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
+                                id="jenis-perjalanan-tab" data-tabs-target="#jenis-perjalanan" type="button"
+                                role="tab" aria-controls="jenis-perjalanan" aria-selected="false">Jenis
+                                Perjalanan</button>
+                        </li>
+                        <li role="presentation">
+                            <button
+                                class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
+                                id="tingkat-perjalanan-tab" data-tabs-target="#tingkat-perjalanan" type="button"
+                                role="tab" aria-controls="tingkat-perjalanan" aria-selected="false">Tingkat
+                                Perjalanan</button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="jenis-tab-content">
+                    <div id="jenis-pegawai" role="tabpanel" aria-labelledby="jenis-pegawai-tab">
+                        <div class="relative pb-20">
+                            <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
+                                <table class="text-sm hover stripe row-border datatable">
+                                    <thead class="bg-secondary-3 text-secondary-2 font-medium">
+                                        <tr>
+                                            <td class="text-xs">Uraian</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-secondary-2">
+                                        @foreach ($jenispeg as $item)
+                                            <tr class="text-xs">
+                                                <td>
+                                                    <p class="text-start">{{ $item->uraian }}</p>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="jenis-perjalanan" role="tabpanel" aria-labelledby="jenis-perjalanan-tab">
+                        <div class="relative pb-20">
+                            <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
+                                <table class="text-sm hover stripe row-border datatable">
+                                    <thead class="bg-secondary-3 text-secondary-2 font-medium">
+                                        <tr>
+                                            <td class="text-xs">Jenis Perjalanan</td>
+                                            <td class="text-xs">Wilayah</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-secondary-2">
+                                        @foreach ($jenisper as $item)
+                                            <tr class="text-xs">
+                                                <td>
+                                                    <p class="text-start">{{ $item->uraian }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-start">{{ $item->wilayah }}</p>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tingkat-perjalanan" role="tabpanel" aria-labelledby="tingkat-perjalanan-tab">
+                        <div class="relative pb-20">
+                            <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
+                                <table class="text-sm hover stripe row-border datatable">
+                                    <thead class="bg-secondary-3 text-secondary-2 font-medium">
+                                        <tr>
+                                            <td class="text-xs">Tingkat</td>
+                                            <td class="text-xs">Uraian</td>
+                                            <td class="text-xs">Keterangan</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-secondary-2">
+                                        @foreach ($tingper as $item)
+                                            <tr class="text-xs">
+                                                <td class="dt-head-left dtr-control" data-order="A001">
+                                                    <p class="!text-start w-min inline-block">{{ $item->tingkat_sppd }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-start">{{ $item->uraian }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-start">{{ $item->keterangan }}</p>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-                <div class="relative pb-20">
-                    <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
-                        <table id="datatable" class="text-sm hover stripe row-border">
-                            <thead class="bg-secondary-3 text-secondary-2 font-medium">
-                                <tr>
-                                    <td class="text-xs">Jenis Perjalanan</td>
-                                    <td class="text-xs">Wilayah</td>
-                                    {{-- <td class="text-xs w-32"></td> --}}
-                                </tr>
-                            </thead>
-                            <tbody class="text-secondary-2">
-                                @foreach ($data as $item)
-                                    <tr class="text-xs">
-                                        <td>
-                                            <p class="text-start">{{ $item->uraian }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-start">{{ $item->wilayah }}</p>
-                                        </td>
-                                        {{-- <td>
-                                            <div class="flex justify-center items-center gap-3">
-                                                <div>
-                                                    <div>
-                                                        <a href="{{ route('jenis-perjalanan.edit', $item->id) }}"
-                                                            class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
-                                                            <svg class="w-4 h-4" aria-hidden="true"
-                                                                xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" stroke-linecap="round"
-                                                                    stroke-linejoin="round" stroke-width="2"
-                                                                    d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
-                                                            </svg>
-
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <button type="button" data-modal-id="{{ $item->id }}"
-                                                        data-modal-toggle="confirm-delete-{{ $item->id }}"
-                                                        data-modal-target="confirm-delete-{{ $item->id }}"
-                                                        class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
-                                                        <svg class="w-4 h-4" aria-hidden="true"
-                                                            xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                                        </svg>
-
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                        </td> --}}
-                                    </tr>
-                                    {{-- <x-modal.confirm-delete :id="$item->id" :name="'Data'" :action="route('jenis-perjalanan.destroy', $item->id)" /> --}}
-                                @endforeach
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -75,61 +119,43 @@
 </x-app-layout>
 <script type="module">
     $(document).ready(function() {
-        $('#datatable').DataTable({
-            info: false,
-            lengthChange: false,
-            deferRender: true,
-            paging: true,
-            pagingType: 'simple',
-            language: {
-                search: '',
-                emptyTable: "Tidak ada data tersedia",
-                searchPlaceholder: 'Cari...'
-            },
-            ordering: false,
-            responsive: {
-                details: {
-                    renderer: function(api, rowIdx, columns) {
-                        let data = columns
-                            .map((col, i) => {
-                                return col.hidden ?
+        $('.datatable').each(function() {
+            $(this).DataTable({
+                info: false,
+                lengthChange: false,
+                deferRender: true,
+                paging: true,
+                pagingType: 'simple',
+                language: {
+                    search: '',
+                    emptyTable: "Tidak ada data tersedia",
+                    searchPlaceholder: 'Cari...'
+                },
+                ordering: false,
+                responsive: {
+                    details: {
+                        renderer: function(api, rowIdx, columns) {
+                            let data = columns
+                                .map((col) =>
+                                    col.hidden ?
                                     `<div class="my-3">
-                                        <p class="text-xs font-bold">${col.title}</p>
-                                        <div class="text-xs">${col.data}</div>
-                                    </div>` : '';
-                            })
-                            .join('');
+                                    <p class="text-xs font-bold">${col.title}</p>
+                                    <div class="text-xs">${col.data}</div>
+                                </div>` : ''
+                                )
+                                .join('');
 
-                        let table = document.createElement('table');
-                        table.innerHTML = data;
-
-                        return data ? table : false;
+                            let table = document.createElement('table');
+                            table.innerHTML = data;
+                            return data ? table : false;
+                        }
                     }
-                }
-            },
-            columnDefs: [{
-                targets: '_all',
-                className: 'dt-head-left',
-            }]
-        });
-        $(document).on('click', '[data-modal-id]', function() {
-            const modalId = $(this).data('modal-id');
-
-            const $targetEl = $(`[id="confirm-delete-${modalId}"]`);
-
-            const modal = new Modal($targetEl[0]);
-            if (modal) {
-                modal.toggle();
-            }
-        });
-        $(document).on('click', '[data-modal-hide]', function() {
-            const modalId = $(this).data('modal-hide');
-            const $targetEl = $(`#${modalId}`);
-
-            const modal = new Modal($targetEl[0]);
-            if (modal) {
-                modal.hide();
-            }
+                },
+                columnDefs: [{
+                    targets: '_all',
+                    className: 'dt-head-left',
+                }]
+            });
         });
     });
 </script>

@@ -24,7 +24,7 @@
                         <label for="no_hp">No. Hp</label>
                         <input type="text" id="no_hp" name="no_hp"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $pegawai->no_hp }}" placeholder="Masukkan Nomor Handphone">
+                            value="{{ $pegawai->nomor_hp }}" placeholder="Masukkan Nomor Handphone">
                     </div>
                     <div class="flex flex-col gap-1 col-span-2">
                         <label for="keterangan">Keterangan</label>
@@ -46,7 +46,7 @@
                             <option value="" selected disabled>Pilih Jenis Pegawai</option>
                             @foreach ($jenis_pegawai as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ $item->id == $pegawai->pangkat->jenis_pegawai_id ? 'selected' : '' }}>
+                                    {{ $item->id == $pegawai->pangkat->jnspeg ? 'selected' : '' }}>
                                     {{ $item->uraian }}</option>
                             @endforeach
                         </select>

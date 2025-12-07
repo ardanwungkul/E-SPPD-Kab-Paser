@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisPegawai;
 use App\Models\JenisPerjalanan;
+use App\Models\TingkatPerjalananDinas;
 use Illuminate\Http\Request;
 
 class JenisPerjalananController extends Controller
 {
     public function index()
     {
-        $data = JenisPerjalanan::all();
-        return view('master.jenis-perjalanan.index', compact('data'));
+        $jenisper = JenisPerjalanan::all();
+        $jenispeg = JenisPegawai::all();
+        $tingper = TingkatPerjalananDinas::all();
+        return view('master.jenis-perjalanan.index', compact('jenisper', 'jenispeg', 'tingper'));
     }
 
     /**

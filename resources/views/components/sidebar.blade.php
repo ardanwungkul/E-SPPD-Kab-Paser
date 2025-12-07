@@ -405,7 +405,7 @@
                     </li>
                     <div class=" mx-8 border-t border-gray-300"></div>
 
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('tingkat-perjalanan-dinas.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
@@ -419,7 +419,7 @@
                             </span>
                             <span class="ml-2 text-xs tracking-wide truncate">Tingkat Perjalanan Dinas</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ route('jenis-perjalanan.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
@@ -877,7 +877,7 @@
                                 </a>
                             </li>
                             <div class=" mx-2 border-t border-gray-300"></div>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('tingkat-perjalanan-dinas.index') }}"
                                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
                                     <span class="inline-flex justify-center items-center ml-2">
@@ -891,7 +891,7 @@
                                     </span>
                                     <span class="ml-2 text-xs tracking-wide truncate">Tingkat Perjalanan Dinas</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('jenis-perjalanan.index') }}"
                                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">

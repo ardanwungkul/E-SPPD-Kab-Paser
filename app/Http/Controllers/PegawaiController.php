@@ -15,8 +15,8 @@ class PegawaiController extends Controller
     {
         $data = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
-            ->orderBy('ref_pangkat.jenis_pegawai_id', 'asc')
-            ->orderBy('ref_pangkat.kode_golongan', 'desc')
+            ->orderBy('ref_pangkat.jnspeg', 'asc')
+            ->orderBy('ref_pangkat.kdgol', 'desc')
             ->orderBy('nama', 'asc')
             ->select('pegawai.*')
             ->get();
@@ -69,15 +69,16 @@ class PegawaiController extends Controller
         $pegawai = new Pegawai();
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
+        $pegawai->jnspeg_id = $request->jenis_pegawai_id;
         $pegawai->pangkat_id = $request->pangkat_id;
         $pegawai->bidang_id = $request->bidang_id;
         $pegawai->bidang_sub_id = $request->sub_bidang_id;
         $pegawai->tingkat_id = $request->tingkat_id;
-        $pegawai->no_hp = $request->no_hp;
+        $pegawai->nomor_hp = $request->no_hp;
         $pegawai->jabatan = $request->jabatan;
         $pegawai->alamat = $request->alamat;
         $pegawai->keterangan = $request->keterangan;
-        $pegawai->ttd_default = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'N';
+        $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'N';
         $pegawai->save();
         return redirect()->route('pegawai.index')->with(['success' => 'Berhasil Menambahkan Pegawai']);
     }
@@ -133,15 +134,16 @@ class PegawaiController extends Controller
         );
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
+        $pegawai->jnspeg_id = $request->jenis_pegawai_id;
         $pegawai->pangkat_id = $request->pangkat_id;
         $pegawai->bidang_id = $request->bidang_id;
         $pegawai->bidang_sub_id = $request->sub_bidang_id;
         $pegawai->tingkat_id = $request->tingkat_id;
-        $pegawai->no_hp = $request->no_hp;
+        $pegawai->nomor_hp = $request->no_hp;
         $pegawai->jabatan = $request->jabatan;
         $pegawai->alamat = $request->alamat;
         $pegawai->keterangan = $request->keterangan;
-        $pegawai->ttd_default = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'N';
+        $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'N';
         $pegawai->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'N';
         $pegawai->save();
         return redirect()->route('pegawai.index')->with(['success' => 'Berhasil Mengubah Pegawai']);
