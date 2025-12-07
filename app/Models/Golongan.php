@@ -11,6 +11,6 @@ class Golongan extends Model
     protected $table = 'ref_pangkat';
     public function jenis_pegawai()
     {
-        return $this->belongsTo(JenisPegawai::class, 'jenis_pegawai_id');
+        return $this->belongsTo(JenisPegawai::class, 'jnspeg');
     }
 }

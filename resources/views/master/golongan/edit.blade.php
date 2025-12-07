@@ -12,7 +12,7 @@
                         <label for="kode_golongan">Kode Golongan</label>
                         <input type="text" id="kode_golongan" name="kode_golongan"
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                            value="{{ $golongan->kode_golongan }}" placeholder="Masukkan Kode Golongan" required>
+                            value="{{ $golongan->kdgol }}" placeholder="Masukkan Kode Golongan" required>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="uraian">Nama Pangkat</label>
@@ -27,7 +27,7 @@
                             <option value="" selected disabled> Pilih Jenis Pegawai</option>
                             @foreach ($jenis_pegawai as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ $item->id == $golongan->jenis_pegawai_id ? 'selected' : '' }}>{{ $item->uraian }}
+                                    {{ $item->id == $golongan->jnspeg ? 'selected' : '' }}>{{ $item->uraian }}
                                 </option>
                             @endforeach
                         </select>

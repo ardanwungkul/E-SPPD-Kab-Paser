@@ -10,7 +10,7 @@ class GolonganController extends Controller
 {
     public function index()
     {
-        $data = Golongan::orderBy('id', 'asc')->orderBy('kode_golongan', 'desc')
+        $data = Golongan::orderBy('id', 'asc')->orderBy('kdgol', 'desc')
             ->get();
 
         return view('master.golongan.index', compact('data'));
@@ -21,7 +21,7 @@ class GolonganController extends Controller
         $request->validate([
             'jenis_pegawai_id' => 'required|string',
         ]);
-        $pangkat = Golongan::where('jenis_pegawai_id', $request->jenis_pegawai_id)->orderBy('kode_golongan', 'desc')->get();
+        $pangkat = Golongan::where('jenis_pegawai_id', $request->jenis_pegawai_id)->orderBy('kdgol', 'desc')->get();
         return response()->json($pangkat);
     }
 
@@ -58,8 +58,8 @@ class GolonganController extends Controller
         );
         $golongan = new Golongan();
         $golongan->uraian = $request->uraian;
-        $golongan->kode_golongan = $request->kode_golongan;
-        $golongan->jenis_pegawai_id = $request->jenis_pegawai_id;
+        $golongan->kdgol = $request->kode_golongan;
+        $golongan->jnspeg = $request->jenis_pegawai_id;
         $golongan->save();
         return redirect()->route('golongan.index')->with(['success' => 'Berhasil Menambahkan Golongan']);
     }
@@ -104,8 +104,8 @@ class GolonganController extends Controller
             ]
         );
         $golongan->uraian = $request->uraian;
-        $golongan->kode_golongan = $request->kode_golongan;
-        $golongan->jenis_pegawai_id = $request->jenis_pegawai_id;
+        $golongan->kdgol = $request->kode_golongan;
+        $golongan->jnspeg = $request->jenis_pegawai_id;
         $golongan->save();
         return redirect()->route('golongan.index')->with(['success' => 'Berhasil Mengubah Golongan']);
     }

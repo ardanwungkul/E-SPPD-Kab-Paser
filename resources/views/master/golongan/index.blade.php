@@ -23,7 +23,7 @@
                                 @foreach ($data as $item)
                                     <tr class="text-xs">
                                         <td>
-                                            <p class="text-start">{{ $item->kode_golongan }}</p>
+                                            <p class="text-start">{{ $item->kdgol }}</p>
                                         </td>
                                         <td>
                                             <p class="text-start">{{ $item->uraian }}</p>

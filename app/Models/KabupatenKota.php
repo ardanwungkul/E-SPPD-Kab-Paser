@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KabupatenKota extends Model
 {
     use HasFactory;
-    protected $table = 'wilayah_kabupaten_kota';
+    protected $table = 'wilayah_kabkota';
 
     public function provinsi()
     {
