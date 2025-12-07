@@ -13,11 +13,19 @@ class KonfigurasiController extends Controller
 {
     public function index()
     {
-        $config = Config::where('aktif', 'Y')->where('tahun', session('tahun'))->first();
-        $kop_surat = KopSurat::first();
         $provinsi = Provinsi::select('id', 'nama')->get();
         $preferensi = Preferensi::first();
-        return view('master.config.index', compact('config', 'preferensi', 'provinsi', 'kop_surat'));
+        return view('master.config.index', compact('preferensi', 'provinsi'));
+    }
+    public function formatindex()
+    {
+        $config = Config::where('aktif', 'Y')->where('tahun', session('tahun'))->first();
+        return view('master.format-nomor.index', compact('config'));
+    }
+    public function kopindex()
+    {
+        $kop_surat = KopSurat::first();
+        return view('master.kop-surat.index', compact('kop_surat'));
     }
     private function formatSPT($value)
     {

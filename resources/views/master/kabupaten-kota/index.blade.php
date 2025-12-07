@@ -21,8 +21,8 @@
                                 <tr>
                                     <td class="text-xs">Provinsi</td>
                                     <td class="text-xs">Kabupaten/Kota</td>
-                                    <td class="text-xs">Latitude</td>
-                                    <td class="text-xs">Longitude</td>
+                                    <td class="text-xs !text-center">Latitude</td>
+                                    <td class="text-xs !text-center">Longitude</td>
                                     <td class="text-xs w-32"></td>
                                 </tr>
                             </thead>
@@ -30,15 +30,15 @@
                                 @foreach ($data as $item)
                                     <tr class="text-xs">
                                         <td>
-                                            <p>{{ $item->nama }}</p>
-                                        </td>
-                                        <td>
                                             <p>{{ $item->provinsi->nama }}</p>
                                         </td>
                                         <td>
+                                            <p>{{ $item->nama }}</p>
+                                        </td>
+                                        <td class=" !text-center">
                                             <p>{{ $item->latitude }}</p>
                                         </td>
-                                        <td>
+                                        <td class=" !text-center">
                                             <p>{{ $item->longitude }}</p>
                                         </td>
                                         <td>

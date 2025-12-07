@@ -2,44 +2,51 @@
     <x-slot name="header">
         Tambah Provinsi
     </x-slot>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div class="w-full min-h-80">
-            <div id="map" class="w-full h-full rounded-lg border border-secondary-3 shadow-lg z-10"></div>
 
-        </div>
-        <x-container>
+    <form action="{{ route('provinsi.store') }}" method="POST">
+        @csrf
+        @method('POST')
+        <x-container class=" max-w-3xl mx-auto">
             <x-slot name="content">
-                <form action="{{ route('provinsi.store') }}" method="POST">
-                    @csrf
-                    @method('POST')
-                    <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
-                        <div class="flex flex-col gap-1">
-                            <label for="nama">Nama Provinsi</label>
-                            <input type="text" id="nama" name="nama"
-                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                                value="{{ old('nama') }}" placeholder="Masukkan Nama Provinsi" required>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <label for="latitude">Latitude</label>
-                            <input type="text" id="latitude" name="latitude"
-                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                                placeholder="Pilih Lokasi Di Map" required readonly>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <label for="longitude">Longitude</label>
-                            <input type="text" id="longitude" name="longitude"
-                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                                placeholder="Pilih Lokasi Di Map" required readonly>
-                        </div>
-                        <div class="flex justify-end items-center gap-4 pt-4">
-                            <x-button.save-button />
-                            <x-button.back-button :route="route('provinsi.index')" />
+                <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
+                    <p class=" text-lg font-semibold text-secondary-1">Ilustrasi Titik Koordiant</p>
+
+                    <div class="w-full">
+                        <div id="map" class="w-full h-80 rounded-lg border border-secondary-3 shadow-lg z-10">
                         </div>
                     </div>
-                </form>
+                </div>
             </x-slot>
         </x-container>
-    </div>
+        <x-container class=" max-w-3xl mx-auto">
+            <x-slot name="content">
+                <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
+                    <div class="flex flex-col gap-1">
+                        <label for="nama">Nama Provinsi</label>
+                        <input type="text" id="nama" name="nama"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
+                            value="{{ old('nama') }}" placeholder="Masukkan Nama Provinsi" required>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="latitude">Latitude</label>
+                        <input type="text" id="latitude" name="latitude"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
+                            placeholder="Pilih Lokasi Di Map" required readonly>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="longitude">Longitude</label>
+                        <input type="text" id="longitude" name="longitude"
+                            class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
+                            placeholder="Pilih Lokasi Di Map" required readonly>
+                    </div>
+                    <div class="flex justify-end items-center gap-4 pt-4">
+                        <x-button.save-button />
+                        <x-button.back-button :route="route('provinsi.index')" />
+                    </div>
+                </div>
+            </x-slot>
+        </x-container>
+    </form>
 </x-app-layout>
 
 

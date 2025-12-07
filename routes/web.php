@@ -52,7 +52,10 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     Route::resource('users', UserController::class);
-    Route::get('sistem/konfigurasi', [KonfigurasiController::class, 'index'])->name('config.index');
+    Route::get('sistem/pengaturan-sistem', [KonfigurasiController::class, 'index'])->name('config.index');
+    Route::get('sistem/format-nomor', [KonfigurasiController::class, 'formatindex'])->name('format.index');
+    Route::get('sistem/kop-surat', [KonfigurasiController::class, 'kopindex'])->name('kop.surat.index');
+
     Route::post('sistem/konfigurasi', [KonfigurasiController::class, 'store'])->name('config.store');
     Route::post('sistem/preferensi', [KonfigurasiController::class, 'storePreferensi'])->name('preferensi.store');
     Route::post('sistem/kop-surat', [KonfigurasiController::class, 'storeKopSurat'])->name('kop-surat.store');

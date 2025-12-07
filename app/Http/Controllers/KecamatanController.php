@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KabupatenKota;
 use App\Models\Kecamatan;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 
 class KecamatanController extends Controller
@@ -26,8 +27,9 @@ class KecamatanController extends Controller
      */
     public function create()
     {
+        $provinsi = Provinsi::all();
         $kabupaten_kota = KabupatenKota::all();
-        return view('master.kecamatan.create', compact('kabupaten_kota'));
+        return view('master.kecamatan.create', compact('provinsi', 'kabupaten_kota'));
     }
 
     /**
@@ -68,8 +70,9 @@ class KecamatanController extends Controller
      */
     public function edit(Kecamatan $kecamatan)
     {
+        $provinsi = Provinsi::all();
         $kabupaten_kota = KabupatenKota::all();
-        return view('master.kecamatan.edit', compact('kecamatan', 'kabupaten_kota'));
+        return view('master.kecamatan.edit', compact('kecamatan', 'kabupaten_kota', 'provinsi'));
     }
 
     /**

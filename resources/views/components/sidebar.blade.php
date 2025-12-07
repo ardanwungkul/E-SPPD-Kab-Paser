@@ -3,6 +3,7 @@
 
     $route = [
         'transaksi' => ['spt.index', 'sppd.index'],
+        'laporan' => [],
         'data-tahunan' => [
             'pegawai.index',
             'pegawai.create',
@@ -52,12 +53,7 @@
             'provinsi.create',
             'provinsi.edit',
         ],
-        'sistem' => [
-            'users.index',
-            'users.create',
-            'users.edit',
-            'config.index',
-        ],
+        'sistem' => ['users.index', 'users.create', 'users.edit', 'config.index'],
     ];
 
 @endphp
@@ -65,7 +61,7 @@
     id="sidebar">
     <div class="h-[60px] border-b border-secondary-3 flex-none flex items-center justify-center bg-color-1-400 px-5">
         <p class="font-medium text-lg text-white whitespace-nowrap expanded-sidebar w-full truncate">
-            {{ session('preferensi') ? session('preferensi')->nama_aplikasi : '' }}</p>
+            {{ session('preferensi') ? session('preferensi')->appname : '' }}</p>
         <button class="p-2 group" id="expand-button">
             <svg class="w-6 h-6 text-white group-hover:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -75,11 +71,6 @@
     </div>
     <div class="overflow-y-auto flex-grow invisible-scrollbar">
         <ul class="flex flex-col py-4 expanded-sidebar">
-            <li class="px-5">
-                <div class="flex flex-row items-center h-8">
-                    <div class="text-xs font-light tracking-wide text-gray-500">Menu</div>
-                </div>
-            </li>
             <li>
                 <a href="{{ route('dashboard') }}"
                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
@@ -98,6 +89,7 @@
             </li>
             <div id="accordion-collapse" data-accordion="collapse" data-active-classes="bg-secondary-3 font-medium"
                 data-inactive-classes="font-light">
+                {{-- Transaksi --}}
                 <h2 id="accordion-collapse-heading-transaksi">
                     <button type="button" class="w-full hover:bg-gray-50"
                         data-accordion-target="#accordion-collapse-body-transaksi"
@@ -152,6 +144,51 @@
                         </a>
                     </li>
                 </div>
+
+                {{-- Laporan --}}
+                <h2 id="accordion-collapse-heading-laporan">
+                    <button type="button" class="w-full hover:bg-gray-50"
+                        data-accordion-target="#accordion-collapse-body-laporan"
+                        aria-expanded="{{ in_array($routeName, $route['laporan']) ? 'true' : 'false' }}"
+                        aria-controls="accordion-collapse-body-laporan">
+                        <li class="p-5 h-9 flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-secondary-1" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 640 640">
+                                    <path fill="currentColo"
+                                        d="M304 112L192 112C183.2 112 176 119.2 176 128L176 512C176 520.8 183.2 528 192 528L448 528C456.8 528 464 520.8 464 512L464 272L376 272C336.2 272 304 239.8 304 200L304 112zM444.1 224L352 131.9L352 200C352 213.3 362.7 224 376 224L444.1 224zM128 128C128 92.7 156.7 64 192 64L325.5 64C342.5 64 358.8 70.7 370.8 82.7L493.3 205.3C505.3 217.3 512 233.6 512 250.6L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 128z" />
+                                </svg>
+                                <div class="flex flex-row items-center h-8">
+                                    <div class="text-xs tracking-wide text-secondary-1">Laporan</div>
+                                </div>
+                            </div>
+                            <svg data-accordion-icon class="w-2 h-2 rotate-180 shrink-0 text-secondary-1"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M9 5 5 1 1 5" />
+                            </svg>
+                        </li>
+                    </button>
+                </h2>
+                <div id="accordion-collapse-body-laporan" class="hidden bg-secondary-3 border-y border-gray-300"
+                    aria-labelledby="accordion-collapse-heading-laporan">
+                    {{-- <li>
+                        <a href="{{ route('spt.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">SPT</span>
+                        </a>
+                    </li> --}}
+                </div>
+
+                {{-- Data Tahunan --}}
                 <h2 id="accordion-collapse-heading-data-tahunan">
                     <button type="button" class="w-full hover:bg-gray-50"
                         data-accordion-target="#accordion-collapse-body-data-tahunan"
@@ -318,6 +355,8 @@
                         </a>
                     </li>
                 </div>
+
+                {{-- Referensi Data --}}
                 <h2 id="accordion-collapse-heading-master-data">
                     <button type="button" class="w-full"
                         data-accordion-target="#accordion-collapse-body-master-data"
@@ -364,6 +403,8 @@
                             <span class="ml-2 text-xs tracking-wide truncate">Pangkat/Golongan</span>
                         </a>
                     </li>
+                    <div class=" mx-8 border-t border-gray-300"></div>
+
                     <li>
                         <a href="{{ route('tingkat-perjalanan-dinas.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
@@ -390,9 +431,11 @@
                                 </svg>
 
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Jenis Perjalanan Dinas</span>
                         </a>
                     </li>
+                    <div class=" mx-8 border-t border-gray-300"></div>
+
                     <li>
                         <a href="{{ route('provinsi.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
@@ -446,6 +489,8 @@
                         </a>
                     </li> --}}
                 </div>
+
+                {{-- Pengaturan --}}
                 <h2 id="accordion-collapse-heading-sistem">
                     <button type="button" class="w-full hover:bg-gray-50"
                         data-accordion-target="#accordion-collapse-body-sistem"
@@ -489,7 +534,7 @@
                                         d="M12.503 2.134a1 1 0 0 0-1 0L4.501 6.17A1 1 0 0 0 4.5 7.902l7.002 4.047a1 1 0 0 0 1 0l6.998-4.04a1 1 0 0 0 0-1.732l-6.997-4.042Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Manajemen User</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Otorisasi Pengguna</span>
                         </a>
                     </li>
                     <li>
@@ -505,7 +550,39 @@
                                         stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">Konfigurasi</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Pengaturan Sistem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('format.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z" />
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Format Nomor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kop.surat.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z" />
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Kop Surat</span>
                         </a>
                     </li>
                 </div>
@@ -532,11 +609,6 @@
         </ul>
         <div class="collapse-sidebar hidden">
             <ul class="flex flex-col py-4">
-                <li class="px-2">
-                    <div class="flex flex-row items-center justify-center h-8">
-                        <div class="text-xs font-light tracking-wide text-gray-500">Menu</div>
-                    </div>
-                </li>
                 <li>
                     <a href="{{ route('dashboard') }}"
                         class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
@@ -804,6 +876,7 @@
                                     <span class="ml-2 text-xs tracking-wide truncate">Pangkat/Golongan</span>
                                 </a>
                             </li>
+                            <div class=" mx-2 border-t border-gray-300"></div>
                             <li>
                                 <a href="{{ route('tingkat-perjalanan-dinas.index') }}"
                                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
@@ -830,9 +903,10 @@
                                         </svg>
 
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Referensi Jenis SPPD</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Jenis Perjalanan Dinas</span>
                                 </a>
                             </li>
+                            <div class=" mx-2 border-t border-gray-300"></div>
                             <li>
                                 <a href="{{ route('provinsi.index') }}"
                                     class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
@@ -924,7 +998,7 @@
                                                 d="M12.503 2.134a1 1 0 0 0-1 0L4.501 6.17A1 1 0 0 0 4.5 7.902l7.002 4.047a1 1 0 0 0 1 0l6.998-4.04a1 1 0 0 0 0-1.732l-6.997-4.042Z" />
                                         </svg>
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Manajemen User</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Otorisasi Pengguna</span>
                                 </a>
                             </li>
                             <li>
@@ -942,7 +1016,25 @@
                                         </svg>
 
                                     </span>
-                                    <span class="ml-2 text-xs tracking-wide truncate">Konfigurasi</span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Pengaturan Sistem</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('kop.surat.index') }}"
+                                    class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6">
+                                    <span class="inline-flex justify-center items-center ml-2">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z" />
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                        </svg>
+
+                                    </span>
+                                    <span class="ml-2 text-xs tracking-wide truncate">Kop Surat</span>
                                 </a>
                             </li>
                         </ul>

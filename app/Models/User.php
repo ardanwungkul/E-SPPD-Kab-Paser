@@ -25,7 +25,8 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'name',
-        'email',
+        'username',
+        'foto',
         'password',
     ];
 
@@ -48,6 +49,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'bidang_id');
+    }
+
     public function getFormattedCreatedAtAttribute()
     {
         return $this->created_at ? \Carbon\Carbon::parse($this->created_at)->translatedFormat('d M Y h:i') : null;

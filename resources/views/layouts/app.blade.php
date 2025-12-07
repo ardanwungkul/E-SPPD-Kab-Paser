@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ session('preferensi') ? session('preferensi')->nama_aplikasi : 'E-SPPD' }}</title>
+    <title>{{ session('preferensi') ? session('preferensi')->appname : 'E-SPPD' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -134,11 +134,11 @@
                                         @endif
                                         <p class="font-semibold md:text-xl text-lg text-gray-800 line-clamp-2">
                                             {{ $header }}
-                                        </p>
+                                        </p>    
                                     </div>
                                     <div class="flex items-center gap-3 flex-none">
                                         <div class="text-end hidden md:block">
-                                            <p class="">Hii, {{ Auth::user()->name }}</p>
+                                            <p class="">{{ Auth::user()->name }}</p>
                                             <p class="text-xs">{{ now()->translatedFormat('D, d M Y') }}</p>
                                         </div>
                                         <div>
@@ -148,7 +148,7 @@
                                                 class="flex text-sm rounded-full md:me-0 focus:ring-2" type="button">
                                                 <span class="sr-only">Open Menu</span>
                                                 <img class="w-8 h-8 rounded-full"
-                                                    src="{{ asset('assets/images/placeholder-image.jpg') }}"
+                                                    src="{{ Auth::user()->photo ? asset('storage/user/'. Auth::user()->photo) : asset('assets/images/placeholder-image.jpg') }}"
                                                     alt="User Photo">
                                             </button>
 

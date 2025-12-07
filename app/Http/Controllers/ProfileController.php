@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -26,11 +27,36 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        // dd($request);
         $request->user()->fill($request->validated());
 
-        // if ($request->user()->isDirty('email')) {
-        //     $request->user()->email_verified_at = null;
-        // }
+        if ($request->hasFile('foto')) {
+
+            // Hapus foto lama jika ada
+            if ($request->user()->photo) {
+                $path = public_path('storage/user/' . $request->user()->photo);
+
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+
+            $imageFile = $request->file('foto');
+            $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
+
+            $imagePath = public_path('storage/user/');
+
+            // Buat folder jika belum ada (tanpa File facade)
+            if (!is_dir($imagePath)) {
+                mkdir($imagePath, 0755, true);
+            }
+
+            // Simpan file langsung tanpa proses GD
+            $imageFile->move($imagePath, $imageName);
+
+            // Simpan nama file
+            $request->user()->photo = $imageName;
+        }
 
         $request->user()->save();
 

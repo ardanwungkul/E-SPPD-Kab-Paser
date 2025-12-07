@@ -20,8 +20,8 @@
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr>
                                     <td class="text-xs">Provinsi</td>
-                                    <td class="text-xs">Latitude</td>
-                                    <td class="text-xs">Longitude</td>
+                                    <td class="text-xs !text-center">Latitude</td>
+                                    <td class="text-xs !text-center">Longitude</td>
                                     <td class="text-xs w-32"></td>
                                 </tr>
                             </thead>
@@ -31,11 +31,11 @@
                                         <td>
                                             <p class="text-start">{{ $item->nama }}</p>
                                         </td>
-                                        <td>
-                                            <p class="text-start">{{ $item->latitude }}</p>
+                                        <td class=" !text-center">
+                                            <p>{{ $item->latitude }}</p>
                                         </td>
-                                        <td>
-                                            <p class="text-start">{{ $item->longitude }}</p>
+                                        <td class=" !text-center">
+                                            <p>{{ $item->longitude }}</p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">
