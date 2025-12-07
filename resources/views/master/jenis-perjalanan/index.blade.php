@@ -95,7 +95,7 @@
                                         @foreach ($tingper as $item)
                                             <tr class="text-xs">
                                                 <td class="dt-head-left dtr-control" data-order="A001">
-                                                    <p class="!text-start w-min inline-block">{{ $item->tingkat_sppd }}
+                                                    <p class="!text-start w-min inline-block">{{ $item->tingkat }}
                                                     </p>
                                                 </td>
                                                 <td>
