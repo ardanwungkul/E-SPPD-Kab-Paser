@@ -20,14 +20,14 @@
                                 class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
                                 id="jenis-perjalanan-tab" data-tabs-target="#jenis-perjalanan" type="button"
                                 role="tab" aria-controls="jenis-perjalanan" aria-selected="false">Jenis
-                                Perjalanan</button>
+                                SPPD</button>
                         </li>
                         <li role="presentation">
                             <button
                                 class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
                                 id="tingkat-perjalanan-tab" data-tabs-target="#tingkat-perjalanan" type="button"
                                 role="tab" aria-controls="tingkat-perjalanan" aria-selected="false">Tingkat
-                                Perjalanan</button>
+                                SPPD</button>
                         </li>
                     </ul>
                 </div>
@@ -38,7 +38,7 @@
                                 <table class="text-sm hover stripe row-border datatable">
                                     <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                         <tr>
-                                            <td class="text-xs">Uraian</td>
+                                            <td class="text-xs">Jenis Pegawai</td>
                                         </tr>
                                     </thead>
                                     <tbody class="text-secondary-2">
@@ -60,7 +60,7 @@
                                 <table class="text-sm hover stripe row-border datatable">
                                     <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                         <tr>
-                                            <td class="text-xs">Jenis Perjalanan</td>
+                                            <td class="text-xs">Jenis SPPD</td>
                                             <td class="text-xs">Wilayah</td>
                                         </tr>
                                     </thead>
@@ -86,7 +86,7 @@
                                 <table class="text-sm hover stripe row-border datatable">
                                     <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                         <tr>
-                                            <td class="text-xs">Tingkat</td>
+                                            <td class="text-xs">Tingkat SPPD</td>
                                             <td class="text-xs">Uraian</td>
                                             <td class="text-xs">Keterangan</td>
                                         </tr>

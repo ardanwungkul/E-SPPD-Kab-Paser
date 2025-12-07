@@ -9,7 +9,7 @@ class TingkatPerjalananDinasController extends Controller
 {
     public function index()
     {
-        $data = TingkatPerjalananDinas::OrderBy('tingkat_sppd', 'asc')->get();
+        $data = TingkatPerjalananDinas::OrderBy('tingkat', 'asc')->get();
         return view('master.tingkat-perjalanan-dinas.index', compact('data'));
     }
 
@@ -38,7 +38,7 @@ class TingkatPerjalananDinasController extends Controller
             ]
         );
         $tingkat_perjalanan_dinas = new TingkatPerjalananDinas();
-        $tingkat_perjalanan_dinas->tingkat_sppd = $request->tingkat_sppd;
+        $tingkat_perjalanan_dinas->tingkat = $request->tingkat_sppd;
         $tingkat_perjalanan_dinas->uraian = $request->uraian;
         $tingkat_perjalanan_dinas->keterangan = $request->keterangan;
         $tingkat_perjalanan_dinas->save();
@@ -77,7 +77,7 @@ class TingkatPerjalananDinasController extends Controller
                 'keterangan.max' => 'Keterangan tidak boleh lebih dari 100 karakter',
             ]
         );
-        $tingkat_perjalanan_dinas->tingkat_sppd = $request->tingkat_sppd;
+        $tingkat_perjalanan_dinas->tingkat = $request->tingkat_sppd;
         $tingkat_perjalanan_dinas->uraian = $request->uraian;
         $tingkat_perjalanan_dinas->keterangan = $request->keterangan;
         $tingkat_perjalanan_dinas->save();
