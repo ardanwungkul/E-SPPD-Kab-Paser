@@ -201,7 +201,7 @@
                     if (response.length > 0) {
                         $.each(response, function(index, pangkat) {
                             $('#pangkat_id').append('<option value="' +
-                                pangkat.id + '">' + pangkat.uraian +
+                                pangkat.id + '">' + pangkat.kdgol + ' - ' +pangkat.uraian +
                                 '</option>');
                         });
 

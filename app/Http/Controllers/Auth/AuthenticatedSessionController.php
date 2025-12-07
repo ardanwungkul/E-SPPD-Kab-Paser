@@ -35,6 +35,17 @@ class AuthenticatedSessionController extends Controller
         $config->judul = "Bidang";
         $request->authenticate();
 
+        if (Auth::user()->aktif != 'Y') {
+
+            Auth::logout();
+
+            return back()
+                ->withErrors([
+                    'email' => 'Akun Anda tidak aktif. Silakan hubungi Administrator.',
+                ])
+                ->withInput();
+        }
+
         $request->session()->regenerate();
         $request->session()->put('tahun', $request->tahun);
         $request->session()->put('config', $config);
@@ -57,7 +68,7 @@ class AuthenticatedSessionController extends Controller
         $user = User::find(Auth::user()->id);
         $user->last_logout = now();
         $user->save();
-        
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

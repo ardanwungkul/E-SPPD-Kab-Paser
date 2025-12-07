@@ -43,9 +43,32 @@
                             class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md" required>
                             <option value="" selected disabled>Pilih Role</option>
                             @for ($i = 1; $i < Auth::user()->level; $i++)
-                                <option value="{{ $i }}">{{ $i == 1 ? 'User Bidang' : ($i == 2 ? 'Admin Bidang' : 'Admin') }}</option>
+                                <option value="{{ $i }}">
+                                    {{ $i == 1 ? 'User Bidang' : ($i == 2 ? 'Admin Bidang' : 'Admin') }}</option>
                             @endfor
                         </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <p>Status</p>
+                        <div class=" w-full flex justify-end">
+                            <div class="toggler">
+                                <input id="aktif" name="aktif" checked type="checkbox">
+                                <label for="aktif">
+                                    <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <polyline class="path check" points="100.2,40.2 51.5,88.8 29.8,67.5">
+                                        </polyline>
+                                    </svg>
+                                    <svg class="toggler-off" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 130.2 130.2">
+                                        <line class="path line" x1="34.4" y1="34.4" x2="95.8"
+                                            y2="95.8"></line>
+                                        <line class="path line" x1="95.8" y1="34.4" x2="34.4"
+                                            y2="95.8"></line>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     {{-- <div class="flex flex-col gap-1">
                         <label for="role_id">Role/Level</label>

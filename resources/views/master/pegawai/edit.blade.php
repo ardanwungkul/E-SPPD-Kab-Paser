@@ -32,10 +32,13 @@
                     </legend>
                     <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
                         <div class="flex flex-col gap-1">
-                            <label id="nip_nik" for="nip">{{ in_array($pegawai->pangkat?->jnspeg, [3,4,8]) ? 'NIP' : 'NIK' }}</label>
+                            <label id="nip_nik"
+                                for="nip">{{ in_array($pegawai->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }}</label>
                             <input type="text" id="nip" name="nip"
                                 class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                                value="{{ $pegawai->nip }}" placeholder="Masukkan {{ in_array($pegawai->pangkat?->jnspeg, [3,4,8]) ? 'NIP' : 'NIK' }} Pegawai" required>
+                                value="{{ $pegawai->nip }}"
+                                placeholder="Masukkan {{ in_array($pegawai->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }} Pegawai"
+                                required>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="nama">Nama</label>
@@ -147,8 +150,8 @@
                             <p>Aktif</p>
                             <div class=" w-full flex justify-end">
                                 <div class="toggler">
-                                    <input id="aktif" name="aktif" {{ $pegawai->aktif == 'Y' ? 'checked' : '' }}
-                                        type="checkbox">
+                                    <input id="aktif" name="aktif"
+                                        {{ $pegawai->aktif == 'Y' ? 'checked' : '' }} type="checkbox">
                                     <label for="aktif">
                                         <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 130.2 130.2">
@@ -182,7 +185,7 @@
         selectionCssClass: 'text-xs md:text-sm',
     });
 
-    let currentMode = "{{ in_array($pegawai->pangkat?->jnspeg, [3,4,8]) ? 'NIP' : 'NIK' }}";
+    let currentMode = "{{ in_array($pegawai->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }}";
 
     function formatNIP(value) {
         // Hanya angka
@@ -230,7 +233,7 @@
 
         if (jenisPegawaiId) {
             $('#pangkat_id').prop('disabled', true)
-                        .html('<option selected disabled>Memuat...</option>');
+                .html('<option selected disabled>Memuat...</option>');
 
             $.ajax({
                 url: "{{ route('get.golongan.by.jenis-pegawai') }}",
@@ -247,7 +250,8 @@
                     if (response.length > 0) {
                         $.each(response, function(index, pangkat) {
                             $('#pangkat_id').append('<option value="' +
-                                pangkat.id + '">' + pangkat.uraian +
+                                pangkat.id + '">' + pangkat.kdgol + ' - ' + pangkat
+                                .uraian +
                                 '</option>');
                         });
 
@@ -275,7 +279,7 @@
 
         if (bidangId) {
             $('#sub_bidang_id').prop('disabled', true)
-                        .html('<option selected disabled>Memuat...</option>');
+                .html('<option selected disabled>Memuat...</option>');
 
             $.ajax({
                 url: "{{ route('get.sub-bidang.by.bidang') }}",

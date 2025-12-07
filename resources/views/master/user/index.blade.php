@@ -6,7 +6,9 @@
     <x-container>
         <x-slot name="content">
             <div>
-                <x-button.add-button :route="route('users.create')" />
+                @if (Auth::user()->level >= 3)
+                    <x-button.add-button :route="route('users.create')" />
+                @endif
                 <div class="relative pb-20">
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
                         <table id="datatable" class="text-sm hover stripe row-border">
