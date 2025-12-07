@@ -22,6 +22,16 @@
                 @csrf
                 @method('POST')
                 <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
+                    <div class=" w-full flex flex-col gap-1">
+                        <label for="provinsi_id">Provinsi</label>
+                        <select name="provinsi_id" id="provinsi_id"
+                            class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md select2" required>
+                            <option value="" selected disabled>Pilih Provinsi</option>
+                            @foreach ($provinsi as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                </div>
                     <div class="flex flex-col gap-1">
                         <label for="kabupaten_kota_id">Kabupaten/Kota</label>
                         <select name="kabupaten_kota_id" id="kabupaten_kota_id"
@@ -66,6 +76,45 @@
         $('.select2').select2({
             dropdownCssClass: "text-xs md:text-sm",
             selectionCssClass: 'text-xs md:text-sm',
+        });
+
+        $('#provinsi_id').on('change', function() {
+            const ProvinsiKode = $(this).val();
+
+            if (ProvinsiKode) {
+                $.ajax({
+                    url: "{{ route('get.kabupaten-kota-by-provinsi') }}",
+                    type: "GET",
+                    data: {
+                        provinsi_id: ProvinsiKode
+                    },
+                    success: function(response) {
+                        
+                        $('#kabupaten_kota_id').empty();
+                        $('#kabupaten_kota_id').append(
+                            '<option value="" selected disabled>Pilih Kabupaten/Kota</option>'
+                        );
+
+                        if (response.length > 0) {
+                            $.each(response, function(index, kabupaten) {
+                                $('#kabupaten_kota_id').append('<option value="' +
+                                    kabupaten.kdgiat + '">' + kabupaten.nama +
+                                    '</option>');
+                            });
+                        } else {
+                            $('#kabupaten_kota_id').append(
+                                '<option value="" disabled>Tidak ada Kabupaten/Kota tersedia</option>'
+                            );
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#kabupaten_kota_id').empty();
+                $('#kabupaten_kota_id').append('<option value="" selected disabled>Pilih Kabupaten/Kota</option>');
+            }
         });
 
         var map = L.map('map').setView([-5.0, 120.0], 3.4);

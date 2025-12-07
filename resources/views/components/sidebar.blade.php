@@ -53,7 +53,7 @@
             'provinsi.create',
             'provinsi.edit',
         ],
-        'sistem' => ['users.index', 'users.create', 'users.edit', 'config.index'],
+        'sistem' => ['users.index', 'users.create', 'users.edit', 'config.index', 'kop.surat.index', 'format.index'],
     ];
 
 @endphp

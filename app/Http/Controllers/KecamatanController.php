@@ -52,6 +52,7 @@ class KecamatanController extends Controller
         $kecamatan->nama = $request->nama;
         $kecamatan->longitude = $request->longitude;
         $kecamatan->latitude = $request->latitude;
+        $kecamatan->provinsi_id = $request->provinsi_id;
         $kecamatan->kabupaten_kota_id = $request->kabupaten_kota_id;
         $kecamatan->save();
         return redirect()->route('kecamatan.index')->with(['success' => 'Berhasil Menambahkan Kecamatan']);
@@ -94,6 +95,7 @@ class KecamatanController extends Controller
         $kecamatan->nama = $request->nama;
         $kecamatan->longitude = $request->longitude;
         $kecamatan->latitude = $request->latitude;
+        $kecamatan->provinsi_id = $request->provinsi_id;
         $kecamatan->kabupaten_kota_id = $request->kabupaten_kota_id;
         $kecamatan->save();
         return redirect()->route('kecamatan.index')->with(['success' => 'Berhasil Mengubah Kecamatan']);
