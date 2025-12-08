@@ -15,7 +15,7 @@ class ProvinsiController extends Controller
             $query->where('nama', 'LIKE', "%{$request->search}%");
         }
 
-        $data = $query->paginate(10)->appends(['search' => $request->search]);
+        $data = $query->paginate(20)->appends(['search' => $request->search]);
 
         return view('master.provinsi.index', compact('data'));
     }

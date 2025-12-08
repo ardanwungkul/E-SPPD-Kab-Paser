@@ -6,25 +6,25 @@
     <x-container>
         <x-slot name="content">
             <div>
-                <div class=" flex mb-4 border-b border-gray-200">
-                    <ul class=" grid grid-cols-3 text-sm font-medium" id="jenis-tab"
+                <div class=" flex mb-4">
+                    <ul class=" grid grid-cols-3 gap-1 text-sm font-medium" id="jenis-tab"
                         data-tabs-toggle="#jenis-tab-content" role="tablist">
                         <li role="presentation">
                             <button 
-                                class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 " 
+                                class=" w-full text-center inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 " 
                                 id="jenis-pegawai-tab" data-tabs-target="#jenis-pegawai" type="button" role="tab"
                                 aria-controls="jenis-pegawai" aria-selected="false">Jenis Pegawai</button>
                         </li>
                         <li role="presentation">
                             <button
-                                class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
+                                class=" w-full text-center inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
                                 id="jenis-perjalanan-tab" data-tabs-target="#jenis-perjalanan" type="button"
                                 role="tab" aria-controls="jenis-perjalanan" aria-selected="false">Jenis
                                 SPPD</button>
                         </li>
                         <li role="presentation">
                             <button
-                                class="inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
+                                class=" w-full text-center inline-block py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
                                 id="tingkat-perjalanan-tab" data-tabs-target="#tingkat-perjalanan" type="button"
                                 role="tab" aria-controls="tingkat-perjalanan" aria-selected="false">Tingkat
                                 SPPD</button>

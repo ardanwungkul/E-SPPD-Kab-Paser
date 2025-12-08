@@ -18,7 +18,7 @@ class KabupatenKotaController extends Controller
             });
         }
 
-        $data = $query->paginate(10)->appends(['search' => $request->search]);
+        $data = $query->paginate(20)->appends(['search' => $request->search]);
 
         return view('master.kabupaten-kota.index', compact('data'));
     }

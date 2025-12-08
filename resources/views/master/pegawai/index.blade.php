@@ -19,6 +19,7 @@
                                     <td class="text-xs">Jenis Pegawai</td>
                                     <td class="text-xs">Golongan</td>
                                     <td class="text-xs">Pangkat</td>
+                                    <td class="text-xs">Status</td>
                                     <td class="text-xs w-32"></td>
                                 </tr>
                             </thead>
@@ -42,6 +43,21 @@
                                         </td>
                                         <td>
                                             <p>{{ $item->pangkat->uraian }}</p>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                @if ($item->aktif == 'Y')
+                                                    <p
+                                                        class="text-white bg-green-400 rounded-lg shadow px-3 py-1 text-center">
+                                                        Aktif
+                                                    </p>
+                                                @else
+                                                    <p
+                                                        class="text-white bg-red-400 rounded-lg shadow px-3 py-1 text-center">
+                                                        Tidak Aktif
+                                                    </p>
+                                                @endif
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">
@@ -96,7 +112,7 @@
             lengthChange: false,
             deferRender: true,
             paging: true,
-            pagingType: 'simple',
+            pageLength: 20,
             language: {
                 search: '',
                 emptyTable: "Tidak ada data tersedia",

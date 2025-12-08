@@ -126,6 +126,7 @@
             lengthChange: false,
             deferRender: true,
             paging: true,
+            pageLength: 20,
             language: {
                 search: '',
                 emptyTable: "Tidak ada data tersedia",

@@ -46,8 +46,8 @@ class SPTController extends Controller
         }
         $pegawai = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
-            ->orderBy('ref_pangkat.jenis_pegawai_id', 'asc')
-            ->orderBy('ref_pangkat.kode_golongan', 'desc')
+            ->orderBy('ref_pangkat.jnspeg', 'asc')
+            ->orderBy('ref_pangkat.kdgol', 'desc')
             ->orderBy('nama', 'asc')
             ->select('pegawai.*')
             ->get();
@@ -83,6 +83,7 @@ class SPTController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $request->validate(
             [
                 'dasar' => 'required',

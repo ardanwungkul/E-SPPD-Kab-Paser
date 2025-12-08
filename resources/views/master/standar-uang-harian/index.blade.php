@@ -97,6 +97,7 @@
             lengthChange: false,
             deferRender: true,
             paging: true,
+            pageLength: 20,
             pagingType: 'simple',
             language: {
                 search: '',

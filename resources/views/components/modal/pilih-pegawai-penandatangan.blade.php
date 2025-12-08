@@ -52,7 +52,7 @@
                                         </td>
                                         <td>
                                             <p>
-                                                {{ $item->ttd_default }}</p>
+                                                {{ $item->ststtd }}</p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">

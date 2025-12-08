@@ -7,7 +7,7 @@
         <x-slot name="content">
             <div>
                 <x-button.add-button :route="route('golongan.create')" />
-                
+
                 <div class="relative pb-20">
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
                         <table id="datatable" class="text-sm hover stripe row-border">
@@ -82,7 +82,7 @@
             lengthChange: false,
             deferRender: true,
             paging: true,
-            pagingType: 'simple',
+            pageLength: 20,
             language: {
                 search: '',
                 emptyTable: "Tidak ada data tersedia",

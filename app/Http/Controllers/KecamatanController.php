@@ -18,7 +18,7 @@ class KecamatanController extends Controller
                 $q->where('nama', 'LIKE', "%{$request->search}%");
             });
         }
-        $data = $query->paginate(10)->appends(['search' => $request->search]);
+        $data = $query->paginate(20)->appends(['search' => $request->search]);
         return view('master.kecamatan.index', compact('data'));
     }
 

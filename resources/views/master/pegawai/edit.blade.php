@@ -127,7 +127,7 @@
                             <p>Penandatangan Laporan :</p>
                             <div class="toggler">
                                 <input id="ttd_default" name="ttd_default"
-                                    {{ $pegawai->ttd_default == 'Y' ? 'checked' : '' }} type="checkbox">
+                                    {{ $pegawai->ststtd == 'Y' ? 'checked' : '' }} type="checkbox">
                                 <label for="ttd_default">
                                     <svg class="toggler-on" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 130.2 130.2">
