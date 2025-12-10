@@ -33,7 +33,31 @@ class SPTController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = SPT::where('tahun', session('tahun'))->orderBy('nomor_urut', 'desc')->get();
+            $data = SPT::where('tahun', session('tahun'))->orderBy('nospt', 'desc')->get()
+                ->map(function ($item) {
+                    $item->format_nomor = 'SPT-';
+                    $nospt = str_pad($item->nospt, 3, '0', STR_PAD_LEFT);
+                    $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
+                    $config_no_spt = $config->no_spt;
+                    $item->format_nomor = str_replace(
+                        [
+                            '{nomor_urut}',
+                            '{lembaga}',
+                            '{nosurat}',
+                            '{bulan}',
+                            '{tahun}'
+                        ],
+                        [
+                            $nospt,
+                            'DPRD',
+                            $item->nosurat,
+                            $this->getBulanRomawi(Carbon::parse($item->tglspt)->format('m')),
+                            $item->tahun
+                        ],
+                        $config_no_spt
+                    );
+                    return $item;
+                });
 
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
@@ -152,7 +176,7 @@ class SPTController extends Controller
         $spt->nospt = $nospt;
         $spt->urut = 1;
         $spt->nosurat = $request->nosurat;
-        
+
         $spt->jenis_id = $request->jenis_sppd_id;
 
         $spt->tglspt = $request->penandatangan_tanggal;
@@ -171,7 +195,21 @@ class SPTController extends Controller
 
         $spt->provinsi_id = $request->provinsi_id;
         $spt->kabkota_id = $request->kabupaten_kota_id;
+
+        if (!$spt->provinsi_id && $spt->kabkota_id) {
+            $kabkota = KabupatenKota::find($spt->kabkota_id);
+
+            $spt->provinsi_id = $kabkota->provinsi_id;
+        }
+
         $spt->kecamatan_id = $request->kecamatan_id;
+
+        if (!$spt->provinsi_id && !$spt->kabkota_id) {
+            $kecamatan = Kecamatan::find($spt->kecamata_id);
+
+            $spt->provinsi_id = $kecamatan->provinsi_id;
+            $spt->kabkota_id = $kecamatan->pkabupaten_kota_id;
+        }
 
         if ($request->berkas) {
             $file = $request->file('berkas');
@@ -186,7 +224,7 @@ class SPTController extends Controller
 
             $file->move($destination, $fileName);
 
-            $spt->path_spt= $fileName;
+            $spt->path_spt = $fileName;
         }
 
         $spt->save();

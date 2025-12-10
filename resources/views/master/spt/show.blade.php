@@ -273,7 +273,7 @@
                                     {{ \Carbon\Carbon::parse($spt->penandatangan_tanggal)->format('d M Y') }}
                                 </td>
                             </tr>
-                            <tr class="even:bg-white odd:bg-secondary-3/60">
+                            {{-- <tr class="even:bg-white odd:bg-secondary-3/60">
                                 <td class="px-3 py-1 whitespace-nowrap">
                                     <div class="flex items-center justify-between gap-3">
                                         <p>
@@ -285,7 +285,7 @@
                                 <td class="px-3 py-1 w-full">
                                     {{ $spt->penandatangan_lokasi }}
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

@@ -162,8 +162,9 @@
                 url: `{{ route('spt.index') }}`,
             },
             columns: [{
-                    name: 'nomor',
-                    data: 'nomor'
+                    name: 'format_nomor',
+                    data: 'format_nomor',
+                    className: '!text-left'
                 },
                 {
                     name: 'id',
@@ -218,11 +219,6 @@
         });
         $('#customSearch').on('keyup', function() {
             table.search(this.value).draw();
-        });
-        $('#filter-lembaga').on('change', function() {
-            table.ajax.url(
-                `{{ route('spt.index', ['lembaga' => 'rplc']) }}`.replace('rplc', this.value)
-            ).load();
         });
     });
 </script>
