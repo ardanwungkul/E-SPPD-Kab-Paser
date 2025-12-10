@@ -288,7 +288,7 @@
                 <x-slot name="content">
                     <fieldset class="border-t border-secondary-4 pt-4">
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
-                            Pegawai
+                            Yang Melaksanakan
                         </legend>
                         <div class=" max-w-xl mx-auto">
                             <button type="button" name="add" id="addPegawai"
