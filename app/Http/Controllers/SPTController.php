@@ -90,7 +90,6 @@ class SPTController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate(
             [
                 'dasar' => 'required',
@@ -151,6 +150,23 @@ class SPTController extends Controller
         $spt->bidang_sub_id = $request->sub_bidang_id;
         $spt->tanggal_berangkat = $request->tanggal_berangkat;
         $spt->tanggal_kembali = $request->tanggal_kembali;
+
+        if ($request->berkas) {
+            $file = $request->file('berkas');
+
+            $fileName = now()->format('Y-m-d_H-i-s') . '.' . $file->getClientOriginalExtension();
+
+            $destination = public_path('storage/file/');
+
+            if (!is_dir($destination)) {
+                mkdir($destination, 0755, true);
+            }
+
+            $file->move($destination, $fileName);
+
+            $spt->path = $fileName;
+        }
+
         $spt->save();
         foreach ($request->dasar as $d) {
             $dasar = new SPTDasar();
@@ -185,7 +201,8 @@ class SPTController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SPT $spt, Request $request) {
+    public function edit(SPT $spt, Request $request)
+    {
         $pegawai = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
             ->orderBy('ref_pangkat.jnspeg', 'asc')

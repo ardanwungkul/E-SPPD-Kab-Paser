@@ -36,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody class="text-secondary-2">
-                                @foreach ($pegawai as $item)
+                                @foreach ($pegawai->where('ststtd', 'Y') as $item)
                                     <tr class="text-xs">
                                         <td>
                                             <p class="text-start">{{ $item->nip }}</p>
