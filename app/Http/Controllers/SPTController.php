@@ -43,7 +43,7 @@ class SPTController extends Controller
                         [
                             '{nomor_urut}',
                             '{lembaga}',
-                            '{nosurat}',
+                            '{nomor_surat}',
                             '{bulan}',
                             '{tahun}'
                         ],

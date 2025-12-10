@@ -157,7 +157,7 @@
                         <div class="flex flex-col gap-1">
                             <label for="nosurat">Nomor Surat</label>
                             <input type="text" name="nosurat" id="nosurat"
-                                class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                class="w-full text-sm rounded-lg border border-secondary-4 text-secondary-1"
                                 placeholder="Masukkan Nomor Surat" >
                         </div>
                         <div class=" w-full grid grid-cols-3 gap-3">
