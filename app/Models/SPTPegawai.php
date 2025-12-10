@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SPTPegawai extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'spt_pegawai';
     public function pegawai()
     {

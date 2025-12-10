@@ -8,7 +8,7 @@
             <div>
                 <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
                     <button type="button" id="add-button"
-                        onclick="window.location = `{{ route('spt.create', ['lembaga' => 'replace_this']) }}`.replace('replace_this',document.getElementById('filter-lembaga').value)"
+                        onclick="window.location = `{{ route('spt.create') }}`"
                         class="bg-[#249D06] hover:bg-opacity-80 text-white rounded-lg px-3 py-2 text-xs shadow-lg flex gap-1 items-center justify-center  whitespace-nowrap w-min font-medium">
                         <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-white"
                             xmlns="http://www.w3.org/2000/svg">
@@ -20,10 +20,10 @@
                         </p>
                     </button>
                     <div class="flex items-center gap-3">
-                        <select name="" id="filter-lembaga" class="text-xs rounded-lg border border-gray-400">
+                        {{-- <select name="" id="filter-lembaga" class="text-xs rounded-lg border border-gray-400">
                             <option value="dprd">DPRD</option>
                             <option value="setwan">Sekretariat DPRD</option>
-                        </select>
+                        </select> --}}
                         <input type="search" class="text-xs rounded-lg border-gray-400" placeholder="Cari...."
                             id="customSearch">
                     </div>
@@ -159,8 +159,7 @@
             }],
             serverSide: true,
             ajax: {
-                url: `{{ route('spt.index', ['lembaga' => 'rplc']) }}`.replace('rplc',
-                    document.getElementById('filter-lembaga').value),
+                url: `{{ route('spt.index') }}`,
             },
             columns: [{
                     name: 'nomor',

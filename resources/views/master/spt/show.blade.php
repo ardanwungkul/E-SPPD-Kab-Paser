@@ -78,7 +78,7 @@
                                         {{ $loop->index + 1 }}.
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $dasar->uraian }}
+                                        {{ $dasar->dasar_ket }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -188,7 +188,7 @@
                                         {{ $loop->index + 1 }}.
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $untuk->uraian }}
+                                        {{ $untuk->untuk_ket }}
                                     </td>
                                 </tr>
                             @endforeach

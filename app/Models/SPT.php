@@ -20,15 +20,15 @@ class SPT extends Model
     }
     public function dasar()
     {
-        return $this->hasMany(SPTDasar::class, 'spt_id');
+        return $this->hasMany(SPTDasar::class, 'spt_id')->orderBy('dasar_ke', 'asc');
     }
     public function pegawai()
     {
-        return $this->hasMany(SPTPegawai::class, 'spt_id');
+        return $this->hasMany(SPTPegawai::class, 'spt_id')->orderBy('pegawai_idx', 'asc');
     }
     public function untuk()
     {
-        return $this->hasMany(SPTUntuk::class, 'spt_id');
+        return $this->hasMany(SPTUntuk::class, 'spt_id')->orderBy('untuk_ke', 'asc');
     }
     public function sppd()
     {
@@ -36,6 +36,6 @@ class SPT extends Model
     }
     public function ub()
     {
-        return $this->belongsTo(Pegawai::class, 'penandatangan_id');
+        return $this->belongsTo(Pegawai::class, 'pejabat_ttd', 'id');
     }
 }

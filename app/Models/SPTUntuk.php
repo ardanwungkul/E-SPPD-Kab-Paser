@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SPTUntuk extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'spt_untuk';
 }

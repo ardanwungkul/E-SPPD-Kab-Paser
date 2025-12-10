@@ -33,11 +33,8 @@ class SPTController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            if ($request->lembaga == 'dprd') {
-                $data = SPT::where('tahun', session('tahun'))->orderBy('nomor_urut', 'desc')->where('is_dprd', true)->get();
-            } else {
-                $data = SPT::where('tahun', session('tahun'))->orderBy('nomor_urut', 'desc')->where('is_dprd', false)->get();
-            }
+            $data = SPT::where('tahun', session('tahun'))->orderBy('nomor_urut', 'desc')->get();
+
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
         return view('master.spt.index');
@@ -48,9 +45,6 @@ class SPTController extends Controller
      */
     public function create(Request $request)
     {
-        if (!in_array($request->lembaga, ['setwan', 'dprd'])) {
-            return redirect()->route('spt.index');
-        }
         $pegawai = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
             ->orderBy('ref_pangkat.jnspeg', 'asc')
@@ -113,7 +107,6 @@ class SPTController extends Controller
                 'untuk' => 'required',
                 'penandatangan_id' => 'required',
                 'penandatangan_tanggal' => 'required',
-                'penandatangan_lokasi' => 'required',
                 'sub_kegiatan_id' => 'required',
                 'sub_bidang_id' => 'required',
                 'jenis_sppd_id' => 'required',
@@ -125,7 +118,6 @@ class SPTController extends Controller
                 'untuk.required' => 'Minimal harus Mengisi 1 Untuk!',
                 'penandatangan_id.required' => 'Penandatangan Wajib di Isi!',
                 'penandatangan_tanggal.required' => 'Tanggal Penandatangan Wajib di Isi!',
-                'penandatangan_lokasi.required' => 'Lokasi Penandatangan Wajib di Isi!',
                 'sub_kegiatan_id.required' => 'Sub Kegiatan Wajib di Isi!',
                 'sub_bidang_id.required' => 'Sub Bidang Wajib di Isi!',
                 'jenis_sppd_id.required' => 'Jenis Perjalanan Dinas Wajib di Isi!',
@@ -134,46 +126,48 @@ class SPTController extends Controller
             ]
         );
 
-        $nomor_urut_terakhir = SPT::where('tahun', session('tahun'))->where('is_dprd', $request->is_dprd == 'dprd' ? true : false)->max('nomor_urut');
+        $nomor_urut_terakhir = SPT::where('tahun', session('tahun'))->max('nospt');
         $nomor_urut_baru = $nomor_urut_terakhir ? $nomor_urut_terakhir + 1 : 1;
-        $nomor_urut = str_pad($nomor_urut_baru, 3, '0', STR_PAD_LEFT);
+        $nospt = str_pad($nomor_urut_baru, 3, '0', STR_PAD_LEFT);
         $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
         $config_no_spt = $config->no_spt;
-        $no_spt = str_replace(
-            [
-                '{nomor_urut}',
-                '{lembaga}',
-                '{bulan}',
-                '{tahun}'
-            ],
-            [
-                $nomor_urut,
-                $request->is_dprd == 'dprd' ? 'DPRD' : 'Setwan',
-                $this->getBulanRomawi(date('m')),
-                session('tahun')
-            ],
-            $config_no_spt
-        );
+        // $no_spt = str_replace(
+        //     [
+        //         '{nomor_urut}',
+        //         '{lembaga}',
+        //         '{bulan}',
+        //         '{tahun}'
+        //     ],
+        //     [
+        //         $nomor_urut,
+        //         $request->is_dprd == 'dprd' ? 'DPRD' : 'Setwan',
+        //         $this->getBulanRomawi(date('m')),
+        //         session('tahun')
+        //     ],
+        //     $config_no_spt
+        // );
 
         $spt = new SPT();
         $spt->tahun = session('tahun');
-        // $spt->ub_status = $request->has('ub_status') && $request->ub_status == 'on' ? 'Y' : 'T';
-        $spt->penandatangan_id = $request->penandatangan_id;
-        $spt->penandatangan_tanggal = $request->penandatangan_tanggal;
-        $spt->penandatangan_lokasi = $request->penandatangan_lokasi;
-        $spt->nomor = $no_spt;
-        $spt->nomor_urut = $nomor_urut;
-        $spt->is_dprd = $request->is_dprd == 'dprd' ? true : false;
-        $spt->kdsubgiat = $request->sub_kegiatan_id;
-        $spt->jenis_sppd_id = $request->jenis_sppd_id;
+        $spt->nospt = $nospt;
+        $spt->urut = 1;
+        $spt->nosurat = $request->nosurat;
+        
+        $spt->jenis_id = $request->jenis_sppd_id;
+
+        $spt->tglspt = $request->penandatangan_tanggal;
+        $spt->pejabat_ttd = $request->penandatangan_id;
+
+        $spt->kdgiat_sub = $request->sub_kegiatan_id;
         $spt->bidang_sub_id = $request->sub_bidang_id;
-        $spt->tanggal_berangkat = $request->tanggal_berangkat;
-        $spt->tanggal_kembali = $request->tanggal_kembali;
+
+        $spt->tglbrkt = $request->tanggal_berangkat;
+        $spt->tglbalik = $request->tanggal_kembali;
 
         $berangkat = Carbon::parse($request->tanggal_berangkat);
         $kembali = Carbon::parse($request->tanggal_kembali);
 
-        $spt->ttl_hari = $berangkat->diffInDays($kembali) + 1;
+        $spt->jmlhari = $berangkat->diffInDays($kembali) + 1;
 
         $spt->provinsi_id = $request->provinsi_id;
         $spt->kabkota_id = $request->kabupaten_kota_id;
@@ -184,7 +178,7 @@ class SPTController extends Controller
 
             $fileName = now()->format('Y-m-d_H-i-s') . '.' . $file->getClientOriginalExtension();
 
-            $destination = public_path('storage/file/');
+            $destination = public_path('storage/' . date('Y') . 'spt');
 
             if (!is_dir($destination)) {
                 mkdir($destination, 0755, true);
@@ -192,25 +186,28 @@ class SPTController extends Controller
 
             $file->move($destination, $fileName);
 
-            $spt->path = $fileName;
+            $spt->path_spt= $fileName;
         }
 
         $spt->save();
-        foreach ($request->dasar as $d) {
+        foreach ($request->dasar as $i => $d) {
             $dasar = new SPTDasar();
             $dasar->spt_id = $spt->id;
-            $dasar->uraian = $d['uraian'];
+            $dasar->dasar_ke = $i + 1;
+            $dasar->dasar_ket = $d['uraian'];
             $dasar->save();
         }
-        foreach ($request->untuk as $u) {
+        foreach ($request->untuk as $i => $u) {
             $untuk = new SPTUntuk();
             $untuk->spt_id = $spt->id;
-            $untuk->uraian = $u['uraian'];
+            $untuk->untuk_ke = $i + 1;
+            $untuk->untuk_ket = $u['uraian'];
             $untuk->save();
         }
-        foreach ($request->pegawai as $p) {
+        foreach ($request->pegawai as $i => $p) {
             $pegawai = new SPTPegawai();
             $pegawai->spt_id = $spt->id;
+            $pegawai->pegawai_idx = $i + 1;
             $pegawai->pegawai_id = $p['id'];
             $pegawai->save();
         }
