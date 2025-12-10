@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SPT extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_spt';
+    protected $table = 'transaksi_spt2';
 
     public function dasar()
     {
