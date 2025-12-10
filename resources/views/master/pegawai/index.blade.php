@@ -3,12 +3,11 @@
         Data Pegawai
     </x-slot>
 
-    <x-container>
+    <x-container class="relative">
         <x-slot name="content">
             <div>
                 <x-button.add-button :route="route('pegawai.create')" />
-
-                <div class="relative pb-20">
+                <div class="pb-20">
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
@@ -104,6 +103,12 @@
         </x-slot>
     </x-container>
 </x-app-layout>
+<style>
+    .dt-search {
+        top: 20px;
+        right: 16px
+    }
+</style>
 <script type="module">
     $(document).ready(function() {
 

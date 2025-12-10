@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bidang;
 use App\Models\Config;
 use App\Models\JenisPerjalanan;
+use App\Models\Kegiatan;
 use App\Models\KopSurat;
 use App\Models\NotaDinas;
 use App\Models\Pegawai;
@@ -15,6 +16,7 @@ use App\Models\SPTPegawai;
 use App\Models\SPTUntuk;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
@@ -52,9 +54,14 @@ class SPTController extends Controller
             ->select('pegawai.*')
             ->get();
         $program = Program::where('tahun', session('tahun'))->get();
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $kegiatan = Kegiatan::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->where('id', Auth::user()->bidang_id);
+            })->get();
+
         $jenis = JenisPerjalanan::all();
-        return view('master.spt.create', compact('pegawai', 'program', 'bidang', 'jenis'));
+        return view('master.spt.create', compact('pegawai', 'program', 'kegiatan', 'bidang', 'jenis'));
     }
 
     private function getBulanRomawi($bulan)
@@ -83,7 +90,7 @@ class SPTController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $request->validate(
             [
                 'dasar' => 'required',
@@ -139,7 +146,7 @@ class SPTController extends Controller
         $spt->nomor = $no_spt;
         $spt->nomor_urut = $nomor_urut;
         $spt->is_dprd = $request->is_dprd == 'dprd' ? true : false;
-        $spt->sub_kegiatan_id = $request->sub_kegiatan_id;
+        $spt->kdsubgiat = $request->sub_kegiatan_id;
         $spt->jenis_sppd_id = $request->jenis_sppd_id;
         $spt->bidang_sub_id = $request->sub_bidang_id;
         $spt->tanggal_berangkat = $request->tanggal_berangkat;
@@ -178,7 +185,22 @@ class SPTController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {}
+    public function edit(SPT $spt, Request $request) {
+        if (!in_array($request->lembaga, ['setwan', 'dprd'])) {
+            return redirect()->route('spt.index');
+        }
+        $pegawai = Pegawai::with('pangkat')
+            ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->orderBy('ref_pangkat.jnspeg', 'asc')
+            ->orderBy('ref_pangkat.kdgol', 'desc')
+            ->orderBy('nama', 'asc')
+            ->select('pegawai.*')
+            ->get();
+        $program = Program::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $jenis = JenisPerjalanan::all();
+        return view('master.spt.create', compact('pegawai', 'program', 'bidang', 'jenis'));
+    }
 
     /**
      * Update the specified resource in storage.

@@ -40,22 +40,12 @@
                         </legend>
                         <div class="text-sm max-w-xl mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                             <div class="flex flex-col gap-1">
-                                <label for="jenis_sppd_id">Jenis SPPD</label>
-                                <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
-                                    required>
-                                    <option value="" selected disabled> Pilih Jenis SPPD</option>
-                                    @foreach ($jenis as $item)
-                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="flex flex-col gap-1">
                                 <label for="bidang_id">{{ session('config')->judul }}</label>
                                 <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
                                     <option value="" selected disabled>Pilih {{ session('config')->judul }}
                                     </option>
                                     @foreach ($bidang as $item)
-                                        <option value="{{ $item->id }}" {{ Auth::user()->level < 3 ? ($item->id == Auth::user()->bidang_id ? 'selected' : '') : '' }}>{{ $item->uraian }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -70,7 +60,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="program_id">Program</label>
-                                <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required disabled>
+                                <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required>
                                     <option value="" selected disabled> Pilih Program</option>
                                     @foreach ($program as $item)
                                         <option value="{{ $item->kdprog }}">{{$item->kdprog}} - {{ $item->uraian }}</option>
@@ -79,11 +69,8 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="kegiatan_id">Kegiatan</label>
-                                <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2" required disabled>
+                                <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2" required>
                                     <option value="" selected disabled> Pilih Kegiatan</option>
-                                    @foreach ($kegiatan as $item)
-                                        <option value="{{ $item->kdgiat }}">{{$item->kdgiat}} - {{ $item->uraian }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
@@ -91,6 +78,16 @@
                                 <select name="sub_kegiatan_id" id="sub_kegiatan_id" class="text-sm rounded-lg select2"
                                     required>
                                     <option value="" selected disabled> Pilih Sub Kegiatan</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="jenis_sppd_id">Jenis SPPD</label>
+                                <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
+                                    required>
+                                    <option value="" selected disabled> Pilih Jenis SPPD</option>
+                                    @foreach ($jenis as $item)
+                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="w-full border-t pb-3 mt-3">
@@ -483,106 +480,106 @@
             selectionCssClass: 'text-sm',
         });
 
-        // $('#program_id').on('change', function() {
-        //     const programKode = $(this).val();
+        $('#program_id').on('change', function() {
+            const programKode = $(this).val();
 
-        //     if (programKode) {
-        //         $('#kegiatan_id').prop('disabled', true)
-        //             .html('<option selected disabled>Memuat...</option>');
+            if (programKode) {
+                $('#kegiatan_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
 
-        //         $.ajax({
-        //             url: "{{ route('get.kegiatan.by.program') }}",
-        //             type: "GET",
-        //             data: {
-        //                 program_id: programKode
-        //             },
-        //             success: function(response) {
-        //                 $('#kegiatan_id').empty();
-        //                 $('#kegiatan_id').append(
-        //                     '<option value="" selected disabled>Pilih Kegiatan</option>'
-        //                 );
-        //                 $('#sub_kegiatan_id').empty();
-        //                 $('#sub_kegiatan_id').append(
-        //                     '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
-        //                 );
+                $.ajax({
+                    url: "{{ route('get.kegiatan.by.program') }}",
+                    type: "GET",
+                    data: {
+                        program_id: programKode
+                    },
+                    success: function(response) {
+                        $('#kegiatan_id').empty();
+                        $('#kegiatan_id').append(
+                            '<option value="" selected disabled>Pilih Kegiatan</option>'
+                        );
+                        $('#sub_kegiatan_id').empty();
+                        $('#sub_kegiatan_id').append(
+                            '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                        );
 
-        //                 if (response.length > 0) {
-        //                     $.each(response, function(index, kegiatan) {
-        //                         $('#kegiatan_id').append('<option value="' +
-        //                             kegiatan.kdgiat + '">' + kegiatan.kdgiat + ' - ' + kegiatan.uraian +
-        //                             '</option>');
-        //                     });
+                        if (response.length > 0) {
+                            $.each(response, function(index, kegiatan) {
+                                $('#kegiatan_id').append('<option value="' +
+                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat + ' - ' + kegiatan.uraian +
+                                    '</option>');
+                            });
 
-        //                     $('#kegiatan_id').prop('disabled', false);
-        //                 } else {
-        //                     $('#kegiatan_id').append(
-        //                         '<option value="" disabled>Tidak ada kegiatan tersedia</option>'
-        //                     );
+                            $('#kegiatan_id').prop('disabled', false);
+                        } else {
+                            $('#kegiatan_id').append(
+                                '<option value="" disabled>Tidak ada kegiatan tersedia</option>'
+                            );
 
-        //                     $('#kegiatan_id').prop('disabled', false);
-        //                 }
-        //             },
-        //             error: function(xhr) {
+                            $('#kegiatan_id').prop('disabled', false);
+                        }
+                    },
+                    error: function(xhr) {
 
-        //                 $('#kegiatan_id').prop('disabled', false);
-        //                 console.error(xhr.responseText);
-        //             }
-        //         });
-        //     } else {
-        //         $('#kegiatan_id').empty();
-        //         $('#kegiatan_id').append('<option value="" selected disabled>Pilih Kegiatan</option>');
-        //         $('#sub_kegiatan_id').empty();
-        //         $('#sub_kegiatan_id').append(
-        //             '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
-        //         );
-        //     }
-        // });
-        // $('#kegiatan_id').on('change', function() {
-        //     const kegiatanId = $(this).val();
+                        $('#kegiatan_id').prop('disabled', false);
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#kegiatan_id').empty();
+                $('#kegiatan_id').append('<option value="" selected disabled>Pilih Kegiatan</option>');
+                $('#sub_kegiatan_id').empty();
+                $('#sub_kegiatan_id').append(
+                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                );
+            }
+        });
+        $('#kegiatan_id').on('change', function() {
+            const kegiatanId = $(this).val();
 
-        //     if (kegiatanId) {
-        //         $('#sub_kegiatan_id').prop('disabled', true)
-        //             .html('<option selected disabled>Memuat...</option>');
+            if (kegiatanId) {
+                $('#sub_kegiatan_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
 
-        //         $.ajax({
-        //             url: "{{ route('get.sub-kegiatan.by.kegiatan') }}",
-        //             type: "GET",
-        //             data: {
-        //                 kegiatan_id: kegiatanId
-        //             },
-        //             success: function(response) {
-        //                 $('#sub_kegiatan_id').empty();
-        //                 $('#sub_kegiatan_id').append(
-        //                     '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
-        //                 );
+                $.ajax({
+                    url: "{{ route('get.sub-kegiatan.by.kegiatan') }}",
+                    type: "GET",
+                    data: {
+                        kegiatan_id: kegiatanId
+                    },
+                    success: function(response) {
+                        $('#sub_kegiatan_id').empty();
+                        $('#sub_kegiatan_id').append(
+                            '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
+                        );
 
-        //                 if (response.length > 0) {
-        //                     $.each(response, function(index, subkegiatan) {
-        //                         $('#sub_kegiatan_id').append('<option value="' +
-        //                             subkegiatan.kdsub + '">' + subkegiatan.kdsub + ' - ' + subkegiatan.uraian +
-        //                             '</option>');
-        //                     });
+                        if (response.length > 0) {
+                            $.each(response, function(index, subkegiatan) {
+                                $('#sub_kegiatan_id').append('<option value="' +
+                                    subkegiatan.kdsub + '">' + subkegiatan.kdsub + ' - ' + subkegiatan.uraian +
+                                    '</option>');
+                            });
 
-        //                     $('#sub_kegiatan_id').prop('disabled', false);
-        //                 } else {
-        //                     $('#sub_kegiatan_id').append(
-        //                         '<option value="" disabled>Tidak ada Sub kegiatan tersedia</option>'
-        //                     );
+                            $('#sub_kegiatan_id').prop('disabled', false);
+                        } else {
+                            $('#sub_kegiatan_id').append(
+                                '<option value="" disabled>Tidak ada Sub kegiatan tersedia</option>'
+                            );
 
-        //                     $('#sub_kegiatan_id').prop('disabled', false);
-        //                 }
-        //             },
-        //             error: function(xhr) {
-        //                 $('#sub_kegiatan_id').prop('disabled', false);
-        //                 console.error(xhr.responseText);
-        //             }
-        //         });
-        //     } else {
-        //         $('#sub_kegiatan_id').empty();
-        //         $('#sub_kegiatan_id').append(
-        //             '<option value="" selected disabled>Pilih Sub Kegiatan</option>');
-        //     }
-        // });
+                            $('#sub_kegiatan_id').prop('disabled', false);
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#sub_kegiatan_id').prop('disabled', false);
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#sub_kegiatan_id').empty();
+                $('#sub_kegiatan_id').append(
+                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>');
+            }
+        });
         $('#bidang_id').on('change', function() {
             const bidangId = $(this).val();
 
@@ -628,71 +625,6 @@
                 $('#sub_bidang_id').append(
                     '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
                 );
-            }
-        });
-        $('#sub_bidang_id').on('change', function() {
-            const subBidangId = $(this).val();
-
-            if (subBidangId) {
-                $('#sub_kegiatan_id').prop('disabled', true)
-                    .html('<option selected disabled>Memuat...</option>');
-
-                $.ajax({
-                    url: "{{ route('get.sub-kegiatan.by.sub-bidang') }}",
-                    type: "GET",
-                    data: {
-                        sub_bidang_id: subBidangId
-                    },
-                    success: function(response) {
-                        $('#sub_kegiatan_id').empty();
-                        $('#sub_kegiatan_id').append(
-                            '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
-                        );
-
-                        if (response.length > 0) {
-                            $.each(response, function(index, subkegiatan) {
-                                $('#sub_kegiatan_id').append('<option value="' +
-                                    subkegiatan.kdsub + '">' + subkegiatan.kdsub + ' - ' + subkegiatan.uraian +
-                                    '</option>');
-                            });
-
-                            $('#sub_kegiatan_id').prop('disabled', false);
-                        } else {
-                            $('#sub_kegiatan_id').append(
-                                '<option value="" disabled>Tidak ada Sub Kegiatan tersedia</option>'
-                            );
-
-                            $('#sub_kegiatan_id').prop('disabled', false);
-                        }
-                    },
-                    error: function(xhr) {
-                        $('#sub_kegiatan_id').prop('disabled', false);
-                        console.error(xhr.responseText);
-                    }
-                });
-            } else {
-                $('#sub_kegiatan_id').empty();
-                $('#sub_kegiatan_id').append(
-                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
-                );
-            }
-        });
-        $('#sub_kegiatan_id').on('change', function() {
-            const subKegiatanId = $(this).val();
-
-            if (subKegiatanId) {
-
-                $.ajax({
-                    url: "{{ route('get.kdprog-kdgiat.by.sub-kegiatan') }}",
-                    type: "GET",
-                    data: {
-                        sub_kegiatan_id: subKegiatanId
-                    },
-                    success: function(response) {
-                        $('#program_id').val(response.kdprog).trigger('change');
-                        $('#kegiatan_id').val(response.kdgiat).trigger('change');
-                    }
-                });
             }
         });
     });

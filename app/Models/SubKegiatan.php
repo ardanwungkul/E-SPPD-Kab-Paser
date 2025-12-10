@@ -20,6 +20,10 @@ class SubKegiatan extends Model
     {
         return $this->belongsTo(Kegiatan::class, 'kdgiat');
     }
+    public function anggaran() 
+    {
+        return $this->hasMany(Anggaran::class, 'kdsub');    
+    }
     public function getFormattedKodeAttribute()
     {
         return $this->kegiatan->formatted_kode . '.' . $this->kode;

@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SPPD;
+use App\Models\SPT;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class SPPDController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            if ($request->lembaga == 'dprd') {
+                $data = SPT::where('tahun', session('tahun'))->orderBy('nomor_urut', 'desc')->where('is_dprd', true)->get();
+            } else {
+                $data = SPT::where('tahun', session('tahun'))->orderBy('nomor_urut', 'desc')->where('is_dprd', false)->get();
+            }
+            return DataTables::of($data)->addIndexColumn()->make(true);
+        }
+
+        return view('master.sppd.index');
     }
 
     /**

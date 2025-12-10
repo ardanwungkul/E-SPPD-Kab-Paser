@@ -256,7 +256,7 @@
                                     </div>
                                 </td>
                                 <td class="px-3 py-1 w-full">
-                                    {{ $spt->ub->pangkat ? $spt->ub->pangkat->kode_golongan . ' - ' : '' }}
+                                    {{ $spt->ub->pangkat ? $spt->ub->pangkat->kdgol . ' - ' : '' }}
                                     {{ $spt->ub->pangkat ? $spt->ub->pangkat->uraian : '' }}
                                 </td>
                             </tr>

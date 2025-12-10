@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('spt', SPTController::class);
     Route::get('spt-cetak/{spt}', [SPTController::class, 'print'])->name('spt.print');
     Route::resource('sppd', SPPDController::class);
+    Route::get('sppd-cetak/{sppd}', [SPPDController::class, 'print'])->name('sppd.print');
 
     Route::resource('standar-uang-harian', StandarUangHarianController::class)->names('suh')->parameters(['standar-uang-harian' => 'suh']);
     Route::resource('anggaran-tahunan', AnggaranController::class)->names('anggaran')->parameters(['anggaran-tahunan' => 'anggaran']);
@@ -74,6 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('referensi/sub-kegiatan', SubKegiatanController::class);
     Route::get('referensi/get-kegiatan-by-program', [KegiatanController::class, 'getKegiatanByProgram'])->name('get.kegiatan.by.program');
     Route::get('referensi/get-sub-kegiatan-by-kegiatan', [SubKegiatanController::class, 'getSubKegiatanByKegiatan'])->name('get.sub-kegiatan.by.kegiatan');
+    Route::get('referensi/get-kdprog-kdgiata-by-sub-kegiatan', [SubKegiatanController::class, 'getKdprogKdgiataBySubKegiatan'])->name('get.kdprog-kdgiat.by.sub-kegiatan');
+    Route::get('referensi/get-sub-kegiatan-by-sub-bidang', [SubKegiatanController::class, 'getSubKegiatanBySubBidang'])->name('get.sub-kegiatan.by.sub-bidang');
 
     Route::resource('referensi/jenis-perjalanan', JenisPerjalananController::class);
     

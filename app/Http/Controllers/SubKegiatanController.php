@@ -13,7 +13,7 @@ class SubKegiatanController extends Controller
     {
         $this->middleware('level:3')->except('index', 'getSubKegiatanByKegiatan');
     }
-    
+
     public function index()
     {
         $data = Program::where('tahun', session('tahun'))->orderBy('kdprog', 'asc')->get();
@@ -133,6 +133,26 @@ class SubKegiatanController extends Controller
             'kegiatan_id' => 'required|string',
         ]);
         $sub_kegiatan = SubKegiatan::where('kdgiat', $request->kegiatan_id)->get();
+        return response()->json($sub_kegiatan);
+    }
+
+    public function getKdprogKdgiataBySubKegiatan(Request $request)
+    {
+        $request->validate([
+            'sub_kegiatan_id' => 'required|string',
+        ]);
+        $sub_kegiatan = SubKegiatan::find($request->sub_kegiatan_id);
+        return response()->json($sub_kegiatan);
+    }
+
+    public function getSubKegiatanBySubBidang(Request $request)
+    {
+        $request->validate([
+            'sub_bidang_id' => 'required|string',
+        ]);
+        $sub_kegiatan = SubKegiatan::whereHas('anggaran', function ($q) use ($request) {
+            $q->where('bidang_sub_id', $request->sub_bidang_id);
+        })->get();
         return response()->json($sub_kegiatan);
     }
 }
