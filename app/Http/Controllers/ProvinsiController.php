@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisPerjalanan;
+use App\Models\KabupatenKota;
+use App\Models\Kecamatan;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
 
@@ -70,5 +73,36 @@ class ProvinsiController extends Controller
     {
         $provinsi->delete();
         return redirect()->route('provinsi.index')->with(['success' => 'Berhasil Menghapus Provinsi']);
+    }
+
+    public function getWilayahByJenisSPPD(Request $request)
+    {
+        $request->validate([
+            'jenis_sppd_id' => 'required',
+        ]);
+        $jenis = JenisPerjalanan::find($request->jenis_sppd_id)->wilayah;
+
+        if ($jenis == 'Provinsi') {
+            $kecamatan = null;
+            $kabkota = null;
+            $provinsi = Provinsi::all();
+        }
+        if ($jenis == 'Kabupaten') {
+            $kecamatan = null;
+            $kabkota = KabupatenKota::where('provinsi_id', session('config')->provinsi)->get();
+            $provinsi = Provinsi::find(session('config')->provinsi);
+        }
+        if ($jenis == 'Kecamatan') {
+            $kecamatan = Kecamatan::where('kabupaten_kota_id', session('config')->kabkota)->get();
+            $kabkota = KabupatenKota::find(session('config')->kabkota);
+            $provinsi = Provinsi::find($kabkota->provinsi_id);
+        }
+
+        return response()->json([
+            'wilayah' => $jenis,
+            'provinsi' => $provinsi,
+            'kabkota' => $kabkota,
+            'kecamatan' => $kecamatan,
+        ]);
     }
 }

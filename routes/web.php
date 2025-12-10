@@ -76,12 +76,14 @@ Route::middleware('auth')->group(function () {
     Route::get('referensi/get-kegiatan-by-program', [KegiatanController::class, 'getKegiatanByProgram'])->name('get.kegiatan.by.program');
     Route::get('referensi/get-sub-kegiatan-by-kegiatan', [SubKegiatanController::class, 'getSubKegiatanByKegiatan'])->name('get.sub-kegiatan.by.kegiatan');
     Route::get('referensi/get-kdprog-kdgiata-by-sub-kegiatan', [SubKegiatanController::class, 'getKdprogKdgiataBySubKegiatan'])->name('get.kdprog-kdgiat.by.sub-kegiatan');
+    Route::get('referensi/get-anggaran-by-sub-kegiatan', [SubKegiatanController::class, 'getAnggaraBySubKegiatan'])->name('get.anggaran.by.sub-kegiatan');
     Route::get('referensi/get-sub-kegiatan-by-sub-bidang', [SubKegiatanController::class, 'getSubKegiatanBySubBidang'])->name('get.sub-kegiatan.by.sub-bidang');
 
     Route::resource('referensi/jenis-perjalanan', JenisPerjalananController::class);
     
     Route::resource('referensi/bidang', BidangController::class);
     Route::resource('referensi/sub-bidang', SubBidangController::class);
+    Route::get('referensi/get-bidang-by-sub-bidang', [SubBidangController::class, 'getBidangBySubBidang'])->name('get.bidang.by.sub-bidang');
     Route::get('referensi/get-sub-bidang-by-bidang', [SubBidangController::class, 'getSubBidangByBidang'])->name('get.sub-bidang.by.bidang');
 
     Route::resource('pegawai', PegawaiController::class);
@@ -94,6 +96,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('master/kabupaten-kota', KabupatenKotaController::class)->parameters(['kabupaten-kota' => 'kabupaten_kota']);
     Route::get('master/kabupaten-kota-by-provinsi', [KabupatenKotaController::class, 'getKabupatenKotaByProvinsi'])->name('get.kabupaten-kota-by-provinsi');
     Route::resource('master/provinsi', ProvinsiController::class);
+    Route::get('master/wilayah-by-jenis-sppd',[ProvinsiController::class, 'getWilayahByJenisSPPD'])->name('get.wilayah.by.jenis-sppd');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

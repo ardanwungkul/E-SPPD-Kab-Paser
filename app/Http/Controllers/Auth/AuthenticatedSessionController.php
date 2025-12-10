@@ -33,6 +33,8 @@ class AuthenticatedSessionController extends Controller
         $config = Config::where('tahun', $request->tahun)->where('aktif', 'Y')->first();
 
         $config->judul = "Bidang";
+        $config->provinsi = "64";
+        $config->kabkota = "6409";
         $request->authenticate();
 
         if (Auth::user()->aktif != 'Y') {

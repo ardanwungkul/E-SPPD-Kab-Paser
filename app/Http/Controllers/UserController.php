@@ -53,7 +53,7 @@ class UserController extends Controller
         $user->bidang_id = $request->bidang_id;
         $user->level = $request->level;
         $user->password = Hash::make($request->password);
-        $user->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'N';
+        $user->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'T';
         $user->save();
         return redirect()->route('users.index')->with(['success' => 'Berhasil Menambahkan User']);
     }
@@ -80,7 +80,7 @@ class UserController extends Controller
         if ($request->has('password') && $request->password !== null) {
             $user->password = Hash::make($request->password);
         }
-        $user->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'N';
+        $user->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'T';
         $user->save();
         return redirect()->route('users.index')->with(['success' => 'Berhasil Mengubah User']);
     }

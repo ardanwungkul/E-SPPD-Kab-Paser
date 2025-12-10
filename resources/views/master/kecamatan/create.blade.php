@@ -108,7 +108,7 @@
                         if (response.length > 0) {
                             $.each(response, function(index, kabupaten) {
                                 $('#kabupaten_kota_id').append('<option value="' +
-                                    kabupaten.kdgiat + '">' + kabupaten.nama +
+                                    kabupaten.id + '">' + kabupaten.nama +
                                     '</option>');
                             });
                             $('#kabupaten_kota_id').prop('disabled', false);

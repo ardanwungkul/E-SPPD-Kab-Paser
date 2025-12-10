@@ -116,6 +116,17 @@ class SubBidangController extends Controller
         $sub_bidang->delete();
         return redirect()->route('sub-bidang.index')->with(['success' => 'Berhasil Menghapus Sub. Bidang']);
     }
+
+    public function getBidangBySubBidang(Request $request)
+    {
+        $request->validate([
+            'sub_bidang_id' => 'required|string',
+        ]);
+        $sub_bidang = SubBidang::find($request->sub_bidang_id);
+        $bidang = Bidang::find($sub_bidang->bidang_id);
+        return response()->json($bidang);
+    }
+
     public function getSubBidangByBidang(Request $request)
     {
         $request->validate([

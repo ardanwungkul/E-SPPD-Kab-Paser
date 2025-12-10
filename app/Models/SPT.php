@@ -30,6 +30,10 @@ class SPT extends Model
     {
         return $this->hasMany(SPTUntuk::class, 'spt_id');
     }
+    public function sppd()
+    {
+        return $this->hasOne(SPPD::class, 'spt_id');
+    }
     public function ub()
     {
         return $this->belongsTo(Pegawai::class, 'penandatangan_id');

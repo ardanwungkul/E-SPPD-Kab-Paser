@@ -52,15 +52,9 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="bidang_id">{{ session('config')->judul }}</label>
-                                <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
-                                    <option value="" selected disabled>Pilih {{ session('config')->judul }}
-                                    </option>
-                                    @foreach ($bidang as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ Auth::user()->level < 3 ? ($item->id == Auth::user()->bidang_id ? 'selected' : '') : '' }}>
-                                            {{ $item->uraian }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="bidang_id" id="bidang_id"
+                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    placeholder="Pilih Bidang" disabled>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
@@ -69,29 +63,22 @@
                                     <option value="" selected disabled> Pilih Sub
                                         {{ session('config')->judul }}
                                     </option>
+                                    @foreach ($subbidang as $item)
+                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="program_id">Program</label>
-                                <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required
-                                    disabled>
-                                    <option value="" selected disabled> Pilih Program</option>
-                                    @foreach ($program as $item)
-                                        <option value="{{ $item->kdprog }}">{{ $item->kdprog }} - {{ $item->uraian }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="program_id" id="program_id"
+                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    placeholder="Pilih Program" disabled>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="kegiatan_id">Kegiatan</label>
-                                <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2" required
-                                    disabled>
-                                    <option value="" selected disabled> Pilih Kegiatan</option>
-                                    @foreach ($kegiatan as $item)
-                                        <option value="{{ $item->kdgiat }}">{{ $item->kdgiat }} - {{ $item->uraian }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="kegiatan_id" id="kegiatan_id"
+                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    placeholder="Pilih Kegiatan" disabled>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="sub_kegiatan_id">Sub Kegiatan</label>
@@ -101,7 +88,15 @@
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
-                                <label for="berkas">Berkas Bukti Disposisi</label>
+                                <label for="anggaran">Anggaran</label>
+                                <input type="text" name="anggaran" id="anggaran"
+                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    placeholder="Total Anggaran" disabled>
+                            </div>
+                            <div class="w-full border-t pb-3 mt-3">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="berkas">Berkas Bukti Disposisi (PDF, JPG, JPEG, PNG Maksimal 1MB)</label>
                                 <label for="berkas"
                                     class=" cursor-pointer flex items-center justify-between p-1 text-xs md:text-sm rounded-lg border border-gray-300 shadow-md">
                                     <div class=" flex items-center gap-2">
@@ -119,7 +114,8 @@
                                         </svg>
                                     </div>
                                 </label>
-                                <input type="file" name="berkas" id="berkas" accept="application/pdf" class="hidden" required>
+                                <input type="file" name="berkas" id="berkas"
+                                    accept="application/pdf,.jpg,.jpeg,.png" class="hidden" required>
                                 <script>
                                     document.getElementById('berkas').addEventListener('change', function(e) {
                                         const fileName = e.target.files[0]?.name || "Tidak ada file dipilih";
@@ -129,15 +125,79 @@
                             </div>
                             <div class="w-full border-t pb-3 mt-3">
                             </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="tanggal_berangkat">Tanggal Berangkat</label>
-                                <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
-                                    class="w-full text-sm rounded-lg border border-secondary-4">
-                            </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="tanggal_kembali">Tanggal Kembali</label>
-                                <input type="date" id="tanggal_kembali" name="tanggal_kembali"
-                                    class="w-full text-sm rounded-lg border border-secondary-4">
+                            <div class=" w-full grid grid-cols-3 gap-3">
+                                <div class="flex flex-col gap-1">
+                                    <label for="tanggal_berangkat">Tanggal Berangkat</label>
+                                    <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
+                                        class="w-full text-sm rounded-lg border border-secondary-4">
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="tanggal_kembali">Tanggal Kembali</label>
+                                    <input type="date" id="tanggal_kembali" name="tanggal_kembali"
+                                        class="w-full text-sm rounded-lg border border-secondary-4">
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="total_hari">Total Hari</label>
+                                    <input type="number" id="total_hari" name="total_hari" placeholder="Total Hari"
+                                        class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee]" disabled>
+                                </div>
+                                <script>
+                                    function hitungTotalHari() {
+                                        const tglBerangkat = document.getElementById('tanggal_berangkat').value;
+                                        const tglKembali = document.getElementById('tanggal_kembali').value;
+
+                                        if (tglBerangkat && tglKembali) {
+                                            const start = new Date(tglBerangkat);
+                                            const end = new Date(tglKembali);
+
+                                            // Hitung selisih waktu
+                                            const selisihMs = end - start;
+
+                                            if (selisihMs >= 0) {
+                                                const totalHari = (selisihMs / (1000 * 60 * 60 * 24)) + 1; // termasuk hari berangkat
+                                                document.getElementById('total_hari').value = totalHari;
+                                            } else {
+                                                document.getElementById('total_hari').value = "";
+                                            }
+                                        }
+                                    }
+
+                                    document.getElementById('tanggal_berangkat').addEventListener('change', hitungTotalHari);
+                                    document.getElementById('tanggal_kembali').addEventListener('change', hitungTotalHari);
+                                </script>
+                                <div class=" w-full flex flex-col gap-1">
+                                    <label for="provinsi_id">Provinsi Tujuan</label>
+                                    <select name="provinsi_id" id="provinsi_id"
+                                        class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md select2"
+                                        required>
+                                        <option value="" selected disabled>Pilih Provinsi</option>
+                                        @foreach ($provinsi as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="kabupaten_kota_id">Kabupaten/Kota Tujuan</label>
+                                    <select name="kabupaten_kota_id" id="kabupaten_kota_id"
+                                        class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md select2"
+                                        required>
+                                        <option value="" selected disabled>Pilih Kabupaten/Kota</option>
+                                        @foreach ($kabkota as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="kecamatan_id">Kecamatan Tujuan</label>
+                                    <select name="kecamatan_id" id="kecamatan_id"
+                                        class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md select2"
+                                        required>
+                                        <option value="" selected disabled>Pilih Kecamatan</option>
+                                        @foreach ($kecamatan as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
@@ -509,6 +569,7 @@
         })
     });
 </script>
+
 {{-- Select 2 --}}
 <script type="module">
     $(document).ready(function() {
@@ -571,105 +632,214 @@
         //         );
         //     }
         // });
-        // $('#kegiatan_id').on('change', function() {
-        //     const kegiatanId = $(this).val();
+        $('#provinsi_id').on('change', function() {
+            const ProvinsiKode = $(this).val();
 
-        //     if (kegiatanId) {
-        //         $('#sub_kegiatan_id').prop('disabled', true)
-        //             .html('<option selected disabled>Memuat...</option>');
-
-        //         $.ajax({
-        //             url: "{{ route('get.sub-kegiatan.by.kegiatan') }}",
-        //             type: "GET",
-        //             data: {
-        //                 kegiatan_id: kegiatanId
-        //             },
-        //             success: function(response) {
-        //                 $('#sub_kegiatan_id').empty();
-        //                 $('#sub_kegiatan_id').append(
-        //                     '<option value="" selected disabled>Pilih Sub Kegiatan</option>'
-        //                 );
-
-        //                 if (response.length > 0) {
-        //                     $.each(response, function(index, subkegiatan) {
-        //                         $('#sub_kegiatan_id').append('<option value="' +
-        //                             subkegiatan.kdsub + '">' + subkegiatan.kdsub + ' - ' + subkegiatan.uraian +
-        //                             '</option>');
-        //                     });
-
-        //                     $('#sub_kegiatan_id').prop('disabled', false);
-        //                 } else {
-        //                     $('#sub_kegiatan_id').append(
-        //                         '<option value="" disabled>Tidak ada Sub kegiatan tersedia</option>'
-        //                     );
-
-        //                     $('#sub_kegiatan_id').prop('disabled', false);
-        //                 }
-        //             },
-        //             error: function(xhr) {
-        //                 $('#sub_kegiatan_id').prop('disabled', false);
-        //                 console.error(xhr.responseText);
-        //             }
-        //         });
-        //     } else {
-        //         $('#sub_kegiatan_id').empty();
-        //         $('#sub_kegiatan_id').append(
-        //             '<option value="" selected disabled>Pilih Sub Kegiatan</option>');
-        //     }
-        // });
-        $('#bidang_id').on('change', function() {
-            const bidangId = $(this).val();
-
-            if (bidangId) {
-                $('#sub_bidang_id').prop('disabled', true)
+            if (ProvinsiKode) {
+                $('#kabupaten_kota_id').prop('disabled', true)
                     .html('<option selected disabled>Memuat...</option>');
-
                 $.ajax({
-                    url: "{{ route('get.sub-bidang.by.bidang') }}",
+                    url: "{{ route('get.kabupaten-kota-by-provinsi') }}",
                     type: "GET",
                     data: {
-                        bidang_id: bidangId
+                        provinsi_id: ProvinsiKode
                     },
                     success: function(response) {
-                        $('#sub_bidang_id').empty();
-                        $('#sub_bidang_id').append(
-                            '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
+
+                        $('#kabupaten_kota_id').empty();
+                        $('#kabupaten_kota_id').append(
+                            '<option value="" selected disabled>Pilih Kabupaten/Kota</option>'
                         );
 
                         if (response.length > 0) {
-                            $.each(response, function(index, subbidang) {
-                                $('#sub_bidang_id').append('<option value="' +
-                                    subbidang.id + '">' + subbidang.uraian +
+                            $.each(response, function(index, kabupaten) {
+                                $('#kabupaten_kota_id').append('<option value="' +
+                                    kabupaten.id + '">' + kabupaten.nama +
                                     '</option>');
                             });
-
-                            $('#sub_bidang_id').prop('disabled', false);
+                            $('#kabupaten_kota_id').prop('disabled', false);
                         } else {
-                            $('#sub_bidang_id').append(
-                                '<option value="" disabled>Tidak ada Sub {{ session('config')->judul }} tersedia</option>'
+                            $('#kabupaten_kota_id').append(
+                                '<option value="" disabled>Tidak ada Kabupaten/Kota tersedia</option>'
                             );
-
-                            $('#sub_bidang_id').prop('disabled', false);
+                            $('#kabupaten_kota_id').prop('disabled', false);
                         }
                     },
                     error: function(xhr) {
-                        $('#sub_bidang_id').prop('disabled', false);
+                        $('#kabupaten_kota_id').prop('disabled', false);
                         console.error(xhr.responseText);
                     }
                 });
             } else {
-                $('#sub_bidang_id').empty();
-                $('#sub_bidang_id').append(
-                    '<option value="" selected disabled>Pilih Sub {{ session('config')->judul }}</option>'
-                );
+                $('#kabupaten_kota_id').empty();
+                $('#kabupaten_kota_id').append(
+                    '<option value="" selected disabled>Pilih Kabupaten/Kota</option>');
             }
         });
+
+        $('#kabupaten_kota_id').on('change', function() {
+            const KabkotaKode = $(this).val();
+
+            if (KabkotaKode) {
+                $('#kecamatan_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+                $.ajax({
+                    url: "{{ route('get.kecamatan-by-kabupaten-kota') }}",
+                    type: "GET",
+                    data: {
+                        kabupaten_kota_id: KabkotaKode
+                    },
+                    success: function(response) {
+
+                        $('#kecamatan_id').empty();
+                        $('#kecamatan_id').append(
+                            '<option value="" selected disabled>Pilih Kecamatan</option>'
+                        );
+
+                        if (response.length > 0) {
+                            $.each(response, function(index, kecamatan) {
+                                $('#kecamatan_id').append('<option value="' +
+                                    kecamatan.id + '">' + kecamatan.nama +
+                                    '</option>');
+                            });
+                            $('#kecamatan_id').prop('disabled', false);
+                        } else {
+                            $('#kecamatan_id').append(
+                                '<option value="" disabled>Tidak ada Kecamatan tersedia</option>'
+                            );
+                            $('#kecamatan_id').prop('disabled', false);
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#kecamatan_id').prop('disabled', false);
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#kabupaten_kota_id').empty();
+                $('#kabupaten_kota_id').append(
+                    '<option value="" selected disabled>Pilih Kabupaten/Kota</option>');
+            }
+        });
+
+        $('#jenis_sppd_id').on('change', function() {
+            const jenisSppdId = $(this).val();
+
+            if (jenisSppdId) {
+                $('#provinsi_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+                $('#kabupaten_kota_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+                $('#kecamatan_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+
+                $.ajax({
+                    url: "{{ route('get.wilayah.by.jenis-sppd') }}",
+                    type: "GET",
+                    data: {
+                        jenis_sppd_id: jenisSppdId
+                    },
+                    success: function(response) {
+                        $('#provinsi_id').empty();
+                        $('#provinsi_id').append(
+                            '<option value="" selected disabled>Pilih Provinsi</option>'
+                        );
+                        $('#kabupaten_kota_id').empty();
+                        $('#kabupaten_kota_id').append(
+                            '<option value="" selected disabled>Pilih Kabupaten/Kota</option>'
+                        );
+                        $('#kecamatan_id').empty();
+                        $('#kecamatan_id').append(
+                            '<option value="" selected disabled>Pilih Kecamatan</option>'
+                        );
+
+                        if (response && response.wilayah) {
+
+                            if (response.wilayah == 'Provinsi') {
+                                $.each(response.provinsi, function(index, provinsi) {
+                                    $('#provinsi_id').append('<option value="' +
+                                        provinsi.id + '">' + provinsi.nama +
+                                        '</option>');
+                                });
+
+                                $('#provinsi_id').prop('disabled', false);
+                                $('#kabupaten_kota_id').prop('disabled', false);
+                                $('#kecamatan_id').prop('disabled', false);
+                            } else if (response.wilayah == 'Kabupaten') {
+                                $('#provinsi_id').append(
+                                    '<option value="' + response.provinsi.id +
+                                    '" selected disabled>' + response.provinsi.nama +
+                                    '</option>'
+                                );
+
+                                $.each(response.kabkota, function(index, kabkota) {
+                                    $('#kabupaten_kota_id').append(
+                                        '<option value="' +
+                                        kabkota.id + '">' + kabkota.nama +
+                                        '</option>');
+                                });
+
+
+                                $('#kabupaten_kota_id').prop('disabled', false);
+                                $('#kecamatan_id').prop('disabled', false);
+                            } else if (response.wilayah == 'Kecamatan') {
+                                $('#provinsi_id').append(
+                                    '<option value="' + response.provinsi.id +
+                                    '" selected disabled>' + response.provinsi.nama +
+                                    '</option>'
+                                );
+                                $('#kabupaten_kota_id').append(
+                                    '<option value="' + response.kabkota.id +
+                                    '" selected disabled>' + response.kabkota.nama +
+                                    '</option>'
+                                );
+
+                                $.each(response.kecamatan, function(index, kecamatan) {
+                                    $('#kecamatan_id').append(
+                                        '<option value="' +
+                                        kecamatan.id + '">' + kecamatan.nama +
+                                        '</option>');
+                                });
+
+                                $('#kecamatan_id').prop('disabled', false);
+                            }
+                        } else {
+                            $('#provinsi_id').prop('disabled', false);
+                            $('#kabupaten_kota_id').prop('disabled', false);
+                            $('#kecamatan_id').prop('disabled', false);
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#provinsi_id').prop('disabled', false);
+                        $('#kabupaten_kota_id').prop('disabled', false);
+                        $('#kecamatan_id').prop('disabled', false);
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#sub_kegiatan_id').empty();
+                $('#sub_kegiatan_id').append(
+                    '<option value="" selected disabled>Pilih Sub Kegiatan</option>');
+            }
+        });
+
         $('#sub_bidang_id').on('change', function() {
             const subBidangId = $(this).val();
 
             if (subBidangId) {
                 $('#sub_kegiatan_id').prop('disabled', true)
                     .html('<option selected disabled>Memuat...</option>');
+
+                $.ajax({
+                    url: "{{ route('get.bidang.by.sub-bidang') }}",
+                    type: "GET",
+                    data: {
+                        sub_bidang_id: subBidangId
+                    },
+                    success: function(response) {
+                        $('#bidang_id').val(response.uraian).trigger('change');
+                    }
+                });
 
                 $.ajax({
                     url: "{{ route('get.sub-kegiatan.by.sub-bidang') }}",
@@ -712,10 +882,23 @@
                 );
             }
         });
+
         $('#sub_kegiatan_id').on('change', function() {
             const subKegiatanId = $(this).val();
 
             if (subKegiatanId) {
+
+                $.ajax({
+                    url: "{{ route('get.anggaran.by.sub-kegiatan') }}",
+                    type: "GET",
+                    data: {
+                        sub_kegiatan_id: subKegiatanId
+                    },
+                    success: function(response) {
+                        $('#anggaran').val('Rp. ' + response.anggaran.total_anggaran)
+                            .trigger('change');
+                    }
+                });
 
                 $.ajax({
                     url: "{{ route('get.kdprog-kdgiat.by.sub-kegiatan') }}",
@@ -724,13 +907,13 @@
                         sub_kegiatan_id: subKegiatanId
                     },
                     success: function(response) {
-                        $('#program_id').val(response.kdprog).trigger('change');
-                        $('#kegiatan_id').val(response.kdgiat).trigger('change');
+                        $('#program_id').val(response.kdprog + ' - ' + response.program
+                            .uraian).trigger('change');
+                        $('#kegiatan_id').val(response.kdgiat + ' - ' + response.kegiatan
+                            .uraian).trigger('change');
                     }
                 });
             }
         });
-
-        $('#bidang_id').trigger('change');
     });
 </script>

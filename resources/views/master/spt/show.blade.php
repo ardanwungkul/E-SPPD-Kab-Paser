@@ -137,7 +137,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $pegawai->pegawai->pangkat ? $pegawai->pegawai->pangkat->kode_golongan : '' }}
+                                        {{ $pegawai->pegawai->pangkat ? $pegawai->pegawai->pangkat->kdgol : '' }}
                                     </td>
                                 </tr>
                                 <tr>

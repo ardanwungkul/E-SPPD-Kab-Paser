@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SPPD extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_sppd';
+    protected $table = 'sppd_main';
+
+    public function spt() {
+        return $this->belongsTo(SPT::class, 'spt_id');
+    }
 }

@@ -78,7 +78,8 @@ class PegawaiController extends Controller
         $pegawai->jabatan = $request->jabatan;
         $pegawai->alamat = $request->alamat;
         $pegawai->keterangan = $request->keterangan;
-        $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'N';
+        $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'T';
+        $pegawai->aktif = 'T';
         $pegawai->save();
         return redirect()->route('pegawai.index')->with(['success' => 'Berhasil Menambahkan Pegawai']);
     }
@@ -143,8 +144,8 @@ class PegawaiController extends Controller
         $pegawai->jabatan = $request->jabatan;
         $pegawai->alamat = $request->alamat;
         $pegawai->keterangan = $request->keterangan;
-        $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'N';
-        $pegawai->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'N';
+        $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'T';
+        $pegawai->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'T';
         $pegawai->save();
         return redirect()->route('pegawai.index')->with(['success' => 'Berhasil Mengubah Pegawai']);
     }

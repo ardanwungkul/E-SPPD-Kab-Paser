@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anggaran;
 use App\Models\Program;
 use App\Models\SubKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Svg\Tag\Rect;
 
 class SubKegiatanController extends Controller
 {
@@ -141,8 +143,28 @@ class SubKegiatanController extends Controller
         $request->validate([
             'sub_kegiatan_id' => 'required|string',
         ]);
-        $sub_kegiatan = SubKegiatan::find($request->sub_kegiatan_id);
+        $sub_kegiatan = SubKegiatan::with(['program', 'kegiatan'])
+            ->find($request->sub_kegiatan_id);
+
         return response()->json($sub_kegiatan);
+    }
+
+    public function getAnggaraBySubKegiatan(Request $request)
+    {
+        $request->validate([
+            'sub_kegiatan_id' => 'required|string',
+        ]);
+        $anggaran = Anggaran::selectRaw('*, (rp_pagu1 + rp_pagu2 + rp_pagu3) as total_anggaran')
+            ->where('kdsub', $request->sub_kegiatan_id)
+            ->first();
+
+        if ($anggaran) {
+            $anggaran->total_anggaran = number_format($anggaran->total_anggaran, 0, ',', '.');
+        }
+
+        return response()->json([
+            'anggaran' => $anggaran,
+        ]);
     }
 
     public function getSubKegiatanBySubBidang(Request $request)
@@ -153,6 +175,7 @@ class SubKegiatanController extends Controller
         $sub_kegiatan = SubKegiatan::whereHas('anggaran', function ($q) use ($request) {
             $q->where('bidang_sub_id', $request->sub_bidang_id);
         })->get();
+
         return response()->json($sub_kegiatan);
     }
 }

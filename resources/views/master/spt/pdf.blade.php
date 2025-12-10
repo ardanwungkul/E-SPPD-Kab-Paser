@@ -137,7 +137,7 @@
                                 <td>Pangkat / Gol</td>
                                 <td>:</td>
                                 <td>{{ $pegawai->pegawai->pangkat ? $pegawai->pegawai->pangkat->uraian : '' }},
-                                    {{ $pegawai->pegawai->pangkat ? $pegawai->pegawai->pangkat->kode_golongan : '' }}
+                                    {{ $pegawai->pegawai->pangkat ? $pegawai->pegawai->pangkat->kdgol : '' }}
                                 </td>
                             </tr>
                             <tr>

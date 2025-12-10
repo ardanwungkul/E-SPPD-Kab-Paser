@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Bidang;
 use App\Models\Config;
 use App\Models\JenisPerjalanan;
+use App\Models\KabupatenKota;
+use App\Models\Kecamatan;
 use App\Models\Kegiatan;
 use App\Models\KopSurat;
 use App\Models\NotaDinas;
 use App\Models\Pegawai;
 use App\Models\Program;
+use App\Models\Provinsi;
 use App\Models\SPT;
 use App\Models\SPTDasar;
 use App\Models\SPTPegawai;
 use App\Models\SPTUntuk;
+use App\Models\SubBidang;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +58,7 @@ class SPTController extends Controller
             ->orderBy('nama', 'asc')
             ->select('pegawai.*')
             ->get();
+
         $program = Program::where('tahun', session('tahun'))->get();
         $kegiatan = Kegiatan::where('tahun', session('tahun'))->get();
         $bidang = Bidang::where('tahun', session('tahun'))
@@ -60,8 +66,17 @@ class SPTController extends Controller
                 $query->where('id', Auth::user()->bidang_id);
             })->get();
 
+        $subbidang = SubBidang::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->where('bidang_id', Auth::user()->bidang_id);
+            })->get();
+
+        $provinsi = Provinsi::all();
+        $kabkota = KabupatenKota::all();
+        $kecamatan = Kecamatan::all();
+
         $jenis = JenisPerjalanan::all();
-        return view('master.spt.create', compact('pegawai', 'program', 'kegiatan', 'bidang', 'jenis'));
+        return view('master.spt.create', compact('provinsi', 'kabkota', 'kecamatan', 'pegawai', 'program', 'kegiatan', 'bidang', 'subbidang', 'jenis'));
     }
 
     private function getBulanRomawi($bulan)
@@ -90,6 +105,7 @@ class SPTController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate(
             [
                 'dasar' => 'required',
@@ -101,6 +117,7 @@ class SPTController extends Controller
                 'sub_kegiatan_id' => 'required',
                 'sub_bidang_id' => 'required',
                 'jenis_sppd_id' => 'required',
+                'berkas' => 'required|file|mimes:pdf,jpg,jpeg,png|max:1024',
             ],
             [
                 'dasar.required' => 'Minimal harus Mengisi 1 Dasar!',
@@ -112,6 +129,8 @@ class SPTController extends Controller
                 'sub_kegiatan_id.required' => 'Sub Kegiatan Wajib di Isi!',
                 'sub_bidang_id.required' => 'Sub Bidang Wajib di Isi!',
                 'jenis_sppd_id.required' => 'Jenis Perjalanan Dinas Wajib di Isi!',
+                'berkas.mimes' => 'berkas harus berupa PDF, JPG, JPEG, atau PNG',
+                'berkas.max' => 'berkas tidak boleh lebih dari 1MB',
             ]
         );
 
@@ -138,7 +157,7 @@ class SPTController extends Controller
 
         $spt = new SPT();
         $spt->tahun = session('tahun');
-        $spt->ub_status = $request->has('ub_status') && $request->ub_status == 'on' ? 'Y' : 'N';
+        // $spt->ub_status = $request->has('ub_status') && $request->ub_status == 'on' ? 'Y' : 'T';
         $spt->penandatangan_id = $request->penandatangan_id;
         $spt->penandatangan_tanggal = $request->penandatangan_tanggal;
         $spt->penandatangan_lokasi = $request->penandatangan_lokasi;
@@ -150,6 +169,15 @@ class SPTController extends Controller
         $spt->bidang_sub_id = $request->sub_bidang_id;
         $spt->tanggal_berangkat = $request->tanggal_berangkat;
         $spt->tanggal_kembali = $request->tanggal_kembali;
+
+        $berangkat = Carbon::parse($request->tanggal_berangkat);
+        $kembali = Carbon::parse($request->tanggal_kembali);
+
+        $spt->ttl_hari = $berangkat->diffInDays($kembali) + 1;
+
+        $spt->provinsi_id = $request->provinsi_id;
+        $spt->kabkota_id = $request->kabupaten_kota_id;
+        $spt->kecamatan_id = $request->kecamatan_id;
 
         if ($request->berkas) {
             $file = $request->file('berkas');

@@ -16,6 +16,10 @@ class SubKegiatan extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'kdprog');
+    }
     public function kegiatan()
     {
         return $this->belongsTo(Kegiatan::class, 'kdgiat');
