@@ -695,5 +695,7 @@
                 });
             }
         });
+
+        $('#bidang_id').trigger('change');
     });
 </script>

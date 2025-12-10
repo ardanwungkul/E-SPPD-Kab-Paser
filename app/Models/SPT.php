@@ -8,8 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class SPT extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_spt2';
+    protected $table = 'spt_main';
 
+    public function sub_bidang()
+    {
+        return $this->belongsTo(SubBidang::class, 'bidang_sub_id');
+    }
+    public function sub_kegiatan()
+    {
+        return $this->belongsTo(SubKegiatan::class, 'kdsubgiat', 'kdsub');
+    }
     public function dasar()
     {
         return $this->hasMany(SPTDasar::class, 'spt_id');

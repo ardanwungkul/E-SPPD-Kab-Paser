@@ -1,4 +1,4 @@
-@props(['pegawai'])
+@props(['pegawai', 'selectedPegawai' => []])
 <div id="pilih-pegawai-spt" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-4xl max-h-full">
@@ -53,17 +53,21 @@
                                             <div class="flex justify-end items-center gap-3">
                                                 <div>
                                                     <button type="button" data-id="{{ $item->id }}"
-                                                        data-check="false"
                                                         data-keterangan="{{ $item->nama }} - {{ $item->jabatan }}"
+                                                        data-check="{{ in_array($item->id, $selectedPegawai) ? 'true' : 'false' }}"
                                                         class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg button-pegawai-spt-check">
 
-                                                        <svg class="w-4 h-4" aria-hidden="true"
-                                                            xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="M5 11.917 9.724 16.5 19 7.5" />
-                                                        </svg>
+                                                        @if (in_array($item->id, $selectedPegawai))
+                                                            X
+                                                        @else
+                                                            <svg class="w-4 h-4" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                    d="M5 11.917 9.724 16.5 19 7.5" />
+                                                            </svg>
+                                                        @endif
                                                     </button>
                                                 </div>
                                             </div>

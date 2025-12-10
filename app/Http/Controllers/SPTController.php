@@ -186,9 +186,6 @@ class SPTController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(SPT $spt, Request $request) {
-        if (!in_array($request->lembaga, ['setwan', 'dprd'])) {
-            return redirect()->route('spt.index');
-        }
         $pegawai = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
             ->orderBy('ref_pangkat.jnspeg', 'asc')
@@ -197,9 +194,10 @@ class SPTController extends Controller
             ->select('pegawai.*')
             ->get();
         $program = Program::where('tahun', session('tahun'))->get();
+        $kegiatan = Kegiatan::where('tahun', session('tahun'))->get();
         $bidang = Bidang::where('tahun', session('tahun'))->get();
         $jenis = JenisPerjalanan::all();
-        return view('master.spt.create', compact('pegawai', 'program', 'bidang', 'jenis'));
+        return view('master.spt.edit', compact('spt', 'pegawai', 'program', 'bidang', 'kegiatan', 'jenis'));
     }
 
     /**

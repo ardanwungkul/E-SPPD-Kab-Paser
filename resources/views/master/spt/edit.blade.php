@@ -40,54 +40,70 @@
                         </legend>
                         <div class="text-sm max-w-xl mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                             <div class="flex flex-col gap-1">
+                                <label for="jenis_sppd_id">Jenis SPPD</label>
+                                <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
+                                    required disabled>
+                                    <option value="" selected disabled> Pilih Jenis SPPD</option>
+                                    @foreach ($jenis as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ $item->id == $spt->jenis_sppd_id ? 'selected' : '' }}>{{ $item->uraian }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-1">
                                 <label for="bidang_id">{{ session('config')->judul }}</label>
-                                <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required>
+                                <select name="bidang_id" id="bidang_id" class="text-sm rounded-lg select2" required
+                                    disabled>
                                     <option value="" selected disabled>Pilih {{ session('config')->judul }}
                                     </option>
                                     @foreach ($bidang as $item)
-                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
+                                        <option value="{{ $item->id }}"
+                                            {{ $item->id == $spt->sub_bidang->bidang_id ? 'selected' : '' }}>
+                                            {{ $item->uraian }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="sub_bidang_id">Sub {{ session('config')->judul }}</label>
                                 <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
-                                    required>
+                                    required disabled>
                                     <option value="" selected disabled> Pilih Sub
                                         {{ session('config')->judul }}
+                                    </option>
+                                    <option value="{{ $spt->bidang_sub_id }}" selected>{{ $spt->sub_bidang->uraian }}
                                     </option>
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="program_id">Program</label>
-                                <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required>
+                                <select name="program_id" id="program_id" class="text-sm rounded-lg select2" required
+                                    disabled>
                                     <option value="" selected disabled> Pilih Program</option>
                                     @foreach ($program as $item)
-                                        <option value="{{ $item->kdprog }}">{{$item->kdprog}} - {{ $item->uraian }}</option>
+                                        <option value="{{ $item->kdprog }}"
+                                            {{ $item->kdprog == $spt->sub_kegiatan->kdprog ? 'selected' : '' }}>
+                                            {{ $item->kdprog }} - {{ $item->uraian }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="kegiatan_id">Kegiatan</label>
-                                <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2" required>
+                                <select name="kegiatan_id" id="kegiatan_id" class="text-sm rounded-lg select2" required
+                                    disabled>
                                     <option value="" selected disabled> Pilih Kegiatan</option>
+                                    <option value="{{ $spt->sub_kegiatan->kdgiat }}" selected>
+                                        {{ $spt->sub_kegiatan->kegiatan->kdgiat }} -
+                                        {{ $spt->sub_kegiatan->kegiatan->uraian }}</option>
                                 </select>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="sub_kegiatan_id">Sub Kegiatan</label>
                                 <select name="sub_kegiatan_id" id="sub_kegiatan_id" class="text-sm rounded-lg select2"
-                                    required>
-                                    <option value="" selected disabled> Pilih Sub Kegiatan</option>
-                                </select>
-                            </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="jenis_sppd_id">Jenis SPPD</label>
-                                <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
-                                    required>
-                                    <option value="" selected disabled> Pilih Jenis SPPD</option>
-                                    @foreach ($jenis as $item)
-                                        <option value="{{ $item->id }}">{{ $item->uraian }}</option>
-                                    @endforeach
+                                    required disabled>
+                                    <option value="{{ $spt->sub_kegiatan->kdsub }}" selected>
+                                        {{ $spt->sub_kegiatan->kdsub }} -
+                                        {{ $spt->sub_kegiatan->uraian }}</option>
                                 </select>
                             </div>
                             <div class="w-full border-t pb-3 mt-3">
@@ -95,11 +111,13 @@
                             <div class="flex flex-col gap-1">
                                 <label for="tanggal_berangkat">Tanggal Berangkat</label>
                                 <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
+                                    value="{{ $spt->tanggal_berangkat }}"
                                     class="w-full text-sm rounded-lg border border-secondary-4">
                             </div>
                             <div class="flex flex-col gap-1">
                                 <label for="tanggal_kembali">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_kembali" name="tanggal_kembali"
+                                    value="{{ $spt->tanggal_kembali }}"
                                     class="w-full text-sm rounded-lg border border-secondary-4">
                             </div>
                         </div>
@@ -114,25 +132,29 @@
                         </legend>
                         <div class="pt-3 max-w-xl mx-auto">
                             <table class="table table-bordered w-full" id="dynamicTableDasar">
-                                <tr>
-                                    <td class="flex items-start px-2">
-                                        <label for="dasar[0][uraian]" class="align-top whitespace-nowrap">Dasar
-                                            Ke
-                                            1</label>
-                                    </td>
-                                    <td class="w-full px-2">
-                                        <div class="space-y-1">
-                                            <textarea name="dasar[0][uraian]" id="dasar[0][uraian]" rows="3"
-                                                class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Dasar Ke-1" required></textarea>
-                                        </div>
-                                    </td>
-                                    <td class="px-2 flex items-start">
-                                        <button type="button" name="add" id="addDasar"
-                                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
-                                    </td>
-                                </tr>
+                                @foreach ($spt->dasar as $item)
+                                    <tr>
+                                        <td class="flex items-start px-2">
+                                            <label for="dasar[{{ $loop->iteration }}][uraian]"
+                                                class="align-top whitespace-nowrap">Dasar
+                                                Ke
+                                                {{ $loop->iteration }}</label>
+                                        </td>
+                                        <td class="w-full px-2">
+                                            <div class="space-y-1">
+                                                <textarea name="dasar[{{ $loop->iteration }}][uraian]" id="dasar[{{ $loop->iteration }}][uraian]" rows="3"
+                                                    class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Dasar Ke-{{ $loop->iteration }}"
+                                                    required>{{ $item->uraian }}</textarea>
+                                            </div>
+                                        </td>
+                                        <td class="px-2 flex items-start">
+                                            <button type="button"
+                                                class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center {{ $loop->iteration == 1 ? '' : 'remove-tr' }}"
+                                                {{ $loop->iteration == 1 ? 'id=addDasar' : 'data-id=dasar' }}>{{ $loop->iteration == 1 ? '+' : '-' }}</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </table>
-
                         </div>
                     </fieldset>
                 </x-slot>
@@ -149,7 +171,7 @@
                                 class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-xs font-medium text-center whitespace-nowrap focus:ring-1 focus:ring-blue-500">
                                 Pilih Pegawai
                             </button>
-                            <x-modal.pilih-pegawai-spt :pegawai="$pegawai" />
+                            <x-modal.pilih-pegawai-spt :pegawai="$pegawai" :selectedPegawai="$spt->pegawai()->pluck('id')->toArray()" />
                             <div class="pt-3">
                                 <table class="table table-bordered w-full" id="dynamicTablePegawai">
                                     <tbody></tbody>
@@ -167,25 +189,28 @@
                         </legend>
                         <div class="pt-3 max-w-xl mx-auto">
                             <table class="table table-bordered w-full" id="dynamicTableUntuk">
-                                <tr>
-                                    <td class="flex items-start px-2">
-                                        <label for="untuk[0][uraian]" class="align-top whitespace-nowrap">Untuk
-                                            Ke
-                                            1</label>
-                                    </td>
-                                    <td class="w-full px-2">
-                                        <div class="space-y-1">
-                                            <textarea name="untuk[0][uraian]" id="untuk[0][uraian]" rows="3"
-                                                class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Untuk Ke-1" required></textarea>
-                                        </div>
-                                    </td>
-                                    <td class="px-2 flex items-start">
-                                        <button type="button" name="add" id="addUntuk"
-                                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
-                                    </td>
-                                </tr>
+                                @foreach ($spt->untuk as $item)
+                                    <tr>
+                                        <td class="flex items-start px-2">
+                                            <label for="untuk[{{ $loop->iteration }}][uraian]"
+                                                class="align-top whitespace-nowrap">Untuk
+                                                Ke
+                                                {{ $loop->iteration }}</label>
+                                        </td>
+                                        <td class="w-full px-2">
+                                            <div class="space-y-1">
+                                                <textarea name="untuk[{{ $loop->iteration }}][uraian]" id="untuk[{{ $loop->iteration }}][uraian]" rows="3"
+                                                    class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Untuk Ke-1" required>{{ $item->uraian }}</textarea>
+                                            </div>
+                                        </td>
+                                        <td class="px-2 flex items-start">
+                                            <button type="button"
+                                                {{ $loop->iteration == 1 ? 'id=addUntuk' : 'data-id=untuk' }}
+                                                class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center {{ $loop->iteration == 1 ? '' : 'remove-tr' }}">{{ $loop->iteration == 1 ? '+' : '-' }}</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </table>
-
                         </div>
                     </fieldset>
                 </x-slot>
@@ -221,6 +246,7 @@
                                         Tangani</label>
                                     <input type="date" id="penandatangan_tanggal" name="penandatangan_tanggal"
                                         value="{{ now()->toDateString() }}"
+                                        value="{{ $spt->penandatangan_tanggal }}"
                                         class="rounded-lg text-sm border border-secondary-4 w-full" required>
                                 </div>
                                 <div>
@@ -228,6 +254,7 @@
                                         Tangani</label>
                                     <input type="text" id="penandatangan_lokasi" name="penandatangan_lokasi"
                                         placeholder="Masukkan Lokasi Penanda Tangan"
+                                        value="{{ $spt->penandatangan_lokasi }}"
                                         class="rounded-lg text-sm border border-secondary-4 w-full" required>
                                 </div>
                             </div>
@@ -274,9 +301,9 @@
 </script>
 {{-- Dasar & Untuk --}}
 <script type="module">
-    var iDasar = 1;
-    var iUntuk = 1;
-    var iPegawai = 1;
+    var iDasar = $("#dynamicTableDasar tr").length;
+    var iUntuk = $("#dynamicTableUntuk tr").length;
+    var iPegawai = {{ $spt->pegawai->count() }};
 
     $(document).ready(function() {
         function updateDasarNumbers() {
@@ -405,6 +432,36 @@
                 updateUntukNumbers();
             }
         });
+
+        function addSelectedPegawaiRow(pegawai_id, pegawai_keterangan) {
+            const newRow = `
+        <tr class="pegawai-item" data-id="${pegawai_id}">
+            <td class="flex items-start px-2 py-2">
+                <label class="align-top whitespace-nowrap pegawai-label"></label>
+            </td>
+            <td class="w-full px-2 py-2">
+                <div class="space-y-1">
+                    <input name="pegawai[${pegawai_id}][keterangan]"
+                        value="${pegawai_keterangan}"
+                        class="w-full text-sm rounded-lg border border-secondary-4 cursor-pointer" readonly />
+
+                    <input name="pegawai[${pegawai_id}][id]"
+                        type="hidden" value="${pegawai_id}" readonly required>
+                </div>
+            </td>
+        </tr>
+    `;
+            $('#dynamicTablePegawai tbody').append(newRow);
+        }
+
+        @foreach ($spt->pegawai()->pluck('id')->toArray() as $selectedId)
+            addSelectedPegawaiRow(
+                "{{ $selectedId }}",
+                "{{ $pegawai->find($selectedId)->nama }} - {{ $pegawai->find($selectedId)->jabatan }}"
+            );
+        @endforeach
+
+        updatePegawaiNumbers();
     });
 </script>
 
@@ -506,7 +563,8 @@
                         if (response.length > 0) {
                             $.each(response, function(index, kegiatan) {
                                 $('#kegiatan_id').append('<option value="' +
-                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat + ' - ' + kegiatan.uraian +
+                                    kegiatan.kdgiat + '">' + kegiatan.kdgiat +
+                                    ' - ' + kegiatan.uraian +
                                     '</option>');
                             });
 
@@ -556,7 +614,8 @@
                         if (response.length > 0) {
                             $.each(response, function(index, subkegiatan) {
                                 $('#sub_kegiatan_id').append('<option value="' +
-                                    subkegiatan.kdsub + '">' + subkegiatan.kdsub + ' - ' + subkegiatan.uraian +
+                                    subkegiatan.kdsub + '">' + subkegiatan
+                                    .kdsub + ' - ' + subkegiatan.uraian +
                                     '</option>');
                             });
 

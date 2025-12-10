@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SPTPegawai extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_spt_pegawai';
+    protected $table = 'spt_pegawai';
     public function pegawai()
     {
         return $this->belongsTo(Pegawai::class, 'pegawai_id');

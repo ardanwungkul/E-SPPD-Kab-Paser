@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class SPTDasar extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi_spt_dasar';
+    protected $table = 'spt_dasar';
 }
