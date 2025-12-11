@@ -79,6 +79,40 @@ class SPPDController extends Controller
     public function create(Request $request)
     {
         $spt = SPT::find($request->spt);
+
+        $index = 1;
+        $tujuan = [];
+
+        while (true) {
+            $prov = $spt->{"provinsi_id{$index}"};
+            $provname = Provinsi::find($prov)->nama ?? null;
+            $kab  = $spt->{"kabkota_id{$index}"};
+            $kabname = KabupatenKota::find($kab)->nama ?? null;
+            $kec  = $spt->{"kecamatan_id{$index}"};
+            $kecname = Provinsi::find($kec)->nama ?? null;
+
+            if (!$prov) break;
+
+            $tujuan[] = [
+                'provinsi_id' => $prov,
+                'provinsi_name' => $provname,
+                'kabkota_id'  => $kab,
+                'kabkota_name' => $kabname,
+                'kecamatan_id' => $kec,
+                'kecamatan_name' => $kecname,
+            ];
+
+            $index++;
+        }
+
+        $spt->tujuan = $tujuan;
+
+        $spt->tanggal_berangkat = Carbon::parse($spt->tanggal_berangkat)
+            ->translatedFormat('l, d F Y');
+
+        $spt->tanggal_kembali = Carbon::parse($spt->tanggal_kembali)
+            ->translatedFormat('l, d F Y');
+
         $tingkat = TingkatPerjalananDinas::all();
 
         $provinsi = Provinsi::all();
@@ -88,7 +122,7 @@ class SPPDController extends Controller
         // dd($spt);
         return view('master.sppd.create', compact('spt', 'tingkat', 'provinsi', 'kabkota', 'kecamatan'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */

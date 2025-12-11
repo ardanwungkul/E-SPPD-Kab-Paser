@@ -24,7 +24,9 @@ class SPT extends Model
     }
     public function pegawai()
     {
-        return $this->hasMany(SPTPegawai::class, 'spt_id')->orderBy('pegawai_idx', 'asc');
+        return $this->belongsToMany(Pegawai::class, 'spt_pegawai', 'spt_id', 'pegawai_id')
+            ->withPivot('pegawai_idx') // kolom pivot tambahan
+            ->orderBy('pegawai_idx', 'asc');
     }
     public function untuk()
     {

@@ -322,7 +322,7 @@
                                 class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-xs font-medium text-center whitespace-nowrap focus:ring-1 focus:ring-blue-500">
                                 Pilih Pegawai
                             </button>
-                            <x-modal.pilih-pegawai-spt :pegawai="$pegawai" :selectedPegawai="$spt->pegawai()->pluck('pegawai_id')->toArray()" />
+                            <x-modal.pilih-pegawai-spt :pegawai="$pegawai" :selectedPegawai="$spt->pegawai()->pluck('id')->toArray()" />
                             <div class="pt-3">
                                 <table class="table table-bordered w-full" id="dynamicTablePegawai">
                                     <tbody></tbody>
@@ -593,7 +593,7 @@
             $('#dynamicTablePegawai tbody').append(newRow);
         }
 
-        @foreach ($spt->pegawai()->pluck('pegawai_id')->toArray() as $selectedId)
+        @foreach ($spt->pegawai()->pluck('id')->toArray() as $selectedId)
             addSelectedPegawaiRow(
                 "{{ $selectedId }}",
                 "{{ $pegawai->find($selectedId)->nama }} - {{ $pegawai->find($selectedId)->jabatan }}"
