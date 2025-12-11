@@ -16,7 +16,7 @@ class SPT extends Model
     }
     public function sub_kegiatan()
     {
-        return $this->belongsTo(SubKegiatan::class, 'kdsubgiat', 'kdsub');
+        return $this->belongsTo(SubKegiatan::class, 'kdgiat_sub', 'kdsub');
     }
     public function dasar()
     {

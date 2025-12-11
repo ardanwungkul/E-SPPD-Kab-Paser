@@ -143,6 +143,19 @@
                             <span class="ml-2 text-xs tracking-wide truncate">SPPD</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('sppd.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Rincian Biaya</span>
+                        </a>
+                    </li>
                 </div>
 
                 {{-- Laporan --}}
@@ -173,7 +186,7 @@
                 </h2>
                 <div id="accordion-collapse-body-laporan" class="hidden bg-secondary-3 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-laporan">
-                    {{-- <li>
+                    <li>
                         <a href="{{ route('spt.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
@@ -183,9 +196,22 @@
                                         d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
                                 </svg>
                             </span>
-                            <span class="ml-2 text-xs tracking-wide truncate">SPT</span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Realisasi Anggaran</span>
                         </a>
-                    </li> --}}
+                    </li>
+                    <li>
+                        <a href="{{ route('spt.index') }}"
+                            class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                                </svg>
+                            </span>
+                            <span class="ml-2 text-xs tracking-wide truncate">Monitoring SPPD</span>
+                        </a>
+                    </li>
                 </div>
 
                 {{-- Data Tahunan --}}

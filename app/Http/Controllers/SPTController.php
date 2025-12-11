@@ -205,18 +205,18 @@ class SPTController extends Controller
         $spt->kecamatan_id = $request->kecamatan_id;
 
         if (!$spt->provinsi_id && !$spt->kabkota_id) {
-            $kecamatan = Kecamatan::find($spt->kecamata_id);
+            $kecamatan = Kecamatan::find($spt->kecamatan_id);
 
             $spt->provinsi_id = $kecamatan->provinsi_id;
-            $spt->kabkota_id = $kecamatan->pkabupaten_kota_id;
+            $spt->kabkota_id = $kecamatan->kabupaten_kota_id;
         }
 
         if ($request->berkas) {
             $file = $request->file('berkas');
 
-            $fileName = now()->format('Y-m-d_H-i-s') . '.' . $file->getClientOriginalExtension();
+            $fileName = now()->format('m-d-His') . '.' . $file->getClientOriginalExtension();
 
-            $destination = public_path('storage/' . date('Y') . 'spt');
+            $destination = public_path('storage/' . date('Y') . '/spt');
 
             if (!is_dir($destination)) {
                 mkdir($destination, 0755, true);
@@ -224,28 +224,34 @@ class SPTController extends Controller
 
             $file->move($destination, $fileName);
 
-            $spt->path_spt = $fileName;
+            $spt->path_spt = 'storage/' . date('Y') . '/spt/' . $fileName;
         }
 
         $spt->save();
-        foreach ($request->dasar as $i => $d) {
+
+        $i = 0;
+        foreach ($request->dasar as $d) {
             $dasar = new SPTDasar();
             $dasar->spt_id = $spt->id;
-            $dasar->dasar_ke = $i + 1;
+            $dasar->dasar_ke = $i++;
             $dasar->dasar_ket = $d['uraian'];
             $dasar->save();
         }
-        foreach ($request->untuk as $i => $u) {
+
+        $i = 0;
+        foreach ($request->untuk as $u) {
             $untuk = new SPTUntuk();
             $untuk->spt_id = $spt->id;
-            $untuk->untuk_ke = $i + 1;
+            $untuk->untuk_ke = $i++;
             $untuk->untuk_ket = $u['uraian'];
             $untuk->save();
         }
-        foreach ($request->pegawai as $i => $p) {
+
+        $i = 0;
+        foreach ($request->pegawai as $p) {
             $pegawai = new SPTPegawai();
             $pegawai->spt_id = $spt->id;
-            $pegawai->pegawai_idx = $i + 1;
+            $pegawai->pegawai_idx = $i++;
             $pegawai->pegawai_id = $p['id'];
             $pegawai->save();
         }
@@ -273,11 +279,25 @@ class SPTController extends Controller
             ->orderBy('nama', 'asc')
             ->select('pegawai.*')
             ->get();
+
         $program = Program::where('tahun', session('tahun'))->get();
         $kegiatan = Kegiatan::where('tahun', session('tahun'))->get();
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->where('id', Auth::user()->bidang_id);
+            })->get();
+
+        $subbidang = SubBidang::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->where('bidang_id', Auth::user()->bidang_id);
+            })->get();
+
+        $provinsi = Provinsi::all();
+        $kabkota = KabupatenKota::all();
+        $kecamatan = Kecamatan::all();
+
         $jenis = JenisPerjalanan::all();
-        return view('master.spt.edit', compact('spt', 'pegawai', 'program', 'bidang', 'kegiatan', 'jenis'));
+        return view('master.spt.edit', compact('spt', 'pegawai', 'program', 'kegiatan', 'bidang', 'subbidang', 'kegiatan', 'jenis', 'provinsi', 'kabkota', 'kecamatan'));
     }
 
     /**

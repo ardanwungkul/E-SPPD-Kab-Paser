@@ -516,7 +516,7 @@
                 $(this).html('X');
                 const newRow = `
                 <tr class="pegawai-item" data-id="${pegawai_id}">
-                    <td class="flex items-start px-2 py-2">
+                    <td>
                         <label for="pegawai[${pegawai_id}][keterangan]" class="align-top whitespace-nowrap">Pegawai Ke 1</label>
                     </td>
                     <td class="w-full px-2 py-2">
@@ -666,51 +666,6 @@
                     '<option value="" selected disabled>Pilih Kabupaten/Kota</option>');
             }
         });
-
-        // $('#kabupaten_kota_id').on('change', function() {
-        //     const KabkotaKode = $(this).val();
-
-        //     if (KabkotaKode) {
-        //         $('#kecamatan_id').prop('disabled', true)
-        //             .html('<option selected disabled>Memuat...</option>');
-        //         $.ajax({
-        //             url: "{{ route('get.kecamatan-by-kabupaten-kota') }}",
-        //             type: "GET",
-        //             data: {
-        //                 kabupaten_kota_id: KabkotaKode
-        //             },
-        //             success: function(response) {
-
-        //                 $('#kecamatan_id').empty();
-        //                 $('#kecamatan_id').append(
-        //                     '<option value="" selected disabled>Pilih Kecamatan</option>'
-        //                 );
-
-        //                 if (response.length > 0) {
-        //                     $.each(response, function(index, kecamatan) {
-        //                         $('#kecamatan_id').append('<option value="' +
-        //                             kecamatan.id + '">' + kecamatan.nama +
-        //                             '</option>');
-        //                     });
-        //                     $('#kecamatan_id').prop('disabled', false);
-        //                 } else {
-        //                     $('#kecamatan_id').append(
-        //                         '<option value="" disabled>Tidak ada Kecamatan tersedia</option>'
-        //                     );
-        //                     $('#kecamatan_id').prop('disabled', false);
-        //                 }
-        //             },
-        //             error: function(xhr) {
-        //                 $('#kecamatan_id').prop('disabled', false);
-        //                 console.error(xhr.responseText);
-        //             }
-        //         });
-        //     } else {
-        //         $('#kabupaten_kota_id').empty();
-        //         $('#kabupaten_kota_id').append(
-        //             '<option value="" selected disabled>Pilih Kabupaten/Kota</option>');
-        //     }
-        // });
 
         $('#jenis_sppd_id').on('change', function() {
             const jenisSppdId = $(this).val();
