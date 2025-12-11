@@ -269,8 +269,6 @@
                                             <option value="{{$item['kecamatan_id']}}" selected>{{$item['kecamatan_name'] ?? 'Pilih Kecamatan'}}</option>
                                         </select>
                                     </div>
-                                    <button type="button" name="add" id="addTujuan" disabled
-                                        class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
                                 </div>
                             @endforeach
                         </div>
@@ -406,7 +404,7 @@
 
             <x-container>
                 <x-slot name="content">
-                    <div class="flex justify-end items-center gap-4 col-span-2 text-sm max-w-xl mx-auto">
+                    <div class="flex justify-end items-center gap-4 col-span-2 text-sm mx-auto">
                         <x-button.save-button />
                         <x-button.back-button :route="route('spt.index')" />
                     </div>
