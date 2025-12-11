@@ -176,23 +176,34 @@ class SPTController extends Controller
 
         $spt->jmlhari = $berangkat->diffInDays($kembali) + 1;
 
-        $spt->provinsi_id = $request->provinsi_id;
-        $spt->kabkota_id = $request->kabupaten_kota_id;
+        if ($request->tujuan) {
+            for ($i = 0; $i < 3; $i++) {
 
-        if (!$spt->provinsi_id && $spt->kabkota_id) {
-            $kabkota = KabupatenKota::find($spt->kabkota_id);
+                $prov = $request->tujuan[$i]['provinsi_id'] ?? null;
+                $kab  = $request->tujuan[$i]['kabupaten_kota_id'] ?? null;
+                $kec  = $request->tujuan[$i]['kecamatan_id'] ?? null;
 
-            $spt->provinsi_id = $kabkota->provinsi_id;
+                if (!$prov && $kab) {
+                    $kabkota = KabupatenKota::find($kab);
+                    if ($kabkota) {
+                        $prov = $kabkota->provinsi_id;
+                    }
+                }
+
+                if (!$prov && !$kab && $kec) {
+                    $kecamatan = Kecamatan::find($kec);
+                    if ($kecamatan) {
+                        $prov = $kecamatan->provinsi_id;
+                        $kab  = $kecamatan->kabupaten_kota_id;
+                    }
+                }
+
+                $spt->{"provinsi_id" . ($i + 1)} = $prov;
+                $spt->{"kabkota_id" . ($i + 1)}  = $kab;
+                $spt->{"kecamatan_id" . ($i + 1)} = $kec;
+            }
         }
 
-        $spt->kecamatan_id = $request->kecamatan_id;
-
-        if (!$spt->provinsi_id && !$spt->kabkota_id) {
-            $kecamatan = Kecamatan::find($spt->kecamatan_id);
-
-            $spt->provinsi_id = $kecamatan->provinsi_id;
-            $spt->kabkota_id = $kecamatan->kabupaten_kota_id;
-        }
 
         if ($request->berkas) {
             $file = $request->file('berkas');
@@ -313,7 +324,7 @@ class SPTController extends Controller
                 'berkas.max' => 'berkas tidak boleh lebih dari 1MB',
             ]
         );
-        
+
         $nomor_urut_terakhir = SPT::where('tahun', session('tahun'))->max('nospt');
         $nomor_urut_baru = $nomor_urut_terakhir ? $nomor_urut_terakhir + 1 : 1;
         $nospt = str_pad($nomor_urut_baru, 3, '0', STR_PAD_LEFT);

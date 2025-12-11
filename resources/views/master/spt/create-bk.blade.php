@@ -39,9 +39,9 @@
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                             Umum
                         </legend>
-                        <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="jenis_sppd_id">Jenis SPPD</label>
+                        <div class="text-sm max-w-xl mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
+                            <div class="flex flex-col gap-1">
+                                <label for="jenis_sppd_id">Jenis SPPD</label>
                                 <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
                                     required>
                                     <option value="" selected disabled> Pilih Jenis SPPD</option>
@@ -50,15 +50,14 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="bidang_id">{{ session('config')->judul }}</label>
+                            <div class="flex flex-col gap-1">
+                                <label for="bidang_id">{{ session('config')->judul }}</label>
                                 <input type="text" name="bidang_id" id="bidang_id"
                                     class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Pilih Bidang" disabled>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="sub_bidang_id">Sub.
-                                    {{ session('config')->judul }}</label>
+                            <div class="flex flex-col gap-1">
+                                <label for="sub_bidang_id">Sub. {{ session('config')->judul }}</label>
                                 <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
                                     required>
                                     <option value="" selected disabled> Pilih Sub
@@ -69,20 +68,20 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="program_id">Program</label>
+                            <div class="flex flex-col gap-1">
+                                <label for="program_id">Program</label>
                                 <input type="text" name="program_id" id="program_id"
                                     class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Pilih Program" disabled>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="kegiatan_id">Kegiatan</label>
+                            <div class="flex flex-col gap-1">
+                                <label for="kegiatan_id">Kegiatan</label>
                                 <input type="text" name="kegiatan_id" id="kegiatan_id"
                                     class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Pilih Kegiatan" disabled>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="sub_kegiatan_id">Sub. Kegiatan</label>
+                            <div class="flex flex-col gap-1">
+                                <label for="sub_kegiatan_id">Sub. Kegiatan</label>
                                 <select name="sub_kegiatan_id" id="sub_kegiatan_id" class="text-sm rounded-lg select2"
                                     required>
                                     <option value="" selected disabled> Pilih Sub. Kegiatan</option>
@@ -94,7 +93,7 @@
             </x-container>
             <x-container>
                 <x-slot name="content">
-                    <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
+                    <div class="text-sm max-w-xl mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                         <div class=" w-full grid grid-cols-3 gap-3">
                             <div class="flex flex-col gap-1">
                                 <label for="anggaran">Anggaran Pagu</label>
@@ -117,14 +116,14 @@
                         </div>
                         <div class="w-full border-t pb-3 mt-3">
                         </div>
-                        <div class="flex items-center gap-3">
-                            <label class=" w-40 min-w-40" for="berkas" class=" flex flex-col items-start">
-                                <p>Berkas Bukti Disposisi</p>
-                                <p class=" text-nowrap text-secondary-1 text-[0.6rem]">(PDF/Image Maksimal
-                                    1MB)</p>
+                        <div class="flex flex-col gap-1">
+                            <label for="berkas" class=" flex items-start">
+                                Berkas Bukti Disposisi
+                                <span class=" text-red-500">*</span>
+                                <span class=" text-secondary-1 text-[0.6rem]">(PDF/Image Maksimal 1MB)</span>
                             </label>
                             <label for="berkas"
-                                class=" flex-grow cursor-pointer flex items-center justify-between p-1 text-xs md:text-sm rounded-lg border border-gray-300 shadow-md">
+                                class=" cursor-pointer flex items-center justify-between p-1 text-xs md:text-sm rounded-lg border border-gray-300 shadow-md">
                                 <div class=" flex items-center gap-2">
                                     <div
                                         class=" text-nowrap px-2 py-1 text-secondary-1 border border-gray-300 bg-neutral-300 rounded-lg">
@@ -132,8 +131,6 @@
                                     </div>
                                     <div id="filename" class=" line-clamp-1"></div>
                                 </div>
-                                <input type="file" name="berkas" id="berkas"
-                                    accept="application/pdf,.jpg,.jpeg,.png" class="opacity-0 w-0 h-0" required>
                                 <div class=" w-5 h-5 text-secondary-1 mr-1">
                                     <svg class=" w-full h-full" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 640 640">
@@ -142,6 +139,8 @@
                                     </svg>
                                 </div>
                             </label>
+                            <input type="file" name="berkas" id="berkas"
+                                accept="application/pdf,.jpg,.jpeg,.png" class="opacity-0 h-0" required>
                             <script>
                                 document.getElementById('berkas').addEventListener('change', function(e) {
                                     const fileName = e.target.files[0]?.name || "Tidak ada file dipilih";
@@ -154,14 +153,12 @@
             </x-container>
             <x-container>
                 <x-slot name="content">
-                    <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
-                        <div class="flex items-center gap-3">
-                            <label class=" w-40 min-w-40" for="nosurat">Nomor Surat</label>
+                    <div class="text-sm max-w-xl mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
+                        <div class="flex flex-col gap-1">
+                            <label for="nosurat">Nomor Surat</label>
                             <input type="text" name="nosurat" id="nosurat"
                                 class="w-full text-sm rounded-lg border border-secondary-4 text-secondary-1"
-                                placeholder="Masukkan Nomor Surat">
-                        </div>
-                        <div class="w-full border-t pb-3 mt-3">
+                                placeholder="Masukkan Nomor Surat" >
                         </div>
                         <div class=" w-full grid grid-cols-3 gap-3">
                             <div class="flex flex-col gap-1">
@@ -220,29 +217,38 @@
                         </div>
                         <div class="w-full border-t pb-3 mt-3">
                         </div>
-                        <div id="listTujuan" class=" flex flex-col gap-3">
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="nosurat">Tujuan ke 1</label>
-                                <div class=" flex-grow grid grid-cols-3 gap-3 tujuan-item">
-                                    <select name="tujuan[0][provinsi_id]" id="tujuan_0_provinsi_id"
-                                        class=" flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md provinsi select2"
-                                        required>
-                                        <option value="" selected disabled>Pilih Provinsi</option>
-                                    </select>
-                                    <select name="tujuan[0][kabupaten_kota_id]" id="tujuan_0_kabupaten_kota_id"
-                                        class=" flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kabkota select2"
-                                        required>
-                                        <option value="" selected disabled>Pilih Kabupaten/Kota</option>
-                                    </select>
-                                    <select name="tujuan[0][kecamatan_id]" id="tujuan_0_kecamatan_id"
-                                        class=" flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kecamatan select2"
-                                        required>
-                                        <option value="" selected disabled>Pilih Kecamatan</option>
-                                    </select>
-                                </div>
-                                <button type="button" name="add" id="addTujuan" disabled
-                                    class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
-                            </div>
+                        <div class=" w-full flex flex-col gap-1">
+                            <label for="provinsi_id">Provinsi Tujuan</label>
+                            <select name="provinsi_id" id="provinsi_id"
+                                class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md select2"
+                                required>
+                                <option value="" selected disabled>Pilih Provinsi</option>
+                                @foreach ($provinsi as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="kabupaten_kota_id">Kabupaten/Kota Tujuan</label>
+                            <select name="kabupaten_kota_id" id="kabupaten_kota_id"
+                                class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md select2"
+                                required>
+                                <option value="" selected disabled>Pilih Kabupaten/Kota</option>
+                                @foreach ($kabkota as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="kecamatan_id">Kecamatan Tujuan</label>
+                            <select name="kecamatan_id" id="kecamatan_id"
+                                class="md:text-sm text-xs rounded-lg border border-gray-300 shadow-md select2"
+                                required>
+                                <option value="" selected disabled>Pilih Kecamatan</option>
+                                @foreach ($kecamatan as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </x-slot>
@@ -253,10 +259,10 @@
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                             Dasar
                         </legend>
-                        <div class="pt-3 mx-auto">
+                        <div class="pt-3 max-w-xl mx-auto">
                             <table class="table table-bordered w-full" id="dynamicTableDasar">
                                 <tr>
-                                    <td class="flex w-40 min-w-40 items-start px-2">
+                                    <td class="flex items-start px-2">
                                         <label for="dasar[0][uraian]" class="align-top whitespace-nowrap">Dasar
                                             Ke
                                             1</label>
@@ -267,7 +273,7 @@
                                                 class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Dasar Ke-1" required></textarea>
                                         </div>
                                     </td>
-                                    <td class="pl-2 flex items-start">
+                                    <td class="px-2 flex items-start">
                                         <button type="button" name="add" id="addDasar"
                                             class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
                                     </td>
@@ -284,7 +290,7 @@
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                             Yang Melaksanakan
                         </legend>
-                        <div class="mx-auto">
+                        <div class=" max-w-xl mx-auto">
                             <button type="button" name="add" id="addPegawai"
                                 data-modal-target="pilih-pegawai-spt" data-modal-toggle="pilih-pegawai-spt"
                                 class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-xs font-medium text-center whitespace-nowrap focus:ring-1 focus:ring-blue-500">
@@ -306,10 +312,10 @@
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                             Untuk
                         </legend>
-                        <div class="pt-3 mx-auto">
+                        <div class="pt-3 max-w-xl mx-auto">
                             <table class="table table-bordered w-full" id="dynamicTableUntuk">
                                 <tr>
-                                    <td class="flex w-40 min-w-40 items-start px-2">
+                                    <td class="flex items-start px-2">
                                         <label for="untuk[0][uraian]" class="align-top whitespace-nowrap">Untuk
                                             Ke
                                             1</label>
@@ -320,7 +326,7 @@
                                                 class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Untuk Ke-1" required></textarea>
                                         </div>
                                     </td>
-                                    <td class="pl-2 flex items-start">
+                                    <td class="px-2 flex items-start">
                                         <button type="button" name="add" id="addUntuk"
                                             class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
                                     </td>
@@ -337,8 +343,9 @@
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                             Penanda Tangan
                         </legend>
-                        <div class="pt-3 mx-auto">
+                        <div class="pt-3 max-w-xl mx-auto">
                             <div class="grid grid-cols-1 gap-5">
+
                                 <div>
                                     <label for="penandatangan_tanggal" class="block mb-1">Tanggal SPT</label>
                                     <input type="date" id="penandatangan_tanggal" name="penandatangan_tanggal"
@@ -372,7 +379,7 @@
 
             <x-container>
                 <x-slot name="content">
-                    <div class="flex justify-end items-center gap-4 col-span-2 text-sm mx-auto">
+                    <div class="flex justify-end items-center gap-4 col-span-2 text-sm max-w-xl mx-auto">
                         <x-button.save-button />
                         <x-button.back-button :route="route('spt.index')" />
                     </div>
@@ -406,13 +413,11 @@
 
     });
 </script>
-{{-- Dasar & Untuk & Tujuan --}}
+{{-- Dasar & Untuk --}}
 <script type="module">
     var iDasar = 1;
     var iUntuk = 1;
     var iPegawai = 1;
-    let maxTujuan = 3;
-    let itujuan = 1;
 
     $(document).ready(function() {
         function updateDasarNumbers() {
@@ -450,114 +455,11 @@
             });
         }
 
-        $("#addTujuan").on("click", function() {
-            if (itujuan >= maxTujuan) return;
-
-            $("#listTujuan .tujuan-item").each(function() {
-
-                // Hilangkan class pada select provinsi
-                $(this).find("select[name$='[provinsi_id]']")
-                    .removeClass('provinsi');
-
-                // Hilangkan class kabupaten/kota
-                $(this).find("select[name$='[kabupaten_kota_id]']")
-                    .removeClass('kabkota');
-
-                // Hilangkan class kecamatan
-                $(this).find("select[name$='[kecamatan_id]']")
-                    .removeClass('kecamatan');
-
-                    console.log('berhasil kah');
-                    
-            });
-
-            let newIndex = itujuan;
-
-            let html = `
-                <div class="flex items-center gap-3 tujuan-item mt-3">
-                    <label class="w-40 min-w-40">Tujuan ke ${newIndex + 1}</label>
-
-                    <div class="flex-grow grid grid-cols-3 gap-3" tujuan-item>
-                        <select name="tujuan[${newIndex}][provinsi_id]"
-                                class="flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md provinsi select2"
-                                required>
-                            <option value="" selected disabled>Pilih Provinsi</option>
-                        </select>
-
-                        <select name="tujuan[${newIndex}][kabupaten_kota_id]"
-                                class="flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kabkota select2"
-                                required>
-                            <option value="" selected disabled>Pilih Kabupaten/Kota</option>
-                        </select>
-
-                        <select name="tujuan[${newIndex}][kecamatan_id]"
-                                class="flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kecamatan select2"
-                                required>
-                            <option value="" selected disabled>Pilih Kecamatan</option>
-                        </select>
-                    </div>
-
-                    <button type="button"
-                            class="removeTujuan text-red-500 border border-red-400 rounded shadow-sm px-3 py-2 text-sm font-medium">
-                        -
-                    </button>
-                </div>
-            `;
-
-            $("#listTujuan").append(html);
-
-            itujuan++;
-
-            // Disable tombol jika sudah mencapai maksimal
-            if (itujuan >= maxTujuan) {
-                $("#addTujuan").prop("disabled", true);
-            }
-
-            $('#jenis_sppd_id').trigger('change');
-
-            $("#listTujuan .tujuan-item").each(function() {
-                
-                $(this).find("select[name$='[provinsi_id]']")
-                    .addClass('provinsi');
-
-                $(this).find("select[name$='[kabupaten_kota_id]']")
-                    .addClass('kabkota');
-
-                $(this).find("select[name$='[kecamatan_id]']")
-                    .addClass('kecamatan');
-            });
-
-            $('.select2').select2({
-                width: '100%',
-                dropdownCssClass: "text-sm",
-                selectionCssClass: 'text-sm',
-            });
-        });
-
-        // Hapus tujuan
-        $(document).on("click", ".removeTujuan", function() {
-            $(this).closest(".tujuan-item").remove();
-            itujuan--;
-
-            // enable tombol jika kurang dari maksimal
-            $("#addTujuan").prop("disabled", false);
-
-            // Re-index ulang label dan name[]
-            $("#listTujuan .tujuan-item").each(function(i) {
-                $(this).find("label").text(`Tujuan ke ${i + 2}`);
-                $(this).find("select[name*='tujuan']").each(function() {
-                    let old = $(this).attr("name");
-                    let newName = old.replace(/tujuan\[\d+\]/, `tujuan[${i + 1}]`);
-                    $(this).attr("name", newName);
-                });
-            });
-        });
-
         $("#addDasar").click(function() {
             ++iDasar;
             $("#dynamicTableDasar").append(
                 `<tr>
-                    <td class="flex w-40 min-w-40 items-start px-2">
+                    <td class="flex items-start px-2">
                         <label for="dasar[${iDasar}][uraian]" class="align-top whitespace-nowrap">Dasar Ke ${iDasar}</label>
                     </td>
                     <td class="w-full px-2">
@@ -565,7 +467,7 @@
                             <textarea name="dasar[${iDasar}][uraian]" id="dasar[${iDasar}][uraian]" rows="3" class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Dasar Ke-${iDasar}"></textarea>
                         </div>
                     </td>
-                    <td class="pl-2 flex items-start">
+                    <td class="px-2 flex items-start">
                         <button type="button" class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center remove-tr" data-id="dasar">
                             -
                         </button>
@@ -579,7 +481,7 @@
             ++iUntuk;
             $("#dynamicTableUntuk").append(
                 `<tr>
-                    <td class="flex w-40 min-w-40 items-start px-2">
+                    <td class="flex items-start px-2">
                         <label for="untuk[${iUntuk}][uraian]" class="align-top whitespace-nowrap">Untuk Ke ${iUntuk}</label>
                     </td>
                     <td class="w-full px-2">
@@ -587,7 +489,7 @@
                             <textarea name="untuk[${iUntuk}][uraian]" id="untuk[${iUntuk}][uraian]" rows="3" class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Untuk Ke-${iUntuk}"></textarea>
                         </div>
                     </td>
-                    <td class="pl-2 flex items-start">
+                    <td class="px-2 flex items-start">
                         <button type="button" class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center remove-tr" data-id="untuk">
                             -
                         </button>
@@ -614,7 +516,7 @@
                 $(this).html('X');
                 const newRow = `
                 <tr class="pegawai-item" data-id="${pegawai_id}">
-                    <td class=" w-40 min-w-40">
+                    <td>
                         <label for="pegawai[${pegawai_id}][keterangan]" class="align-top whitespace-nowrap">Pegawai Ke 1</label>
                     </td>
                     <td class="w-full px-2 py-2">
@@ -716,68 +618,66 @@
 <script type="module">
     $(document).ready(function() {
         $('.select2').select2({
-            width: '100%',
             dropdownCssClass: "text-sm",
             selectionCssClass: 'text-sm',
         });
 
-        $(document).on('change', '.provinsi', function() {
-            let provinsiSelect = $(this); // elemen provinsi yang berubah
-            let wrapper = provinsiSelect.closest('.flex.items-center'); // container "Tujuan ke ..."
+        $('#provinsi_id').on('change', function() {
+            const ProvinsiKode = $(this).val();
 
-            let kabkotaSelect = wrapper.find('.kabkota');
-
-            const provinsiID = provinsiSelect.val();
-
-            if (provinsiID) {
-                kabkotaSelect.prop('disabled', true)
+            if (ProvinsiKode) {
+                $('#kabupaten_kota_id').prop('disabled', true)
                     .html('<option selected disabled>Memuat...</option>');
-
                 $.ajax({
                     url: "{{ route('get.kabupaten-kota-by-provinsi') }}",
                     type: "GET",
                     data: {
-                        provinsi_id: provinsiID
+                        provinsi_id: ProvinsiKode
                     },
                     success: function(response) {
-                        kabkotaSelect.empty().append(
+
+                        $('#kabupaten_kota_id').empty();
+                        $('#kabupaten_kota_id').append(
                             '<option value="" selected disabled>Pilih Kabupaten/Kota</option>'
                         );
 
                         if (response.length > 0) {
-                            $.each(response, function(i, kab) {
-                                kabkotaSelect.append(
-                                    `<option value="${kab.id}">${kab.nama}</option>`
-                                );
+                            $.each(response, function(index, kabupaten) {
+                                $('#kabupaten_kota_id').append('<option value="' +
+                                    kabupaten.id + '">' + kabupaten.nama +
+                                    '</option>');
                             });
+                            $('#kabupaten_kota_id').prop('disabled', false);
                         } else {
-                            kabkotaSelect.append(
+                            $('#kabupaten_kota_id').append(
                                 '<option value="" disabled>Tidak ada Kabupaten/Kota tersedia</option>'
                             );
+                            $('#kabupaten_kota_id').prop('disabled', false);
                         }
-
-                        kabkotaSelect.prop('disabled', false);
                     },
                     error: function(xhr) {
-                        kabkotaSelect.prop('disabled', false);
+                        $('#kabupaten_kota_id').prop('disabled', false);
+                        console.error(xhr.responseText);
                     }
                 });
+            } else {
+                $('#kabupaten_kota_id').empty();
+                $('#kabupaten_kota_id').append(
+                    '<option value="" selected disabled>Pilih Kabupaten/Kota</option>');
             }
         });
-
 
         $('#jenis_sppd_id').on('change', function() {
             const jenisSppdId = $(this).val();
 
-            $("#addTujuan").prop("disabled", false);
-
             if (jenisSppdId) {
-                $('.provinsi').prop('disabled', true).html(
-                    '<option selected disabled>Memuat...</option>');
-                $('.kabkota').prop('disabled', true).html(
-                    '<option selected disabled>Memuat...</option>');
-                $('.kecamatan').prop('disabled', true).html(
-                    '<option selected disabled>Memuat...</option>');
+                $('#provinsi_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+                $('#kabupaten_kota_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+                $('#kecamatan_id').prop('disabled', true)
+                    .html('<option selected disabled>Memuat...</option>');
+
                 $.ajax({
                     url: "{{ route('get.wilayah.by.jenis-sppd') }}",
                     type: "GET",
@@ -785,90 +685,87 @@
                         jenis_sppd_id: jenisSppdId
                     },
                     success: function(response) {
-                        $('.provinsi').empty();
-                        $('.provinsi').append(
+                        $('#provinsi_id').empty();
+                        $('#provinsi_id').append(
                             '<option value="" selected disabled>Pilih Provinsi</option>'
                         );
-                        $('.kabkota').empty();
-                        $('.kabkota').append(
+                        $('#kabupaten_kota_id').empty();
+                        $('#kabupaten_kota_id').append(
                             '<option value="" selected disabled>Pilih Kabupaten/Kota</option>'
                         );
-                        $('.kecamatan').empty();
-                        $('.kecamatan').append(
+                        $('#kecamatan_id').empty();
+                        $('#kecamatan_id').append(
                             '<option value="" selected disabled>Pilih Kecamatan</option>'
                         );
 
                         if (response && response.wilayah) {
 
                             if (response.wilayah == 'Provinsi') {
-                                $('.provinsi').each(function() {
-                                    $.each(response.provinsi, (i, prov) => {
-                                        $(this).append(
-                                            `<option value="${prov.id}">${prov.nama}</option>`
-                                        );
-                                    });
-                                    $(this).prop('disabled', false);
+                                $.each(response.provinsi, function(index, provinsi) {
+                                    $('#provinsi_id').append('<option value="' +
+                                        provinsi.id + '">' + provinsi.nama +
+                                        '</option>');
                                 });
 
-                                $('.kabkota').prop('disabled', false).html(
-                                    '<option selected disabled>Pilih Kabupaten/Kota</option>'
-                                );
-                                $('.kecamatan').prop('disabled', true).html(
-                                    '<option selected disabled>Pilih Kecamatan</option>'
-                                );
-
+                                $('#provinsi_id').prop('disabled', false);
+                                $('#kabupaten_kota_id').prop('disabled', false);
+                                // $('#kecamatan_id').prop('disabled', false);
                             } else if (response.wilayah == 'Kabupaten') {
-                                $('.provinsi').append(
+                                $('#provinsi_id').append(
                                     '<option value="' + response.provinsi.id +
                                     '" selected disabled>' + response.provinsi.nama +
                                     '</option>'
                                 );
 
                                 $.each(response.kabkota, function(index, kabkota) {
-                                    $('.kabkota').append(
+                                    $('#kabupaten_kota_id').append(
                                         '<option value="' +
                                         kabkota.id + '">' + kabkota.nama +
                                         '</option>');
                                 });
 
 
-                                $('.kabkota').prop('disabled', false);
+                                $('#kabupaten_kota_id').prop('disabled', false);
                                 // $('#kecamatan_id').prop('disabled', false);
                             } else if (response.wilayah == 'Kecamatan') {
-                                $('.provinsi').append(
+                                $('#provinsi_id').append(
                                     '<option value="' + response.provinsi.id +
                                     '" selected disabled>' + response.provinsi.nama +
                                     '</option>'
                                 );
-                                $('.kabkota').append(
+                                $('#kabupaten_kota_id').append(
                                     '<option value="' + response.kabkota.id +
                                     '" selected disabled>' + response.kabkota.nama +
                                     '</option>'
                                 );
 
                                 $.each(response.kecamatan, function(index, kecamatan) {
-                                    $('.kecamatan').append(
+                                    $('#kecamatan_id').append(
                                         '<option value="' +
                                         kecamatan.id + '">' + kecamatan.nama +
                                         '</option>');
                                 });
 
-                                $('.kecamatan').prop('disabled', false);
+                                $('#kecamatan_id').prop('disabled', false);
                             }
                         } else {
-                            $('.provinsi').prop('disabled', false);
-                            $('.kabkota').prop('disabled', false);
-                            $('.kecamatan').prop('disabled', false);
+                            $('#provinsi_id').prop('disabled', false);
+                            $('#kabupaten_kota_id').prop('disabled', false);
+                            $('#kecamatan_id').prop('disabled', false);
                         }
                     },
                     error: function(xhr) {
-                        $('.provinsi').prop('disabled', false);
-                        $('.kabkota').prop('disabled', false);
-                        $('.kecamatan').prop('disabled', false);
+                        $('#provinsi_id').prop('disabled', false);
+                        $('#kabupaten_kota_id').prop('disabled', false);
+                        $('#kecamatan_id').prop('disabled', false);
                         console.error(xhr.responseText);
                     }
                 });
-            } else {}
+            } else {
+                $('#sub_kegiatan_id').empty();
+                $('#sub_kegiatan_id').append(
+                    '<option value="" selected disabled>Pilih Sub. Kegiatan</option>');
+            }
         });
 
         $('#sub_bidang_id').on('change', function() {

@@ -8,7 +8,7 @@
             <div>
                 <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
                     <button type="button" id="add-button"
-                        onclick="window.location = `{{ route('spt.create', ['lembaga' => 'replace_this', 'sppd' => true]) }}`.replace('replace_this',document.getElementById('filter-lembaga').value)"
+                        onclick="window.location = `{{ route('spt.create', ['sppd' => true]) }}`"
                         class="bg-[#249D06] hover:bg-opacity-80 text-white rounded-lg px-3 py-2 text-xs shadow-lg flex gap-1 items-center justify-center  whitespace-nowrap w-min font-medium">
                         <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-white"
                             xmlns="http://www.w3.org/2000/svg">
@@ -20,10 +20,6 @@
                         </p>
                     </button>
                     <div class="flex items-center gap-3">
-                        <select name="" id="filter-lembaga" class="text-xs rounded-lg border border-gray-400">
-                            <option value="dprd">DPRD</option>
-                            <option value="setwan">Sekretariat DPRD</option>
-                        </select>
                         <input type="search" class="text-xs rounded-lg border-gray-400" placeholder="Cari...."
                             id="customSearch">
                     </div>
@@ -34,6 +30,7 @@
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr>
                                     <th class="text-xs">Nomor SPT</th>
+                                    <th class="text-xs">Nomor SPPD</th>
                                     <th class="text-xs w-32"></th>
                                 </tr>
                             </thead>
@@ -159,8 +156,7 @@
             }],
             serverSide: true,
             ajax: {
-                url: `{{ route('spt.index', ['lembaga' => 'rplc']) }}`.replace('rplc',
-                    document.getElementById('filter-lembaga').value),
+                url: `{{ route('sppd.index') }}`,
             },
             columns: [{
                     name: 'format_nomor',
@@ -168,18 +164,30 @@
                     className: '!text-left'
                 },
                 {
+                    name: 'format_sppd',
+                    data: 'format_sppd',
+                    className: '!text-left',
+                    render: function(data, type, row) {
+                        return row.has_sppd ? row.format_sppd : '-';
+                    }
+                },
+                {
                     name: 'id',
                     data: 'id',
                     render: function(data, type, row) {
-                        const sppdUrl = `{{ route('sppd.create') }}`;
+                        const sppdUrl = `{{ route('sppd.create', ['spt' => 'replace']) }}`.replace('replace',
+                                data)
                         let buttons = '';
-                        
+
 
                         // Jika punya relasi SPPD → tampilkan tombol tambahan
                         if (row.has_sppd) {
-                            const showUrl = `{{ route('sppd.show', ':id') }}`.replace(':id', data);
-                            const editUrl = `{{ route('sppd.edit', ':id') }}`.replace(':id', data);
-                            const printUrl = `{{ route('sppd.print', ':id') }}`.replace(':id', data);
+                            const showUrl = `{{ route('sppd.show', ':id') }}`.replace(':id',
+                                data);
+                            const editUrl = `{{ route('sppd.edit', ':id') }}`.replace(':id',
+                                data);
+                            const printUrl = `{{ route('sppd.print', ':id') }}`.replace(':id',
+                                data);
                             buttons = `<div class="flex items-center justify-center gap-3">
                                     <div>
                                         <div>
@@ -220,33 +228,24 @@
                             `;
                         } else {
                             buttons = `<a href="${sppdUrl}" class="bg-[#249D06] hover:bg-opacity-80 text-white rounded-lg px-3 py-2 text-xs shadow-lg flex gap-1 items-center justify-center  whitespace-nowrap w-min font-medium">
-                                <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-white"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    </path>
-                                </svg>
-                                <p>
-                                    Buat Surat Perintah Dinas
-                                </p>
-                                </a>
-                            `;
-                        }
-
-                        buttons += `</div>`;
+                                    <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-white"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        </path>
+                                    </svg>
+                                    <p>
+                                        Buat Surat Perintah Dinas
+                                    </p>
+                                </a>`;
+                        };
                         return buttons;
                     }
                 },
-
             ]
 
         });
         $('#customSearch').on('keyup', function() {
             table.search(this.value).draw();
-        });
-        $('#filter-lembaga').on('change', function() {
-            table.ajax.url(
-                `{{ route('spt.index', ['lembaga' => 'rplc']) }}`.replace('rplc', this.value)
-            ).load();
         });
     });
 </script>

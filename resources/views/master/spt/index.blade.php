@@ -7,8 +7,7 @@
         <x-slot name="content">
             <div>
                 <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
-                    <button type="button" id="add-button"
-                        onclick="window.location = `{{ route('spt.create') }}`"
+                    <button type="button" id="add-button" onclick="window.location = `{{ route('spt.create') }}`"
                         class="bg-[#249D06] hover:bg-opacity-80 text-white rounded-lg px-3 py-2 text-xs shadow-lg flex gap-1 items-center justify-center  whitespace-nowrap w-min font-medium">
                         <svg viewBox="0 0 24 24" fill="none" class="w-3 h-3 stroke-white"
                             xmlns="http://www.w3.org/2000/svg">
@@ -169,11 +168,16 @@
                 {
                     name: 'id',
                     data: 'id',
-                    render: function(data) {
-                        const showUrl = `{{ route('spt.show', ':id') }}`.replace(':id', data);
-                        const editUrl = `{{ route('spt.edit', ':id') }}`.replace(':id', data);
-                        const printUrl = `{{ route('spt.print', ':id') }}`.replace(':id', data);
-                        return `<div class="flex items-center justify-center gap-3">
+                    render: function(data, type, row) {
+                        let buttons = '';
+
+                        if (row.has_sppd) {
+                            buttons = '';
+                        } else {
+                            const showUrl = `{{ route('spt.show', ':id') }}`.replace(':id', data);
+                            const editUrl = `{{ route('spt.edit', ':id') }}`.replace(':id', data);
+                            const printUrl = `{{ route('spt.print', ':id') }}`.replace(':id', data);
+                            buttons = `<div class="flex items-center justify-center gap-3">
                                     <div>
                                         <div>
                                             <a href="${showUrl}"
@@ -210,7 +214,10 @@
                                         </div>
                                     </div>
                                 </div>
-                        `;
+                            `;
+                        }
+
+                        return buttons;
                     }
                 },
 

@@ -3,14 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Config;
+use App\Models\KabupatenKota;
+use App\Models\Kecamatan;
+use App\Models\Provinsi;
 use App\Models\SPPD;
 use App\Models\SPT;
+use App\Models\TingkatPerjalananDinas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class SPPDController extends Controller
 {
+    private function getBulanRomawi($bulan)
+    {
+        $romawi = [
+            1 => 'I',
+            2 => 'II',
+            3 => 'III',
+            4 => 'IV',
+            5 => 'V',
+            6 => 'VI',
+            7 => 'VII',
+            8 => 'VIII',
+            9 => 'IX',
+            10 => 'X',
+            11 => 'XI',
+            12 => 'XII',
+        ];
+
+        return $romawi[(int)$bulan] ?? '';
+    }
     /**
      * Display a listing of the resource.
      */
@@ -40,6 +63,7 @@ class SPPDController extends Controller
                         ],
                         $config_no_spt
                     );
+                    $item->format_sppd = $item->format_nomor;
                     return $item;
                 });
 
@@ -52,11 +76,19 @@ class SPPDController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
+        $spt = SPT::find($request->spt);
+        $tingkat = TingkatPerjalananDinas::all();
 
+        $provinsi = Provinsi::all();
+        $kabkota = KabupatenKota::all();
+        $kecamatan = Kecamatan::all();
+
+        // dd($spt);
+        return view('master.sppd.create', compact('spt', 'tingkat', 'provinsi', 'kabkota', 'kecamatan'));
+    }
+    
     /**
      * Store a newly created resource in storage.
      */
