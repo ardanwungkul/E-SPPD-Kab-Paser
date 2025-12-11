@@ -163,8 +163,9 @@
                     document.getElementById('filter-lembaga').value),
             },
             columns: [{
-                    name: 'nomor',
-                    data: 'nomor'
+                    name: 'format_nomor',
+                    data: 'format_nomor',
+                    className: '!text-left'
                 },
                 {
                     name: 'id',
