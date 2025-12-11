@@ -153,23 +153,6 @@ class SPTController extends Controller
         $nomor_urut_terakhir = SPT::where('tahun', session('tahun'))->max('nospt');
         $nomor_urut_baru = $nomor_urut_terakhir ? $nomor_urut_terakhir + 1 : 1;
         $nospt = str_pad($nomor_urut_baru, 3, '0', STR_PAD_LEFT);
-        $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
-        $config_no_spt = $config->no_spt;
-        // $no_spt = str_replace(
-        //     [
-        //         '{nomor_urut}',
-        //         '{lembaga}',
-        //         '{bulan}',
-        //         '{tahun}'
-        //     ],
-        //     [
-        //         $nomor_urut,
-        //         $request->is_dprd == 'dprd' ? 'DPRD' : 'Setwan',
-        //         $this->getBulanRomawi(date('m')),
-        //         session('tahun')
-        //     ],
-        //     $config_no_spt
-        // );
 
         $spt = new SPT();
         $spt->tahun = session('tahun');
@@ -303,9 +286,132 @@ class SPTController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, SPT $spt)
     {
-        //
+        $request->validate(
+            [
+                'dasar' => 'required',
+                'pegawai' => 'required',
+                'untuk' => 'required',
+                'penandatangan_id' => 'required',
+                'penandatangan_tanggal' => 'required',
+                // 'sub_kegiatan_id' => 'required',
+                // 'sub_bidang_id' => 'required',
+                // 'jenis_sppd_id' => 'required',
+                'berkas' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:1024',
+            ],
+            [
+                'dasar.required' => 'Minimal harus Mengisi 1 Dasar!',
+                'pegawai.required' => 'Minimal harus Mengisi 1 Pegawai!',
+                'untuk.required' => 'Minimal harus Mengisi 1 Untuk!',
+                'penandatangan_id.required' => 'Penandatangan Wajib di Isi!',
+                'penandatangan_tanggal.required' => 'Tanggal Penandatangan Wajib di Isi!',
+                'sub_kegiatan_id.required' => 'Sub Kegiatan Wajib di Isi!',
+                'sub_bidang_id.required' => 'Sub Bidang Wajib di Isi!',
+                'jenis_sppd_id.required' => 'Jenis Perjalanan Dinas Wajib di Isi!',
+                'berkas.mimes' => 'berkas harus berupa PDF, JPG, JPEG, atau PNG',
+                'berkas.max' => 'berkas tidak boleh lebih dari 1MB',
+            ]
+        );
+        
+        $nomor_urut_terakhir = SPT::where('tahun', session('tahun'))->max('nospt');
+        $nomor_urut_baru = $nomor_urut_terakhir ? $nomor_urut_terakhir + 1 : 1;
+        $nospt = str_pad($nomor_urut_baru, 3, '0', STR_PAD_LEFT);
+
+        // $spt = new SPT();
+        $spt->tahun = session('tahun');
+        $spt->nospt = $nospt;
+        $spt->urut = 1;
+        $spt->nosurat = $request->nosurat;
+
+        // $spt->jenis_id = $request->jenis_sppd_id;
+
+        $spt->tglspt = $request->penandatangan_tanggal;
+        $spt->pejabat_ttd = $request->penandatangan_id;
+
+        // $spt->kdgiat_sub = $request->sub_kegiatan_id;
+        // $spt->bidang_sub_id = $request->sub_bidang_id;
+
+        $spt->tglbrkt = $request->tanggal_berangkat;
+        $spt->tglbalik = $request->tanggal_kembali;
+
+        $berangkat = Carbon::parse($request->tanggal_berangkat);
+        $kembali = Carbon::parse($request->tanggal_kembali);
+
+        $spt->jmlhari = $berangkat->diffInDays($kembali) + 1;
+
+        // $spt->provinsi_id = $request->provinsi_id;
+        // $spt->kabkota_id = $request->kabupaten_kota_id;
+
+        // if (!$spt->provinsi_id && $spt->kabkota_id) {
+        //     $kabkota = KabupatenKota::find($spt->kabkota_id);
+
+        //     $spt->provinsi_id = $kabkota->provinsi_id;
+        // }
+
+        // $spt->kecamatan_id = $request->kecamatan_id;
+
+        // if (!$spt->provinsi_id && !$spt->kabkota_id) {
+        //     $kecamatan = Kecamatan::find($spt->kecamatan_id);
+
+        //     $spt->provinsi_id = $kecamatan->provinsi_id;
+        //     $spt->kabkota_id = $kecamatan->kabupaten_kota_id;
+        // }
+
+        if ($request->berkas) {
+            $file = $request->file('berkas');
+
+            if ($spt->path_spt && file_exists(public_path($spt->path_spt))) {
+                unlink(public_path($spt->path_spt));
+            }
+
+            $fileName = now()->format('m-d-His') . '.' . $file->getClientOriginalExtension();
+
+            $destination = public_path('storage/' . date('Y') . '/spt');
+
+            if (!is_dir($destination)) {
+                mkdir($destination, 0755, true);
+            }
+
+            $file->move($destination, $fileName);
+
+            $spt->path_spt = 'storage/' . date('Y') . '/spt/' . $fileName;
+        }
+
+        $spt->save();
+
+        SPTDasar::where('spt_id', $spt->id)->delete();
+        SPTUntuk::where('spt_id', $spt->id)->delete();
+        SPTPegawai::where('spt_id', $spt->id)->delete();
+
+        $i = 0;
+        foreach ($request->dasar as $d) {
+            $dasar = new SPTDasar();
+            $dasar->spt_id = $spt->id;
+            $dasar->dasar_ke = $i++;
+            $dasar->dasar_ket = $d['uraian'];
+            $dasar->save();
+        }
+
+        $i = 0;
+        foreach ($request->untuk as $u) {
+            $untuk = new SPTUntuk();
+            $untuk->spt_id = $spt->id;
+            $untuk->untuk_ke = $i++;
+            $untuk->untuk_ket = $u['uraian'];
+            $untuk->save();
+        }
+
+        $i = 0;
+        foreach ($request->pegawai as $p) {
+            $pegawai = new SPTPegawai();
+            $pegawai->spt_id = $spt->id;
+            $pegawai->pegawai_idx = $i++;
+            $pegawai->pegawai_id = $p['id'];
+            $pegawai->save();
+        }
+
+        return redirect()->route('spt.show', $spt->id)->with(['success' => 'Berhasil Mengubah Surat Perintah Tugas']);
     }
 
     /**

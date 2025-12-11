@@ -140,7 +140,7 @@
                                 </div>
                             </label>
                             <input type="file" name="berkas" id="berkas"
-                                accept="application/pdf,.jpg,.jpeg,.png" class="hidden" required>
+                                accept="application/pdf,.jpg,.jpeg,.png" class="opacity-0 h-0" required>
                             <script>
                                 document.getElementById('berkas').addEventListener('change', function(e) {
                                     const fileName = e.target.files[0]?.name || "Tidak ada file dipilih";
