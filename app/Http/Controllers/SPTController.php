@@ -266,6 +266,33 @@ class SPTController extends Controller
      */
     public function edit(SPT $spt, Request $request)
     {
+        $index = 1;
+        $tujuan = [];  // get current value or empty array
+
+        while (true) {
+            $prov = $spt->{"provinsi_id{$index}"};
+            $provname = Provinsi::find($prov)->nama ?? null;
+            $kab  = $spt->{"kabkota_id{$index}"};
+            $kabname = KabupatenKota::find($kab)->nama ?? null;
+            $kec  = $spt->{"kecamatan_id{$index}"};
+            $kecname = Provinsi::find($kec)->nama ?? null;
+
+            if (!$prov) break;
+
+            $tujuan[] = [
+                'provinsi_id' => $prov,
+                'provinsi_name' => $provname,
+                'kabkota_id'  => $kab,
+                'kabkota_name' => $kabname,
+                'kecamatan_id' => $kec,
+                'kecamatan_name' => $kecname,
+            ];
+
+            $index++;
+        }
+
+        $spt->tujuan = $tujuan;
+
         $pegawai = Pegawai::with('pangkat')
             ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
             ->orderBy('ref_pangkat.jnspeg', 'asc')
@@ -335,13 +362,8 @@ class SPTController extends Controller
         $spt->urut = 1;
         $spt->nosurat = $request->nosurat;
 
-        // $spt->jenis_id = $request->jenis_sppd_id;
-
         $spt->tglspt = $request->penandatangan_tanggal;
         $spt->pejabat_ttd = $request->penandatangan_id;
-
-        // $spt->kdgiat_sub = $request->sub_kegiatan_id;
-        // $spt->bidang_sub_id = $request->sub_bidang_id;
 
         $spt->tglbrkt = $request->tanggal_berangkat;
         $spt->tglbalik = $request->tanggal_kembali;
@@ -350,25 +372,6 @@ class SPTController extends Controller
         $kembali = Carbon::parse($request->tanggal_kembali);
 
         $spt->jmlhari = $berangkat->diffInDays($kembali) + 1;
-
-        // $spt->provinsi_id = $request->provinsi_id;
-        // $spt->kabkota_id = $request->kabupaten_kota_id;
-
-        // if (!$spt->provinsi_id && $spt->kabkota_id) {
-        //     $kabkota = KabupatenKota::find($spt->kabkota_id);
-
-        //     $spt->provinsi_id = $kabkota->provinsi_id;
-        // }
-
-        // $spt->kecamatan_id = $request->kecamatan_id;
-
-        // if (!$spt->provinsi_id && !$spt->kabkota_id) {
-        //     $kecamatan = Kecamatan::find($spt->kecamatan_id);
-
-        //     $spt->provinsi_id = $kecamatan->provinsi_id;
-        //     $spt->kabkota_id = $kecamatan->kabupaten_kota_id;
-        // }
-
         if ($request->berkas) {
             $file = $request->file('berkas');
 

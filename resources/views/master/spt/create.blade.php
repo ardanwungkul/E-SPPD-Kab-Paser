@@ -339,14 +339,14 @@
                         </legend>
                         <div class="pt-3 mx-auto">
                             <div class="grid grid-cols-1 gap-5">
-                                <div>
-                                    <label for="penandatangan_tanggal" class="block mb-1">Tanggal SPT</label>
+                                <div class=" flex items-center">
+                                    <label class=" w-40 min-w-40" for="penandatangan_tanggal" class="block mb-1">Tanggal SPT</label>
                                     <input type="date" id="penandatangan_tanggal" name="penandatangan_tanggal"
                                         value="{{ now()->toDateString() }}"
                                         class="rounded-lg text-sm border border-secondary-4 w-full" required>
                                 </div>
-                                <div>
-                                    <label class="block mb-1">Ditanda Tangani Oleh</label>
+                                <div class=" flex items-center">
+                                    <label class=" w-40 min-w-40" class="block mb-1">Ditanda Tangani Oleh</label>
                                     <input type="text" id="penandatangan_keterangan"
                                         name="penandatangan_keterangan"
                                         class="rounded-lg text-sm border border-secondary-4 w-full cursor-pointer"
