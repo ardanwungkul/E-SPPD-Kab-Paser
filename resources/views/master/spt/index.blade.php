@@ -170,14 +170,38 @@
                     data: 'id',
                     render: function(data, type, row) {
                         let buttons = '';
-
-                        if (row.has_sppd) {
-                            buttons = '';
-                        } else {
                             const showUrl = `{{ route('spt.show', ':id') }}`.replace(':id', data);
                             const editUrl = `{{ route('spt.edit', ':id') }}`.replace(':id', data);
                             const printUrl = `{{ route('spt.print', ':id') }}`.replace(':id', data);
-                            buttons = `<div class="flex items-center justify-center gap-3">
+                        if (row.sppd) {
+                            buttons = `<div class="flex items-center justify-end gap-3">
+                                    <div>
+                                        <div>
+                                            <a href="${showUrl}"
+                                                class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
+                                                <svg class="w-4 h-4" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                    height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <a href="${printUrl}"
+                                                class="flex items-center gap-1 bg-secondary-3 px-3 py-1 rounded-lg text-secondary-2 hover:bg-opacity-90 border border-secondary-4 shadow-lg">
+                                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M16.444 18H19a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2.556M17 11V5a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v6h10ZM7 15h10v4a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-4Z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            buttons = `<div class="flex items-center justify-end gap-3">
                                     <div>
                                         <div>
                                             <a href="${showUrl}"

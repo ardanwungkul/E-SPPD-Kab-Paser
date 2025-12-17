@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Buat Surat Perintah Tugas
+        Buat Surat Perjalanan Dinas
     </x-slot>
 
     <div id="alert-2" class="fixed right-3 bottom-3 z-50 hidden">
@@ -41,7 +41,7 @@
                         </legend>
                         <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                             <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="jenis_sppd_id">Jenis SPPD</label>
+                                <label class=" flex basis-1/5 items-start" for="jenis_sppd_id">Jenis SPPD</label>
                                 <select name="jenis_sppd_id" id="jenis_sppd_id" class="text-sm rounded-lg select2"
                                     required>
                                     <option value="" selected disabled> Pilih Jenis SPPD</option>
@@ -51,17 +51,18 @@
                                 </select>
                             </div>
                             <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="bidang_id">{{ session('config')->judul }}</label>
+                                <label class=" flex basis-1/5 items-start"
+                                    for="bidang_id">{{ session('config')->judul }}</label>
                                 <input type="text" name="bidang_id" id="bidang_id"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Pilih Bidang" disabled>
                             </div>
                             <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="sub_bidang_id">Sub.
+                                <label class=" flex basis-1/5 items-start" for="sub_bidang_id">Sub.
                                     {{ session('config')->judul }}</label>
                                 <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2"
                                     required>
-                                    <option value="" selected disabled> Pilih Sub
+                                    <option value="" selected disabled> Pilih Sub.
                                         {{ session('config')->judul }}
                                     </option>
                                     @foreach ($subbidang as $item)
@@ -70,19 +71,19 @@
                                 </select>
                             </div>
                             <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="program_id">Program</label>
+                                <label class=" flex basis-1/5 items-start" for="program_id">Program</label>
                                 <input type="text" name="program_id" id="program_id"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Pilih Program" disabled>
                             </div>
                             <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="kegiatan_id">Kegiatan</label>
+                                <label class=" flex basis-1/5 items-start" for="kegiatan_id">Kegiatan</label>
                                 <input type="text" name="kegiatan_id" id="kegiatan_id"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Pilih Kegiatan" disabled>
                             </div>
                             <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="sub_kegiatan_id">Sub. Kegiatan</label>
+                                <label class=" flex basis-1/5 items-start" for="sub_kegiatan_id">Sub. Kegiatan</label>
                                 <select name="sub_kegiatan_id" id="sub_kegiatan_id" class="text-sm rounded-lg select2"
                                     required>
                                     <option value="" selected disabled> Pilih Sub. Kegiatan</option>
@@ -95,36 +96,38 @@
             <x-container>
                 <x-slot name="content">
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
-                        <div class=" w-full grid grid-cols-3 gap-3">
-                            <div class="flex flex-col gap-1">
-                                <label for="anggaran">Anggaran Pagu</label>
+                        {{-- Anggaran --}}
+                        <div class=" w-full flex flex-col gap-3">
+                            <div class="flex items-center gap-3">
+                                <label class=" flex basis-1/5 items-start" for="anggaran">Anggaran Pagu</label>
                                 <input type="text" name="anggaran" id="anggaran" value="Rp. 0"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Jumlah Anggaran" disabled>
                             </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="realisasi">Jumlah Realisasi</label>
+                            <div class="flex items-center gap-3">
+                                <label class=" flex basis-1/5 items-start" for="realisasi">Jumlah Realisasi</label>
                                 <input type="text" name="realisasi" id="realisasi" value="Rp. 0"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Jumlah Realisasi">
                             </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="sisa">Sisa Anggaran</label>
+                            <div class="flex items-center gap-3">
+                                <label class=" flex basis-1/5 items-start" for="sisa">Sisa Anggaran</label>
                                 <input type="text" name="sisa" id="sisa" value="Rp. 0"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
                                     placeholder="Sisa Anggaran" disabled>
                             </div>
                         </div>
                         <div class="w-full border-t pb-3 mt-3">
                         </div>
+                        {{-- Berkas --}}
                         <div class="flex items-center gap-3">
-                            <label class=" w-40 min-w-40" for="berkas" class=" flex flex-col items-start">
+                            <label class=" basis-1/5" for="berkas" class=" flex flex-col items-start">
                                 <p>Berkas Bukti Disposisi</p>
                                 <p class=" text-nowrap text-secondary-1 text-[0.6rem]">(PDF/Image Maksimal
                                     1MB)</p>
                             </label>
                             <label for="berkas"
-                                class=" flex-grow cursor-pointer flex items-center justify-between p-1 text-xs md:text-sm rounded-lg border border-gray-300 shadow-md">
+                                class="  w-3/5 cursor-pointer flex items-center justify-between p-1 text-xs md:text-sm rounded-lg border border-gray-300 shadow-md">
                                 <div class=" flex items-center gap-2">
                                     <div
                                         class=" text-nowrap px-2 py-1 text-secondary-1 border border-gray-300 bg-neutral-300 rounded-lg">
@@ -155,32 +158,42 @@
             <x-container>
                 <x-slot name="content">
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
+                        {{-- Nomor Surat --}}
                         <div class="flex items-center gap-3">
-                            <label class=" w-40 min-w-40" for="nosurat">Nomor Surat</label>
+                            <label class=" flex basis-1/5 items-start" for="nospt">Nomor SPT</label>
+                            <input type="text" name="nospt" id="nospt" value="{{$nospt}}"
+                                class="  w-3/5 text-sm rounded-lg border border-secondary-4 text-secondary-1"
+                                placeholder="Masukkan Nomor SPT">
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <label class=" flex basis-1/5 items-start" for="nosurat">Nomor Surat</label>
                             <input type="text" name="nosurat" id="nosurat"
-                                class="w-full text-sm rounded-lg border border-secondary-4 text-secondary-1"
+                                class="  w-3/5 text-sm rounded-lg border border-secondary-4 text-secondary-1"
                                 placeholder="Masukkan Nomor Surat">
                         </div>
                         <div class="w-full border-t pb-3 mt-3">
                         </div>
-                        <div class=" w-full grid grid-cols-3 gap-3">
-                            <div class="flex flex-col gap-1">
-                                <label for="tanggal_berangkat">Tanggal Berangkat</label>
+                        {{-- Tanggal --}}
+                        <div class=" w-full flex flex-col gap-3">
+                            <div class="flex items-center gap-3">
+                                <label class=" flex basis-1/5 items-start" for="tanggal_berangkat">Tanggal
+                                    Berangkat</label>
                                 <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
                                     value="{{ now()->format('Y-m-d') }}"
-                                    class="w-full text-sm rounded-lg border border-secondary-4">
+                                    class="  w-3/5 text-sm rounded-lg border border-secondary-4">
                             </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="tanggal_kembali">Tanggal Kembali</label>
+                            <div class="flex items-center gap-3">
+                                <label class=" flex basis-1/5 items-start" for="tanggal_kembali">Tanggal
+                                    Kembali</label>
                                 <input type="date" id="tanggal_kembali" name="tanggal_kembali"
                                     value="{{ now()->format('Y-m-d') }}"
-                                    class="w-full text-sm rounded-lg border border-secondary-4">
+                                    class="  w-3/5 text-sm rounded-lg border border-secondary-4">
                             </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="total_hari">Total Hari</label>
+                            <div class="flex items-center gap-3">
+                                <label class=" flex basis-1/5 items-start" for="total_hari">Jumlah Hari</label>
                                 <input type="number" id="total_hari" name="total_hari" placeholder="Jumlah Hari"
                                     value="1"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 bg-[#eee]" disabled>
+                                    class="  w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee]" disabled>
                             </div>
                             <script>
                                 function hitungTotalHari() {
@@ -221,23 +234,23 @@
                         <div class="w-full border-t pb-3 mt-3">
                         </div>
                         <div id="listTujuan" class=" flex flex-col gap-3">
-                            <div class="flex items-center gap-3">
-                                <label class=" w-40 min-w-40" for="nosurat">Tujuan ke 1</label>
-                                <div class=" flex-grow grid grid-cols-3 gap-3 tujuan-item">
+                            <div class="flex items-start gap-3">
+                                <label class=" flex basis-1/5 items-start pt-3" for="nosurat">Tujuan ke 1</label>
+                                <div class="  w-3/5 flex flex-col gap-3 tujuan-item">
                                     <select name="tujuan[0][provinsi_id]" id="tujuan_0_provinsi_id"
-                                        class=" flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md provinsi select2"
-                                        required>
-                                        <option value="" selected disabled>Pilih Provinsi</option>
+                                        class=" md:text-sm text-xs rounded-lg border border-gray-300 shadow-md provinsi daerah"
+                                        required disabled>
+                                        <option value="" selected disabled>Pilih Jenis SPPD Terlebih Dahulu</option>
                                     </select>
                                     <select name="tujuan[0][kabupaten_kota_id]" id="tujuan_0_kabupaten_kota_id"
-                                        class=" flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kabkota select2"
-                                        required>
-                                        <option value="" selected disabled>Pilih Kabupaten/Kota</option>
+                                        class=" md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kabkota daerah"
+                                        required disabled>
+                                        <option value="" selected disabled>Pilih Jenis SPPD Terlebih Dahulu</option>
                                     </select>
                                     <select name="tujuan[0][kecamatan_id]" id="tujuan_0_kecamatan_id"
-                                        class=" flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kecamatan select2"
-                                        required>
-                                        <option value="" selected disabled>Pilih Kecamatan</option>
+                                        class=" md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kecamatan daerah"
+                                        required disabled>
+                                        <option value="" selected disabled>Pilih Jenis SPPD Terlebih Dahulu</option>
                                     </select>
                                 </div>
                                 <button type="button" name="add" id="addTujuan" disabled
@@ -253,27 +266,15 @@
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                             Dasar
                         </legend>
-                        <div class="pt-3 mx-auto">
-                            <table class="table table-bordered w-full" id="dynamicTableDasar">
-                                <tr>
-                                    <td class="flex w-40 min-w-40 items-start px-2">
-                                        <label for="dasar[0][uraian]" class="align-top whitespace-nowrap">Dasar
-                                            Ke
-                                            1</label>
-                                    </td>
-                                    <td class="w-full px-2">
-                                        <div class="space-y-1">
-                                            <textarea name="dasar[0][uraian]" id="dasar[0][uraian]" rows="3"
-                                                class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Dasar Ke-1" required></textarea>
-                                        </div>
-                                    </td>
-                                    <td class="pl-2 flex items-start">
-                                        <button type="button" name="add" id="addDasar"
-                                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
-                                    </td>
-                                </tr>
-                            </table>
-
+                        <div class=" flex flex-col gap-3" id="dynamicTableDasar">
+                            <div class="flex items-start gap-3 dasar-item">
+                                <label for="dasar[0][uraian]" class=" flex basis-1/5 items-start pt-3">Dasar ke
+                                    1</label>
+                                <textarea name="dasar[0][uraian]" id="dasar[0][uraian]" rows="3"
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4" placeholder="Dasar Ke-1" required></textarea>
+                                <button type="button" name="add" id="addDasar"
+                                    class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
+                            </div>
                         </div>
                     </fieldset>
                 </x-slot>
@@ -292,9 +293,7 @@
                             </button>
                             <x-modal.pilih-pegawai-spt :pegawai="$pegawai" />
                             <div class="pt-3">
-                                <table class="table table-bordered w-full" id="dynamicTablePegawai">
-                                    <tbody></tbody>
-                                </table>
+                                <div id="dynamicTablePegawai" class="flex flex-col gap-3"></div>
                             </div>
                         </div>
                     </fieldset>
@@ -306,27 +305,15 @@
                         <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                             Untuk
                         </legend>
-                        <div class="pt-3 mx-auto">
-                            <table class="table table-bordered w-full" id="dynamicTableUntuk">
-                                <tr>
-                                    <td class="flex w-40 min-w-40 items-start px-2">
-                                        <label for="untuk[0][uraian]" class="align-top whitespace-nowrap">Untuk
-                                            Ke
-                                            1</label>
-                                    </td>
-                                    <td class="w-full px-2">
-                                        <div class="space-y-1">
-                                            <textarea name="untuk[0][uraian]" id="untuk[0][uraian]" rows="3"
-                                                class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Untuk Ke-1" required></textarea>
-                                        </div>
-                                    </td>
-                                    <td class="pl-2 flex items-start">
-                                        <button type="button" name="add" id="addUntuk"
-                                            class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
-                                    </td>
-                                </tr>
-                            </table>
-
+                        <div class=" flex flex-col gap-3" id="dynamicTableUntuk">
+                            <div class="flex items-start gap-3 untuk-item">
+                                <label for="untuk[0][uraian]" class=" flex basis-1/5 items-start pt-3">Untuk ke
+                                    1</label>
+                                <textarea name="untuk[0][uraian]" id="untuk[0][uraian]" rows="3"
+                                    class="w-3/5 text-sm rounded-lg border border-secondary-4" placeholder="Untuk Ke-1" required></textarea>
+                                <button type="button" name="add" id="addUntuk"
+                                    class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
+                            </div>
                         </div>
                     </fieldset>
                 </x-slot>
@@ -339,17 +326,19 @@
                         </legend>
                         <div class="pt-3 mx-auto">
                             <div class="grid grid-cols-1 gap-5">
-                                <div class=" flex items-center">
-                                    <label class=" w-40 min-w-40" for="penandatangan_tanggal" class="block mb-1">Tanggal SPT</label>
+                                <div class=" flex items-center gap-3">
+                                    <label class=" flex basis-1/5 items-start" for="penandatangan_tanggal"
+                                        class="block mb-1">Tanggal SPT</label>
                                     <input type="date" id="penandatangan_tanggal" name="penandatangan_tanggal"
                                         value="{{ now()->toDateString() }}"
-                                        class="rounded-lg text-sm border border-secondary-4 w-full" required>
+                                        class=" w-3/5 rounded-lg text-sm border border-secondary-4" required>
                                 </div>
-                                <div class=" flex items-center">
-                                    <label class=" w-40 min-w-40" class="block mb-1">Ditanda Tangani Oleh</label>
+                                <div class=" flex items-center gap-3">
+                                    <label class=" flex basis-1/5 items-start" class="block mb-1">Ditanda Tangani
+                                        Oleh</label>
                                     <input type="text" id="penandatangan_keterangan"
                                         name="penandatangan_keterangan"
-                                        class="rounded-lg text-sm border border-secondary-4 w-full cursor-pointer"
+                                        class=" w-3/5 rounded-lg text-sm border border-secondary-4 cursor-pointer"
                                         data-modal-target="pilih-pegawai-penandatangan"
                                         data-modal-toggle="pilih-pegawai-penandatangan"
                                         placeholder="Ketuk untuk memilih Pegawai" readonly required>
@@ -386,7 +375,7 @@
     $(document).ready(function() {
 
         $('#form').on('submit', function(event) {
-            if ($('#dynamicTablePegawai tr').length === 0) {
+            if ($('#dynamicTablePegawai .pegawai-item').length === 0) {
                 event.preventDefault();
                 $('#alert-2').show();
                 $('#addPegawai').focus();
@@ -406,6 +395,7 @@
 
     });
 </script>
+
 {{-- Dasar & Untuk & Tujuan --}}
 <script type="module">
     var iDasar = 1;
@@ -416,37 +406,40 @@
 
     $(document).ready(function() {
         function updateDasarNumbers() {
-            $("#dynamicTableDasar tr").each(function(index, tr) {
+            $("#dynamicTableDasar .dasar-item").each(function(index) {
                 const newIndex = index + 1;
-                $(tr).find("label").attr("for", `dasar[${newIndex}][uraian]`).text("Dasar Ke " +
-                    newIndex);
-                $(tr).find("textarea").attr({
-                    id: `dasar[${newIndex}][uraian]`,
-                    name: `dasar[${newIndex}][uraian]`,
+
+                $(this).find("label")
+                    .attr("for", `dasar[${index}][uraian]`)
+                    .text(`Dasar ke ${newIndex}`);
+
+                $(this).find("textarea").attr({
+                    id: `dasar[${index}][uraian]`,
+                    name: `dasar[${index}][uraian]`,
                     placeholder: `Dasar Ke-${newIndex}`
                 });
             });
         }
 
         function updateUntukNumbers() {
-            $("#dynamicTableUntuk tr").each(function(index, tr) {
+            $("#dynamicTableUntuk .untuk-item").each(function (index) {
                 const newIndex = index + 1;
-                $(tr).find("label").attr("for", `untuk[${newIndex}][uraian]`).text("Untuk Ke " +
-                    newIndex);
-                $(tr).find("textarea").attr({
-                    id: `untuk[${newIndex}][uraian]`,
-                    name: `untuk[${newIndex}][uraian]`,
+
+                $(this).find("label")
+                    .attr("for", `untuk[${index}][uraian]`)
+                    .text(`Untuk ke ${newIndex}`);
+
+                $(this).find("textarea").attr({
+                    id: `untuk[${index}][uraian]`,
+                    name: `untuk[${index}][uraian]`,
                     placeholder: `Untuk Ke-${newIndex}`
                 });
             });
         }
 
         function updatePegawaiNumbers() {
-            $("#dynamicTablePegawai tr").each(function(index, tr) {
-                const newIndexPegawai = index + 1;
-                $(tr).find("label").attr("for", `pegawai[${newIndexPegawai}][keterangan]`).text(
-                    "Pegawai Ke " +
-                    newIndexPegawai);
+            $('#dynamicTablePegawai .pegawai-item').each(function(index) {
+                $(this).find('label').text(`Pegawai ke ${index + 1}`);
             });
         }
 
@@ -466,39 +459,36 @@
                 // Hilangkan class kecamatan
                 $(this).find("select[name$='[kecamatan_id]']")
                     .removeClass('kecamatan');
-
-                    console.log('berhasil kah');
-                    
             });
 
             let newIndex = itujuan;
 
             let html = `
-                <div class="flex items-center gap-3 tujuan-item mt-3">
-                    <label class="w-40 min-w-40">Tujuan ke ${newIndex + 1}</label>
+                <div class="flex items-start gap-3 tujuan-item">
+                    <label class=" flex basis-1/5 items-start pt-3">Tujuan ke ${newIndex + 1}</label>
 
-                    <div class="flex-grow grid grid-cols-3 gap-3" tujuan-item>
+                    <div class="  w-3/5 flex flex-col gap-3">
                         <select name="tujuan[${newIndex}][provinsi_id]"
-                                class="flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md provinsi select2"
+                                class=" md:text-sm text-xs rounded-lg border border-gray-300 shadow-md provinsi daerah"
                                 required>
                             <option value="" selected disabled>Pilih Provinsi</option>
                         </select>
 
                         <select name="tujuan[${newIndex}][kabupaten_kota_id]"
-                                class="flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kabkota select2"
+                                class=" md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kabkota daerah"
                                 required>
                             <option value="" selected disabled>Pilih Kabupaten/Kota</option>
                         </select>
 
                         <select name="tujuan[${newIndex}][kecamatan_id]"
-                                class="flex-grow md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kecamatan select2"
+                                class=" md:text-sm text-xs rounded-lg border border-gray-300 shadow-md kecamatan daerah"
                                 required>
                             <option value="" selected disabled>Pilih Kecamatan</option>
                         </select>
                     </div>
 
                     <button type="button"
-                            class="removeTujuan text-red-500 border border-red-400 rounded shadow-sm px-3 py-2 text-sm font-medium">
+                            class="removeTujuan text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">
                         -
                     </button>
                 </div>
@@ -515,19 +505,7 @@
 
             $('#jenis_sppd_id').trigger('change');
 
-            $("#listTujuan .tujuan-item").each(function() {
-                
-                $(this).find("select[name$='[provinsi_id]']")
-                    .addClass('provinsi');
-
-                $(this).find("select[name$='[kabupaten_kota_id]']")
-                    .addClass('kabkota');
-
-                $(this).find("select[name$='[kecamatan_id]']")
-                    .addClass('kecamatan');
-            });
-
-            $('.select2').select2({
+            $('.daerah').select2({
                 width: '100%',
                 dropdownCssClass: "text-sm",
                 selectionCssClass: 'text-sm',
@@ -553,47 +531,50 @@
             });
         });
 
-        $("#addDasar").click(function() {
-            ++iDasar;
-            $("#dynamicTableDasar").append(
-                `<tr>
-                    <td class="flex w-40 min-w-40 items-start px-2">
-                        <label for="dasar[${iDasar}][uraian]" class="align-top whitespace-nowrap">Dasar Ke ${iDasar}</label>
-                    </td>
-                    <td class="w-full px-2">
-                        <div class="space-y-1">
-                            <textarea name="dasar[${iDasar}][uraian]" id="dasar[${iDasar}][uraian]" rows="3" class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Dasar Ke-${iDasar}"></textarea>
-                        </div>
-                    </td>
-                    <td class="pl-2 flex items-start">
-                        <button type="button" class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center remove-tr" data-id="dasar">
+        $("#addDasar").on("click", function() {
+            $("#dynamicTableDasar").append(`
+                <div class="flex items-start gap-3 dasar-item">
+                    <label class="flex basis-1/5 items-start pt-3">
+                        Dasar ke ${iDasar + 1}
+                    </label>
+
+                    <textarea
+                        rows="3"
+                        class=" w-3/5 text-sm rounded-lg border border-secondary-4"
+                        placeholder="Dasar Ke-${iDasar + 1}"
+                    ></textarea>
+
+                    <button type="button" class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center remove-tr" data-id="dasar">
                             -
                         </button>
-                    </td>
-                </tr>`
-            );
+                </div>
+            `);
+
+            iDasar++;
             updateDasarNumbers();
         });
 
         $("#addUntuk").click(function() {
-            ++iUntuk;
             $("#dynamicTableUntuk").append(
-                `<tr>
-                    <td class="flex w-40 min-w-40 items-start px-2">
-                        <label for="untuk[${iUntuk}][uraian]" class="align-top whitespace-nowrap">Untuk Ke ${iUntuk}</label>
-                    </td>
-                    <td class="w-full px-2">
-                        <div class="space-y-1">
-                            <textarea name="untuk[${iUntuk}][uraian]" id="untuk[${iUntuk}][uraian]" rows="3" class="w-full text-sm rounded-lg border border-secondary-4" placeholder="Untuk Ke-${iUntuk}"></textarea>
-                        </div>
-                    </td>
-                    <td class="pl-2 flex items-start">
-                        <button type="button" class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center remove-tr" data-id="untuk">
+                `
+                <div class="flex items-start gap-3 untuk-item">
+                    <label class="flex basis-1/5 items-start pt-3">
+                        Untuk ke ${iUntuk + 1}
+                    </label>
+
+                    <textarea
+                        rows="3"
+                        class=" w-3/5 text-sm rounded-lg border border-secondary-4"
+                        placeholder="Untuk Ke-${iUntuk + 1}"
+                    ></textarea>
+
+                    <button type="button" class="text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center remove-tr" data-id="untuk">
                             -
                         </button>
-                    </td>
-                </tr>`
-            );
+                </div>    
+            `);
+
+            ++iUntuk;
             updateUntukNumbers();
         });
 
@@ -603,45 +584,65 @@
 
             const isChecked = $(this).attr('data-check') === 'true';
             $(this).attr('data-check', isChecked ? 'false' : 'true');
+
             if (isChecked) {
+                // UNCHECK → hapus
                 $(this).html(`
-                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            d="M5 11.917 9.724 16.5 19 7.5" />
                     </svg>
                 `);
+
                 $(`#dynamicTablePegawai .pegawai-item[data-id="${pegawai_id}"]`).remove();
             } else {
+                // CHECK → tambah
                 $(this).html('X');
-                const newRow = `
-                <tr class="pegawai-item" data-id="${pegawai_id}">
-                    <td class=" w-40 min-w-40">
-                        <label for="pegawai[${pegawai_id}][keterangan]" class="align-top whitespace-nowrap">Pegawai Ke 1</label>
-                    </td>
-                    <td class="w-full px-2 py-2">
-                        <div class="space-y-1">
-                            <input name="pegawai[${pegawai_id}][keterangan]" id="pegawai[${pegawai_id}][keterangan]" value="${pegawai_keterangan}"
-                                    class="w-full text-sm rounded-lg border border-secondary-4 cursor-pointer" readonly />
-                            <input name="pegawai[${pegawai_id}][id]" id="pegawai[${pegawai_id}][id]" type="text" value="${pegawai_id}"
-                                    class="hidden" readonly required>
+
+                const newItem = `
+                    <div class="flex items-start gap-3 pegawai-item" data-id="${pegawai_id}">
+                        <label class="flex basis-1/5 items-start pt-2">
+                            Pegawai ke
+                        </label>
+
+                        <div class=" w-3/5 space-y-1">
+                            <input
+                                name="pegawai[${pegawai_id}][keterangan]"
+                                value="${pegawai_keterangan}"
+                                class="w-full text-sm rounded-lg border border-secondary-4 cursor-pointer"
+                                readonly
+                            />
+                            <input
+                                name="pegawai[${pegawai_id}][id]"
+                                type="hidden"
+                                value="${pegawai_id}"
+                                required
+                            />
                         </div>
-                    </td>
-                </tr>
-            `;
-                $('#dynamicTablePegawai tBody').append(newRow);
+                    </div>
+                `;
+
+                $('#dynamicTablePegawai').append(newItem);
             }
-            updatePegawaiNumbers()
+
+            updatePegawaiNumbers();
         });
+
         $(document).on('click', '.remove-tr', function() {
             const data = $(this).data('id');
             if (data == 'dasar') {
-                --iDasar;
-                $(this).parents('tr').remove();
-                updateDasarNumbers();
+                if (iDasar > 1) {
+                    iDasar--;
+                    $(this).closest('.dasar-item').remove();
+                    updateDasarNumbers();
+                }
             }
             if (data == 'untuk') {
-                --iUntuk;
-                $(this).parents('tr').remove();
-                updateUntukNumbers();
+                if (iUntuk > 1) {
+                    iUntuk--;
+                    $(this).closest('.untuk-item').remove();
+                    updateUntukNumbers();
+                }
             }
         });
     });
@@ -716,6 +717,12 @@
 <script type="module">
     $(document).ready(function() {
         $('.select2').select2({
+            width: '60%',
+            dropdownCssClass: "text-sm",
+            selectionCssClass: 'text-sm',
+        });
+
+        $('.daerah').select2({
             width: '100%',
             dropdownCssClass: "text-sm",
             selectionCssClass: 'text-sm',
@@ -723,7 +730,7 @@
 
         $(document).on('change', '.provinsi', function() {
             let provinsiSelect = $(this); // elemen provinsi yang berubah
-            let wrapper = provinsiSelect.closest('.flex.items-center'); // container "Tujuan ke ..."
+            let wrapper = provinsiSelect.closest('.tujuan-item'); // container "Tujuan ke ..."
 
             let kabkotaSelect = wrapper.find('.kabkota');
 
@@ -860,6 +867,17 @@
                             $('.kabkota').prop('disabled', false);
                             $('.kecamatan').prop('disabled', false);
                         }
+
+                        $("#listTujuan .tujuan-item").each(function() {
+                            $(this).find("select[name$='[provinsi_id]']")
+                                .addClass('provinsi');
+
+                            $(this).find("select[name$='[kabupaten_kota_id]']")
+                                .addClass('kabkota');
+
+                            $(this).find("select[name$='[kecamatan_id]']")
+                                .addClass('kecamatan');
+                        });
                     },
                     error: function(xhr) {
                         $('.provinsi').prop('disabled', false);

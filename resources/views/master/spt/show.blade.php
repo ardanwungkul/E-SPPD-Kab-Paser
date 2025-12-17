@@ -65,8 +65,8 @@
     </x-container>
     <x-container>
         <x-slot name="content">
-            <fieldset class="text-sm text-secondary-2 border-t border-secondary-4">
-                <legend align="center" class="px-5">
+            <fieldset class=" text-sm text-secondary-2 border-t border-secondary-4 pt-4">
+                <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                     Dasar
                 </legend>
                 <div class="py-3">
@@ -90,8 +90,8 @@
     </x-container>
     <x-container>
         <x-slot name="content">
-            <fieldset class="text-sm text-secondary-2 border-t border-secondary-4">
-                <legend align="center" class="px-5">
+            <fieldset class=" text-sm text-secondary-2 border-t border-secondary-4 pt-4">
+                <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                     Pegawai
                 </legend>
                 <div class="py-3">
@@ -111,7 +111,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $pegawai->pegawai->nama }}
+                                        {{ $pegawai->nama }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -124,7 +124,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $pegawai->pegawai->nip }}
+                                        {{ $pegawai->nip }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -137,7 +137,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $pegawai->pegawai->pangkat ? $pegawai->pegawai->pangkat->kdgol : '' }}
+                                        {{ $pegawai->pangkat ? $pegawai->pangkat->kdgol : '-' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -150,7 +150,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $pegawai->pegawai->pangkat ? $pegawai->pegawai->pangkat->uraian : '' }}
+                                        {{ $pegawai->pangkat ? $pegawai->pangkat->uraian : '-' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -163,7 +163,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-1 w-full">
-                                        {{ $pegawai->pegawai->jabatan }}
+                                        {{ $pegawai->jabatan }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -175,8 +175,8 @@
     </x-container>
     <x-container>
         <x-slot name="content">
-            <fieldset class="text-sm text-secondary-2 border-t border-secondary-4">
-                <legend align="center" class="px-5">
+            <fieldset class=" text-sm text-secondary-2 border-t border-secondary-4 pt-4">
+                <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                     Untuk
                 </legend>
                 <div class="py-3">
@@ -200,26 +200,13 @@
     </x-container>
     <x-container>
         <x-slot name="content">
-            <fieldset class="text-sm text-secondary-2 border-t border-secondary-4">
-                <legend align="center" class="px-5">
+            <fieldset class=" text-sm text-secondary-2 border-t border-secondary-4 pt-4">
+                <legend align="center" class="px-5 text-secondary-1 bg-white text-lg font-semibold">
                     Penandatangan
                 </legend>
                 <div class="py-3">
                     <table>
                         <tbody>
-                            <tr class="even:bg-white odd:bg-secondary-3/60">
-                                <td class="px-3 py-1 whitespace-nowrap">
-                                    <div class="flex items-center justify-between gap-3">
-                                        <p>
-                                            UB
-                                        </p>
-                                        <p>:</p>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-1 w-full">
-                                    {{ $spt->ub_status == 'Y' ? 'Ya' : 'Tidak' }}
-                                </td>
-                            </tr>
                             <tr class="even:bg-white odd:bg-secondary-3/60">
                                 <td class="px-3 py-1 whitespace-nowrap">
                                     <div class="flex items-center justify-between gap-3">

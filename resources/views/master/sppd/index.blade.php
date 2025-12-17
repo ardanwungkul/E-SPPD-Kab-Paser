@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Surat Perintah Dinas
+        Surat Perjalanan Dinas
     </x-slot>
 
     <x-container>
@@ -16,7 +16,7 @@
                             </path>
                         </svg>
                         <p>
-                            Buat Surat Perintah Dinas
+                            Buat Surat Perjalanan Dinas
                         </p>
                     </button>
                     <div class="flex items-center gap-3">
@@ -77,27 +77,26 @@
                     data: 'format_sppd',
                     className: '!text-left',
                     render: function(data, type, row) {
-                        return row.has_sppd ? row.format_sppd : 'SPPD belum dibuat';
+                        return row.sppd ? row.format_sppd : 'SPPD belum dibuat';
                     }
                 },
                 {
                     name: 'id',
                     data: 'id',
                     render: function(data, type, row) {
-                        const sppdUrl = `{{ route('sppd.create', ['spt' => 'replace']) }}`.replace('replace',
-                                data)
+                        const sppdUrl = `{{ route('sppd.create', ['spt' => 'replace']) }}`.replace('replace',data)
+
                         let buttons = '';
 
 
                         // Jika punya relasi SPPD → tampilkan tombol tambahan
-                        if (row.has_sppd) {
-                            const showUrl = `{{ route('sppd.show', ':id') }}`.replace(':id',
-                                data);
-                            const editUrl = `{{ route('sppd.edit', ':id') }}`.replace(':id',
-                                data);
-                            const printUrl = `{{ route('sppd.print', ':id') }}`.replace(':id',
-                                data);
-                            buttons = `<div class="flex items-center justify-center gap-3">
+                        if (row.sppd) {
+                            const showUrl = `{{ route('sppd.show', ':id') }}`.replace(':id', row.sppd.id);
+                            const editUrl = `{{ route('sppd.edit', ':id') }}`.replace(':id', row.sppd.id);
+                            const printUrl = `{{ route('sppd.print', ':id') }}`.replace(':id', row.sppd.id);
+
+                            
+                            buttons = `<div class="flex items-center justify-end gap-3">
                                     <div>
                                         <div>
                                             <a href="${showUrl}"
@@ -143,7 +142,7 @@
                                         </path>
                                     </svg>
                                     <p>
-                                        Buat Surat Perintah Dinas
+                                        Buat Surat Perjalanan Dinas
                                     </p>
                                 </a>`;
                         };

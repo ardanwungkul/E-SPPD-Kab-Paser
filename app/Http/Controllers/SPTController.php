@@ -33,7 +33,7 @@ class SPTController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = SPT::where('tahun', session('tahun'))->orderBy('nospt', 'desc')->get()
+            $data = SPT::with('sppd')->where('tahun', session('tahun'))->orderBy('nospt', 'desc')->get()
                 ->map(function ($item) {
                     $item->format_nomor = 'SPT-';
                     $nospt = str_pad($item->nospt, 3, '0', STR_PAD_LEFT);
@@ -94,7 +94,10 @@ class SPTController extends Controller
         $kecamatan = Kecamatan::all();
 
         $jenis = JenisPerjalanan::all();
-        return view('master.spt.create', compact('provinsi', 'kabkota', 'kecamatan', 'pegawai', 'program', 'kegiatan', 'bidang', 'subbidang', 'jenis'));
+
+        $oldnospt = SPT::where('tahun', session('tahun'))->max('nospt');
+        $nospt = $oldnospt ? $oldnospt + 1 : 1;
+        return view('master.spt.create', compact('provinsi', 'kabkota', 'kecamatan', 'pegawai', 'program', 'kegiatan', 'bidang', 'subbidang', 'jenis', 'nospt'));
     }
 
     private function getBulanRomawi($bulan)
@@ -150,14 +153,17 @@ class SPTController extends Controller
             ]
         );
 
-        $nomor_urut_terakhir = SPT::where('tahun', session('tahun'))->max('nospt');
-        $nomor_urut_baru = $nomor_urut_terakhir ? $nomor_urut_terakhir + 1 : 1;
-        $nospt = str_pad($nomor_urut_baru, 3, '0', STR_PAD_LEFT);
-
         $spt = new SPT();
+
+
         $spt->tahun = session('tahun');
-        $spt->nospt = $nospt;
-        $spt->urut = 1;
+        $spt->nospt = $request->nospt;
+
+        $lastUrut = SPT::where('tahun', $spt->tahun)
+            ->where('nospt', $spt->nospt)
+            ->max('urut');
+
+        $spt->urut  = $lastUrut ? $lastUrut + 1 : 1;
         $spt->nosurat = $request->nosurat;
 
         $spt->jenis_id = $request->jenis_sppd_id;
@@ -352,13 +358,9 @@ class SPTController extends Controller
             ]
         );
 
-        $nomor_urut_terakhir = SPT::where('tahun', session('tahun'))->max('nospt');
-        $nomor_urut_baru = $nomor_urut_terakhir ? $nomor_urut_terakhir + 1 : 1;
-        $nospt = str_pad($nomor_urut_baru, 3, '0', STR_PAD_LEFT);
-
         // $spt = new SPT();
         $spt->tahun = session('tahun');
-        $spt->nospt = $nospt;
+        // $spt->nospt = $nospt;
         $spt->urut = 1;
         $spt->nosurat = $request->nosurat;
 
@@ -438,6 +440,60 @@ class SPTController extends Controller
     public function print(SPT $spt)
     {
         $kop_surat = KopSurat::first();
+
+        $index = 1;
+        $tujuan = [];
+
+        while (true) {
+            $prov = $spt->{"provinsi_id{$index}"};
+            $provname = Provinsi::find($prov)->nama ?? null;
+            $kab  = $spt->{"kabkota_id{$index}"};
+            $kabname = KabupatenKota::find($kab)->nama ?? null;
+            $kec  = $spt->{"kecamatan_id{$index}"};
+            $kecname = Provinsi::find($kec)->nama ?? null;
+
+            if (!$prov) break;
+
+            $tujuan[] = [
+                'provinsi_id' => $prov,
+                'provinsi_name' => $provname,
+                'kabkota_id'  => $kab,
+                'kabkota_name' => $kabname,
+                'kecamatan_id' => $kec,
+                'kecamatan_name' => $kecname,
+            ];
+
+            $index++;
+        }
+
+        $spt->tujuan = $tujuan;
+
+        $spt->format_spt = 'SPT-';
+        $nospt = str_pad($spt->nospt, 3, '0', STR_PAD_LEFT);
+        $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
+        $config_no_spt = $config->no_spt;
+        $spt->format_spt = str_replace(
+            [
+                '{nomor_urut}',
+                '{lembaga}',
+                '{nomor_surat}',
+                '{bulan}',
+                '{tahun}'
+            ],
+            [
+                $nospt,
+                'DPRD',
+                $spt->nosurat,
+                $this->getBulanRomawi(Carbon::parse($spt->tglspt)->format('m')),
+                $spt->tahun
+            ],
+            $config_no_spt
+        );
+
+        $spt->jmlbahasa = $this->terbilang($spt->jmlhari);
+
+        // return view('master.spt.pdf', compact('spt', 'kop_surat'));
+
         $pdf = Pdf::loadView('master.spt.pdf', compact('spt', 'kop_surat'));
         $pdf->setOptions([
             'defaultFont' => 'Times New Roman',
@@ -447,6 +503,22 @@ class SPTController extends Controller
             'margin_left' => 30,
         ]);
         $pdf->setPaper('A4');
-        return $pdf->download('Surat Perintah Tugas ' . str_replace(['/', '\\'], '-', $spt->nomor) . '.pdf');
+        return $pdf->download('Surat Perintah Tugas ' . str_replace(['/', '\\'], '-', $spt->format_nomor) . '.pdf');
+    }
+
+    public function terbilang($angka)
+    {
+        $angka = abs($angka);
+        $baca = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"];
+
+        if ($angka < 12) {
+            return $baca[$angka];
+        } elseif ($angka < 20) {
+            return $this->terbilang($angka - 10) . " belas";
+        } elseif ($angka < 100) {
+            return $this->terbilang(intdiv($angka, 10)) . " puluh " . $this->terbilang($angka % 10);
+        }
+
+        return $angka;
     }
 }
