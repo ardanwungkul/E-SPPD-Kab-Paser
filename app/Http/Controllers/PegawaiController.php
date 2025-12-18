@@ -74,10 +74,10 @@ class PegawaiController extends Controller
         $pegawai->bidang_id = $request->bidang_id;
         $pegawai->bidang_sub_id = $request->sub_bidang_id;
         $pegawai->tingkat_id = $request->tingkat_id;
-        $pegawai->nomor_hp = $request->no_hp;
+        $pegawai->nomor_hp = $request->no_hp ?? '';
         $pegawai->jabatan = $request->jabatan;
-        $pegawai->alamat = $request->alamat;
-        $pegawai->keterangan = $request->keterangan;
+        $pegawai->alamat = $request->alamat ?? '';
+        $pegawai->keterangan = $request->keterangan ?? '';
         $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'T';
         $pegawai->aktif = 'T';
         $pegawai->save();
@@ -140,10 +140,10 @@ class PegawaiController extends Controller
         $pegawai->bidang_id = $request->bidang_id;
         $pegawai->bidang_sub_id = $request->sub_bidang_id;
         $pegawai->tingkat_id = $request->tingkat_id;
-        $pegawai->nomor_hp = $request->no_hp;
+        $pegawai->nomor_hp = $request->no_hp ?? '';
         $pegawai->jabatan = $request->jabatan;
-        $pegawai->alamat = $request->alamat;
-        $pegawai->keterangan = $request->keterangan;
+        $pegawai->alamat = $request->alamat ?? '';
+        $pegawai->keterangan = $request->keterangan ?? '';
         $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'T';
         $pegawai->aktif = $request->has('aktif') && $request->aktif == 'on' ? 'Y' : 'T';
         $pegawai->save();
