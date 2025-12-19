@@ -2,8 +2,27 @@
     $routeName = request()->route()->getName();
 
     $route = [
-        'transaksi' => ['spt.index', 'sppd.index'],
-        'laporan' => [],
+        'transaksi' => [
+            'spt.index', 
+            'spt.create', 
+            'spt.show', 
+            'spt.edit', 
+            'sppd.index',
+            'sppd.create',
+            'sppd.show',
+            'sppd.edit',
+            'rincian-biaya.index',
+            'rincian-biaya.create',
+            'rincian-biaya.edit'
+        ],
+        'laporan' => [
+            'realisasi-anggaran.index',
+            'realisasi-anggaran.create',
+            'realisasi-anggaran.edit',
+            'monitoring-sppd.index',
+            'monitoring-sppd.create',
+            'monitoring-sppd.edit'
+        ],
         'data-tahunan' => [
             'pegawai.index',
             'pegawai.create',
@@ -144,7 +163,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('sppd.index') }}"
+                        <a href="{{ route('rincian-biaya.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +206,7 @@
                 <div id="accordion-collapse-body-laporan" class="hidden bg-secondary-3 border-y border-gray-300"
                     aria-labelledby="accordion-collapse-heading-laporan">
                     <li>
-                        <a href="{{ route('spt.index') }}"
+                        <a href="{{ route('realisasi-anggaran.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +219,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('spt.index') }}"
+                        <a href="{{ route('monitoring-sppd.index') }}"
                             class="relative flex flex-row items-center h-9 focus:outline-none hover:bg-gray-50 text-secondary-1 hover:text-gray-800 border-l-4 border-transparent hover:border-secondary-1 pr-6 pl-3">
                             <span class="inline-flex justify-center items-center ml-4">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

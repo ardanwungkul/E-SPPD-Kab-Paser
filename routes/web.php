@@ -9,11 +9,14 @@ use App\Http\Controllers\KabupatenKotaController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KonfigurasiController;
+use App\Http\Controllers\MonitoringSPPDController;
 use App\Http\Controllers\NotaDinasController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ProvinsiController;
+use App\Http\Controllers\RiilAnggaranController;
+use App\Http\Controllers\RincianBiayaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SPPDController;
 use App\Http\Controllers\SPTController;
@@ -67,6 +70,10 @@ Route::middleware('auth')->group(function () {
     Route::get('spt-cetak/{spt}', [SPTController::class, 'print'])->name('spt.print');
     Route::resource('sppd', SPPDController::class);
     Route::get('sppd-cetak/{sppd}', [SPPDController::class, 'print'])->name('sppd.print');
+    Route::resource('rincian-biaya', RincianBiayaController::class);
+
+    Route::resource('realisasi-anggaran', RiilAnggaranController::class);
+    Route::resource('monitoring-sppd', MonitoringSPPDController::class);
 
     Route::resource('standar-uang-harian', StandarUangHarianController::class)->names('suh')->parameters(['standar-uang-harian' => 'suh']);
     Route::resource('anggaran-tahunan', AnggaranController::class)->names('anggaran')->parameters(['anggaran-tahunan' => 'anggaran']);
