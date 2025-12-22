@@ -62,10 +62,13 @@ class SPPDController extends Controller
                 ->where('tahun', session('tahun'))
                 ->get()
                 ->sortBy(function ($item) {
-                    return $item->sppd ? 1 : 0;
-                })
-                ->sortByDesc(function ($item) {
-                    return $item->sppd->nosppd ?? 0;
+                    return [
+                        // 0 = tidak punya sppd (paling atas)
+                        $item->sppd ? 1 : 0,
+
+                        // nosppd DESC → pakai minus
+                        - ($item->sppd->nosppd ?? 0),
+                    ];
                 })
                 ->values()
                 ->map(function ($item) {
