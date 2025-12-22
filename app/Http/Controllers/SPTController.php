@@ -71,10 +71,16 @@ class SPTController extends Controller
     public function create(Request $request)
     {
         $pegawai = Pegawai::with('pangkat')
-            ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->leftJoin('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->orderByRaw('
+                CASE 
+                    WHEN pegawai.pangkat_id IS NULL OR pegawai.pangkat_id = 0 THEN 1
+                    ELSE 0
+                END
+            ')
             ->orderBy('ref_pangkat.jnspeg', 'asc')
             ->orderBy('ref_pangkat.kdgol', 'desc')
-            ->orderBy('nama', 'asc')
+            ->orderBy('pegawai.nama', 'asc')
             ->select('pegawai.*')
             ->get();
 
@@ -314,10 +320,16 @@ class SPTController extends Controller
         $spt->tujuan = $tujuan;
 
         $pegawai = Pegawai::with('pangkat')
-            ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->leftJoin('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->orderByRaw('
+                CASE 
+                    WHEN pegawai.pangkat_id IS NULL OR pegawai.pangkat_id = 0 THEN 1
+                    ELSE 0
+                END
+            ')
             ->orderBy('ref_pangkat.jnspeg', 'asc')
             ->orderBy('ref_pangkat.kdgol', 'desc')
-            ->orderBy('nama', 'asc')
+            ->orderBy('pegawai.nama', 'asc')
             ->select('pegawai.*')
             ->get();
 
@@ -375,7 +387,7 @@ class SPTController extends Controller
         // $spt = new SPT();
         $spt->tahun = session('tahun');
         // $spt->nospt = $nospt;
-        $spt->urut = 1;
+        // $spt->urut = 1;
         $spt->nosurat = $request->nosurat ?? 0;
 
         $spt->tglspt = $request->penandatangan_tanggal;

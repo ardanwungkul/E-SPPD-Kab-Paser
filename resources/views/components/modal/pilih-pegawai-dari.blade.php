@@ -47,7 +47,7 @@
                                             <p>{{ $item->jabatan }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat->uraian }} - {{ $item->pangkat->kdgol }}</p>
+                                            <p>{{ $item->pangkat?->uraian }} - {{ $item->pangkat?->kdgol }}</p>
                                         </td>
                                         <td>
                                             <div class="flex justify-center items-center gap-3">

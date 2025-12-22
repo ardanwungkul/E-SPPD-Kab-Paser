@@ -203,8 +203,11 @@ class SPPDController extends Controller
         $kabkota = KabupatenKota::all();
         $kecamatan = Kecamatan::all();
 
+        $oldnosppd = SPPD::where('tahun', session('tahun'))->max('nosppd');
+        $nosppd = $oldnosppd ? $oldnosppd + 1 : 1;
+
         // dd($spt);
-        return view('master.sppd.create', compact('spt', 'tingkat', 'provinsi', 'kabkota', 'kecamatan'));
+        return view('master.sppd.create', compact('spt', 'tingkat', 'provinsi', 'kabkota', 'kecamatan', 'nosppd'));
     }
 
     /**
@@ -226,6 +229,14 @@ class SPPDController extends Controller
         $sppd = new SPPD;
 
         $sppd->tahun = session('tahun');
+
+        $sppd->nosppd = $request->nosppd;
+
+        $lastUrut = SPT::where('tahun', $sppd->tahun)
+            ->where('nospt', $sppd->nosppd)
+            ->max('urut');
+
+        $sppd->urut  = $lastUrut ? $lastUrut + 1 : 1;
 
         $noakhir = SPPD::where('tahun', session('tahun'))->max('nosppd');
         $sppd->nosppd = $noakhir ? $noakhir + 1 : 1;

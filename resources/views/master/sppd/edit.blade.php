@@ -194,6 +194,12 @@
                     </legend>
                     <div class="pt-3 mx-auto text-sm">
                         <div class="grid grid-cols-1 gap-5">
+                            <div class="flex items-center gap-3">
+                                <label class=" flex basis-1/5 mr-8" for="nosppd">Nomor SPPD</label>
+                                <input type="text" name="nosppd" id="nosppd" value="{{ $sppd->nosppd }}" disabled
+                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    placeholder="Masukkan Nomor SPPD" required>
+                            </div>
                             <div class=" flex items-center gap-4">
                                 <label class=" flex-none basis-1/5 mr-8" for="penandatangan_tanggal" class="block mb-1">Tanggal
                                     SPT

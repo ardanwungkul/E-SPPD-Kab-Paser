@@ -48,7 +48,7 @@
                                             <p>{{ $item->jabatan }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat->uraian }} - {{ $item->pangkat->kdgol }}</p>
+                                            <p>{{ $item->pangkat?->uraian }} - {{ $item->pangkat?->kdgol }}</p>
                                         </td>
                                         <td>
                                             <p>
