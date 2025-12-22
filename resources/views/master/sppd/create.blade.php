@@ -149,7 +149,7 @@
                                     <tbody>
                                         @foreach ($spt->pegawai->skip(1) as $item)
                                             <tr>
-                                                <td class=" pt-3 align-top">{{ $item->pegawai_idx + 1 }}</td>
+                                                <td class=" pt-3 align-top">{{ $loop->iteration }}</td>
                                                 <td class=" pt-3 align-top">{{ $item->nama }}</td>
                                                 <td class=" pt-3 align-top">
                                                     {{ in_array($item->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }}
