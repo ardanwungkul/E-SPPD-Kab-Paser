@@ -14,10 +14,16 @@ class PegawaiController extends Controller
     public function index()
     {
         $data = Pegawai::with('pangkat')
-            ->join('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->leftJoin('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
+            ->orderByRaw('
+                CASE 
+                    WHEN pegawai.pangkat_id IS NULL OR pegawai.pangkat_id = 0 THEN 1
+                    ELSE 0
+                END
+            ')
             ->orderBy('ref_pangkat.jnspeg', 'asc')
             ->orderBy('ref_pangkat.kdgol', 'desc')
-            ->orderBy('nama', 'asc')
+            ->orderBy('pegawai.nama', 'asc')
             ->select('pegawai.*')
             ->get();
         return view('master.pegawai.index', compact('data'));
@@ -43,12 +49,10 @@ class PegawaiController extends Controller
     {
         $request->validate(
             [
-                'nip' => 'required|max:21',
+                'nip' => 'max:21',
                 'nama' => 'required|max:70',
-                'pangkat_id' => 'required',
                 'bidang_id' => 'required',
-                'tingkat_id' => 'required',
-                'jabatan' => 'required|max:70',
+                'jabatan' => 'max:70',
                 'no_hp' => 'max:30',
                 'keterangan' => 'max:70',
             ],
@@ -67,19 +71,19 @@ class PegawaiController extends Controller
             ]
         );
         $pegawai = new Pegawai();
-        $pegawai->nip = $request->nip;
+        $pegawai->nip = $request->nip ?? '';
         $pegawai->nama = $request->nama;
         $pegawai->jnspeg_id = $request->jenis_pegawai_id;
-        $pegawai->pangkat_id = $request->pangkat_id;
+        $pegawai->pangkat_id = $request->pangkat_id ?? 0;
         $pegawai->bidang_id = $request->bidang_id;
         $pegawai->bidang_sub_id = $request->sub_bidang_id;
-        $pegawai->tingkat_id = $request->tingkat_id;
+        $pegawai->tingkat_id = $request->tingkat_id ?? 0;
         $pegawai->nomor_hp = $request->no_hp ?? '';
-        $pegawai->jabatan = $request->jabatan;
+        $pegawai->jabatan = $request->jabatan ?? '';
         $pegawai->alamat = $request->alamat ?? '';
         $pegawai->keterangan = $request->keterangan ?? '';
         $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'T';
-        $pegawai->aktif = 'T';
+        $pegawai->aktif = 'Y';
         $pegawai->save();
         return redirect()->route('pegawai.index')->with(['success' => 'Berhasil Menambahkan Pegawai']);
     }
@@ -110,12 +114,10 @@ class PegawaiController extends Controller
     {
         $request->validate(
             [
-                'nip' => 'required|max:21',
+                'nip' => 'max:21',
                 'nama' => 'required|max:70',
-                'pangkat_id' => 'required',
                 'bidang_id' => 'required',
-                'tingkat_id' => 'required',
-                'jabatan' => 'required|max:70',
+                'jabatan' => 'max:70',
                 'no_hp' => 'max:30',
                 'keterangan' => 'max:70',
             ],
@@ -133,15 +135,15 @@ class PegawaiController extends Controller
                 'keterangan.max' => 'Maksimal Nama adalah 70 Karakter',
             ]
         );
-        $pegawai->nip = $request->nip;
+        $pegawai->nip = $request->nip ?? '';
         $pegawai->nama = $request->nama;
         $pegawai->jnspeg_id = $request->jenis_pegawai_id;
-        $pegawai->pangkat_id = $request->pangkat_id;
+        $pegawai->pangkat_id = $request->pangkat_id ?? 0;
         $pegawai->bidang_id = $request->bidang_id;
         $pegawai->bidang_sub_id = $request->sub_bidang_id;
-        $pegawai->tingkat_id = $request->tingkat_id;
+        $pegawai->tingkat_id = $request->tingkat_id ?? 0;
         $pegawai->nomor_hp = $request->no_hp ?? '';
-        $pegawai->jabatan = $request->jabatan;
+        $pegawai->jabatan = $request->jabatan ?? '';
         $pegawai->alamat = $request->alamat ?? '';
         $pegawai->keterangan = $request->keterangan ?? '';
         $pegawai->ststtd = $request->has('ttd_default') && $request->ttd_default == 'on' ? 'Y' : 'T';

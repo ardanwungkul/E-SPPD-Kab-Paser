@@ -25,6 +25,10 @@ class Pegawai extends Model
     {
         return $this->belongsTo(Bidang::class, 'bidang_id');
     }
+    public function jenispegawai()
+    {
+        return $this->belongsTo(JenisPegawai::class, 'jnspeg_id');
+    }
     public function tingkat()
     {
         return $this->belongsTo(TingkatPerjalananDinas::class, 'tingkat_id');

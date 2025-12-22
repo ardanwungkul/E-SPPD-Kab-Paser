@@ -58,7 +58,16 @@ class SPPDController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = SPT::with('sppd')->where('tahun', session('tahun'))->orderBy('nospt', 'desc')->get()
+            $data = SPT::with('sppd')
+                ->where('tahun', session('tahun'))
+                ->get()
+                ->sortBy(function ($item) {
+                    return $item->sppd ? 1 : 0;
+                })
+                ->sortByDesc(function ($item) {
+                    return $item->sppd->nosppd ?? 0;
+                })
+                ->values()
                 ->map(function ($item) {
                     $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
 

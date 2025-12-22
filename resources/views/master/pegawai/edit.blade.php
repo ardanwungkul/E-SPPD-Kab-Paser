@@ -15,7 +15,7 @@
                             <option value="" selected disabled>Pilih Jenis Pegawai</option>
                             @foreach ($jenis_pegawai as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ $item->id == $pegawai->pangkat->jnspeg ? 'selected' : '' }}>
+                                    {{ $item->id == $pegawai->jnspeg_id ? 'selected' : '' }}>
                                     {{ $item->uraian }}</option>
                             @endforeach
                         </select>
@@ -33,12 +33,12 @@
                     <div class="text-xs md:text-sm space-y-3 max-w-xl mx-auto">
                         <div class="flex flex-col gap-1">
                             <label id="nip_nik"
-                                for="nip">{{ in_array($pegawai->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }}</label>
+                                for="nip">{{ in_array($pegawai->jnspeg_id, [3, 4, 8]) ? 'NIP' : 'NIK' }}</label>
                             <input type="text" id="nip" name="nip"
                                 class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
                                 value="{{ $pegawai->nip }}"
-                                placeholder="Masukkan {{ in_array($pegawai->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }} Pegawai"
-                                required>
+                                placeholder="Masukkan {{ in_array($pegawai->jnspeg_id, [3, 4, 8]) ? 'NIP' : 'NIK' }} Pegawai"
+                                >
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="nama">Nama</label>
@@ -80,9 +80,9 @@
                         <div class="flex flex-col gap-1">
                             <label for="pangkat_id">Pangkat/Golongan</label>
                             <select name="pangkat_id" id="pangkat_id"
-                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2" required>
+                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2">
                                 <option value="" selected disabled>Pilih Pangkat/Golongan</option>
-                                @foreach ($pegawai->pangkat->jenis_pegawai->pangkat as $item)
+                                @foreach ($pegawai->jenispegawai->pangkat as $item)
                                     <option value="{{ $item->id }}"
                                         {{ $item->id == $pegawai->pangkat_id ? 'selected' : '' }}>{{ $item->uraian }}
                                     </option>
@@ -92,7 +92,7 @@
                         <div class="flex flex-col gap-1">
                             <label for="tingkat_id">Tingkat</label>
                             <select name="tingkat_id" id="tingkat_id"
-                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2" required>
+                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2">
                                 <option value="" selected disabled>Pilih Tingkat</option>
                                 @foreach ($tingkat as $item)
                                     <option value="{{ $item->id }}"
@@ -181,7 +181,7 @@
         selectionCssClass: 'text-xs md:text-sm',
     });
 
-    let currentMode = "{{ in_array($pegawai->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }}";
+    let currentMode = "{{ in_array($pegawai->jnspeg_id, [3, 4, 8]) ? 'NIP' : 'NIK' }}";
 
     function formatNIP(value) {
         // Hanya angka

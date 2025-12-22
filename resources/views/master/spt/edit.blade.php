@@ -367,7 +367,7 @@
                         </legend>
                         <div class="pt-3 mx-auto">
                             <div class="grid grid-cols-1 gap-5">
-                                <div class=" flex items-center">
+                                <div class=" flex items-center gap-3">
                                     <label class=" flex basis-1/5 items-start" for="penandatangan_tanggal"
                                         class="block mb-1">Tanggal SPT
                                     </label>
@@ -375,7 +375,7 @@
                                         value="{{ $spt->tglspt }}"
                                         class=" w-3/5 rounded-lg text-sm border border-secondary-4" required>
                                 </div>
-                                <div class=" flex items-center">
+                                <div class=" flex items-center gap-3">
                                     <label class=" flex basis-1/5 items-start" for="penandatangan_tanggal"
                                         class="block mb-1">Ditanda Tangani Oleh</label>
                                     <input type="text" id="penandatangan_keterangan"

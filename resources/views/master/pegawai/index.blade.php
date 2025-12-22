@@ -35,13 +35,13 @@
                                             <p>{{ $item->jabatan }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat->jenis_pegawai->uraian }}</p>
+                                            <p>{{ $item->pangkat?->jenis_pegawai->uraian }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat->kdgol }}</p>
+                                            <p>{{ $item->pangkat?->kdgol }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat->uraian }}</p>
+                                            <p>{{ $item->pangkat?->uraian }}</p>
                                         </td>
                                         <td>
                                             <div>

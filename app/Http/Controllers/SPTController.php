@@ -18,6 +18,7 @@ use App\Models\SPTDasar;
 use App\Models\SPTPegawai;
 use App\Models\SPTUntuk;
 use App\Models\SubBidang;
+use App\Models\SubKegiatan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -89,6 +90,15 @@ class SPTController extends Controller
                 $query->where('bidang_id', Auth::user()->bidang_id);
             })->get();
 
+        $subkegiatan = SubKegiatan::where('tahun', session('tahun'))
+            ->when(Auth::user()->level < 3, function ($query) {
+                $query->whereHas('anggaran', function ($q) {
+                    $q->where('bidang_id', Auth::user()->bidang_id);
+                });
+            })
+            ->get();
+
+
         $provinsi = Provinsi::all();
         $kabkota = KabupatenKota::all();
         $kecamatan = Kecamatan::all();
@@ -97,7 +107,7 @@ class SPTController extends Controller
 
         $oldnospt = SPT::where('tahun', session('tahun'))->max('nospt');
         $nospt = $oldnospt ? $oldnospt + 1 : 1;
-        return view('master.spt.create', compact('provinsi', 'kabkota', 'kecamatan', 'pegawai', 'program', 'kegiatan', 'bidang', 'subbidang', 'jenis', 'nospt'));
+        return view('master.spt.create', compact('provinsi', 'kabkota', 'kecamatan', 'pegawai', 'program', 'kegiatan', 'subkegiatan', 'bidang', 'subbidang', 'jenis', 'nospt'));
     }
 
     private function getBulanRomawi($bulan)
@@ -137,7 +147,7 @@ class SPTController extends Controller
                 'sub_kegiatan_id' => 'required',
                 'sub_bidang_id' => 'required',
                 'jenis_sppd_id' => 'required',
-                'berkas' => 'required|file|mimes:pdf,jpg,jpeg,png|max:1024',
+                'berkas' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:1024',
             ],
             [
                 'dasar.required' => 'Minimal harus Mengisi 1 Dasar!',
@@ -164,7 +174,7 @@ class SPTController extends Controller
             ->max('urut');
 
         $spt->urut  = $lastUrut ? $lastUrut + 1 : 1;
-        $spt->nosurat = $request->nosurat;
+        $spt->nosurat = $request->nosurat ?? 0;
 
         $spt->jenis_id = $request->jenis_sppd_id;
 
@@ -256,7 +266,11 @@ class SPTController extends Controller
             $pegawai->save();
         }
 
-        return redirect()->route('spt.show', $spt->id)->with(['success' => 'Berhasil Membuat Surat Perintah Tugas']);
+        if ($request->sppd) {
+            return redirect()->route('sppd.create', ['spt' => $spt->id])->with(['success' => 'Berhasil Membuat Surat Perintah Tugas']);
+        } else {
+            return redirect()->route('spt.show', $spt->id)->with(['success' => 'Berhasil Membuat Surat Perintah Tugas']);
+        }
     }
 
     /**
@@ -362,7 +376,7 @@ class SPTController extends Controller
         $spt->tahun = session('tahun');
         // $spt->nospt = $nospt;
         $spt->urut = 1;
-        $spt->nosurat = $request->nosurat;
+        $spt->nosurat = $request->nosurat ?? 0;
 
         $spt->tglspt = $request->penandatangan_tanggal;
         $spt->pejabat_ttd = $request->penandatangan_id;

@@ -32,6 +32,7 @@
             enctype="multipart/form-data">
             @csrf
             @method('POST')
+            <input type="hidden" name="sppd" value="{{ request('sppd') }}">
             <input type="hidden" name="is_dprd" value="{{ request()->lembaga == 'dprd' ? 'dprd' : null }}">
             <x-container>
                 <x-slot name="content">
@@ -87,6 +88,9 @@
                                 <select name="sub_kegiatan_id" id="sub_kegiatan_id" class="text-sm rounded-lg select2"
                                     required>
                                     <option value="" selected disabled> Pilih Sub. Kegiatan</option>
+                                    @foreach ($subkegiatan as $item)
+                                        <option value="{{$item->kdsub}}">{{$item->kdsub}} - {{$item->uraian}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -136,7 +140,7 @@
                                     <div id="filename" class=" line-clamp-1"></div>
                                 </div>
                                 <input type="file" name="berkas" id="berkas"
-                                    accept="application/pdf,.jpg,.jpeg,.png" class="opacity-0 w-0 h-0" required>
+                                    accept="application/pdf,.jpg,.jpeg,.png" class="opacity-0 w-0 h-0">
                                 <div class=" w-5 h-5 text-secondary-1 mr-1">
                                     <svg class=" w-full h-full" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 640 640">
@@ -163,7 +167,7 @@
                             <label class=" flex basis-1/5 items-start" for="nospt">Nomor SPT</label>
                             <input type="text" name="nospt" id="nospt" value="{{$nospt}}"
                                 class="  w-3/5 text-sm rounded-lg border border-secondary-4 text-secondary-1"
-                                placeholder="Masukkan Nomor SPT">
+                                placeholder="Masukkan Nomor SPT" required>
                         </div>
                         <div class="flex items-center gap-3">
                             <label class=" flex basis-1/5 items-start" for="nosurat">Nomor Surat</label>
@@ -716,6 +720,8 @@
 {{-- Select 2 --}}
 <script type="module">
     $(document).ready(function() {
+        let isAutoChanging = false;
+
         $('.select2').select2({
             width: '60%',
             dropdownCssClass: "text-sm",
@@ -893,8 +899,10 @@
             const subBidangId = $(this).val();
 
             if (subBidangId) {
-                $('#sub_kegiatan_id').prop('disabled', true)
-                    .html('<option selected disabled>Memuat...</option>');
+                if (!isAutoChanging) {
+                    $('#sub_kegiatan_id').prop('disabled', true)
+                        .html('<option selected disabled>Memuat...</option>');
+                }
 
                 $.ajax({
                     url: "{{ route('get.bidang.by.sub-bidang') }}",
@@ -907,40 +915,43 @@
                     }
                 });
 
-                $.ajax({
-                    url: "{{ route('get.sub-kegiatan.by.sub-bidang') }}",
-                    type: "GET",
-                    data: {
-                        sub_bidang_id: subBidangId
-                    },
-                    success: function(response) {
-                        $('#sub_kegiatan_id').empty();
-                        $('#sub_kegiatan_id').append(
-                            '<option value="" selected disabled>Pilih Sub. Kegiatan</option>'
-                        );
-
-                        if (response.length > 0) {
-                            $.each(response, function(index, subkegiatan) {
-                                $('#sub_kegiatan_id').append('<option value="' +
-                                    subkegiatan.kdsub + '">' + subkegiatan
-                                    .kdsub + ' - ' + subkegiatan.uraian +
-                                    '</option>');
-                            });
-
-                            $('#sub_kegiatan_id').prop('disabled', false);
-                        } else {
+                if (!isAutoChanging) {
+                    $.ajax({
+                        url: "{{ route('get.sub-kegiatan.by.sub-bidang') }}",
+                        type: "GET",
+                        data: {
+                            sub_bidang_id: subBidangId
+                        },
+                        success: function(response) {
+                            $('#sub_kegiatan_id').empty();
                             $('#sub_kegiatan_id').append(
-                                '<option value="" disabled>Tidak ada Sub. Kegiatan tersedia</option>'
+                                '<option value="" selected disabled>Pilih Sub. Kegiatan</option>'
                             );
-
+    
+                            if (response.length > 0) {
+                                $.each(response, function(index, subkegiatan) {
+                                    $('#sub_kegiatan_id').append('<option value="' +
+                                        subkegiatan.kdsub + '">' + subkegiatan
+                                        .kdsub + ' - ' + subkegiatan.uraian +
+                                        '</option>');
+                                });
+    
+                                $('#sub_kegiatan_id').prop('disabled', false);
+                            } else {
+                                $('#sub_kegiatan_id').append(
+                                    '<option value="" disabled>Tidak ada Sub. Kegiatan tersedia</option>'
+                                );
+    
+                                $('#sub_kegiatan_id').prop('disabled', false);
+                            }
+                        },
+                        error: function(xhr) {
                             $('#sub_kegiatan_id').prop('disabled', false);
+                            console.error(xhr.responseText);
                         }
-                    },
-                    error: function(xhr) {
-                        $('#sub_kegiatan_id').prop('disabled', false);
-                        console.error(xhr.responseText);
-                    }
-                });
+                    });
+                }
+
             } else {
                 $('#sub_kegiatan_id').empty();
                 $('#sub_kegiatan_id').append(
@@ -961,10 +972,16 @@
                         sub_kegiatan_id: subKegiatanId
                     },
                     success: function(response) {
+                        isAutoChanging = true;
+
                         $('#anggaran').val('Rp. ' + response.anggaran.total_anggaran)
                             .trigger('change');
                         $('#sisa').val('Rp. ' + response.anggaran.total_anggaran)
                             .trigger('change');
+                        $('#sub_bidang_id').val(response.anggaran.bidang_sub_id)
+                            .trigger('change');
+
+                        isAutoChanging = false;
                     }
                 });
 

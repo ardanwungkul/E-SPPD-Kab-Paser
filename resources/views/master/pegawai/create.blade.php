@@ -33,7 +33,7 @@
                             <label id="nip_nik" for="nip">NIP</label>
                             <input type="text" id="nip" name="nip"
                                 class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md"
-                                value="{{ old('nip') }}" placeholder="Masukkan NIP Pegawai" required>
+                                value="{{ old('nip') }}" placeholder="Masukkan NIP Pegawai">
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="nama">Nama</label>
@@ -61,14 +61,14 @@
                         <div class="flex flex-col gap-1">
                             <label for="pangkat_id">Pangkat/Golongan</label>
                             <select name="pangkat_id" id="pangkat_id"
-                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2" required>
+                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2">
                                 <option value="" selected disabled>Pilih Pangkat/Golongan</option>
                             </select>
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="tingkat_id">Tingkat</label>
                             <select name="tingkat_id" id="tingkat_id"
-                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2" required>
+                                class="text-xs md:text-sm rounded-lg border border-gray-300 shadow-md select2">
                                 <option value="" selected disabled>Pilih Tingkat</option>
                                 @foreach ($tingkat as $item)
                                     <option value="{{ $item->id }}">{{ $item->uraian }}</option>

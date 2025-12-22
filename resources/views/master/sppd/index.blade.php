@@ -29,8 +29,8 @@
                         <table id="datatable" class="text-sm hover stripe row-border">
                             <thead class="bg-secondary-3 text-secondary-2 font-medium">
                                 <tr>
-                                    <th class="text-xs">Nomor SPT</th>
                                     <th class="text-xs">Nomor SPPD</th>
+                                    <th class="text-xs">Nomor SPT</th>
                                     <th class="text-xs w-32"></th>
                                 </tr>
                             </thead>
@@ -68,17 +68,17 @@
                 url: `{{ route('sppd.index') }}`,
             },
             columns: [{
-                    name: 'format_nomor',
-                    data: 'format_nomor',
-                    className: '!text-left'
-                },
-                {
                     name: 'format_sppd',
                     data: 'format_sppd',
                     className: '!text-left',
                     render: function(data, type, row) {
                         return row.sppd ? row.format_sppd : 'SPPD belum dibuat';
                     }
+                },
+                {
+                    name: 'format_nomor',
+                    data: 'format_nomor',
+                    className: '!text-left'
                 },
                 {
                     name: 'id',
