@@ -125,22 +125,27 @@
                         {{-- Anggaran --}}
                         <div class=" w-full flex flex-col gap-3">
                             <div class="flex items-center gap-3">
-                                <label class=" flex basis-1/5 items-start" for="anggaran">Anggaran Pagu</label>
-                                <input type="text" name="anggaran" id="anggaran" value="Rp. 0"
-                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
-                                    placeholder="Jumlah Anggaran" disabled>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <label class=" flex basis-1/5 items-start" for="realisasi">Jumlah Realisasi</label>
-                                <input type="text" name="realisasi" id="realisasi" value="Rp. 0"
-                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
-                                    placeholder="Jumlah Realisasi">
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <label class=" flex basis-1/5 items-start" for="sisa">Sisa Anggaran</label>
-                                <input type="text" name="sisa" id="sisa" value="Rp. 0"
-                                    class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
-                                    placeholder="Sisa Anggaran" disabled>
+                                <label class=" flex basis-1/5 items-start" for="anggaran">Anggaran</label>
+                                <div class=" w-3/5 grid grid-cols-3 gap-3">
+                                    <div class=" w-full flex flex-col gap-1">
+                                        <label class=" flex items-start" for="anggaran">Anggaran Pagu</label>
+                                        <input type="text" name="anggaran" id="anggaran" value="Rp. 0"
+                                            class=" w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                            placeholder="Jumlah Anggaran" disabled>
+                                    </div>
+                                    <div class=" w-full flex flex-col gap-1">
+                                        <label class=" flex items-start" for="realisasi">Jumlah Realisasi</label>
+                                        <input type="text" name="realisasi" id="realisasi" value="Rp. 0"
+                                            class=" w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                            placeholder="Jumlah Realisasi">
+                                    </div>
+                                    <div class=" w-full flex flex-col gap-1">
+                                        <label class=" flex items-start" for="sisa">Sisa Anggaran</label>
+                                        <input type="text" name="sisa" id="sisa" value="Rp. 0"
+                                            class=" w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                            placeholder="Sisa Anggaran" disabled>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="w-full border-t pb-3 mt-3">
