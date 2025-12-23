@@ -238,8 +238,8 @@ class SPPDController extends Controller
 
         $sppd->urut  = $lastUrut ? $lastUrut + 1 : 1;
 
-        $noakhir = SPPD::where('tahun', session('tahun'))->max('nosppd');
-        $sppd->nosppd = $noakhir ? $noakhir + 1 : 1;
+        // $noakhir = SPPD::where('tahun', session('tahun'))->max('nosppd');
+        // $sppd->nosppd = $noakhir ? $noakhir + 1 : 1;
 
         $sppd->spt_id = $request->spt;
         $sppd->angkutan = $request->angkutan;
