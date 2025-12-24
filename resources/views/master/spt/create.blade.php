@@ -170,9 +170,16 @@
                         {{-- Nomor Surat --}}
                         <div class="flex items-center gap-3">
                             <label class=" flex basis-1/5 items-start" for="nospt">Nomor SPT</label>
-                            <input type="text" name="nospt" id="nospt" value="{{$nospt}}"
-                                class="  w-3/5 text-sm rounded-lg border border-secondary-4 text-secondary-1"
-                                placeholder="Masukkan Nomor SPT" required>
+                            @php
+                                [$left, $right] = explode('{nomor_urut}', $format);
+                            @endphp
+                            <div class=" flex items-center gap-2">
+                                {{ $left }}
+                                <input type="text" name="nospt" id="nospt" value="{{$nospt}}"
+                                    class=" w-12 text-sm rounded-lg border border-secondary-4 text-secondary-1"
+                                    placeholder="Masukkan Nomor SPT" required>
+                                {{ $right }}
+                            </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <label class=" flex basis-1/5 items-start" for="nosurat">Nomor Surat</label>

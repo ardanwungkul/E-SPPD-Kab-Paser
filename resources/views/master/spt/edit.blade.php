@@ -191,10 +191,16 @@
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                         <div class="flex items-center gap-3">
                             <label class=" flex basis-1/5 items-start" for="nospt">Nomor SPT</label>
-                            <input type="text" name="nospt" id="nospt" value="{{ $spt->nospt }}"
-                                disabled
-                                class=" w-3/5 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
-                                placeholder="Masukkan Nomor Surat">
+                            @php
+                                [$left, $right] = explode('{nomor_urut}', $format);
+                            @endphp
+                            <div class=" flex items-center gap-2">
+                                {{ $left }}
+                                <input type="text" name="nospt" id="nospt" value="{{ str_pad($spt->nospt, 3, '0', STR_PAD_LEFT) }}" disabled
+                                    class=" w-12 text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1"
+                                    placeholder="Masukkan Nomor SPT" required>
+                                {{ $right }}
+                            </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <label class=" flex basis-1/5 items-start" for="nosurat">Nomor Surat</label>

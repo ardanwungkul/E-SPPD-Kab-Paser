@@ -26,7 +26,10 @@ class PegawaiController extends Controller
             ->orderBy('pegawai.nama', 'asc')
             ->select('pegawai.*')
             ->get();
-        return view('master.pegawai.index', compact('data'));
+
+        $jenis_pegawai = JenisPegawai::all();
+        $pangkat = Golongan::all();
+        return view('master.pegawai.index', compact('data', 'jenis_pegawai', 'pangkat'));
     }
 
 

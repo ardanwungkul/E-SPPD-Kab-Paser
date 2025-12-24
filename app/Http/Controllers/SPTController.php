@@ -111,9 +111,19 @@ class SPTController extends Controller
 
         $jenis = JenisPerjalanan::all();
 
+        $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
+        $format = $config->no_spt;
+        $format = str_replace(
+            ['{bulan}', '{lembaga}', '{tahun}'],
+            [
+                'Bulan SPT', 'Tahun SPT'
+            ],
+            $format
+        );
+
         $oldnospt = SPT::where('tahun', session('tahun'))->max('nospt');
         $nospt = $oldnospt ? $oldnospt + 1 : 1;
-        return view('master.spt.create', compact('provinsi', 'kabkota', 'kecamatan', 'pegawai', 'program', 'kegiatan', 'subkegiatan', 'bidang', 'subbidang', 'jenis', 'nospt'));
+        return view('master.spt.create', compact('format', 'provinsi', 'kabkota', 'kecamatan', 'pegawai', 'program', 'kegiatan', 'subkegiatan', 'bidang', 'subbidang', 'jenis', 'nospt'));
     }
 
     private function getBulanRomawi($bulan)
@@ -349,8 +359,20 @@ class SPTController extends Controller
         $kabkota = KabupatenKota::all();
         $kecamatan = Kecamatan::all();
 
+        $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
+        $format = $config->no_spt;
+        $format = str_replace(
+            ['{bulan}', '{lembaga}', '{tahun}'],
+            [
+                $this->getBulanRomawi(\Carbon\Carbon::parse($spt->tglspt)->format('m')),
+                'DPRD',
+                $spt->tahun
+            ],
+            $format
+        );
+
         $jenis = JenisPerjalanan::all();
-        return view('master.spt.edit', compact('spt', 'pegawai', 'program', 'kegiatan', 'bidang', 'subbidang', 'kegiatan', 'jenis', 'provinsi', 'kabkota', 'kecamatan'));
+        return view('master.spt.edit', compact('spt', 'format', 'pegawai', 'program', 'kegiatan', 'bidang', 'subbidang', 'kegiatan', 'jenis', 'provinsi', 'kabkota', 'kecamatan'));
     }
 
     /**

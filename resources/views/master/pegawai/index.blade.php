@@ -7,6 +7,47 @@
         <x-slot name="content">
             <div>
                 <x-button.add-button :route="route('pegawai.create')" />
+                <div class=" flex gap-3 mb-5">
+                    <select id="jnspeg" class="text-sm rounded-lg select2" required>
+                        <option value="" selected>Semua Jenis Pegawai</option>
+                        @foreach ($jenis_pegawai as $item)
+                            <option value="{{$item->uraian}}">{{$item->uraian}}</option>
+                        @endforeach
+                    </select>
+                    <select id="pangkatgol" class="text-sm rounded-lg select2" required>
+                        <option value="" selected>Semua Pangkat/Gol.</option>
+                        @foreach ($pangkat as $item)
+                            <option value="{{$item->uraian}} - {{$item->kdgol}}">{{$item->uraian}} - {{$item->kdgol}}</option>
+                        @endforeach
+                    </select>
+                    <select id="status" class="text-sm rounded-lg select2" required>
+                        <option value="" selected>Semua Status</option>
+                        <option value="aktif">Aktif</option>
+                        <option value="tidak aktif">Tidak Aktif</option>
+                    </select>
+                    <button
+                        id="reset-filter"
+                        type="button"
+                        class=" h-6 text-secondary-1 px-3 text-xs rounded-lg border border-gray-300 hover:bg-gray-100 shadow-lg duration-300">
+                        Reset
+                    </button>
+                    <style>
+                        .select2-container--default
+                            .select2-selection--single
+                            .select2-selection__rendered {
+                            line-height: inherit !important;
+                            padding-top: 3px !important;
+                        }
+                        .select2-container--default
+                            .select2-selection--single
+                            .select2-selection__arrow {
+                            top: 0 !important;
+                        }
+                        .select2-container--default .select2-selection--single {
+                            height: 24px !important;
+                        }
+                    </style>
+                </div>
                 <div class="pb-20">
                     <div class="rounded-lg overflow-hidden shadow-lg border border-secondary-4">
                         <table id="datatable" class="text-sm hover stripe row-border">
@@ -16,8 +57,7 @@
                                     <td class="text-xs">Nama</td>
                                     <td class="text-xs">Jabatan</td>
                                     <td class="text-xs">Jenis Pegawai</td>
-                                    <td class="text-xs">Golongan</td>
-                                    <td class="text-xs">Pangkat</td>
+                                    <td class="text-xs">Pangkat/Gol.</td>
                                     <td class="text-xs">Status</td>
                                     <td class="text-xs w-32"></td>
                                 </tr>
@@ -38,10 +78,7 @@
                                             <p>{{ $item->pangkat?->jenis_pegawai->uraian }}</p>
                                         </td>
                                         <td>
-                                            <p>{{ $item->pangkat?->kdgol }}</p>
-                                        </td>
-                                        <td>
-                                            <p>{{ $item->pangkat?->uraian }}</p>
+                                            <p>{{ $item->pangkat?->uraian }} - {{ $item->pangkat?->kdgol }}</p>
                                         </td>
                                         <td>
                                             <div>
@@ -111,6 +148,11 @@
 </style>
 <script type="module">
     $(document).ready(function() {
+        $('.select2').select2({
+            widht: '100%',
+            dropdownCssClass: "text-xs",
+            selectionCssClass: 'text-xs',
+        });
 
         var table = $('#datatable').DataTable({
             info: false,
@@ -188,6 +230,24 @@
             if (modal) {
                 modal.hide();
             }
+        });
+        $('#jnspeg').on('change', function () {
+        table.column(3).search(this.value).draw();
+        });
+
+        $('#pangkatgol').on('change', function () {
+            table.column(4).search(this.value).draw();
+        });
+
+        $('#status').on('change', function () {
+            table.column(5).search(this.value).draw();
+        });
+        $('#reset-filter').on('click', function () {
+            $('#jnspeg, #pangkatgol, #status')
+                .val(null)
+                .trigger('change');
+
+            table.columns().search('').draw();
         });
     });
 </script>
