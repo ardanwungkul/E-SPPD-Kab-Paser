@@ -68,6 +68,7 @@ class SPPDController extends Controller
 
                         // nosppd DESC → pakai minus
                         - ($item->sppd->nosppd ?? 0),
+                        - ($item->sppd->urut ?? 0),
                     ];
                 })
                 ->values()

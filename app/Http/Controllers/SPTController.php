@@ -34,7 +34,7 @@ class SPTController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = SPT::with('sppd')->where('tahun', session('tahun'))->orderBy('nospt', 'desc')->get()
+            $data = SPT::with('sppd')->where('tahun', session('tahun'))->orderBy('nospt', 'desc')->orderBy('urut', 'desc')->get()
                 ->map(function ($item) {
                     $item->format_nomor = 'SPT-';
                     $nospt = str_pad($item->nospt, 3, '0', STR_PAD_LEFT);
