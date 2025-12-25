@@ -175,7 +175,7 @@
                             @endphp
                             <div class=" flex items-center gap-2">
                                 {{ $left }}
-                                <input type="text" name="nospt" id="nospt" value="{{$nospt}}"
+                                <input type="text" name="nospt" id="nospt" value="{{ str_pad($nospt, 3, '0', STR_PAD_LEFT) }}"
                                     class=" w-12 text-sm rounded-lg border border-secondary-4 text-secondary-1"
                                     placeholder="Masukkan Nomor SPT" required>
                                 {{ $right }}
