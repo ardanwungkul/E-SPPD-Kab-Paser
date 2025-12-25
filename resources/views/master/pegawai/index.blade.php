@@ -145,6 +145,14 @@
         top: 20px;
         right: 16px
     }
+
+    @media only screen and (max-width: 768px) {
+        .dt-input, .dt-search {
+            top: 50px;
+            right: 0;
+            padding: 0 20px;
+        }
+    }
 </style>
 <script type="module">
     $(document).ready(function() {
