@@ -10,6 +10,10 @@ class SPT extends Model
     use HasFactory;
     protected $table = 'spt_main';
 
+    public function jenis_sppd() 
+    {
+        return $this->belongsTo(JenisPerjalanan::class, 'jenis_id'); 
+    }
     public function sub_bidang()
     {
         return $this->belongsTo(SubBidang::class, 'bidang_sub_id');

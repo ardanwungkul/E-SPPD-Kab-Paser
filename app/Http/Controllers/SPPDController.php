@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Config;
-use App\Models\KabupatenKota;
-use App\Models\Kecamatan;
 use App\Models\KopSurat;
 use App\Models\Provinsi;
+use App\Models\KabupatenKota;
+use App\Models\Kecamatan;
 use App\Models\SPPD;
 use App\Models\SPT;
 use App\Models\TingkatPerjalananDinas;
@@ -147,7 +147,7 @@ class SPPDController extends Controller
             $kab  = $spt->{"kabkota_id{$index}"};
             $kabname = KabupatenKota::find($kab)->nama ?? null;
             $kec  = $spt->{"kecamatan_id{$index}"};
-            $kecname = Provinsi::find($kec)->nama ?? null;
+            $kecname = Kecamatan::find($kec)->nama ?? null;
 
             if (!$prov) break;
 
@@ -266,7 +266,7 @@ class SPPDController extends Controller
             $kab  = $sppd->spt->{"kabkota_id{$index}"};
             $kabname = KabupatenKota::find($kab)->nama ?? null;
             $kec  = $sppd->spt->{"kecamatan_id{$index}"};
-            $kecname = Provinsi::find($kec)->nama ?? null;
+            $kecname = Kecamatan::find($kec)->nama ?? null;
 
             if (!$prov) break;
 
@@ -313,7 +313,7 @@ class SPPDController extends Controller
             $kab  = $sppd->spt->{"kabkota_id{$index}"};
             $kabname = KabupatenKota::find($kab)->nama ?? null;
             $kec  = $sppd->spt->{"kecamatan_id{$index}"};
-            $kecname = Provinsi::find($kec)->nama ?? null;
+            $kecname = Kecamatan::find($kec)->nama ?? null;
 
             if (!$prov) break;
 
@@ -419,7 +419,7 @@ class SPPDController extends Controller
             $kab  = $sppd->spt->{"kabkota_id{$index}"};
             $kabname = KabupatenKota::find($kab)->nama ?? null;
             $kec  = $sppd->spt->{"kecamatan_id{$index}"};
-            $kecname = Provinsi::find($kec)->nama ?? null;
+            $kecname = Kecamatan::find($kec)->nama ?? null;
 
             if (!$prov) break;
 

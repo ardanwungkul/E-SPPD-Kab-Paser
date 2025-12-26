@@ -311,7 +311,7 @@ class SPTController extends Controller
             $kab  = $spt->{"kabkota_id{$index}"};
             $kabname = KabupatenKota::find($kab)->nama ?? null;
             $kec  = $spt->{"kecamatan_id{$index}"};
-            $kecname = Provinsi::find($kec)->nama ?? null;
+            $kecname = Kecamatan::find($kec)->nama ?? null;
 
             if (!$prov) break;
 
@@ -498,7 +498,7 @@ class SPTController extends Controller
             $kab  = $spt->{"kabkota_id{$index}"};
             $kabname = KabupatenKota::find($kab)->nama ?? null;
             $kec  = $spt->{"kecamatan_id{$index}"};
-            $kecname = Provinsi::find($kec)->nama ?? null;
+            $kecname = Kecamatan::find($kec)->nama ?? null;
 
             if (!$prov) break;
 
