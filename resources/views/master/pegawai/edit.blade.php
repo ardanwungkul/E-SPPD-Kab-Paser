@@ -60,7 +60,7 @@
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="sub_bidang_id">Sub. {{ session('config')->judul }}</label>
-                            <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2">
+                            <select name="sub_bidang_id" id="sub_bidang_id" class="text-sm rounded-lg select2" required>
                                 <option value="" selected disabled> Pilih Sub. {{ session('config')->judul }}
                                 </option>
                                 @if ($pegawai->bidang_sub_id)
