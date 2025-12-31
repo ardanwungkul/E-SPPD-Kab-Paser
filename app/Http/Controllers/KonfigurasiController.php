@@ -127,18 +127,30 @@ class KonfigurasiController extends Controller
         $kop_surat->dprd_header_4 = $request->dprd_header_4;
         if ($request->hasFile('dprd_logo')) {
 
+            // Hapus logo lama jika ada
             if ($kop_surat->dprd_logo) {
-                $old_file_dprd_logo = 'public/' . $kop_surat->dprd_logo;
-                if (Storage::exists($old_file_dprd_logo)) {
-                    Storage::delete($old_file_dprd_logo);
+                $oldPath = public_path($kop_surat->dprd_logo);
+
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
 
+            $file = $request->file('dprd_logo');
+            $fileName = time() . '_' . mt_rand(100, 999) . '_' . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
 
-            $file_dprd = $request->file('dprd_logo');
-            $nama_file_dprd = time() . '_' . mt_rand(100, 999) . '_' . mt_rand(100, 999) . '.' . $file_dprd->getClientOriginalExtension();
-            $file_dprd->storeAs('public/uploads/gambar/kop_surat', $nama_file_dprd);
-            $kop_surat->dprd_logo = 'uploads/gambar/kop_surat/' . $nama_file_dprd;
+            $uploadPath = public_path('uploads/gambar/kop_surat');
+
+            // Buat folder jika belum ada
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
+            }
+
+            // Simpan file
+            $file->move($uploadPath, $fileName);
+
+            // Simpan path ke database
+            $kop_surat->dprd_logo = 'uploads/gambar/kop_surat/' . $fileName;
         }
 
         $kop_surat->setwan_header_1 = $request->setwan_header_1;
@@ -147,18 +159,30 @@ class KonfigurasiController extends Controller
         $kop_surat->setwan_header_4 = $request->setwan_header_4;
         if ($request->hasFile('setwan_logo')) {
 
+            // Hapus logo lama jika ada
             if ($kop_surat->setwan_logo) {
-                $old_file_setwan_logo = 'public/' . $kop_surat->setwan_logo;
-                if (Storage::exists($old_file_setwan_logo)) {
-                    Storage::delete($old_file_setwan_logo);
+                $oldPath = public_path($kop_surat->setwan_logo);
+
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
 
+            $file = $request->file('setwan_logo');
+            $fileName = time() . '_' . mt_rand(100, 999) . '_' . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
 
-            $file_setwan = $request->file('setwan_logo');
-            $nama_file_setwan = time() . '_' . mt_rand(100, 999) . '_' . mt_rand(100, 999) . '.' . $file_setwan->getClientOriginalExtension();
-            $file_setwan->storeAs('public/uploads/gambar/kop_surat', $nama_file_setwan);
-            $kop_surat->setwan_logo = 'uploads/gambar/kop_surat/' . $nama_file_setwan;
+            $uploadPath = public_path('uploads/gambar/kop_surat');
+
+            // Buat folder jika belum ada
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
+            }
+
+            // Simpan file
+            $file->move($uploadPath, $fileName);
+
+            // Simpan path ke database
+            $kop_surat->setwan_logo = 'uploads/gambar/kop_surat/' . $fileName;
         }
         $kop_surat->save();
         return redirect()->back()->with(['success' => 'Berhasil Mengubah Kop Surat']);

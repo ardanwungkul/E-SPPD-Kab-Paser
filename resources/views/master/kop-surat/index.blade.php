@@ -20,7 +20,7 @@
                                         <div class="h-28 relative group">
                                             <label for="dprd_logo" class="cursor-pointer">
                                                 <img id="dprd_logo_preview"
-                                                    src="{{ $kop_surat->dprd_logo && file_exists(public_path('storage/' . $kop_surat->dprd_logo)) ? asset('storage/' . $kop_surat->dprd_logo) : asset('assets/images/placeholder-potrait.png') }}"
+                                                   src="{{ $kop_surat->dprd_logo && file_exists(public_path($kop_surat->dprd_logo))? asset($kop_surat->dprd_logo): asset('assets/images/placeholder-potrait.png')}}"
                                                     alt="Preview Gambar" class="w-full h-28 object-cover" />
                                                 <div
                                                     class="absolute w-full h-full bg-black/20 top-0 rounded-lg hidden group-hover:block cursor-pointer">
@@ -71,7 +71,7 @@
                                         <div class="h-28 relative group">
                                             <label for="setwan_logo" class="cursor-pointer">
                                                 <img id="setwan_logo_preview"
-                                                    src="{{ $kop_surat->setwan_logo && file_exists(public_path('storage/' . $kop_surat->setwan_logo)) ? asset('storage/' . $kop_surat->setwan_logo) : asset('assets/images/placeholder-potrait.png') }}"
+                                                    src="{{ $kop_surat->setwan_logo && file_exists(public_path($kop_surat->setwan_logo))? asset($kop_surat->setwan_logo): asset('assets/images/placeholder-potrait.png')}}"
                                                     alt="Preview Gambar" class="w-full h-28 object-cover" />
                                                 <div
                                                     class="absolute w-full h-full bg-black/20 top-0 rounded-lg hidden group-hover:block cursor-pointer">

@@ -42,17 +42,21 @@
             <tr>
                 <td>
 
-                    @if ($spt->is_dprd)
+                    @if ($sppd->spt->is_dprd)
                         <img style="width: 70px;"
-                            src="{{ $kop_surat->dprd_logo && file_exists(public_path('storage/' . $kop_surat->dprd_logo))
-                                ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('storage/' . $kop_surat->dprd_logo)))
-                                : 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('assets/images/logo-ppu.png'))) }}"
+                            src="{{ 
+                                $kop_surat->dprd_logo && file_exists(public_path($kop_surat->dprd_logo))
+                                ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path($kop_surat->dprd_logo)))
+                                : 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('assets/images/logo-ppu.png')))
+                            }}"
                             class="w-full h-28 object-cover" />
                     @else
                         <img style="width: 70px;"
-                            src="{{ $kop_surat->setwan_logo && file_exists(public_path('storage/' . $kop_surat->setwan_logo))
-                                ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('storage/' . $kop_surat->setwan_logo)))
-                                : 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('assets/images/logo-ppu.png'))) }}"
+                            src="{{ 
+                                $kop_surat->setwan_logo && file_exists(public_path($kop_surat->setwan_logo))
+                                ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path($kop_surat->setwan_logo)))
+                                : 'data:image/jpeg;base64,' . base64_encode(file_get_contents(public_path('assets/images/logo-ppu.png')))
+                            }}"
                             class="w-full h-28 object-cover" />
                     @endif
 

@@ -24,7 +24,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class SPTController extends Controller
@@ -117,8 +116,7 @@ class SPTController extends Controller
         $format = str_replace(
             ['{bulan}', '{lembaga}', '{tahun}'],
             [
-                'Bulan SPT',
-                'Tahun SPT'
+                'Bulan SPT', 'Tahun SPT'
             ],
             $format
         );
@@ -239,28 +237,20 @@ class SPTController extends Controller
         }
 
 
-        if ($request->hasFile('berkas')) {
-
-            // Hapus berkas lama jika ada
-            if ($spt->path_spt) {
-                $oldPath = 'public/' . $spt->path_spt;
-
-                if (Storage::exists($oldPath)) {
-                    Storage::delete($oldPath);
-                }
-            }
-
+        if ($request->berkas) {
             $file = $request->file('berkas');
 
             $fileName = now()->format('m-d-His') . '.' . $file->getClientOriginalExtension();
 
-            // Path: storage/app/public/{Y}/spt
-            $folder = date('Y') . '/spt';
+            $destination = public_path('storage/' . date('Y') . '/spt');
 
-            $file->storeAs('public/' . $folder, $fileName);
+            if (!is_dir($destination)) {
+                mkdir($destination, 0755, true);
+            }
 
-            // Simpan path RELATIF
-            $spt->path_spt = $folder . '/' . $fileName;
+            $file->move($destination, $fileName);
+
+            $spt->path_spt = 'storage/' . date('Y') . '/spt/' . $fileName;
         }
 
         $spt->save();
@@ -432,29 +422,24 @@ class SPTController extends Controller
         $kembali = Carbon::parse($request->tanggal_kembali);
 
         $spt->jmlhari = $berangkat->diffInDays($kembali) + 1;
-        
-        if ($request->hasFile('berkas')) {
-
+        if ($request->berkas) {
             $file = $request->file('berkas');
 
-            // Hapus berkas lama jika ada
-            if ($spt->path_spt) {
-                $oldPath = 'public/' . $spt->path_spt;
-
-                if (Storage::exists($oldPath)) {
-                    Storage::delete($oldPath);
-                }
+            if ($spt->path_spt && file_exists(public_path($spt->path_spt))) {
+                unlink(public_path($spt->path_spt));
             }
 
             $fileName = now()->format('m-d-His') . '.' . $file->getClientOriginalExtension();
 
-            // Folder: storage/app/public/{Y}/spt
-            $folder = date('Y') . '/spt';
+            $destination = public_path('storage/' . date('Y') . '/spt');
 
-            $file->storeAs('public/' . $folder, $fileName);
+            if (!is_dir($destination)) {
+                mkdir($destination, 0755, true);
+            }
 
-            // Simpan path RELATIF (tanpa "public/" dan tanpa "storage/")
-            $spt->path_spt = $folder . '/' . $fileName;
+            $file->move($destination, $fileName);
+
+            $spt->path_spt = 'storage/' . date('Y') . '/spt/' . $fileName;
         }
 
         $spt->save();

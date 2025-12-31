@@ -148,7 +148,7 @@
                                                 class="flex text-sm rounded-full md:me-0 focus:ring-2" type="button">
                                                 <span class="sr-only">Open Menu</span>
                                                 <img class="w-8 h-8 rounded-full"
-                                                    src="{{ Auth::user()->photo ? asset('storage/'. Auth::user()->photo) : asset('assets/images/placeholder-image.jpg') }}"
+                                                    src="{{ Auth::user()->photo ? asset('storage/user/'. Auth::user()->photo) : asset('assets/images/placeholder-image.jpg') }}"
                                                     alt="User Photo">
                                             </button>
 
