@@ -50,7 +50,7 @@ class SPTController extends Controller
                         ],
                         [
                             $nospt,
-                            'DPRD',
+                            'BKAD',
                             $item->nosurat,
                             $this->getBulanRomawi(Carbon::parse($item->tglspt)->format('m')),
                             $item->tahun
@@ -365,7 +365,7 @@ class SPTController extends Controller
             ['{bulan}', '{lembaga}', '{tahun}'],
             [
                 $this->getBulanRomawi(\Carbon\Carbon::parse($spt->tglspt)->format('m')),
-                'DPRD',
+                'BKAD',
                 $spt->tahun
             ],
             $format
@@ -530,7 +530,7 @@ class SPTController extends Controller
             ],
             [
                 $nospt,
-                'DPRD',
+                'BKAD',
                 $spt->nosurat,
                 $this->getBulanRomawi(Carbon::parse($spt->tglspt)->format('m')),
                 $spt->tahun

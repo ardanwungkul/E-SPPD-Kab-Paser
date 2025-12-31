@@ -87,7 +87,7 @@ class SPPDController extends Controller
                         ],
                         [
                             $nospt,
-                            'DPRD',
+                            'BKAD',
                             $item->nosurat,
                             $this->getBulanRomawi(Carbon::parse($item->tglspt)->format('m')),
                             $item->tahun
@@ -110,7 +110,7 @@ class SPPDController extends Controller
                             ],
                             [
                                 $nosppd,
-                                'DPRD',
+                                'BKAD',
                                 $item->nosurat,
                                 $this->getBulanRomawi(Carbon::parse($item->sppd->created_at)->format('m')),
                                 $item->tahun
@@ -179,7 +179,7 @@ class SPPDController extends Controller
             ],
             [
                 $nospt,
-                'DPRD',
+                'BKAD',
                 $spt->nosurat,
                 $this->getBulanRomawi(Carbon::parse($spt->tglspt)->format('m')),
                 $spt->tahun
@@ -345,7 +345,7 @@ class SPPDController extends Controller
             ],
             [
                 $nospt,
-                'DPRD',
+                'BKAD',
                 $sppd->spt->nosurat,
                 $this->getBulanRomawi(Carbon::parse($sppd->spt->tglspt)->format('m')),
                 $sppd->spt->tahun
@@ -451,7 +451,7 @@ class SPPDController extends Controller
             ],
             [
                 $nosppd,
-                'DPRD',
+                'BKAD',
                 123,
                 $this->getBulanRomawi(Carbon::parse($sppd->created_at)->format('m')),
                 $sppd->tahun
