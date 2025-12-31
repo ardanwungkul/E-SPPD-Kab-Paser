@@ -42,7 +42,7 @@
             <tr>
                 <td>
 
-                    @if ($sppd->spt->is_dprd)
+                    @if ($spt->is_dprd)
                         <img style="width: 70px;"
                             src="{{ 
                                 $kop_surat->dprd_logo && file_exists(public_path($kop_surat->dprd_logo))
