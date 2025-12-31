@@ -11,7 +11,7 @@
                     </legend>
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                         <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start" for="pegawai_id">Nama Pegawai</label>
+                            <label class=" flex-none basis-1/5 items-start" for="pegawai_id">Nama Pegawai</label>
                             <select name="pegawai_id" id="pegawai_id" class="text-sm rounded-lg select2"
                                 required>
                                 <option value="" selected disabled>Pilih Pegawai</option>
@@ -21,11 +21,11 @@
                             </select>
                         </div>
                         <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start" for="jenis_sppd_id">Nomor SPD</label>
+                            <label class=" flex-none basis-1/5 items-start" for="jenis_sppd_id">Nomor SPD</label>
                             <div class=" flex"><span class=" w-4">:</span> {{$sppd->format_sppd}}</div>
                         </div>
                         <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start" for="jenis_sppd_id">Tujuan</label>
+                            <label class=" flex-none basis-1/5 items-start" for="jenis_sppd_id">Tujuan</label>
                             <table class=" flex-grow">
                                 <thead>
                                     <tr class=" text-left">
@@ -57,16 +57,16 @@
                         Kegiatan
                     </legend>
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
-                        <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start">Nomor Kegiatan</label>
+                        <div class="flex items-start gap-3">
+                            <label class=" flex-none basis-1/5 items-start">Nomor Kegiatan</label>
                             <div class=" flex"><span class=" w-4">:</span> {{$sppd->spt->kdgiat_sub}} - {{$sppd->spt->sub_kegiatan->uraian}}</div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start">Kode Rekening</label>
+                        <div class="flex items-start gap-3">
+                            <label class=" flex-none basis-1/5 items-start">Kode Rekening</label>
                             <div class=" flex"><span class=" w-4">:</span> {{$sppd->kd_rek}}</div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start">Kegiatan</label>
+                        <div class="flex items-start gap-3">
+                            <label class=" flex-none basis-1/5 items-start">Kegiatan</label>
                             <div class=" flex"><span class=" w-4">:</span> Perjalanan Dinas {{$sppd->spt->jenis_sppd->uraian}}</div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                         <div id="listTujuan" class=" flex flex-col gap-3">
                             <div class="flex items-start gap-3">
-                                <label class=" flex basis-1/5 items-start pt-3" for="nosurat">Rincian Ke 1</label>
+                                <label class=" flex-none basis-1/5 items-start pt-3" for="nosurat">Rincian Ke 1</label>
                                 <div class="  w-3/5 flex flex-col gap-3 tujuan-item">
                                     <input type="text" name="uraian" id="uraian"
                                         class=" w-full text-sm rounded-lg border border-secondary-4 text-secondary-1"
@@ -118,7 +118,7 @@
                     </legend>
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                         <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start" for="pelaksana_id">Pejabat Pelaksana</label>
+                            <label class=" flex-none basis-1/5 items-start" for="pelaksana_id">Pejabat Pelaksana</label>
                             <select name="pelaksana_id" id="pelaksana_id" class="text-sm rounded-lg select2"
                                 required>
                                 <option value="" selected disabled>Pilih Pejabat Pelaksana</option>
@@ -128,7 +128,7 @@
                             </select>
                         </div>
                         <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start" for="bendahara_id">Bendahara Pengeluaran</label>
+                            <label class=" flex-none basis-1/5 items-start" for="bendahara_id">Bendahara Pengeluaran</label>
                             <select name="bendahara_id" id="bendahara_id" class="text-sm rounded-lg select2"
                                 required>
                                 <option value="" selected disabled>Pilih Bendahara Pengeluaran</option>
@@ -138,7 +138,7 @@
                             </select>
                         </div>
                         <div class="flex items-center gap-3">
-                            <label class=" flex basis-1/5 items-start" for="pembuat_id">Pembuat Rincian</label>
+                            <label class=" flex-none basis-1/5 items-start" for="pembuat_id">Pembuat Rincian</label>
                             <select name="pembuat_id" id="pembuat_id" class="text-sm rounded-lg select2"
                                 required>
                                 <option value="" selected disabled>Pilih Pembuat Rincian</option>
@@ -149,6 +149,14 @@
                         </div>
                     </div>
                 </fieldset>
+            </x-slot>
+        </x-container>
+        <x-container>
+            <x-slot name="content">
+                <div class="flex justify-end items-center gap-4 col-span-2 text-sm mx-auto">
+                    <x-button.save-button />
+                    <x-button.back-button :route="route('spt.index')" />
+                </div>
             </x-slot>
         </x-container>
     </form>

@@ -19,7 +19,7 @@
                         <div class="relative rounded-lg">
                             <img id="fotoPegawai"
                                 class="object-cover w-40 h-40 rounded-lg border border-gray-300 cursor-pointer"
-                                src="{{ $user->photo ? asset('storage/user/' . $user->photo) : asset('assets/images/placeholder-image.jpg') }}"
+                                src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('assets/images/placeholder-image.jpg') }}"
                                 alt="">
                             <div class="absolute z-10 top-0 rounded-lg opacity-0 hover:opacity-100 cursor-pointer">
                                 <label for="fotoPegawaiInput" class="rounded-lg cursor-pointer">

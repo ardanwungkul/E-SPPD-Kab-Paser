@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -34,28 +35,22 @@ class ProfileController extends Controller
 
             // Hapus foto lama jika ada
             if ($request->user()->photo) {
-                $path = public_path('storage/user/' . $request->user()->photo);
+                $oldPath = 'public/user/' . $request->user()->photo;
 
-                if (file_exists($path)) {
-                    unlink($path);
+                if (Storage::exists($oldPath)) {
+                    Storage::delete($oldPath);
                 }
             }
 
             $imageFile = $request->file('foto');
-            $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
+            $imageName = time() . '_' . mt_rand(100, 999) . '.'
+                . $imageFile->getClientOriginalExtension();
 
-            $imagePath = public_path('storage/user/');
+            // Simpan file ke storage/app/public/user
+            $imageFile->storeAs('public/user', $imageName);
 
-            // Buat folder jika belum ada (tanpa File facade)
-            if (!is_dir($imagePath)) {
-                mkdir($imagePath, 0755, true);
-            }
-
-            // Simpan file langsung tanpa proses GD
-            $imageFile->move($imagePath, $imageName);
-
-            // Simpan nama file
-            $request->user()->photo = $imageName;
+            // Simpan path RELATIF (tanpa "public/")
+            $request->user()->photo = 'user/' . $imageName;
         }
 
         $request->user()->save();

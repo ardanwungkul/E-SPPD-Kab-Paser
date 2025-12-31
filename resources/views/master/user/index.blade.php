@@ -30,7 +30,7 @@
                                 @foreach ($data as $item)
                                     <tr class="text-xs">
                                         <td>
-                                            <img class=" w-14 h-14 rounded-lg" src="{{ $item->photo ? asset('storage/user/' . $item->photo) : asset('assets/images/placeholder-image.jpg') }}" alt="">
+                                            <img class=" w-14 min-w-14 h-14 rounded-lg" src="{{ $item->photo ? asset('storage/' . $item->photo) : asset('assets/images/placeholder-image.jpg') }}" alt="">
                                         </td>
                                         <td>
                                             <p>{{ $item->name }}</p>
