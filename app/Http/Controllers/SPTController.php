@@ -86,13 +86,11 @@ class SPTController extends Controller
 
         $program = Program::where('tahun', session('tahun'))->get();
         $kegiatan = Kegiatan::where('tahun', session('tahun'))->get();
-        $bidang = Bidang::where('tahun', session('tahun'))
-            ->when(Auth::user()->level < 3, function ($query) {
+        $bidang = Bidang::when(Auth::user()->level < 3, function ($query) {
                 $query->where('id', Auth::user()->bidang_id);
             })->get();
 
-        $subbidang = SubBidang::where('tahun', session('tahun'))
-            ->when(Auth::user()->level < 3, function ($query) {
+        $subbidang = SubBidang::when(Auth::user()->level < 3, function ($query) {
                 $query->where('bidang_id', Auth::user()->bidang_id);
             })->get();
 
@@ -345,13 +343,11 @@ class SPTController extends Controller
 
         $program = Program::where('tahun', session('tahun'))->get();
         $kegiatan = Kegiatan::where('tahun', session('tahun'))->get();
-        $bidang = Bidang::where('tahun', session('tahun'))
-            ->when(Auth::user()->level < 3, function ($query) {
+        $bidang = Bidang::when(Auth::user()->level < 3, function ($query) {
                 $query->where('id', Auth::user()->bidang_id);
             })->get();
 
-        $subbidang = SubBidang::where('tahun', session('tahun'))
-            ->when(Auth::user()->level < 3, function ($query) {
+        $subbidang = SubBidang::when(Auth::user()->level < 3, function ($query) {
                 $query->where('bidang_id', Auth::user()->bidang_id);
             })->get();
 

@@ -17,7 +17,7 @@ class UserController extends Controller
     }
     public function create()
     {
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::all();
 
         return view('master.user.create', compact('bidang'));
     }
@@ -28,7 +28,7 @@ class UserController extends Controller
     }
     public function edit(User $user)
     {
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::all();
         return view('master.user.edit', compact('user', 'bidang'));
     }
     public function store(Request $request)

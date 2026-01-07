@@ -56,8 +56,7 @@ class AnggaranController extends Controller
     public function create(Request $request)
     {
         $program = Program::where('tahun', session('tahun'))->get();
-        $bidang = Bidang::where('tahun', session('tahun'))
-            ->when(Auth::user()->level < 3, function ($query) {
+        $bidang = Bidang::when(Auth::user()->level < 3, function ($query) {
                 $query->where('id', Auth::user()->bidang_id);
             })->get();
 
@@ -121,7 +120,7 @@ class AnggaranController extends Controller
     public function edit(Anggaran $anggaran)
     {
         $program = Program::where('tahun', session('tahun'))->get();
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::all();
         return view('master.anggaran.edit', compact('anggaran', 'program', 'bidang'));
     }
 

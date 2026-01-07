@@ -40,7 +40,7 @@ class PegawaiController extends Controller
     {
         $jenis_pegawai = JenisPegawai::all();
         $tingkat = TingkatPerjalananDinas::all();
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::all();
         return view('master.pegawai.create', compact('tingkat', 'jenis_pegawai', 'bidang'));
     }
 
@@ -108,7 +108,7 @@ class PegawaiController extends Controller
     {
         $jenis_pegawai = JenisPegawai::all();
         $tingkat = TingkatPerjalananDinas::all();
-        $bidang = Bidang::where('tahun', session('tahun'))->get();
+        $bidang = Bidang::all();
         return view('master.pegawai.edit', compact('pegawai', 'tingkat', 'jenis_pegawai', 'bidang'));
     }
 
