@@ -14,11 +14,18 @@ class AnggaranController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Bidang::where('tahun', session('tahun'))->whereHas('sub_bidang', function ($query) {
-            $query->whereHas('anggaran');
-        })->with(['sub_bidang' => function ($query) {
-            $query->whereHas('anggaran');
-        }]);
+        $query = Bidang::whereHas('sub_bidang', function ($q) {
+                $q->whereHas('anggaran', function ($q) {
+                    $q->where('tahun', session('tahun'));
+                });
+            })
+            ->with([
+                'sub_bidang' => function ($q) {
+                    $q->with(['anggaran' => function ($q) {
+                        $q->where('tahun', session('tahun'));
+                    }]);
+                }
+            ]);
 
         if ($request->has('q') && $request->q != '') {
             $query->where(function ($query) use ($request) {
@@ -39,6 +46,7 @@ class AnggaranController extends Controller
         }
 
         $data = $query->get();
+
         return view('master.anggaran.index', compact('data'));
     }
 
@@ -81,17 +89,17 @@ class AnggaranController extends Controller
             $anggaran->bidang_id = $request->bidang_id;
             $anggaran->bidang_sub_id = $request->sub_bidang_id;
 
-            $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1);
-            $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2);
-            $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3);
+            $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1 ?? 0);
+            $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2 ?? 0);
+            $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3 ?? 0);
 
             $anggaran->tahun = session('tahun');
             $anggaran->save();
         } else {
 
-            $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1);
-            $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2);
-            $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3);
+            $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1 ?? 0);
+            $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2 ?? 0);
+            $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3 ?? 0);
 
             $anggaran->save();
         }
@@ -122,9 +130,9 @@ class AnggaranController extends Controller
      */
     public function update(Request $request, Anggaran $anggaran)
     {
-        $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1);
-        $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2);
-        $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3);
+        $anggaran->rp_pagu1 = preg_replace('/[^0-9-]/', '', $request->rp_pagu1 ?? 0);
+        $anggaran->rp_pagu2 = preg_replace('/[^0-9-]/', '', $request->rp_pagu2 ?? 0);
+        $anggaran->rp_pagu3 = preg_replace('/[^0-9-]/', '', $request->rp_pagu3 ?? 0);
 
         $anggaran->save();
 

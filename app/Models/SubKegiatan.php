@@ -16,17 +16,34 @@ class SubKegiatan extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where($field ?? 'kdsub', $value)
+            ->where('tahun', session('tahun'))
+            ->firstOrFail();
+    }
+
+    protected function setKeysForSaveQuery($query)
+    {
+        return $query
+            ->where('kdsub', $this->getOriginal('kdsub')) // ⬅️ id LAMA
+            ->where('tahun', $this->getOriginal('tahun') ?? session('tahun'));
+    }
+
     public function program()
     {
-        return $this->belongsTo(Program::class, 'kdprog');
+        return $this->belongsTo(Program::class, 'kdprog')
+            ->where('tahun', session('tahun'));
     }
     public function kegiatan()
     {
-        return $this->belongsTo(Kegiatan::class, 'kdgiat');
+        return $this->belongsTo(Kegiatan::class, 'kdgiat')
+            ->where('tahun', session('tahun'));
     }
     public function anggaran() 
     {
-        return $this->hasMany(Anggaran::class, 'kdsub');    
+        return $this->hasMany(Anggaran::class, 'kdsub')
+            ->where('tahun', session('tahun'));
     }
     public function getFormattedKodeAttribute()
     {

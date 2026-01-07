@@ -13,4 +13,8 @@ class SPPD extends Model
     public function spt() {
         return $this->belongsTo(SPT::class, 'spt_id');
     }
+
+    public function rincian_biaya() {
+        return $this->hasMany(RincianBiaya::class, 'sppd_id');
+    }
 }

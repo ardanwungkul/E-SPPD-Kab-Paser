@@ -14,9 +14,24 @@ class Kegiatan extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where($field ?? 'kdgiat', $value)
+            ->where('tahun', session('tahun'))
+            ->firstOrFail();
+    }
+
+    protected function setKeysForSaveQuery($query)
+    {
+        return $query
+            ->where('kdgiat', $this->getOriginal('kdgiat')) // ⬅️ id LAMA
+            ->where('tahun', $this->getOriginal('tahun') ?? session('tahun'));
+    }
+
     public function program()
     {
-        return $this->belongsTo(Program::class, 'kdprog');
+        return $this->belongsTo(Program::class, 'kdprog')
+            ->where('tahun', session('tahun'));
     }
 
     public function getFormattedKodeAttribute()
@@ -25,7 +40,8 @@ class Kegiatan extends Model
     }
     public function sub_kegiatan()
     {
-        return $this->hasMany(SubKegiatan::class, 'kdgiat');
+        return $this->hasMany(SubKegiatan::class, 'kdgiat')
+            ->where('tahun', session('tahun'));
     }
 }
 

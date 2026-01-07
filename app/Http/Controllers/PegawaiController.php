@@ -80,8 +80,8 @@ class PegawaiController extends Controller
         $pegawai->nama = $request->nama;
         $pegawai->jnspeg_id = $request->jenis_pegawai_id;
         $pegawai->pangkat_id = $request->pangkat_id ?? 0;
-        $pegawai->bidang_id = $request->bidang_id;
-        $pegawai->bidang_sub_id = $request->sub_bidang_id;
+        $pegawai->bidang_id = $request->bidang_id ?? 0;
+        $pegawai->bidang_sub_id = $request->sub_bidang_id ?? 0;
         $pegawai->tingkat_id = $request->tingkat_id ?? 0;
         $pegawai->nomor_hp = $request->no_hp ?? '';
         $pegawai->jabatan = $request->jabatan ?? '';
@@ -146,8 +146,8 @@ class PegawaiController extends Controller
         $pegawai->nama = $request->nama;
         $pegawai->jnspeg_id = $request->jenis_pegawai_id;
         $pegawai->pangkat_id = $request->pangkat_id ?? 0;
-        $pegawai->bidang_id = $request->bidang_id;
-        $pegawai->bidang_sub_id = $request->sub_bidang_id;
+        $pegawai->bidang_id = $request->bidang_id ?? 0;
+        $pegawai->bidang_sub_id = $request->sub_bidang_id ?? 0;
         $pegawai->tingkat_id = $request->tingkat_id ?? 0;
         $pegawai->nomor_hp = $request->no_hp ?? '';
         $pegawai->jabatan = $request->jabatan ?? '';

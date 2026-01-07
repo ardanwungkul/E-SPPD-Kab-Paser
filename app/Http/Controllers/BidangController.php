@@ -15,7 +15,7 @@ class BidangController extends Controller
     
     public function index()
     {
-        $data = Bidang::where('tahun', session('tahun'))->get();
+        $data = Bidang::all();
         return view('master.bidang.index', compact('data'));
     }
 
@@ -37,9 +37,7 @@ class BidangController extends Controller
                 'uraian' =>  [
                     'required',
                     'max:100',
-                    Rule::unique('ref_bidang')->where(function ($query) use ($request) {
-                        return $query->where('tahun', session('tahun'));
-                    })
+                    Rule::unique('ref_bidang')
                 ],
             ],
             [
@@ -50,7 +48,6 @@ class BidangController extends Controller
         );
         $bidang = new Bidang();
         $bidang->uraian = $request->uraian;
-        $bidang->tahun = session('tahun');
         $bidang->save();
 
         return redirect()->route('bidang.index')->with(['success' => 'Berhasil Menambahkan Bidang']);
@@ -75,9 +72,7 @@ class BidangController extends Controller
                 'uraian' =>  [
                     'required',
                     'max:100',
-                    Rule::unique('ref_bidang')->where(function ($query) use ($request) {
-                        return $query->where('tahun', session('tahun'));
-                    })->ignore($bidang->id)
+                    Rule::unique('ref_bidang')->ignore($bidang->id)
                 ],
             ],
             [

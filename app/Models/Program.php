@@ -14,8 +14,23 @@ class Program extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where($field ?? 'kdprog', $value)
+            ->where('tahun', session('tahun'))
+            ->firstOrFail();
+    }
+
+    protected function setKeysForSaveQuery($query)
+    {
+        return $query
+            ->where('kdprog', $this->getOriginal('kdprog')) // ⬅️ id LAMA
+            ->where('tahun', $this->getOriginal('tahun') ?? session('tahun'));
+    }
+
     public function kegiatan()
     {
-        return $this->hasMany(Kegiatan::class, 'kdprog');
+        return $this->hasMany(Kegiatan::class, 'kdprog')
+            ->where('tahun', session('tahun'));
     }
 }

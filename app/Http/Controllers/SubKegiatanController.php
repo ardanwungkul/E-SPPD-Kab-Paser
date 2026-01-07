@@ -134,7 +134,7 @@ class SubKegiatanController extends Controller
         $request->validate([
             'kegiatan_id' => 'required|string',
         ]);
-        $sub_kegiatan = SubKegiatan::where('kdgiat', $request->kegiatan_id)->get();
+        $sub_kegiatan = SubKegiatan::where('tahun', session('tahun'))->where('kdgiat', $request->kegiatan_id)->get();
         return response()->json($sub_kegiatan);
     }
 
@@ -143,8 +143,8 @@ class SubKegiatanController extends Controller
         $request->validate([
             'sub_kegiatan_id' => 'required|string',
         ]);
-        $sub_kegiatan = SubKegiatan::with(['program', 'kegiatan'])
-            ->find($request->sub_kegiatan_id);
+        $sub_kegiatan = SubKegiatan::where('tahun', session('tahun'))->with(['program', 'kegiatan'])
+            ->where('kdsub', $request->sub_kegiatan_id)->first();
 
         return response()->json($sub_kegiatan);
     }
@@ -155,6 +155,7 @@ class SubKegiatanController extends Controller
             'sub_kegiatan_id' => 'required|string',
         ]);
         $anggaran = Anggaran::selectRaw('*, (rp_pagu1 + rp_pagu2 + rp_pagu3) as total_anggaran')
+            ->where('tahun', session('tahun'))
             ->where('kdsub', $request->sub_kegiatan_id)
             ->first();
 
@@ -172,7 +173,7 @@ class SubKegiatanController extends Controller
         $request->validate([
             'sub_bidang_id' => 'required|string',
         ]);
-        $sub_kegiatan = SubKegiatan::whereHas('anggaran', function ($q) use ($request) {
+        $sub_kegiatan = SubKegiatan::where('tahun', session('tahun'))->whereHas('anggaran', function ($q) use ($request) {
             $q->where('bidang_sub_id', $request->sub_bidang_id);
         })->get();
 

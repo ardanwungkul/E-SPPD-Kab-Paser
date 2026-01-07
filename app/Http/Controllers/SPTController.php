@@ -242,7 +242,7 @@ class SPTController extends Controller
 
             $fileName = now()->format('m-d-His') . '.' . $file->getClientOriginalExtension();
 
-            $destination = public_path('storage/' . date('Y') . '/spt');
+            $destination = public_path('storage/' . session('tahun') . '/spt');
 
             if (!is_dir($destination)) {
                 mkdir($destination, 0755, true);
@@ -250,7 +250,7 @@ class SPTController extends Controller
 
             $file->move($destination, $fileName);
 
-            $spt->path_spt = 'storage/' . date('Y') . '/spt/' . $fileName;
+            $spt->path_spt = 'storage/' . session('tahun') . '/spt/' . $fileName;
         }
 
         $spt->save();
@@ -431,7 +431,7 @@ class SPTController extends Controller
 
             $fileName = now()->format('m-d-His') . '.' . $file->getClientOriginalExtension();
 
-            $destination = public_path('storage/' . date('Y') . '/spt');
+            $destination = public_path('storage/' . session('tahun') . '/spt');
 
             if (!is_dir($destination)) {
                 mkdir($destination, 0755, true);
@@ -439,7 +439,7 @@ class SPTController extends Controller
 
             $file->move($destination, $fileName);
 
-            $spt->path_spt = 'storage/' . date('Y') . '/spt/' . $fileName;
+            $spt->path_spt = 'storage/' . session('tahun') . '/spt/' . $fileName;
         }
 
         $spt->save();

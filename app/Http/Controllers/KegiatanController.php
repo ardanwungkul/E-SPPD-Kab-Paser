@@ -128,7 +128,7 @@ class KegiatanController extends Controller
             'program_id' => 'required|string',
         ]);
         $programKode = $request->input('program_id');
-        $kegiatan = Kegiatan::where('kdprog', $programKode)->get();
+        $kegiatan = Kegiatan::where('tahun', session('tahun'))->where('kdprog', $programKode)->get();
         return response()->json($kegiatan);
     }
 }

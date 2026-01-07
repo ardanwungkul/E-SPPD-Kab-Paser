@@ -12,8 +12,9 @@ class Bidang extends Model
     // use SoftDeletes;
     public $timestamps = false;
     protected $table = 'ref_bidang';
+
     public function sub_bidang()
     {
-        return $this->hasMany(SubBidang::class, 'bidang_id');
+        return $this->hasMany(SubBidang::class, 'bidang_id', 'id');
     }
 }

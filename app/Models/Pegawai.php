@@ -19,11 +19,13 @@ class Pegawai extends Model
     }
     public function sub_bidang()
     {
-        return $this->belongsTo(SubBidang::class, 'bidang_sub_id');
+        return $this->belongsTo(SubBidang::class, 'bidang_sub_id')
+            ->where('tahun', session('tahun'));
     }
     public function bidang()
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id');
+        return $this->belongsTo(Bidang::class, 'bidang_id')
+            ->where('tahun', session('tahun'));
     }
     public function jenispegawai()
     {

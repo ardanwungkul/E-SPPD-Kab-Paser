@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('sppd', SPPDController::class);
     Route::get('sppd-cetak/{sppd}', [SPPDController::class, 'print'])->name('sppd.print');
     Route::resource('rincian-biaya', RincianBiayaController::class);
+    Route::get('rincian-biaya-cetak/{rincian_biaya}', [RincianBiayaController::class, 'print'])->name('rincian-biaya.print');
 
     Route::resource('realisasi-anggaran', RiilAnggaranController::class);
     Route::resource('monitoring-sppd', MonitoringSPPDController::class);
