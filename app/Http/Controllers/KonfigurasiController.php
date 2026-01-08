@@ -41,6 +41,13 @@ class KonfigurasiController extends Controller
         }
         return true;
     }
+    private function formatKwitansi($value)
+    {
+        if ($value && $value !== '') {
+            return strpos($value, '{nomor_urut}') !== false && strpos($value, '{tahun}') !== false;
+        }
+        return true;
+    }
     private function formatSPJ($value)
     {
         if ($value && $value !== '') {
@@ -62,6 +69,11 @@ class KonfigurasiController extends Controller
                         $fail("Nomor SPPD harus mengandung {nomor_urut} dan {tahun}. ");
                     }
                 }],
+                'no_kwitansi' => ['required', 'max:100', function ($attribute, $value, $fail) {
+                    if (!$this->formatKwitansi($value)) {
+                        $fail("Nomor Kwitansi harus mengandung {nomor_urut} dan {tahun}. ");
+                    }
+                }],
                 'no_spj' => ['max:100', function ($attribute, $value, $fail) {
                     if (!$this->formatSPJ($value)) {
                         $fail("Nomor SPJ harus mengandung {nomor_urut} dan {tahun}.");
@@ -71,12 +83,14 @@ class KonfigurasiController extends Controller
             [
                 'no_spt.max' => 'Nomor SPT tidak boleh lebih dari 100 karakter.',
                 'no_sppd.max' => 'Nomor SPPD tidak boleh lebih dari 100 karakter.',
+                'no_kwitansi.max' => 'Nomor SPPD tidak boleh lebih dari 100 karakter.',
                 'no_spj.max' => 'Nomor SPJ tidak boleh lebih dari 100 karakter.',
             ]
         );
         $config = Config::where('aktif', 'Y')->where('tahun', session('tahun'))->first();
         $config->no_spt = $request->no_spt;
         $config->no_sppd = $request->no_sppd;
+        $config->no_kwitansi = $request->no_kwitansi;
         $config->no_spj = $request->no_spj;
         // $config->judul = $request->judul;
         $config->save();

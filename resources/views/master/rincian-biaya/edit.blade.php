@@ -35,6 +35,20 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
+                            <label class=" flex-none basis-1/5 items-start" for="nokwitansi">Nomor Kwitansi</label>
+                            @php
+                                [$left, $right] = explode('{nomor_urut}', $format);
+                            @endphp
+                            <div class=" flex items-center gap-2">
+                                {{ $left }}
+                                <input type="text" name="nokwitansi" id="nokwitansi"
+                                    value="{{ str_pad($rincianBiaya->nokwitansi, 4, '0', STR_PAD_LEFT) }}"
+                                    class=" w-16 text-sm  text-center rounded-lg border border-secondary-4 text-secondary-1"
+                                    placeholder="Masukkan Nomor Kwitansi" required>
+                                {{ $right }}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
                             <label class=" flex-none basis-1/5 items-start" for="jenis_sppd_id">Tujuan</label>
                             <table class=" flex-grow">
                                 <thead>
@@ -109,25 +123,25 @@
                                                 name="rincian[{{ $loop->iteration - 1 }}][jml_satuan]"
                                                 id="rincian[{{ $loop->iteration - 1 }}][jml_satuan]"
                                                 class=" w-full text-sm rounded-lg border border-secondary-4 text-secondary-1 jml_satuan"
-                                                placeholder="Jumlah Satuan" required>
+                                                placeholder="Jumlah Satuan">
                                             <input type="text" value="{{ $item->jns_satuan }}"
                                                 name="rincian[{{ $loop->iteration - 1 }}][jns_satuan]"
                                                 id="rincian[{{ $loop->iteration - 1 }}][jml_satuan]"
                                                 class=" col-span-2 w-full text-sm rounded-lg border border-secondary-4 text-secondary-1"
-                                                placeholder="Jenis Satuan" required>
+                                                placeholder="Jenis Satuan">
                                         </div>
                                         <input type="text" oninput="this.value = formatRupiah(this.value, 'Rp. ')"
                                             value="Rp. {{ number_format($item->harga, 0, ',', '.') }}"
                                             name="rincian[{{ $loop->iteration - 1 }}][harga]"
                                             id="rincian[{{ $loop->iteration - 1 }}][harga]"
                                             class=" w-full text-sm rounded-lg border border-secondary-4 text-secondary-1 harga"
-                                            placeholder="Harga Satuan" required>
+                                            placeholder="Harga Satuan">
                                         <input type="text" oninput="this.value = formatRupiah(this.value, 'Rp. ')"
                                             value="Rp. {{ number_format($item->jml_harga, 0, ',', '.') }}"
                                             name="rincian[{{ $loop->iteration - 1 }}][jml_biaya]"
                                             id="rincian[{{ $loop->iteration - 1 }}][jml_biaya]" value="0"
-                                            class=" w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1 jml_biaya"
-                                            placeholder="Jumlah Biaya" disabled>
+                                            class=" w-full text-sm rounded-lg border border-secondary-4 text-secondary-1 jml_biaya"
+                                            placeholder="Jumlah Biaya">
                                     </div>
 
                                     <div class="flex flex-col gap-2">

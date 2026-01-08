@@ -10,7 +10,7 @@
         }
 
         html {
-            margin: 55px 57px;
+            margin: 25px 57px;
         }
 
         .container_spt {
@@ -82,235 +82,314 @@
 <body>
     <div class="container_spt">
         <table style="width: 100%; margin-top: 15px;">
-            <colgroup>
-                <col width="25%">
-                <col width="12px">
-                <col>
-                <col>
-                <col>
-                <col>
-            </colgroup>
             <tr>
-                <td rowspan="2"><h3>KWITANSI DINAS</h3></td>
-                <td colspan="2" style="white-space: nowrap;"><h1 style="margin : 0"><u class="text-black">Surat Bukti</u></h1></td>
-                <td>Mata Anggaran</td>
-                <td>:</td>
-                <td>5.01.02.04.01.0001</td>
+                <td rowspan="2" width="25%">
+                    <h3>KWITANSI DINAS</h3>
+                </td>
+                <td style="white-space: nowrap;">
+                    <h1 style="margin : 0"><u class="text-black">Surat Bukti</u></h1>
+                </td>
+                <td style="white-space: nowrap;">Mata Anggaran</td>
+                <td width="12px">:</td>
+                <td>{{ $rincianBiaya->sppd->kd_rek }}</td>
             </tr>
             <tr>
-                <td colspan="2">Nomor : 0022/BKAD-GU/PPU/1/202</td>
-                <td>Mata Anggaran</td>
+                <td style="white-space: nowrap;">Nomor : {{ $rincianBiaya->format_kwitansi }}</td>
+                <td style="white-space: nowrap;">Tahun Anggaran</td>
                 <td>:</td>
-                <td>5.01.02.04.01.0001</td>
+                <td>{{ $rincianBiaya->tahun }}</td>
             </tr>
+        </table>
+
+        <table style="width: 100%; margin-top: 15px;">
             <tr>
-                <td>Sudah terima dari</td>
-                <td>:</td>
-                <td colspan="4">Bendahara Pengeluaran Badan Keuangan dan Aset Daerah Kab. PPU</td>
+                <td width="25%">Sudah terima dari</td>
+                <td width="12px">:</td>
+                <td>Bendahara Pengeluaran Badan Keuangan dan Aset Daerah Kab. PPU</td>
             </tr>
             <tr>
                 <td>Banyaknya uang</td>
                 <td>:</td>
-                <td colspan="4" style="padding:12px; border:5px double black; text-align:center;"><h3>Satu Juta Tiga Ratus Dua Belas Ribu Seratus Rupiah</h3></td>
+                <td style="padding:12px; border:5px double black; text-align:center;">
+                    <h3><i>{{$rincianBiaya->totalbahasa}}</i></h3>
+                </td>
             </tr>
             <tr>
                 <td>Buat Bayar</td>
                 <td>:</td>
-                <td colspan="4">Belanja Perjalanan Dinas Biasa (Luar Daerah Dalam Propinsi)</td>
+                <td>Perjalanan Dinas {{ $rincianBiaya->sppd->spt->jenis_sppd->uraian }}</td>
             </tr>
             <tr>
                 <td>No SPT</td>
                 <td>:</td>
-                <td colspan="4">{{$rincianBiaya->sppd->spt->format_spt}}</td>
+                <td>{{ $rincianBiaya->sppd->spt->format_spt }}</td>
             </tr>
             <tr>
                 <td>No SPPD</td>
                 <td>:</td>
-                <td colspan="4">{{$rincianBiaya->sppd->format_sppd}}</td>
+                <td>{{ $rincianBiaya->sppd->format_sppd }}</td>
             </tr>
             <tr>
                 <td>Tugas yang diberikan</td>
                 <td>:</td>
-                <td colspan="4">{{$rincianBiaya->sppd->spt->sub_kegiatan->uraian}}</td>
-            </tr>
-            <tr>
-                <td>Terbilang</td>
+                <td style="border: 2px solid black; padding:8px;">
+                    {{ $rincianBiaya->sppd->spt->untuk->first()->untuk_ket }}</td>
             </tr>
             <tr>
             </tr>
         </table>
 
-        <table style="width: 100%; margin-top: 15px;">
+        <table style="width: 100%; margin-top: 15px; border-bottom: 3px solid black">
             <tr>
-                <td style="text-align: center;margin:0">
-                    <h3><u class="text-black">SURAT PERJALANAN DINAS</u></h3>
+                <td width="45%" rowspan="2"
+                    style="font-size: 1.17em; padding:8px; font-weight:700; border:3px solid black;">
+                    <table width="100%" style="border-collapse:collapse;">
+                        <tr>
+                            <td>Terbilang</td>
+                            <td style="text-align:right;">
+                                Rp.&nbsp;{{ number_format($rincianBiaya->total, 0, ',', '.') }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td></td>
+                <td width="35%">
+                    <table width="100%" style="border-collapse:collapse;">
+                        <tr>
+                            <td>Penajam</td>
+                            <td style="text-align: right">{{ $rincianBiaya->tahun }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align:center;">
+                    Tanda Tangan Penerima
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <br>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td style="text-align: center; text-decoration: underline; font-weight:700;">
+                    {{ $rincianBiaya->pegawai->nama }}
                 </td>
             </tr>
         </table>
 
-        <table style="width: 100%; margin-top: 15px;" class="sppd-table">
+        <table style="width: 100%; margin-top: 15px; border-bottom: 3px dashed black;">
             <tr>
-                <td class="no">1</td>
-                <td class="label">Pengguna Anggaran</td>
-                <td colspan="2">Kepala Badan Keuangan dan Aset Daerah</td>
-            </tr>
-
-            <tr>
-                <td class="no">2</td>
-                <td class="label">Nama /
-                    {{ in_array($rincianBiaya->sppd->spt->pegawai->first()->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }} Pegawai
-                    yang melaksanakan perjalanan dinas</td>
-                <td colspan="2">
-                    {{ $rincianBiaya->sppd->spt->pegawai->first()->nama }}<br>
-                    {{ $rincianBiaya->sppd->spt->pegawai->first()->nip }}
+                <td width="35%" style="text-align: center">Mengetahui/Menyetujui</td>
+                <td></td>
+                <td width="35%">
+                    <table width="100%" style="border-collapse:collapse;">
+                        <tr>
+                            <td>Sudah dibayar pada</td>
+                            <td style="text-align: right">{{ $rincianBiaya->tahun }}</td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
-
             <tr>
-                <td class="no">3</td>
-                <td class="label">
-                    <span width="16px">a.</span> Pangkat dan Golongan<br>
-                    <span width="16px">b.</span> Jabatan<br>
-                    <span width="16px">c.</span> Tingkat Biaya Perjalanan Dinas
-                </td>
-                <td colspan="2">
-                    <span width="16px">a.</span> {{ $rincianBiaya->sppd->spt->pegawai->first()->pangkat->uraian }}
-                    -{{ $rincianBiaya->sppd->spt->pegawai->first()->pangkat->kdgol }}<br>
-                    <span width="16px">b.</span> {{ $rincianBiaya->sppd->spt->pegawai->first()->jabatan }}<br>
-                    <span width="16px">c.</span> {{ $rincianBiaya->sppd->spt->pegawai->first()->tingkat->uraian }}
+                <td style="text-align: center">Pejabat Pelaksana Teknis Kegiatan</td>
+                <td></td>
+                <td style="text-align: center">Bendahara Pengeluaran</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <br>
+                    <br>
+                    <br>
                 </td>
             </tr>
-
             <tr>
-                <td class="no">4</td>
-                <td class="label">Maksud Perjalanan Dinas</td>
-                <td colspan="2">
-                    @foreach ($rincianBiaya->sppd->spt->untuk as $item)
-                        {{ $loop->iteration > 1 ? '<br>' : '' }}
-                        <p>{{ $rincianBiaya->sppd->spt->untuk->count() > 1 ? $loop->iteration . '.' : '' }} {{ $item->untuk_ket }}
-                        </p>
-                    @endforeach
+                <td style="text-align: center; text-decoration: underline; font-weight:700;">
+                    {{ $rincianBiaya->pelaksana->nama }}
+                </td>
+                <td></td>
+                <td style="text-align: center; text-decoration: underline; font-weight:700;">
+                    {{ $rincianBiaya->bendahara->nama }}
                 </td>
             </tr>
-
             <tr>
-                <td class="no">5</td>
-                <td class="label">Alat Angkut yang dipergunakan</td>
-                <td colspan="2">{{ $rincianBiaya->sppd->angkutan }}</td>
-            </tr>
-
-            <tr>
-                <td class="no">6</td>
-                <td class="label">
-                    <span width="16px">a.</span> Tempat berangkat<br>
-                    <span width="16px">b.</span> Tempat tujuan
+                <td style="text-align: center;">
+                    {{ in_array($rincianBiaya->pelaksana->jnspeg_id, [3, 4, 8]) ? 'NIP' : 'NIK' }}.
+                    {{ $rincianBiaya->pelaksana->nip }}
                 </td>
-                <td colspan="2">
-                    <span width="16px">a.</span> Penajam<br>
-                    <span width="16px">b.</span>
-                    @foreach ($rincianBiaya->sppd->tujuan as $tujuan)
-                        {{ $tujuan['provinsi_name'] ? Str::title(Str::lower($tujuan['provinsi_name'])) : '' }}{{ $tujuan['kabkota_name'] ? ', ' . Str::title(Str::lower($tujuan['kabkota_name'])) : '' }}{{ $tujuan['kecamatan_name'] ? ', ' . Str::title(Str::lower($tujuan['kecamatan_name'])) : '' }}
-                    @endforeach
+                <td></td>
+                <td style="text-align: center;">
+                    {{ in_array($rincianBiaya->bendahara->jnspeg_id, [3, 4, 8]) ? 'NIP' : 'NIK' }}.
+                    {{ $rincianBiaya->bendahara->nip }}
                 </td>
             </tr>
-
             <tr>
-                <td class="no">7</td>
-                <td class="label">
-                    <span width="16px">a.</span> Lamanya Perjalanan Dinas<br>
-                    <span width="16px">b.</span> Tanggal berangkat<br>
-                    <span width="16px">c.</span> Tanggal harus kembali
-                </td>
-                <td colspan="2">
-                    <span width="16px">a.</span> {{ $rincianBiaya->sppd->spt->jmlhari }} ({{ $rincianBiaya->sppd->spt->jmlbahasa }})
-                    hari<br>
-                    <span width="16px">b.</span> {{ $rincianBiaya->sppd->spt->tglbrkt }}<br>
-                    <span width="16px">c.</span> {{ $rincianBiaya->sppd->spt->tglbalik }}
+                <td colspan="3">
+                    <br>
                 </td>
             </tr>
-
             <tr>
-                <td class="no" rowspan="{{ $rincianBiaya->sppd->spt->pegawai->count() }}">8</td>
-                <td>Pengikut : Nama</td>
-                <td>NIP/NIK</td>
-                <td>Keterangan</td>
+                <td colspan="3" style="text-align: center">Setuju dibayar</td>
             </tr>
+            <tr>
+                <td colspan="3" style="text-align: center">Pengguna Anggaran</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <br>
+                    <br>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center; text-decoration: underline; font-weight:700;">
+                    {{ $rincianBiaya->sppd->spt->ub->nama }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center;">
+                    {{ in_array($rincianBiaya->sppd->spt->ub->jnspeg_id, [3, 4, 8]) ? 'NIP' : 'NIK' }}.
+                    {{ $rincianBiaya->sppd->spt->ub->nip }}
+                </td>
+            </tr>
+        </table>
 
-            @foreach ($rincianBiaya->sppd->spt->pegawai->skip(1) as $item)
+        <table style="width: 100%; margin-top: 15px; border-collapse: collapse;">
+            <tr>
+                <td colspan="11"
+                    style="border: 2px solid black; border-bottom:0; text-align: center; font-weight:700;">RINCIAN
+                    PERJALANAN DINAS</td>
+            </tr>
+            <tr>
+                <td colspan="11" style="border: 2px solid black; border-top:0; text-align: center;">TAHUN
+                    {{ $rincianBiaya->tahun }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-left: 2px solid black; border-top: 2px solid black;">NAMA</td>
+                <td width="20px" style="border-top: 2px solid black; text-align: center">:</td>
+                <td colspan="8" style="font-weight: 700; border-top: 2px solid black; border-right:2px solid black">
+                    {{ $rincianBiaya->pegawai->nama }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-left: 2px solid black;">NO. SPT</td>
+                <td style="text-align: center">:</td>
+                <td colspan="8" style="border-right: 2px solid black;">{{ $rincianBiaya->sppd->spt->format_spt }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-left: 2px solid black;">NO. SPPD</td>
+                <td style="text-align: center">:</td>
+                <td colspan="8" style="border-right: 2px solid black;">{{ $rincianBiaya->sppd->format_sppd }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-left: 2px solid black; border-bottom: 2px solid black;">Tujuan</td>
+                <td style="border-bottom: 2px solid black; text-align: center">:</td>
+                <td colspan="8" style="border-right: 2px solid black; border-bottom: 2px solid black;">
+                    {{ $rincianBiaya->pegawai->nama }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-weight: 700; border-left: 2px solid black; border-top: 2px solid black;">
+                    No. Kegiatan</td>
+                <td style="border-top: 2px solid black; text-align: center">:</td>
+                <td colspan="8" style="font-weight: 700; border-top: 2px solid black; border-right:2px solid black">
+                    {{ $rincianBiaya->sppd->spt->sub_kegiatan->kdsub }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-weight: 700; border-left: 2px solid black;">No. Rek</td>
+                <td style="text-align: center">:</td>
+                <td colspan="8" style="font-weight: 700; border-right: 2px solid black;">
+                    {{ $rincianBiaya->sppd->kd_rek }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"
+                    style="font-weight: 700; border-left: 2px solid black; border-bottom: 2px solid black;">Kegiatan
+                </td>
+                <td style="border-bottom: 2px solid black; text-align: center">:</td>
+                <td colspan="8"
+                    style="font-weight: 700; border-right: 2px solid black; border-bottom: 2px solid black;">Perjalanan
+                    Dinas {{ $rincianBiaya->sppd->spt->jenis_sppd->uraian }}</td>
+            </tr>
+            <tr>
+                <td width="32px" style="border: 2px solid black; text-align: center; font-weight: 700;">No</td>
+                <td colspan="8" style="border: 2px solid black; text-align: center; font-weight: 700;">Uraian</td>
+                <td colspan="2" style="border: 2px solid black; text-align: center; font-weight: 700;">Jumlah</td>
+            </tr>
+            @foreach ($rincianBiaya->daftar as $item)
                 <tr>
-                    <td style="white-space: nowrap;">{{ $loop->iteration }}. {{ $item->nama }}</td>
-                    <td style="white-space: nowrap;">
-                        {{ in_array($item->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }} :
-                        {{ $item->nip }}</td>
-                    <td>
-                        {{ $item->keterangan == '' ? '-' : $item->keterangan }}</td>
+                    <td
+                        style="text-align: center; border:2px solid black; border-top: 2px dashed black; {{ $loop->last ? '' : 'border-bottom: 0;' }}">
+                        {{ $loop->iteration }}</td>
+                    <td
+                        style="border:2px solid black; border-top: 2px dashed black; {{ $loop->last ? '' : 'border-bottom: 0;' }}">
+                        {{ $item->uraian }}</td>
+                    <td
+                        style="text-align: center; border:2px solid black; border-top: 2px dashed black; {{ $loop->last ? '' : 'border-bottom: 0;' }}">
+                        :</td>
+                    <td width="32px"
+                        style="text-align:center; border-top: 2px dashed black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        {{ $item->jml_satuan }}</td>
+                    <td
+                        style="border-top: 2px dashed black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        {{ $item->jns_satuan }}</td>
+                    <td
+                        style="border-top: 2px dashed black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        X</td>
+                    <td
+                        style="border-top: 2px dashed black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        Rp. </td>
+                    <td
+                        style="border-top: 2px dashed black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        {{ number_format($item->harga, 0, ',', '.') }}</td>
+                    <td width="32px"
+                        style="border-top: 2px dashed black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        =</td>
+                    <td
+                        style="border-top: 2px dashed black; border-left: 2px solid black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        Rp.</td>
+                    <td
+                        style="text-align: right; border-top: 2px dashed black; border-right: 2px solid black; {{ $loop->last ? 'border-bottom: 2px solid black' : 'border-bottom: 0;' }}">
+                        {{ number_format($item->jml_harga, 0, ',', '.') }}</td>
                 </tr>
             @endforeach
-
             <tr>
-                <td class="no">9</td>
-                <td class="label">
-                    <span width="16px">a.</span> Pembebanan Anggaran<br>
-                    <span width="16px">b.</span> SKPD<br>
-                    <span width="16px">c.</span> Kode Rekening
+                <td colspan="5"></td>
+                <td colspan="4"
+                    style="text-align: center; border: 2px solid black; letter-spacing: 3px; font-weight: 700;">Jumlah
                 </td>
-                <td colspan="2">
-                    <span width="16px">a.</span> DPA<br>
-                    <span width="16px">b.</span> Badan Keuangan dan Aset Daerah<br>
-                    <span width="16px">c.</span> {{ $rincianBiaya->sppd->kd_rek == '' ? '-' : $rincianBiaya->sppd->kd_rek }}
-                </td>
-            </tr>
-
-            <tr>
-                <td class="no">10</td>
-                <td class="label">Keterangan lain-lain</td>
-                <td colspan="2">{{ $rincianBiaya->sppd->keterangan == '' ? '-' : $rincianBiaya->sppd->keterangan }}</td>
+                <td style="font-weight: 700; border: 2px solid black; border-right: 0;">Rp.</td>
+                <td style="font-weight: 700; text-align:right; border: 2px solid black; border-left: 0;">{{ number_format($rincianBiaya->total, 0, ',', '.') }}</td>
             </tr>
         </table>
 
         <table style="width: 100%; margin-top: 15px;">
             <tr>
-                <td width="65%"></td>
-                <td width="90px" style="text-align: left; vertical-align: top; white-space: nowrap;" colspan="3">
-                    Ditetapkan di Penajam Paser Utara</td>
-            </tr>
-            <tr>
                 <td></td>
-                <td width="90px" style="text-align: left; vertical-align:top; white-space: nowrap;" colspan="3">
-                    Pada tanggal
-                    {{ $rincianBiaya->sppd->spt->tglspt }}
-                </td>
+                <td width="35%" style="text-align: center; font-weight:700;">Pembuat Rincian</td>
             </tr>
             <tr>
-                <td colspan="4">&nbsp;</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="3" style="text-align: left; font-weight : bold">{{ $rincianBiaya->sppd->spt->ub->jabatan }},</td>
-            </tr>
-            <tr>
-                <td colspan="4">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="4">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="4">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="4">&nbsp;</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="3" style="text-align: left;font-weight: bold;">
-                    <p style="font-weight: bold">{{ $rincianBiaya->sppd->spt->ub->nama }}</p>
+                <td colspan="2">
+                    <br>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <tr>
                 <td></td>
-                <td colspan="3" style="text-align: left;">
-                    {{ in_array($rincianBiaya->sppd->spt->ub->pangkat?->jnspeg, [3, 4, 8]) ? 'NIP' : 'NIK' }}.
-                    {{ $rincianBiaya->sppd->spt->ub->nip }}</td>
+                <td style="text-align: center; text-decoration: underline; font-weight:700;">
+                    {{ $rincianBiaya->pembuat->nama }}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align: center;">
+                    {{ in_array($rincianBiaya->pembuat->jnspeg_id, [3, 4, 8]) ? 'NIP' : 'NIK' }}.
+                    {{ $rincianBiaya->pembuat->nip }}
+                </td>
             </tr>
         </table>
     </div>

@@ -31,6 +31,12 @@
                                         value="{{ $config->no_sppd }}" placeholder="Nomor SPPD" required>
                                 </div>
                                 <div class="flex flex-col gap-1">
+                                    <label for="no_kwitansi">Nomor Kwitansi</label>
+                                    <input type="text" id="no_kwitansi" name="no_kwitansi"
+                                        class="md:text-sm text-xs rounded-lg border border-gray-300"
+                                        value="{{ $config->no_kwitansi }}" placeholder="Nomor Kwitansi" required>
+                                </div>
+                                <div class="flex flex-col gap-1">
                                     <label for="no_spj">Nomor SPJ</label>
                                     <input type="text" id="no_spj" name="no_spj"
                                         class="md:text-sm text-xs rounded-lg border border-gray-300"

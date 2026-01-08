@@ -39,6 +39,49 @@ class RincianBiayaController extends Controller
         return $romawi[(int)$bulan] ?? '';
     }
 
+    public function terbilang($angka)
+    {
+        $angka = abs((int) $angka);
+
+        $baca = [
+            "",
+            "satu",
+            "dua",
+            "tiga",
+            "empat",
+            "lima",
+            "enam",
+            "tujuh",
+            "delapan",
+            "sembilan",
+            "sepuluh",
+            "sebelas"
+        ];
+
+        if ($angka < 12) {
+            return $baca[$angka];
+        } elseif ($angka < 20) {
+            return $this->terbilang($angka - 10) . " belas";
+        } elseif ($angka < 100) {
+            return $this->terbilang(intdiv($angka, 10)) . " puluh " . $this->terbilang($angka % 10);
+        } elseif ($angka < 200) {
+            return "seratus " . $this->terbilang($angka - 100);
+        } elseif ($angka < 1000) {
+            return $this->terbilang(intdiv($angka, 100)) . " ratus " . $this->terbilang($angka % 100);
+        } elseif ($angka < 2000) {
+            return "seribu " . $this->terbilang($angka - 1000);
+        } elseif ($angka < 1000000) {
+            return $this->terbilang(intdiv($angka, 1000)) . " ribu " . $this->terbilang($angka % 1000);
+        } elseif ($angka < 1000000000) {
+            return $this->terbilang(intdiv($angka, 1000000)) . " juta " . $this->terbilang($angka % 1000000);
+        } elseif ($angka < 1000000000000) {
+            return $this->terbilang(intdiv($angka, 1000000000)) . " miliar " . $this->terbilang($angka % 1000000000);
+        }
+
+        return "";
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -193,7 +236,20 @@ class RincianBiayaController extends Controller
 
         $rincian = RincianBiaya::where('sppd_id', $sppd->id)->pluck('peg_id')->toArray();
 
-        return view('master.rincian-biaya.create', compact('sppd', 'pegawai', 'rincian'));
+        $config = Config::where('tahun', session('tahun'))->where('aktif', 'Y')->first();
+        $format = $config->no_kwitansi;
+        $format = str_replace(
+            ['{bulan}', '{tahun}'],
+            [
+                'Bulan Kwitansi',
+                'Tahun Kwitansi'
+            ],
+            $format
+        );
+
+        $nokwitansi = RincianBiaya::where('tahun', session('tahun'))->max('nokwitansi') + 1;
+
+        return view('master.rincian-biaya.create', compact('sppd', 'pegawai', 'rincian', 'nokwitansi', 'format'));
     }
 
     /**
@@ -206,14 +262,14 @@ class RincianBiayaController extends Controller
 
         $rincianBiaya->tahun = session('tahun');
         $rincianBiaya->id = RincianBiaya::where('tahun', session('tahun'))->max('id') + 1;
-        $rincianBiaya->nokwitansi = RincianBiaya::where('tahun', session('tahun'))->max('nokwitansi') + 1;
+        $rincianBiaya->nokwitansi = $request->nokwitansi;
         $rincianBiaya->sppd_id = $request->sppd;
         $rincianBiaya->peg_id = $request->pegawai_id;
         $rincianBiaya->pel_id = $request->pelaksana_id;
         $rincianBiaya->bndhr_id = $request->bendahara_id;
         $rincianBiaya->buat_id = $request->pembuat_id;
 
-        
+
         $rincianBiaya->save();
         // dd($rincianBiaya);
 
@@ -225,37 +281,39 @@ class RincianBiayaController extends Controller
             $daftar->rincian_id = $rincianBiaya->id;
             $daftar->idx = $idx++;
             $daftar->uraian = $item['uraian'];
-            $daftar->jml_satuan = $item['jml_satuan'];
-            $daftar->jns_satuan = $item['jns_satuan'];
-            $daftar->harga = preg_replace('/[^0-9-]/', '', $item['harga']);
-            $daftar->jml_harga = preg_replace('/[^0-9-]/', '', $item['harga']) * $item['jml_satuan'];
+            $daftar->jml_satuan = $item['jml_satuan'] ?? 0;
+            $daftar->jns_satuan = $item['jns_satuan'] ?? '';
+            $daftar->harga = $item['harga'] ? preg_replace('/[^0-9-]/', '', $item['harga']) : 0;
+            $daftar->jml_harga = $item['jml_biaya'] ? preg_replace('/[^0-9-]/', '', $item['jml_biaya']) : 0;
 
             $daftar->save();
         }
 
         $idx = 1;
 
-        foreach ($request->bukti as $item) {
-            if ($item) {
-                $rincianfile = new RincianFile();
+        if ($request->hasFile('bukti')) {
+            foreach ($request->bukti as $item) {
+                if ($item) {
+                    $rincianfile = new RincianFile();
 
-                $file = $item;
+                    $file = $item;
 
-                $fileName = now()->format('m-d-His') . '.' . $file->getClientOriginalExtension();
+                    $fileName = $fileName = now()->format('mdHis') . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
 
-                $destination = public_path('storage/' . session('tahun') . '/rincian-biaya');
+                    $destination = public_path('storage/' . session('tahun') . '/rincian-biaya');
 
-                if (!is_dir($destination)) {
-                    mkdir($destination, 0755, true);
+                    if (!is_dir($destination)) {
+                        mkdir($destination, 0755, true);
+                    }
+
+                    $file->move($destination, $fileName);
+
+                    $rincianfile->rincian_id = $rincianBiaya->id;
+                    $rincianfile->idx = $idx++;
+                    $rincianfile->path_rincian = 'storage/' . session('tahun') . '/rincian-biaya/' . $fileName;
+
+                    $rincianfile->save();
                 }
-
-                $file->move($destination, $fileName);
-
-                $rincianfile->idx = $idx++;
-                $rincianfile->rincian_id = $rincianBiaya->id;
-                $rincianfile->path_rincian = 'storage/' . session('tahun') . '/rincian-biaya/' . $fileName;
-
-                $rincianfile->save();
             }
         }
 
@@ -334,6 +392,18 @@ class RincianBiayaController extends Controller
                 $rincianBiaya->sppd->tahun
             ],
             $config_no_sppd
+        );
+
+        $nokwitansi = str_pad($rincianBiaya->nokwitansi, 4, '0', STR_PAD_LEFT);
+        $format = $config->no_kwitansi;
+        $rincianBiaya->format_kwitansi = str_replace(
+            ['{nomor_urut}', '{bulan}', '{tahun}'],
+            [
+                $nokwitansi,
+                $this->getBulanRomawi(Carbon::parse($rincianBiaya->created_at)->format('m')),
+                $rincianBiaya->tahun
+            ],
+            $format
         );
 
         $pegawai = Pegawai::with('pangkat')
@@ -427,6 +497,16 @@ class RincianBiayaController extends Controller
             $config_no_sppd
         );
 
+        $format = $config->no_kwitansi;
+        $format = str_replace(
+            ['{bulan}', '{tahun}'],
+            [
+                $this->getBulanRomawi(Carbon::parse($rincianBiaya->created_at)->format('m')),
+                $rincianBiaya->tahun
+            ],
+            $format
+        );
+
         $pegawai = Pegawai::with('pangkat')
             ->leftJoin('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
             ->orderByRaw('
@@ -441,7 +521,7 @@ class RincianBiayaController extends Controller
             ->select('pegawai.*')
             ->get();
 
-        return view('master.rincian-biaya.edit', compact('rincianBiaya', 'pegawai'));
+        return view('master.rincian-biaya.edit', compact('rincianBiaya', 'pegawai', 'format'));
     }
 
     /**
@@ -451,6 +531,7 @@ class RincianBiayaController extends Controller
     {
         // dd($request);
         // $rincianBiaya->peg_id = $request->pegawai_id;
+        $rincianBiaya->nokwitansi = $request->nokwitansi;
         $rincianBiaya->pel_id = $request->pelaksana_id;
         $rincianBiaya->bndhr_id = $request->bendahara_id;
         $rincianBiaya->buat_id = $request->pembuat_id;
@@ -467,10 +548,10 @@ class RincianBiayaController extends Controller
             $daftar->rincian_id = $rincianBiaya->id;
             $daftar->idx = $idx++;
             $daftar->uraian = $item['uraian'];
-            $daftar->jml_satuan = $item['jml_satuan'];
-            $daftar->jns_satuan = $item['jns_satuan'];
-            $daftar->harga = preg_replace('/[^0-9-]/', '', $item['harga']);
-            $daftar->jml_harga = preg_replace('/[^0-9-]/', '', $item['harga']) * $item['jml_satuan'];
+            $daftar->jml_satuan = $item['jml_satuan'] ?? 0;
+            $daftar->jns_satuan = $item['jns_satuan'] ?? '';
+            $daftar->harga = $item['harga'] ? preg_replace('/[^0-9-]/', '', $item['harga']) : 0;
+            $daftar->jml_harga = $item['jml_biaya'] ? preg_replace('/[^0-9-]/', '', $item['jml_biaya']) : 0;
 
             $daftar->save();
         }
@@ -502,7 +583,7 @@ class RincianBiayaController extends Controller
         }
 
         $idx = 1;
-        
+
         if ($request->hasFile('bukti')) {
             foreach ($request->bukti as $item) {
                 if ($item) {
@@ -540,7 +621,7 @@ class RincianBiayaController extends Controller
         //
     }
 
-    public function print(RincianBiaya $rincianBiaya) 
+    public function print(RincianBiaya $rincianBiaya)
     {
         $index = 1;
         $tujuan = [];
@@ -611,6 +692,18 @@ class RincianBiayaController extends Controller
             $config_no_sppd
         );
 
+        $nokwitansi = str_pad($rincianBiaya->nokwitansi, 4, '0', STR_PAD_LEFT);
+        $format = $config->no_kwitansi;
+        $rincianBiaya->format_kwitansi = str_replace(
+            ['{nomor_urut}', '{bulan}', '{tahun}'],
+            [
+                $nokwitansi,
+                $this->getBulanRomawi(Carbon::parse($rincianBiaya->created_at)->format('m')),
+                $rincianBiaya->tahun
+            ],
+            $format
+        );
+
         $pegawai = Pegawai::with('pangkat')
             ->leftJoin('ref_pangkat', 'pegawai.pangkat_id', '=', 'ref_pangkat.id')
             ->orderByRaw('
@@ -625,9 +718,13 @@ class RincianBiayaController extends Controller
             ->select('pegawai.*')
             ->get();
 
-        return view('master.rincian-biaya.pdf', compact('rincianBiaya', 'pegawai'));
+        $rincianBiaya->total = $rincianBiaya->daftar()->sum('jml_harga');
 
-        $pdf = Pdf::loadView('master.spt.pdf', compact('spt', 'kop_surat'));
+        $rincianBiaya->totalbahasa = $this->terbilang($rincianBiaya->total);
+
+        // return view('master.rincian-biaya.pdf', compact('rincianBiaya', 'pegawai'));
+
+        $pdf = Pdf::loadView('master.rincian-biaya.pdf', compact('rincianBiaya', 'pegawai'));
         $pdf->setOptions([
             'defaultFont' => 'Times New Roman',
             'margin_top' => 50,
@@ -636,6 +733,6 @@ class RincianBiayaController extends Controller
             'margin_left' => 30,
         ]);
         $pdf->setPaper('A4');
-        return $pdf->download('Surat Perintah Tugas ' . str_replace(['/', '\\'], '-', '') . '.pdf');
+        return $pdf->download('Surat Kwitansi Dinas ' . str_replace(['/', '\\'], '-', '') . '.pdf');
     }
 }

@@ -84,6 +84,11 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
+                        <label class=" flex-none basis-1/5 items-start" for="jenis_sppd_id">Nomor Kwitansi</label>
+                        <div class=" flex"><span class=" w-4">:</span> {{ $rincianBiaya->format_kwitansi }}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
                         <label class=" flex-none basis-1/5 items-start" for="jenis_sppd_id">Tujuan</label>
                         <table class=" flex-grow">
                             <thead>

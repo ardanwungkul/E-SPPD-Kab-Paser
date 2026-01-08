@@ -2,7 +2,8 @@
     <x-slot name="header">
         Tambah Rincian Biaya
     </x-slot>
-    <form action="{{ route('rincian-biaya.store', ['sppd' => request('sppd')]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('rincian-biaya.store', ['sppd' => request('sppd')]) }}" method="POST"
+        enctype="multipart/form-data">
         @csrf
         <x-container>
             <x-slot name="content">
@@ -16,7 +17,9 @@
                             <select name="pegawai_id" id="pegawai_id" class="text-sm rounded-lg select2" required>
                                 <option value="" selected disabled>Pilih Pegawai</option>
                                 @foreach ($sppd->spt->pegawai as $item)
-                                    <option value="{{ $item->id }}" {{ in_array($item->id, $rincian) ? 'disabled' : '' }}>{{ $item->nama }}</option>
+                                    <option value="{{ $item->id }}"
+                                        {{ in_array($item->id, $rincian) ? 'disabled' : '' }}>{{ $item->nama }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -27,6 +30,20 @@
                         <div class="flex items-center gap-3">
                             <label class=" flex-none basis-1/5 items-start" for="jenis_sppd_id">Nomor SPD</label>
                             <div class=" flex"><span class=" w-4">:</span> {{ $sppd->format_sppd }}</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <label class=" flex-none basis-1/5 items-start" for="nokwitansi">Nomor Kwitansi</label>
+                            @php
+                                [$left, $right] = explode('{nomor_urut}', $format);
+                            @endphp
+                            <div class=" flex items-center gap-2">
+                                {{ $left }}
+                                <input type="text" name="nokwitansi" id="nokwitansi"
+                                    value="{{ str_pad($nokwitansi, 4, '0', STR_PAD_LEFT) }}"
+                                    class=" w-16 text-sm  text-center rounded-lg border border-secondary-4 text-secondary-1"
+                                    placeholder="Masukkan Nomor Kwitansi" required>
+                                {{ $right }}
+                            </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <label class=" flex-none basis-1/5 items-start" for="jenis_sppd_id">Tujuan</label>
@@ -97,21 +114,24 @@
                                     <div class=" grid grid-cols-3 gap-3">
                                         <input type="number" name="rincian[1][jml_satuan]" id="rincian[1][jml_satuan]"
                                             class=" w-full text-sm rounded-lg border border-secondary-4 text-secondary-1 jml_satuan"
-                                            placeholder="Jumlah Satuan" required>
+                                            placeholder="Jumlah Satuan">
                                         <input type="text" name="rincian[1][jns_satuan]" id="rincian[1][jml_satuan]"
                                             class=" col-span-2 w-full text-sm rounded-lg border border-secondary-4 text-secondary-1"
-                                            placeholder="Jenis Satuan" required>
+                                            placeholder="Jenis Satuan">
                                     </div>
-                                    <input type="text" name="rincian[1][harga]" id="rincian[1][harga]" value="" oninput="this.value = formatRupiah(this.value, 'Rp. ')"
+                                    <input type="text" name="rincian[1][harga]" id="rincian[1][harga]" value=""
+                                        oninput="this.value = formatRupiah(this.value, 'Rp. ')"
                                         class=" w-full text-sm rounded-lg border border-secondary-4 text-secondary-1 harga"
-                                        placeholder="Rp. 0" required>
-                                    <input type="text" name="rincian[1][jml_biaya]" id="rincian[1][jml_biaya]" value="" oninput="this.value = formatRupiah(this.value, 'Rp. ')"
-                                        class=" w-full text-sm rounded-lg border border-secondary-4 bg-[#eee] text-secondary-1 jml_biaya"
-                                        placeholder="Rp. 0" disabled>
+                                        placeholder="Rp. 0">
+                                    <input type="text" name="rincian[1][jml_biaya]" id="rincian[1][jml_biaya]"
+                                        value="" oninput="this.value = formatRupiah(this.value, 'Rp. ')"
+                                        class=" w-full text-sm rounded-lg border border-secondary-4 text-secondary-1 jml_biaya"
+                                        placeholder="Rp. 0">
                                 </div>
 
                                 <div class="flex flex-col gap-2">
-                                    <button type="button" class="addRincian text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
+                                    <button type="button"
+                                        class="addRincian text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 inline-flex items-center px-3 py-2 text-sm font-medium text-center">+</button>
                                     <button type="button"
                                         class="removeRincian text-secondary-2 border border-secondary-4 rounded shadow-sm focus:outline-none bg-secondary-3 hover:bg-opacity-80 hidden items-center px-3 py-2 text-sm font-medium text-center">-</button>
                                 </div>
@@ -129,8 +149,10 @@
                     </legend>
                     <div class="text-sm mx-auto grid grid-cols-1 gap-y-3 gap-x-7">
                         <div class="flex items-center gap-3">
-                            <label class=" flex-none basis-1/5 items-start" for="pelaksana_id">Pejabat Pelaksana</label>
-                            <select name="pelaksana_id" id="pelaksana_id" class="text-sm rounded-lg select2" required>
+                            <label class=" flex-none basis-1/5 items-start" for="pelaksana_id">Pejabat
+                                Pelaksana</label>
+                            <select name="pelaksana_id" id="pelaksana_id" class="text-sm rounded-lg select2"
+                                required>
                                 <option value="" selected disabled>Pilih Pejabat Pelaksana</option>
                                 @foreach ($pegawai as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -314,7 +336,7 @@
         });
 
         // auto hitung
-        $(document).on('input', '.jml_satuan, .harga', function () {
+        $(document).on('input', '.jml_satuan, .harga', function() {
             hitungJumlah($(this).closest('.rincian-item'));
         });
 
